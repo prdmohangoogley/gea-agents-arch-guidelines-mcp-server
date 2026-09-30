@@ -1,0 +1,6 @@
+project_id            = "my-gcp-project-id"
+region                = "us-central1"
+spanner_instance_id   = "gea-arch-guidelines-spanner"
+spanner_database_name = "arch_guidelines_graph"
+bq_dataset_id         = "gea_arch_guidelines_analytics"
+gcs_bucket_name       = "gea-arch-guidelines-raw-corpus"

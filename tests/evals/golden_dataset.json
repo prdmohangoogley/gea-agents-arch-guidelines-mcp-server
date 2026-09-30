@@ -1,0 +1,37 @@
+[
+  {
+    "query": "How do I secure agent tool execution against confused deputy attacks?",
+    "category": "security",
+    "expected_guideline_ids": ["DOC-02"],
+    "expected_pattern": "Zero Ambient Authority",
+    "min_retrieval_rank": 3
+  },
+  {
+    "query": "What is the recommended state management architecture for stateful agents?",
+    "category": "runtime",
+    "expected_guideline_ids": ["DOC-08", "DOC-09"],
+    "expected_pattern": "Memory Bank",
+    "min_retrieval_rank": 3
+  },
+  {
+    "query": "How can I avoid blowing up the context window when registering hundreds of skills?",
+    "category": "context",
+    "expected_guideline_ids": ["DOC-08"],
+    "expected_pattern": "Progressive Disclosure",
+    "min_retrieval_rank": 3
+  },
+  {
+    "query": "What protocols does Google Cloud support for enterprise multi-agent interoperability?",
+    "category": "protocols",
+    "expected_guideline_ids": ["DOC-03"],
+    "expected_pattern": null,
+    "min_retrieval_rank": 3
+  },
+  {
+    "query": "How should we implement evaluation and quality benchmarking for agent trajectories?",
+    "category": "quality",
+    "expected_guideline_ids": ["DOC-01"],
+    "expected_pattern": null,
+    "min_retrieval_rank": 3
+  }
+]
