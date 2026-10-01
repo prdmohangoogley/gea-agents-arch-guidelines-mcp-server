@@ -5,6 +5,9 @@ from __future__ import annotations
 from typing import Any
 from fastmcp import FastMCP
 from src.graph.client import GraphClient
+from src.otel_setup import get_tracer
+
+tracer = get_tracer("guidelines-mcp-server")
 
 
 def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
@@ -20,7 +23,14 @@ def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
         Returns:
             Structured envelope containing matching guidelines, patterns, and operational latency metadata.
         """
-        return await client.get_best_practice(topic=topic)
+        with tracer.start_as_current_span("tools/call:get_best_practice") as span:
+            span.set_attribute("tool.name", "get_best_practice")
+            span.set_attribute("topic", topic)
+            result = await client.get_best_practice(topic=topic)
+            span.set_attribute("result.status", result.get("status", "unknown"))
+            span.set_attribute("result.source", result.get("source", "unknown"))
+            span.set_attribute("latency_ms", float(result.get("latency_ms", 0.0)))
+            return result
 
     @mcp.tool()
     async def deep_dive_guideline(component: str) -> dict[str, Any]:
@@ -32,7 +42,14 @@ def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
         Returns:
             Analytical lookup envelope including implemented patterns, antipattern hazards, and mitigations.
         """
-        return await client.deep_dive_guideline(component=component)
+        with tracer.start_as_current_span("tools/call:deep_dive_guideline") as span:
+            span.set_attribute("tool.name", "deep_dive_guideline")
+            span.set_attribute("component", component)
+            result = await client.deep_dive_guideline(component=component)
+            span.set_attribute("result.status", result.get("status", "unknown"))
+            span.set_attribute("result.source", result.get("source", "unknown"))
+            span.set_attribute("latency_ms", float(result.get("latency_ms", 0.0)))
+            return result
 
     @mcp.tool()
     async def search_guidelines(

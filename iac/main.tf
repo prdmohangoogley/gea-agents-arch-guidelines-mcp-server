@@ -21,7 +21,11 @@ resource "google_project_service" "required_apis" {
     "bigqueryconnection.googleapis.com",
     "run.googleapis.com",
     "storage.googleapis.com",
-    "iam.googleapis.com"
+    "iam.googleapis.com",
+    "telemetry.googleapis.com",
+    "cloudtrace.googleapis.com",
+    "monitoring.googleapis.com",
+    "logging.googleapis.com"
   ])
 
   project            = var.project_id

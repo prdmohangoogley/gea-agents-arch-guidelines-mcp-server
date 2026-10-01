@@ -1,0 +1,99 @@
+{
+  "displayName": "Enterprise Agents Architectural Guidelines MCP Observability",
+  "gridLayout": {
+    "columns": "2",
+    "widgets": [
+      {
+        "title": "Cloud Run Request Latencies (P95 & P99)",
+        "xyChart": {
+          "dataSets": [
+            {
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "filter": "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"gea-agents-arch-guidelines-mcp-server\" AND metric.type=\"run.googleapis.com/request_latencies\"",
+                  "aggregation": {
+                    "perSeriesAligner": "ALIGN_PERCENTILE_95",
+                    "alignmentPeriod": "60s",
+                    "crossSeriesReducer": "REDUCE_PERCENTILE_95"
+                  }
+                }
+              },
+              "plotType": "LINE",
+              "legendTemplate": "P95 Latency"
+            }
+          ],
+          "timeshiftDuration": "0s",
+          "yAxis": {
+            "label": "ms",
+            "scale": "LINEAR"
+          }
+        }
+      },
+      {
+        "title": "MCP Tool Invocations and Error Rates",
+        "xyChart": {
+          "dataSets": [
+            {
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "filter": "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"gea-agents-arch-guidelines-mcp-server\" AND metric.type=\"run.googleapis.com/request_count\"",
+                  "aggregation": {
+                    "perSeriesAligner": "ALIGN_RATE",
+                    "alignmentPeriod": "60s",
+                    "crossSeriesReducer": "REDUCE_SUM",
+                    "groupByFields": ["metric.label.response_code_class"]
+                  }
+                }
+              },
+              "plotType": "STACKED_BAR"
+            }
+          ],
+          "yAxis": {
+            "label": "Requests/sec",
+            "scale": "LINEAR"
+          }
+        }
+      },
+      {
+        "title": "Container CPU Utilization",
+        "xyChart": {
+          "dataSets": [
+            {
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "filter": "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"gea-agents-arch-guidelines-mcp-server\" AND metric.type=\"run.googleapis.com/container/cpu/utilizations\"",
+                  "aggregation": {
+                    "perSeriesAligner": "ALIGN_PERCENTILE_99",
+                    "alignmentPeriod": "60s"
+                  }
+                }
+              },
+              "plotType": "LINE",
+              "legendTemplate": "P99 CPU"
+            }
+          ]
+        }
+      },
+      {
+        "title": "Container Memory Utilization",
+        "xyChart": {
+          "dataSets": [
+            {
+              "timeSeriesQuery": {
+                "timeSeriesFilter": {
+                  "filter": "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"gea-agents-arch-guidelines-mcp-server\" AND metric.type=\"run.googleapis.com/container/memory/utilizations\"",
+                  "aggregation": {
+                    "perSeriesAligner": "ALIGN_PERCENTILE_99",
+                    "alignmentPeriod": "60s"
+                  }
+                }
+              },
+              "plotType": "LINE",
+              "legendTemplate": "P99 Memory"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

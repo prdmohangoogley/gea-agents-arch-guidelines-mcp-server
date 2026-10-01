@@ -106,4 +106,8 @@ resource "google_spanner_database" "database" {
   ]
 
   deletion_protection = false
+
+  lifecycle {
+    ignore_changes = [ddl]
+  }
 }

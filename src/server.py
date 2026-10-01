@@ -1,14 +1,19 @@
 """FastMCP Server Application Entrypoint for Enterprise Agents Architectural Guidelines."""
 
+from __future__ import annotations
+
 import argparse
-import asyncio
 import sys
 from fastmcp import FastMCP
 from src.config import config
 from src.graph.client import GraphClient
+from src.otel_setup import setup_opentelemetry
 from src.tools.guidelines import register_guideline_tools
 from src.tools.health import register_health_tools
 from src.tools.patterns import register_pattern_tools
+
+# Initialize OpenTelemetry instrumentation
+setup_opentelemetry("guidelines-mcp-server")
 
 
 def create_server() -> FastMCP:

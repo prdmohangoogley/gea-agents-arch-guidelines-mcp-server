@@ -37,6 +37,27 @@ resource "google_storage_bucket_iam_member" "gcs_viewer" {
   member = "serviceAccount:${google_service_account.mcp_runner.email}"
 }
 
+# IAM: Cloud Trace Agent (Required to push spans to Cloud Trace)
+resource "google_project_iam_member" "trace_agent" {
+  project = var.project_id
+  role    = "roles/cloudtrace.agent"
+  member  = "serviceAccount:${google_service_account.mcp_runner.email}"
+}
+
+# IAM: Telemetry Writer (Required for OpenTelemetry ingestion endpoint)
+resource "google_project_iam_member" "telemetry_writer" {
+  project = var.project_id
+  role    = "roles/telemetry.writer"
+  member  = "serviceAccount:${google_service_account.mcp_runner.email}"
+}
+
+# IAM: Monitoring Metric Writer (Required for metrics pushing)
+resource "google_project_iam_member" "metric_writer" {
+  project = var.project_id
+  role    = "roles/monitoring.metricWriter"
+  member  = "serviceAccount:${google_service_account.mcp_runner.email}"
+}
+
 # Cloud Run v2 Service Definition
 resource "google_cloud_run_v2_service" "mcp_server" {
   name     = var.service_name
