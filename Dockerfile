@@ -11,7 +11,9 @@ ENV PYTHONUNBUFFERED=1 \
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 COPY pyproject.toml README.md ./
-RUN uv pip install --no-cache -e .
+COPY src/ ./src/
+COPY pipelines/ ./pipelines/
+RUN uv pip install --no-cache .
 
 # Runtime stage
 FROM python:3.11-slim AS runner
@@ -36,7 +38,7 @@ RUN groupadd -r mcpuser && useradd -r -g mcpuser -d /app -s /sbin/nologin mcpuse
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder /usr/local/bin /usr/local/bin
 
-# Copy source code and pipelines
+# Copy application files
 COPY src/ /app/src/
 COPY pipelines/ /app/pipelines/
 COPY pyproject.toml /app/

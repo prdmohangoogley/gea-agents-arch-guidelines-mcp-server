@@ -1,0 +1,12 @@
+.venv
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.sync
+iac/.terraform
+iac/terraform.tfstate*
+*.log
+.DS_Store

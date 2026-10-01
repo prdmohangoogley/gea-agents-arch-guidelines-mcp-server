@@ -59,3 +59,21 @@ Deploy the instrumented server and verify that metrics (latency, invocations) ar
 - Spans for `tools/call` appear in Cloud Trace Explorer showing latency.
 - No PII or guideline secrets are exposed in the raw trace metadata.
 - A clear URL or dashboard spec is provided to the user.
+
+# AGY Goal: Phase 4.6 - Step 4: Security Auditing & Verification
+
+## 📌 Context
+Validate that the access controls and content safety filters are active and cannot be easily bypassed.
+
+---
+
+## 🛠️ Tasks
+1. **Unauthorized Access Test:** Attempt to call the live Cloud Run endpoint from a completely unauthenticated client (e.g., via standard `curl`). Expect `HTTP 401/403`.
+2. **Authorized Access Test:** Call the endpoint using valid OIDC credentials (impersonating the approved consumer agent). Expect `HTTP 200 OK`.
+3. **Malicious Payload Test:** Send a prompt containing obvious Jailbreak commands or malicious injection strings to the `get_best_practice` tool. Verify that **Model Armor** blocks the request and emits a log.
+4. **Audit Trail Verification:** Inspect **Cloud Audit Logs** and Cloud Logging to ensure every tool execution and authentication event is logged.
+
+## ✅ Acceptance Criteria
+- Unauthenticated requests are successfully blocked.
+- Malicious requests are successfully flagged and blocked by Model Armor.
+- A final security status report is produced for the user.

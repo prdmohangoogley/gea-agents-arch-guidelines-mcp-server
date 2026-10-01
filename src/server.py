@@ -35,6 +35,18 @@ def create_server() -> FastMCP:
     register_guideline_tools(mcp, client)
     register_pattern_tools(mcp, client)
 
+    # Custom HTTP health probe endpoint for Cloud Run and Docker
+    @mcp.custom_route("/health", methods=["GET"])
+    async def health_endpoint(request: Any) -> Any:
+        from starlette.responses import JSONResponse
+
+        return JSONResponse({
+            "status": "healthy",
+            "server": config.server_name,
+            "version": config.server_version,
+            "project": config.gcp_project_id,
+        })
+
     return mcp
 
 
