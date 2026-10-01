@@ -1,3 +1,7 @@
+data "google_project" "project" {
+  project_id = var.project_id
+}
+
 resource "google_bigquery_connection" "spanner_connection" {
   connection_id = var.connection_id
   project       = var.project_id
@@ -12,11 +16,11 @@ resource "google_bigquery_connection" "spanner_connection" {
   }
 }
 
-# Grant BigQuery Connection service account Spanner database reader privileges
+# Grant BigQuery Connection Service Agent Spanner database reader privileges
 resource "google_spanner_database_iam_member" "bq_spanner_reader" {
   project  = var.project_id
   instance = var.spanner_instance_id
   database = var.spanner_database_name
   role     = "roles/spanner.databaseReader"
-  member   = "serviceAccount:${google_bigquery_connection.spanner_connection.cloud_spanner[0].service_account_id}"
+  member   = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com"
 }

@@ -24,8 +24,8 @@ output "bigquery_spanner_connection" {
 }
 
 output "bigquery_federation_sa" {
-  description = "BigQuery Connection service account with Spanner reader permissions"
-  value       = module.federation.service_account_id
+  description = "BigQuery Connection service agent with Spanner reader permissions"
+  value       = module.federation.service_agent_email
 }
 
 output "gcs_bucket" {

@@ -3,7 +3,6 @@ resource "google_spanner_instance" "instance" {
   config           = var.config
   display_name     = var.display_name
   processing_units = var.processing_units
-  edition          = var.edition
   project          = var.project_id
 }
 
