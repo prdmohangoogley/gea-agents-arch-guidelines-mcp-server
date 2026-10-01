@@ -15,14 +15,3 @@ resource "google_bigquery_connection" "spanner_connection" {
     use_data_boost  = var.use_data_boost
   }
 }
-
-# Grant BigQuery Connection Service Agent Spanner database reader privileges
-resource "google_spanner_database_iam_member" "bq_spanner_reader" {
-  project  = var.project_id
-  instance = var.spanner_instance_id
-  database = var.spanner_database_name
-  role     = "roles/spanner.databaseReader"
-  member   = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-bigqueryconnection.iam.gserviceaccount.com"
-
-  depends_on = [google_bigquery_connection.spanner_connection]
-}

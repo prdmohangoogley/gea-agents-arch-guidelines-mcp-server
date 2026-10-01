@@ -21,6 +21,12 @@ variable "container_image" {
   default     = "us-docker.pkg.dev/cloudrun/container/hello"
 }
 
+variable "ingress" {
+  description = "Cloud Run ingress traffic setting conforming to org policies"
+  type        = string
+  default     = "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER"
+}
+
 variable "spanner_instance_id" {
   description = "Spanner instance ID"
   type        = string

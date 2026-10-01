@@ -23,11 +23,6 @@ output "bigquery_spanner_connection" {
   value       = module.federation.connection_id
 }
 
-output "bigquery_federation_sa" {
-  description = "BigQuery Connection service agent with Spanner reader permissions"
-  value       = module.federation.service_agent_email
-}
-
 output "gcs_bucket" {
   description = "GCS bucket name for raw corpus"
   value       = module.gcs.bucket_name

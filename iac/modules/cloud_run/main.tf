@@ -42,7 +42,7 @@ resource "google_cloud_run_v2_service" "mcp_server" {
   name     = var.service_name
   location = var.region
   project  = var.project_id
-  ingress  = "INGRESS_TRAFFIC_ALL"
+  ingress  = var.ingress
 
   template {
     service_account = google_service_account.mcp_runner.email
