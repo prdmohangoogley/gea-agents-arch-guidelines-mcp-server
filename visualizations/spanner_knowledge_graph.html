@@ -1,0 +1,3705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Agents Architectural Guidelines — Cloud Spanner Graph Visualization</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --card-bg: rgba(22, 27, 34, 0.85);
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --guideline: #1f6feb;
+      --pattern: #a371f7;
+      --antipattern: #f85149;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #header {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 10;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 14px 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      max-width: 480px;
+    }
+    #header h1 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #header p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .stats-bar {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      font-size: 0.78rem;
+    }
+    .stat-pill {
+      background: rgba(255,255,255,0.06);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-pill b { color: #fff; }
+    #controls {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      padding: 14px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 320px;
+    }
+    .search-box {
+      width: 100%;
+      padding: 8px 12px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .search-box:focus { border-color: var(--accent); }
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .filter-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid transparent;
+      color: var(--text);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { background: rgba(255,255,255,0.15); }
+    .filter-btn.active {
+      background: var(--accent);
+      color: #0d1117;
+      font-weight: 600;
+    }
+    #network {
+      flex: 1;
+      height: 100%;
+    }
+    #sidebar {
+      width: 380px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border-left: 1px solid var(--border);
+      height: 100%;
+      overflow-y: auto;
+      padding: 24px;
+      display: none;
+      flex-direction: column;
+      box-shadow: -4px 0 20px rgba(0,0,0,0.3);
+      z-index: 20;
+    }
+    #sidebar.open { display: flex; }
+    .sidebar-close {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+    .sidebar-close:hover { color: #fff; }
+    .node-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+    .badge-guideline { background: rgba(31, 111, 235, 0.25); color: #58a6ff; border: 1px solid rgba(88, 166, 255, 0.4); }
+    .badge-pattern { background: rgba(163, 113, 247, 0.25); color: #d2a8ff; border: 1px solid rgba(210, 168, 255, 0.4); }
+    .badge-antipattern { background: rgba(248, 81, 73, 0.25); color: #ff7b72; border: 1px solid rgba(255, 123, 114, 0.4); }
+    .node-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+      line-height: 1.35;
+    }
+    .node-prop {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .node-prop strong { color: var(--text); }
+    .connected-list {
+      margin-top: 14px;
+      list-style: none;
+    }
+    .connected-item {
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .connected-item:hover { background: rgba(88, 166, 255, 0.1); border-color: var(--accent); }
+    .legend {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-top: 6px;
+      font-size: 0.78rem;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1>🌐 Cloud Spanner Property Graph</h1>
+    <p>Database: <code>arch_guidelines_graph</code> | Graph: <code>ArchGuidelinesGraph</code></p>
+    <div class="stats-bar">
+      <div class="stat-pill">Guidelines: <b id="stat-guidelines">0</b></div>
+      <div class="stat-pill">Patterns: <b id="stat-patterns">0</b></div>
+      <div class="stat-pill">Edges: <b id="stat-edges">0</b></div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><span class="dot" style="background: var(--guideline);"></span> Guideline</div>
+      <div class="legend-item"><span class="dot" style="background: var(--pattern);"></span> Pattern</div>
+      <div class="legend-item"><span class="dot" style="background: var(--antipattern);"></span> Antipattern</div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <input type="text" id="search-input" class="search-box" placeholder="Search guidelines or patterns..." />
+    <div class="filter-group">
+      <button class="filter-btn active" onclick="filterType('ALL')">All</button>
+      <button class="filter-btn" onclick="filterType('Guideline')">Guidelines</button>
+      <button class="filter-btn" onclick="filterType('Pattern')">Patterns</button>
+    </div>
+    <button class="filter-btn" id="physics-toggle" onclick="togglePhysics()">Pause Physics</button>
+  </div>
+
+  <div id="network"></div>
+
+  <div id="sidebar">
+    <button class="sidebar-close" onclick="closeSidebar()">&times;</button>
+    <div id="sidebar-content"></div>
+  </div>
+
+  <script>
+    const graphData = {
+  "guidelines_count": 38,
+  "patterns_count": 110,
+  "antipatterns_count": 1,
+  "nodes": [
+    {
+      "id": "DOC-01420033",
+      "label": "01-ai-agent-quality-engineering",
+      "title_full": "01-ai-agent-quality-engineering - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 6. Topic Modeling & Taxonomic Tags  **Domain Taxonomy** `ai-agents` \u00b7 `quality-engineering` \u00b7 `evaluation-and-testing` \u00b7 `observability` \u00b7 `security-and-compliance` \u00b7 `cost-optimization` \u00b7 `responsible-ai` \u00b7 `mlops-and-genaiops` \u00b7 `cloud-infrastructure` \u00b7 `platform-governance`  **Key Entity & Tec...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-071F346D",
+      "label": "19-agent-tools-interoperability-...",
+      "title_full": "19-agent-tools-interoperability-2 - 2. Run the agent. It emits text containing one or more <a2ui-json>...</a2ui-json>",
+      "group": "Guideline",
+      "category": "antigravity",
+      "summary": "## Endnotes  1. A2A Community (2026) A2A Documentation: Extensions, *A2A Protocol*, <https://a2a-protocol.org/latest/topics/extensions/> 2. Antigravity Team (2026) Antigravity Editor: MCP Integration, *Antigravity Docs*, <https://antigravity.google/docs/mcp> 3. Fowler M, Lewis J (2014) Microservices...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-16984E21",
+      "label": "log - Change log",
+      "title_full": "log - Change log",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "--- type: \"Log\" title: \"Change log\" timestamp: \"2026-09-30T13:01:05-07:00\" corpus: \"GEAPL200\" ---  # Change log  ## 2026-09-30  - Initial publication of bundle `GEAPL200_2026-09-30_124746`. - 20 concepts converted from Google Docs; 100 source figures processed into Mermaid diagrams, Markdown tables,...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-19EE89E2",
+      "label": "15-introduction-to-agents",
+      "title_full": "15-introduction-to-agents - Document Section",
+      "group": "Guideline",
+      "category": "guardrails-policy-enforcement",
+      "summary": "## Endnotes  1. Julia Wiesinger, Patrick Marlow, et al. 2024 \"Agents\". Available at: [https://www.kaggle.com/whitepaper-agents](https://www.kaggle.com/whitepaper-agents). 2. Antonio Gulli, Lavi Nigam, et al. 2025 \"Agents Companion\". Available at: [https://www.kaggle.com/whitepaper-agent-companion](h...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-1F10F301",
+      "label": "05-enterprise-ai-agent-systems-g...",
+      "title_full": "05-enterprise-ai-agent-systems-google-cloud - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 5. Real-World / Customer Scenarios  **Scenario 1: Retail Order-Status Assistant (hallucination, lost mutations, turn-15 crash)**  - *Context & Constraints:* Live shipping data, ERP cancellation writes, long multi-turn conversations. - *Applied Architecture:* Orchestration layer with stateful sess...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-3BB27A2C",
+      "label": "validation-plan - Validation and...",
+      "title_full": "validation-plan - Validation and Evaluation Plan",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# Validation and Evaluation Plan  ## 1. Scope This plan details the testing, benchmarking, and evaluation strategy for the Enterprise Agents Architectural Guidelines MCP Server and its underlying Spanner Graph data store.  ## 2. Evaluation Dimensions  ### A. Retrieval Quality (Hit Rate & MRR) - **Go...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-4593FA3B",
+      "label": "12-agent-quality",
+      "title_full": "12-agent-quality - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## References  ### Academic Papers, Books, & Formal Reports  1. Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., ... & Rockt\u00e4schel, T. (2020). Retrieval Augmented Generation for Knowledge-Intensive NLP Tasks. Advances in Neural Information Processing Systems, 33, 9459-9474....",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-51E6DBE7",
+      "label": "07-enterprise-agent-skills",
+      "title_full": "07-enterprise-agent-skills - Document Section",
+      "group": "Guideline",
+      "category": "2",
+      "summary": "## 6. Topic Modeling & Taxonomic Tags  **Domain Taxonomy** `ai-agents` \u00b7 `agent-skills` \u00b7 `procedural-knowledge-engineering` \u00b7 `context-engineering` \u00b7 `cloud-infrastructure` \u00b7 `security-and-compliance` \u00b7 `evaluation-and-testing` \u00b7 `devops-and-sre` \u00b7 `cost-optimization` \u00b7 `software-architecture`  **K...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-52F1D269",
+      "label": "17-agents-concepts-visually-expl...",
+      "title_full": "17-agents-concepts-visually-explained - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## Architectural Best Practice: Key Guidelines & Takeaways  1. **Deploy Tiered Model Meshes.** Run simple tasks (greetings, routing, entity parsing) on Gemini 2.5 Flash for sub-second latencies and low cost. Reserve Gemini 2.5 Pro for multi-step reasoning and dynamic tool coordination. 2. **Never Re...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-59E9580B",
+      "label": "08-context-engineering-stateful-...",
+      "title_full": "08-context-engineering-stateful-agents - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 6. Topic Modeling & Taxonomic Tags  **Domain Taxonomy** `ai-agents` \u00b7 `context-engineering` \u00b7 `conversational-ai` \u00b7 `cloud-infrastructure` \u00b7 `data-engineering` \u00b7 `security-and-compliance` \u00b7 `privacy-and-governance` \u00b7 `distributed-systems` \u00b7 `cost-optimization` \u00b7 `information-retrieval`  **Key Ent...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-5BACD716",
+      "label": "04-deploying-gemini-enterprise-a...",
+      "title_full": "04-deploying-gemini-enterprise-agent-runtime - Document Section",
+      "group": "Guideline",
+      "category": "2",
+      "summary": "## 7. Appendix: Reference Tables  ### A. Tutorial Series Progression  | Part | Theme | Focus | Agent exists where? | In deploy picker? | |---|---|---|---|---| | Part 1 | Build | Platform foundations, ADK, Agent Studio, Agent Garden, RAG Engine | Local filesystem | No | | Part 2 | Build | Native Pyth...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-5FC4EA66",
+      "label": "architecture - Enterprise Agents...",
+      "title_full": "architecture - Enterprise Agents Architectural Guidelines MCP Server \u2014 Architecture",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# Enterprise Agents Architectural Guidelines MCP Server \u2014 Architecture  ## 1. Executive Summary The Enterprise Agents Architectural Guidelines MCP Server (`gea-agents-arch-guidelines-mcp-server`) provides AI agents and enterprise developers with structured, verified knowledge on designing, securing,...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-615DD32F",
+      "label": "13-spec-driven-production-grade-...",
+      "title_full": "13-spec-driven-production-grade-development - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## Context Hygiene & Prompt Sanitization  A significant danger in autonomous development is the \"Context Hallucination\" risk. When an agent lacks specific data, it may fill gaps using any available strings in its current context, potentially leaking sensitive information like hardcoded email address...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-61A00F98",
+      "label": "11-prototype-to-production",
+      "title_full": "11-prototype-to-production - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## Operations in-Production  Your agent is live. Now the focus shifts from development to a fundamentally different challenge: **keeping the system reliable**, **cost-effective**, **and safe as it interacts with thousands of users**. A traditional service operates on predictable logic. An agent, in...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-632F9693",
+      "label": "20-context-engineering-sessions-...",
+      "title_full": "20-context-engineering-sessions-memory - See https://cloud.google.com/agent-builder/agent-engine/memory-bank/set-up for",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# See https://cloud.google.com/agent-builder/agent-engine/memory-bank/set-up for...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-65857673",
+      "label": "14-agent-skills - Skill Name",
+      "title_full": "14-agent-skills - Skill Name",
+      "group": "Guideline",
+      "category": "0",
+      "summary": "## Endnotes  [^1]: https://codelabs.developers.google.com/getting-started-with-antigravity-skills?utm_campaign=CDR_0xf9030db1_default_b513044940&utm_medium=external&utm_source=blog#0 [^2]: https://github.com/anthropics/skills/tree/main/skills/skill-creator [^3]: https://hermes-agent.nousresearch.com...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-6901DD6F",
+      "label": "mcp-server-spec - FastMCP Server...",
+      "title_full": "mcp-server-spec - FastMCP Server Specification: Enterprise Agents Architectural Guidelines",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# FastMCP Server Specification: Enterprise Agents Architectural Guidelines  ## 1. Overview The FastMCP Server exposes structured architectural knowledge about enterprise AI agents on Google Cloud to client agents (e.g. Antigravity, Claude Desktop, Cursor) and developer workflows.  ## 2. Server Trans...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-6B2CA7D9",
+      "label": "spanner-graph-schema - Cloud Spa...",
+      "title_full": "spanner-graph-schema - Cloud Spanner Graph Schema Specification",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# Cloud Spanner Graph Schema Specification  ## 1. Overview Cloud Spanner Graph combines relational and property graph capabilities. This schema defines the tables and the `PROPERTY GRAPH` definition used to store the architectural guidelines knowledge base.  ## 2. Table Definitions (DDL)  ```sql --...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-74C719BA",
+      "label": "20-context-engineering-sessions-...",
+      "title_full": "20-context-engineering-sessions-memory - Option 1: Use the built-in PreloadMemoryTool which retrieves memories with",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# more information. memory_bank_config = {  \"customization_configs\": [{  \"memory_topics\": [  { \"managed_memory_topic\": {\"managed_topic_enum\": \"USER_PERSONAL_INFO\" }},  {  \"custom_memory_topic\": {  \"label\": \"business_feedback\",  \"description\": \"\"\"Specific user feedback about their experience at the c...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-7B88B290",
+      "label": "19-agent-tools-interoperability-2",
+      "title_full": "19-agent-tools-interoperability-2 - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## Agent-to-Agent (A2A) Interoperability  As AI systems transition into distributed networks of specialized domain experts, standardized communication becomes essential for scaling. This section explores the Agent-to-Agent (A2A) protocol as the foundational layer that resolves ecosystem fragmentatio...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-7C7C1810",
+      "label": "19-agent-tools-interoperability-...",
+      "title_full": "19-agent-tools-interoperability-2 - 1. Direct Instantiation via Hardcoded Endpoint",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## Building the Virtual Workforce  The introduction of the A2A protocol and the shift toward specialization does more than just solve technical bottlenecks\u2014it creates the foundations for new marketplaces for expertise which represents a new model in how value is delivered.  Without A2A, a developer...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-7CBBD84D",
+      "label": "nl2kg-spec - AGY Goal: Phase 3 -...",
+      "title_full": "nl2kg-spec - AGY Goal: Phase 3 - NL2KG Triplification Pipeline Implementation",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# AGY Goal: Phase 3 - NL2KG Triplification Pipeline Implementation  ## \ud83d\udccc Context We have provisioned the Dual-Binding Fabric (Spanner + BigQuery). Now we must build the pipeline that converts the OKF (Open Knowledge Format) Data Lake in GCS into Structured Graph Triples (NL2KG).  ---  ## \ud83d\udee0\ufe0f Tasks 1....",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-9B7E0F2D",
+      "label": "20-context-engineering-sessions-...",
+      "title_full": "20-context-engineering-sessions-memory - Option 2: Use a Custom tool where you can describe what type of information",
+      "group": "Guideline",
+      "category": "message-passing-between-agents",
+      "summary": "## Conclusion  This whitepaper has explored the discipline of **Context Engineering**, focusing on its two central components: **Sessions** and **Memory**. The journey from a simple conversational turn to a piece of persistent, actionable intelligence is governed by this practice, which involves dyn...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-9EAB107D",
+      "label": "16-the-new-sdlc-with-vibe-coding",
+      "title_full": "16-the-new-sdlc-with-vibe-coding - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## Endnotes  1. GetPanto, \"AI Coding Assistant Statistics 2025-2026,\" [https://www.getpanto.ai/blog/ai-coding-assistant-statistics](https://www.getpanto.ai/blog/ai-coding-assistant-statistics); Index.dev, \"Developer Productivity Statistics with AI Tools,\" [https://www.index.dev/blog/developer-produc...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-A48E7A97",
+      "label": "20-context-engineering-sessions-...",
+      "title_full": "20-context-engineering-sessions-memory - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## Context Engineering  LLMs are inherently stateless. Outside of their training data, their reasoning and awareness are confined to the information provided within the \"context window\" of a single API call. This presents a fundamental problem, as AI agents must be equipped with operating instructio...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-BA6962CE",
+      "label": "iac-spec - AGY Goal: Phase 2 - I...",
+      "title_full": "iac-spec - AGY Goal: Phase 2 - Infrastructure as Code",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "---  ### \ud83c\udfd7\ufe0f Phase 2: Infrastructure as Code (Terraform) *Hand this to Antigravity to generate the Terraform templates for your Nexus GCP account.*  ```markdown  # AGY Goal: Phase 2 - Infrastructure as Code  ## \ud83d\udccc Context We need to provision the **Hybrid GraphRAG** infrastructure on Google Cloud Plat...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-BBBDAE4A",
+      "label": "03-enterprise-ai-agent-protocol-...",
+      "title_full": "03-enterprise-ai-agent-protocol-stack - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 7. Appendix: Reference Matrices & Architecture Map  ### A. The Full Protocol Stack  | Layer | Protocol(s) | Responsibility | | :---- | :---- | :---- | | User Experience | A2UI + Gemini Live API | What to render; voice and vision | | Interaction Transport | AG-UI | Streaming SSE, tool states, HITL...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-CC328248",
+      "label": "20-context-engineering-sessions-...",
+      "title_full": "20-context-engineering-sessions-memory - Optionally, the sub-agent can save the final response text (or structured",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# Parent agent. root_agent = LlmAgent(  ...,  sub_agents=[sub_agent_1, sub_agent_2] ) ```  *Snippet 2: A2A communication across multiple agent frameworks*  In the **separate, individual histories model**, each agent maintains its own private conversation history and functions like a black box to oth...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-D907B753",
+      "label": "11-prototype-to-production - Exa...",
+      "title_full": "11-prototype-to-production - Example using ADK: Hierarchical agent composition",
+      "group": "Guideline",
+      "category": "5-agent-discovery-the-agent-card",
+      "summary": "## Conclusion: Bridging the Last Mile with AgentOps  Moving an AI prototype to a production system is an organizational transformation that requires a new operational discipline: **AgentOps**.  Most agent projects fail in the \"last mile\" not due to technology, but because the operational complexity...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-DECC8746",
+      "label": "02-vibe-coding-agent-security-ev...",
+      "title_full": "02-vibe-coding-agent-security-evaluation-kb - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 6. Topic Modeling & Taxonomic Tags  **Domain Taxonomy** `ai-agents` \u00b7 `application-security` \u00b7 `supply-chain-security` \u00b7 `identity-and-access-management` \u00b7 `secops-and-incident-response` \u00b7 `evaluation-and-testing` \u00b7 `observability` \u00b7 `developer-experience` \u00b7 `cloud-infrastructure` \u00b7 `software-sup...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-E5DAAE46",
+      "label": "10-vibe-coding-agent-security-an...",
+      "title_full": "10-vibe-coding-agent-security-and-evaluation - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# Derive criteria from the user's opening turns opening = \" \".join(session.user_messages[:2])  criteria = client.models.generate_content(     model=\"gemini-3-pro\",     contents=f\"Produce 3-5 acceptance criteria for: {opening}. Return JSON.\", ).parsed[\"criteria\"]  # Score every agent turn against the...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-EB384DA1",
+      "label": "repo-scaffolding - AGY Goal: Pha...",
+      "title_full": "repo-scaffolding - AGY Goal: Phase 1 - Repository Scaffolding",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# AGY Goal: Phase 1 - Repository Scaffolding  ## \ud83d\udccc Context We are starting a new repository for the **Enterprise Agents Architectural Guidelines MCP Server**.  ---  ## \u2699\ufe0f Variables - **REPO_NAME:** `gea-agents-arch-guidelines-mcp-server`  ---  ## \ud83d\udee0\ufe0f Tasks 1. Scaffold the repository with the followin...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-EEEA516F",
+      "label": "09-platform-native-state-management",
+      "title_full": "09-platform-native-state-management - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 6. Cross-References Within the Existing Knowledge Base  The source explicitly connected the article to two documents already in this corpus:  | Source document | Overlapping coverage | | :---- | :---- | | *Context Engineering \u2014 Sessions, Memory* | Agent Runtime Sessions, Agent Sandbox, Agent Iden...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-F60B5061",
+      "label": "nl2kg-pipeline-spec - NL2KG Pipe...",
+      "title_full": "nl2kg-pipeline-spec - NL2KG Pipeline Specification",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "# NL2KG Pipeline Specification  ## 1. Objective The Natural Language to Knowledge Graph (NL2KG) Triplification Pipeline extracts entities, concepts, relationships, and architectural tradeoffs from unstructured markdown documents and converts them into structured graph triples for Cloud Spanner Graph...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-F6430C38",
+      "label": "index",
+      "title_full": "index - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "--- type: \"Index\" title: \"GEA Agent Development - Architecture Best Practices Knowledge Base\" description: \"Root index for the GEAPL200 knowledge bundle.\" timestamp: \"2026-09-30T13:01:05-07:00\" status: \"draft\" corpus: \"GEAPL200\" version_tag: \"GEAPL200_2026-09-30_124746\" ---  # GEA Agent Development...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-F7DA53F0",
+      "label": "06-agent-tools-mcp-multi-agent-o...",
+      "title_full": "06-agent-tools-mcp-multi-agent-orchestration - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 4. Trade-Off Analysis & Pitfalls  | Option / Decision | Advantages | Trade-Offs / Risks | Mitigations | |---|---|---|---| | Granular schema-validated tools *(chosen, M1)* | Least privilege by construction; predictable state; self-correcting | More tools to author and maintain | Generate schemas f...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-F9DF6DFA",
+      "label": "14-agent-skills",
+      "title_full": "14-agent-skills - Document Section",
+      "group": "Guideline",
+      "category": "architecture",
+      "summary": "## 6. On Meta-Skills and Self-Improving Skills  So far, every skill in this document has been written by a human. A domain expert sits down, drafts a `SKILL.md`, tests it, ships it. That's the right place to start. But once you have a working library, the natural next question is: can the agent help...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "DOC-FD530B32",
+      "label": "18-agent-tools-interoperability-...",
+      "title_full": "18-agent-tools-interoperability-with-mcp - Document Section",
+      "group": "Guideline",
+      "category": "c-explicit-invocation-agenttool",
+      "summary": "## Endnotes  [^1]: Wikipedia contributors, 'Foundation model', *Wikipedia, The Free Encyclopedia*. https://en.wikipedia.org/w/index.php?title=Foundation_model&oldid=1320137519 [accessed 3 November 2025]  [^2]: Arredondo, Pablo, \"GPT-4 Passes the Bar Exam: What That Means for Artificial Intelligence...",
+      "color": {
+        "background": "#1f6feb",
+        "border": "#58a6ff"
+      },
+      "size": 22,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-01AA6C",
+      "label": "Glass Box Trajectory Assertion",
+      "title_full": "Glass Box Trajectory Assertion",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Glass Box Trajectory Assertion",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-0330AE",
+      "label": "Triad Composition",
+      "title_full": "Triad Composition",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Triad Composition",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-0E9F8C",
+      "label": "Multi-Model Memory Storage",
+      "title_full": "Multi-Model Memory Storage",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Multi-Model Memory Storage",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-122015",
+      "label": "Black Box Metric Selection",
+      "title_full": "Black Box Metric Selection",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Black Box Metric Selection",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-126E3E",
+      "label": "Quality Scorecard as Executable Release Gate",
+      "title_full": "Quality Scorecard as Executable Release Gate",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Quality Scorecard as Executable Release Gate",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-12A6AE",
+      "label": "OpenTelemetry Span Hierarchy",
+      "title_full": "OpenTelemetry Span Hierarchy",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: OpenTelemetry Span Hierarchy",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-1419A7",
+      "label": "UCP Standardized Commerce",
+      "title_full": "UCP Standardized Commerce",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: UCP Standardized Commerce",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-1C192A",
+      "label": "JIT Downscoped Credentials",
+      "title_full": "JIT Downscoped Credentials",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: JIT Downscoped Credentials",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-1C4860",
+      "label": "Progressive Tool Disclosure",
+      "title_full": "Progressive Tool Disclosure",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Progressive Tool Disclosure",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-1CA66F",
+      "label": "Multimodal Rendered Artifact Evaluation",
+      "title_full": "Multimodal Rendered Artifact Evaluation",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Multimodal Rendered Artifact Evaluation",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-1F5949",
+      "label": "Evaluatable-by-Design Instrumentation",
+      "title_full": "Evaluatable-by-Design Instrumentation",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Evaluatable-by-Design Instrumentation",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-21B136",
+      "label": "Federated Tool Ownership",
+      "title_full": "Federated Tool Ownership",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Federated Tool Ownership",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-239FC6",
+      "label": "Autonomy Level Sizing",
+      "title_full": "Autonomy Level Sizing",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Autonomy Level Sizing (L0\u2013L4)",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-257B22",
+      "label": "Canonical Skill Directory",
+      "title_full": "Canonical Skill Directory",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Canonical Skill Directory",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-260B5D",
+      "label": "Idempotent Provisioning Script",
+      "title_full": "Idempotent Provisioning Script",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Idempotent Provisioning Script",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-26A354",
+      "label": "Retrieval-Augmented Generation",
+      "title_full": "Retrieval-Augmented Generation",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "This retrieval capability is also why memory is frequently compared to another key architectural pattern: Retrieval-Augmented Generation (RAG). However, they are built on different architectural principles, as RAG handles static, external data while Memory curates dynamic, user-specific context. They fulfill two distinct and complementary roles: RAG makes an agent an expert on facts, while memory makes it an expert on the user. The following chart breaks down their high-level differences:",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-2BF775",
+      "label": "Correction Mining",
+      "title_full": "Correction Mining",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Correction Mining",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-2C1A32",
+      "label": "Defense-in-Depth Security Architecture",
+      "title_full": "Defense-in-Depth Security Architecture",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Defense-in-Depth Security Architecture",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-336E9D",
+      "label": "A2A Agent Card Interoperability",
+      "title_full": "A2A Agent Card Interoperability",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: A2A Agent Card Interoperability",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-356B19",
+      "label": "Position Self-Diagnosis",
+      "title_full": "Position Self-Diagnosis",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Position Self-Diagnosis",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-359DBB",
+      "label": "Agent-to-Agent",
+      "title_full": "Agent-to-Agent",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Agent-to-Agent (A2A) Handoff",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-37AEDE",
+      "label": "Stateful Circuit Breaker with Git Checkpointing",
+      "title_full": "Stateful Circuit Breaker with Git Checkpointing",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Stateful Circuit Breaker with Git Checkpointing",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-3B2C5A",
+      "label": "Procedural Playbook Execution",
+      "title_full": "Procedural Playbook Execution",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Procedural Playbook Execution",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-3DED2A",
+      "label": "Extraction",
+      "title_full": "Extraction",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Extraction \u2192 Consolidation \u2192 Provenance ETL",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-3FDA27",
+      "label": "A2UI Declarative Generative UI",
+      "title_full": "A2UI Declarative Generative UI",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: A2UI Declarative Generative UI",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-408EEB",
+      "label": "AP2 Capped Commerce Mandate",
+      "title_full": "AP2 Capped Commerce Mandate",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: AP2 Capped Commerce Mandate",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-45B9C3",
+      "label": "Sequential Pipeline",
+      "title_full": "Sequential Pipeline",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Sequential Pipeline",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-478ECE",
+      "label": "Vibe Coding Agent Security",
+      "title_full": "Vibe Coding Agent Security",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: Vibe Coding Agent Security & Evaluation \u2014 ](/concepts/02-vibe-coding-agent-security-evaluation-kb.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-484DB3",
+      "label": "Black Box Golden Dataset Regression",
+      "title_full": "Black Box Golden Dataset Regression",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Black Box Golden Dataset Regression",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-48A855",
+      "label": "ADK Trajectory Validation",
+      "title_full": "ADK Trajectory Validation",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: ADK Trajectory Validation",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-4A24AC",
+      "label": "Heterogeneous Model Mesh",
+      "title_full": "Heterogeneous Model Mesh",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Heterogeneous Model Mesh / Tiered Routing",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-4A92D6",
+      "label": "AG-UI Runtime Event Stream",
+      "title_full": "AG-UI Runtime Event Stream",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: AG-UI Runtime Event Stream",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-4E1F49",
+      "label": "Event",
+      "title_full": "Event",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Event/State Session Split",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-4FAEA3",
+      "label": "Session-Prefix Rubric Derivation",
+      "title_full": "Session-Prefix Rubric Derivation",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Session-Prefix Rubric Derivation",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-50CE20",
+      "label": "Vibe Diff with Hardware MFA",
+      "title_full": "Vibe Diff with Hardware MFA",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Vibe Diff with Hardware MFA",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-524BC6",
+      "label": "AP2 Mandate Chain",
+      "title_full": "AP2 Mandate Chain",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: AP2 Mandate Chain",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-5654C8",
+      "label": "Path B Crystallization",
+      "title_full": "Path B Crystallization",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Path B Crystallization (Bottom-Up)",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-56CFFD",
+      "label": "Production Session Hardening",
+      "title_full": "Production Session Hardening",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Production Session Hardening",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-56FBB9",
+      "label": "Shift Intelligence Left",
+      "title_full": "Shift Intelligence Left",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Shift Intelligence Left",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-57C5DF",
+      "label": "Idempotent Mutation with Plan-Time Keys",
+      "title_full": "Idempotent Mutation with Plan-Time Keys",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Idempotent Mutation with Plan-Time Keys",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-57D3A9",
+      "label": "Tiered Session Persistence",
+      "title_full": "Tiered Session Persistence",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Tiered Session Persistence",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-597291",
+      "label": "Model Routing to Resolve the Effectiveness",
+      "title_full": "Model Routing to Resolve the Effectiveness",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Model Routing to Resolve the Effectiveness\u2013Efficiency Tension",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-5C24F6",
+      "label": "Three-Tier Progressive Loading",
+      "title_full": "Three-Tier Progressive Loading",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Three-Tier Progressive Loading",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-636331",
+      "label": "Dual-Loop Evolution",
+      "title_full": "Dual-Loop Evolution",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Dual-Loop Evolution (In-Line + Agent Gym)",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-67363C",
+      "label": "Recursive Summarization with a Verbatim Window",
+      "title_full": "Recursive Summarization with a Verbatim Window",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Recursive Summarization with a Verbatim Window",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-679ADA",
+      "label": "Context Engineering for Stateful AI Agents",
+      "title_full": "Context Engineering for Stateful AI Agents",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: Context Engineering for Stateful AI Agents](/concepts/08-context-engineering-stateful-agents.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-680229",
+      "label": "Defense-in-Depth Against the Confused Deputy",
+      "title_full": "Defense-in-Depth Against the Confused Deputy",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Defense-in-Depth Against the Confused Deputy",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-6AF9F1",
+      "label": "Enterprise AI Agent Systems on Google Clou",
+      "title_full": "Enterprise AI Agent Systems on Google Clou",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: Enterprise AI Agent Systems on Google Clou](/concepts/05-enterprise-ai-agent-systems-google-cloud.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-6BA21C",
+      "label": "DAG Composition",
+      "title_full": "DAG Composition",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: DAG Composition",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-6D4DC4",
+      "label": "x402 Machine-to-Machine Micropayment",
+      "title_full": "x402 Machine-to-Machine Micropayment",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: x402 Machine-to-Machine Micropayment",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-6F4F75",
+      "label": "Enterprise AI Agent Systems on Google Cloud",
+      "title_full": "Enterprise AI Agent Systems on Google Cloud",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "- [Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud](/concepts/05-enterprise-ai-agent-systems-google-cloud.md) - `enterprise-agents` `google-cloud` `agent-architecture` `multi-agent-orchestration` `agent-security`",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-732787",
+      "label": "Agent Tools",
+      "title_full": "Agent Tools",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-](/concepts/06-agent-tools-mcp-multi-agent-orchestration.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-733816",
+      "label": "Anti-Slopsquatting Supply Chain Control",
+      "title_full": "Anti-Slopsquatting Supply Chain Control",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Anti-Slopsquatting Supply Chain Control",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-764D4E",
+      "label": "The 5-Step Agentic Loop with Externalized State",
+      "title_full": "The 5-Step Agentic Loop with Externalized State",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: The 5-Step Agentic Loop with Externalized State",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-7AAEFD",
+      "label": "OpenTelemetry Trajectory Tracing",
+      "title_full": "OpenTelemetry Trajectory Tracing",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: OpenTelemetry Trajectory Tracing + LM-as-a-Judge",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-7C3A86",
+      "label": "Calibrated LLM Judge",
+      "title_full": "Calibrated LLM Judge",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Calibrated LLM Judge",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-7DB182",
+      "label": "Human-in-the-Loop Approval Gate",
+      "title_full": "Human-in-the-Loop Approval Gate",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Human-in-the-Loop Approval Gate",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-8089F8",
+      "label": "Intent-Scoped Two-Stage Retrieval",
+      "title_full": "Intent-Scoped Two-Stage Retrieval",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Intent-Scoped Two-Stage Retrieval *(follow-up exchange)*",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-81F9FC",
+      "label": "Empty-Picker Diagnostic Tree",
+      "title_full": "Empty-Picker Diagnostic Tree",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Empty-Picker Diagnostic Tree",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-82BC12",
+      "label": "Enterprise Agent Skills",
+      "title_full": "Enterprise Agent Skills",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: Enterprise Agent Skills \u2014 Progressive Disc](/concepts/07-enterprise-agent-skills.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-89D8B6",
+      "label": "Three-Gate Evaluation Harness",
+      "title_full": "Three-Gate Evaluation Harness",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Three-Gate Evaluation Harness",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-8CC64F",
+      "label": "Home-Resident Virtualenv",
+      "title_full": "Home-Resident Virtualenv",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Home-Resident Virtualenv",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-8D09E6",
+      "label": "Iterative Refinement",
+      "title_full": "Iterative Refinement",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Iterative Refinement (Generator\u2013Critic)",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-8FEF2F",
+      "label": "The Open AI Agent Protocol Stack on Google Cloud",
+      "title_full": "The Open AI Agent Protocol Stack on Google Cloud",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "- [Architecture Best Practice: The Open AI Agent Protocol Stack on Google Cloud (MCP \u00b7 A2A \u00b7 UCP \u00b7 AP2/x402 \u00b7 A2UI \u00b7 AG-UI)](/concepts/03-enterprise-ai-agent-protocol-stack.md) - `agent-protocols` `mcp` `a2a` `ap2` `generative-ui`",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-933BAA",
+      "label": "Dynamic Per-Turn Payload Assembly",
+      "title_full": "Dynamic Per-Turn Payload Assembly",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Dynamic Per-Turn Payload Assembly",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-946BEC",
+      "label": "Hierarchical Multi-Agent Sessions",
+      "title_full": "Hierarchical Multi-Agent Sessions",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Hierarchical Multi-Agent Sessions",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-98DEDD",
+      "label": "Path A Decomposition",
+      "title_full": "Path A Decomposition",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Path A Decomposition (Top-Down)",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-9DE790",
+      "label": "Supervisor",
+      "title_full": "Supervisor",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Supervisor / Router Topology",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-9E0DF0",
+      "label": "A2A Federated Agent Mesh",
+      "title_full": "A2A Federated Agent Mesh",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: A2A Federated Agent Mesh",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-9E2E23",
+      "label": "Adversarial Distractor Matrix",
+      "title_full": "Adversarial Distractor Matrix",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Adversarial Distractor Matrix",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-A64CCE",
+      "label": "AI Agent Quality",
+      "title_full": "AI Agent Quality",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: AI Agent Quality \u2014 Evaluation, Observabili](/concepts/01-ai-agent-quality-engineering.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-A8D8F8",
+      "label": "Platform-Native State Management with Gemini Enterprise Agent Runtime",
+      "title_full": "Platform-Native State Management with Gemini Enterprise Agent Runtime",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "- [Architecture Best Practice: Platform-Native State Management with Gemini Enterprise Agent Runtime & Memory Bank](/concepts/09-platform-native-state-management.md) - `gemini-enterprise` `agent-runtime` `memory-bank` `state-management` `managed-services`",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-A9ABC1",
+      "label": "Asynchronous Memory Triggering",
+      "title_full": "Asynchronous Memory Triggering",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Asynchronous Memory Triggering",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-A9CDFF",
+      "label": "Four-Pillar Agent Anatomy",
+      "title_full": "Four-Pillar Agent Anatomy",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Four-Pillar Agent Anatomy",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-AC569D",
+      "label": "MCP Tool Server per Domain",
+      "title_full": "MCP Tool Server per Domain",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: MCP Tool Server per Domain",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-B1B8A1",
+      "label": "Agent Quality Metrics and Alerting",
+      "title_full": "Agent Quality Metrics and Alerting",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Agent Quality Metrics and Alerting",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-B29851",
+      "label": "Runtime Precondition Enforcement",
+      "title_full": "Runtime Precondition Enforcement",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Runtime Precondition Enforcement",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-B5C614",
+      "label": "Separated RAG and Memory Tiers",
+      "title_full": "Separated RAG and Memory Tiers",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Separated RAG and Memory Tiers",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-B6EB34",
+      "label": "Three-Layer Prerequisite Matrix",
+      "title_full": "Three-Layer Prerequisite Matrix",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Three-Layer Prerequisite Matrix",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-BA19E9",
+      "label": "Red",
+      "title_full": "Red",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Red / Blue / Green SecOps Triad",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-BE9E38",
+      "label": "The Agent Quality Flywheel",
+      "title_full": "The Agent Quality Flywheel",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: The Agent Quality Flywheel",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-BF1302",
+      "label": "Schema-Validated Tool Definition",
+      "title_full": "Schema-Validated Tool Definition",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Schema-Validated Tool Definition (ADK)",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-C0D91C",
+      "label": "Bias Mitigation in Pairwise Evaluation",
+      "title_full": "Bias Mitigation in Pairwise Evaluation",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Bias Mitigation in Pairwise Evaluation",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-C23C81",
+      "label": "Session Convergence Telemetry",
+      "title_full": "Session Convergence Telemetry",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Session Convergence Telemetry",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-C37EA5",
+      "label": "MCP Server per Tool Domain",
+      "title_full": "MCP Server per Tool Domain",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: MCP Server per Tool Domain",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-C63873",
+      "label": "Instructional Error Recovery",
+      "title_full": "Instructional Error Recovery",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Instructional Error Recovery",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-C6703D",
+      "label": "The Open AI Agent Protocol Stack on Google",
+      "title_full": "The Open AI Agent Protocol Stack on Google",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: The Open AI Agent Protocol Stack on Google](/concepts/03-enterprise-ai-agent-protocol-stack.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-CABFE0",
+      "label": "Secure Memory Gateway",
+      "title_full": "Secure Memory Gateway",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Secure Memory Gateway",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-CB2F1A",
+      "label": "Platform-Native State Management with Gemi",
+      "title_full": "Platform-Native State Management with Gemi",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: Platform-Native State Management with Gemi](/concepts/09-platform-native-state-management.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-CDD4F7",
+      "label": "Ephemeral Skill Lifecycle",
+      "title_full": "Ephemeral Skill Lifecycle",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Ephemeral Skill Lifecycle & Context Condensation",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-CF2D34",
+      "label": "Meta-Skills with a Human Gate",
+      "title_full": "Meta-Skills with a Human Gate",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Meta-Skills with a Human Gate",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-CFEBCE",
+      "label": "Deploying to Agent Runtime",
+      "title_full": "Deploying to Agent Runtime",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "| [Architecture Best Practice: Deploying to Agent Runtime \u2014 Prerequisites](/concepts/04-deploying-gemini-enterprise-agent-runtime.md) | draft | 2027-03-29 |",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-D05F0E",
+      "label": "Payload Pruning",
+      "title_full": "Payload Pruning",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Payload Pruning",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-DACB09",
+      "label": "Key Guidelines",
+      "title_full": "Key Guidelines",
+      "group": "Pattern",
+      "category": "context-engineering",
+      "description": "## Architectural Best Practice: Key Guidelines & Takeaways",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-DDF89D",
+      "label": "Ephemeral Sandboxed Execution",
+      "title_full": "Ephemeral Sandboxed Execution",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Ephemeral Sandboxed Execution",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-E3DD9E",
+      "label": "automate the feedback loop from production insight to deployed improvement and standardize on interoperable protocols to build a cohesive ecosystem",
+      "title_full": "automate the feedback loop from production insight to deployed improvement and standardize on interoperable protocols to build a cohesive ecosystem",
+      "group": "Pattern",
+      "category": "5-agent-discovery-the-agent-card",
+      "description": "- **If you're scaling**, elevate your practice: automate the feedback loop from production insight to deployed improvement and standardize on interoperable protocols to build a cohesive ecosystem, not just point solutions.",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-E5FD6F",
+      "label": "Runtime Human-in-the-Loop Breakpoint",
+      "title_full": "Runtime Human-in-the-Loop Breakpoint",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Runtime Human-in-the-Loop Breakpoint",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-E6DC23",
+      "label": "anything that is a good",
+      "title_full": "anything that is a good",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "**The second path involves developers** wrapping agentic or coded workflows into Skills. If an agent successfully executes a non-trivial, repetitive task, you don't want it to have to figure out the process from scratch next time. Instead, you want the agent to create a Skill out of this successful run. In short, we are observing an emerging pattern: anything that is a good, reusable workflow becomes a Skill, and you don't have to write it yourself, the agent does, you review. This is already meta-skills territory, which we introduce gently here before going deep on it in **Section 6**.",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F00E33",
+      "label": "Coordinator",
+      "title_full": "Coordinator",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Coordinator (Hub-and-Spoke)",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F12E6D",
+      "label": "Deploy-Then-Register Sequence",
+      "title_full": "Deploy-Then-Register Sequence",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Deploy-Then-Register Sequence",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F1E31A",
+      "label": "Cloud Shell as the Lab Environment",
+      "title_full": "Cloud Shell as the Lab Environment",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Cloud Shell as the Lab Environment",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F2B737",
+      "label": "Durable Long-Running Orchestration",
+      "title_full": "Durable Long-Running Orchestration",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Durable Long-Running Orchestration",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F49E88",
+      "label": "Runtime AgBOM Drift Detection",
+      "title_full": "Runtime AgBOM Drift Detection",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Runtime AgBOM Drift Detection",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F4AD9F",
+      "label": "Enterprise Agent Gateway Governance",
+      "title_full": "Enterprise Agent Gateway Governance",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Enterprise Agent Gateway Governance",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F4F92B",
+      "label": "Two-Phase HITL Tool Call",
+      "title_full": "Two-Phase HITL Tool Call",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Two-Phase HITL Tool Call",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F56719",
+      "label": "Lesson-Plan Decomposition of the Tutorial",
+      "title_full": "Lesson-Plan Decomposition of the Tutorial",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Lesson-Plan Decomposition of the Tutorial",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-F8B27E",
+      "label": "Capability Profiles",
+      "title_full": "Capability Profiles",
+      "group": "Pattern",
+      "category": "2",
+      "description": "### Pattern: Capability Profiles",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-FC8303",
+      "label": "Context Engineering for Stateful AI Agents on Google Cloud",
+      "title_full": "Context Engineering for Stateful AI Agents on Google Cloud",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "- [Architecture Best Practice: Context Engineering for Stateful AI Agents on Google Cloud \u2014 Sessions, Memory & Governance](/concepts/08-context-engineering-stateful-agents.md) - `context-engineering` `sessions` `memory` `rag` `adk`",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-FD02F4",
+      "label": "Defense-in-Depth",
+      "title_full": "Defense-in-Depth",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Defense-in-Depth \u2014 \"The Principle of the Leash\"",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "PAT-FD35D0",
+      "label": "Deliberate Inference-Time Placement",
+      "title_full": "Deliberate Inference-Time Placement",
+      "group": "Pattern",
+      "category": "architecture",
+      "description": "### Pattern: Deliberate Inference-Time Placement",
+      "color": {
+        "background": "#8957e5",
+        "border": "#d2a8ff"
+      },
+      "size": 14,
+      "shape": "dot"
+    },
+    {
+      "id": "ANTI-C9AEB6",
+      "label": "large language models frequently hallucinate software packages that do not exist",
+      "title_full": "large language models frequently hallucinate software packages that do not exist",
+      "group": "Antipattern",
+      "category": "hazard",
+      "description": "Hazard: Agentic code generation introduces a highly specific and dangerous supply chain vulnerability: large language models frequently hallucinate software packages that do not exist. Malicious actors actively monitor developer forums and AI outputs for these hallucinations, proactively publishing malware under those exact fake names. Because autonomous agents can alter dependency graphs without human confirmation, a single hallucination can pull malware directly into the build environment.\nRemedy: Apply corresponding architectural pattern",
+      "color": {
+        "background": "#da3633",
+        "border": "#ff7b72"
+      },
+      "size": 18,
+      "shape": "triangle"
+    }
+  ],
+  "edges": [
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-01AA6C",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-0330AE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-0E9F8C",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-122015",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-126E3E",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-12A6AE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-1419A7",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-1C192A",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-1C4860",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-1CA66F",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-1F5949",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-21B136",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-239FC6",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-257B22",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-260B5D",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-632F9693",
+      "to": "PAT-26A354",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-2BF775",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-2C1A32",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-336E9D",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-356B19",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-359DBB",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-37AEDE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-3B2C5A",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-3DED2A",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-3FDA27",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-408EEB",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-45B9C3",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-478ECE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-478ECE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-484DB3",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-48A855",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-4A24AC",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-4A92D6",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-4E1F49",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-4FAEA3",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-50CE20",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-524BC6",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-5654C8",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-56CFFD",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-56FBB9",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-57C5DF",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-57D3A9",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-597291",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-5C24F6",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-636331",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-67363C",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-679ADA",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-680229",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-6AF9F1",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-6BA21C",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-6D4DC4",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-6F4F75",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-6F4F75",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-732787",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-732787",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-733816",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-764D4E",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-7AAEFD",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-7C3A86",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-7DB182",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-8089F8",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-81F9FC",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-82BC12",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-82BC12",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-89D8B6",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-8CC64F",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-8D09E6",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-8FEF2F",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-8FEF2F",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-933BAA",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-946BEC",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-98DEDD",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-9DE790",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-9E0DF0",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-9E2E23",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-A64CCE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-A64CCE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-EEEA516F",
+      "to": "PAT-A8D8F8",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-A8D8F8",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-A9ABC1",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-A9CDFF",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-AC569D",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-B1B8A1",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-B29851",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-B5C614",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-B6EB34",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-BA19E9",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-BE9E38",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-BF1302",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-C0D91C",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-C23C81",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-C37EA5",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-C63873",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-C6703D",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-CABFE0",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-CB2F1A",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-CDD4F7",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-CF2D34",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-CFEBCE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-CFEBCE",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-D05F0E",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-19EE89E2",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-4593FA3B",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-52F1D269",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-615DD32F",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-61A00F98",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-7B88B290",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-9EAB107D",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-A48E7A97",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-E5DAAE46",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-EEEA516F",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F9DF6DFA",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-FD530B32",
+      "to": "PAT-DACB09",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-DDF89D",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-D907B753",
+      "to": "PAT-E3DD9E",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-01420033",
+      "to": "PAT-E5FD6F",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F9DF6DFA",
+      "to": "PAT-E6DC23",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-F00E33",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-F12E6D",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-F1E31A",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-F2B737",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-DECC8746",
+      "to": "PAT-F49E88",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-BBBDAE4A",
+      "to": "PAT-F4AD9F",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F7DA53F0",
+      "to": "PAT-F4F92B",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-5BACD716",
+      "to": "PAT-F56719",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-51E6DBE7",
+      "to": "PAT-F8B27E",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-FC8303",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-F6430C38",
+      "to": "PAT-FC8303",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-1F10F301",
+      "to": "PAT-FD02F4",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    },
+    {
+      "from": "DOC-59E9580B",
+      "to": "PAT-FD35D0",
+      "arrows": "to",
+      "color": {
+        "color": "#30363d",
+        "highlight": "#58a6ff"
+      }
+    }
+  ]
+};
+
+    document.getElementById("stat-guidelines").innerText = graphData.guidelines_count;
+    document.getElementById("stat-patterns").innerText = graphData.patterns_count;
+    document.getElementById("stat-edges").innerText = graphData.edges.length;
+
+    const container = document.getElementById("network");
+    const nodes = new vis.DataSet(graphData.nodes);
+    const edges = new vis.DataSet(graphData.edges);
+
+    const options = {
+      nodes: {
+        font: { color: "#e6edf3", size: 13, face: "-apple-system, sans-serif" },
+        borderWidth: 2,
+        shadow: { enabled: true, color: "rgba(0,0,0,0.5)", size: 6 }
+      },
+      edges: {
+        color: { color: "#484f58", highlight: "#58a6ff", hover: "#8b949e" },
+        width: 1.5,
+        smooth: { type: "continuous" },
+        arrows: { to: { enabled: true, scaleFactor: 0.6 } }
+      },
+      physics: {
+        forceAtlas2Based: {
+          gravitationalConstant: -70,
+          centralGravity: 0.015,
+          springLength: 90,
+          springConstant: 0.08,
+          damping: 0.5
+        },
+        solver: "forceAtlas2Based",
+        stabilization: { iterations: 150 }
+      },
+      interaction: {
+        hover: true,
+        tooltipDelay: 150
+      }
+    };
+
+    const network = new vis.Network(container, { nodes, edges }, options);
+    let physicsActive = true;
+
+    function togglePhysics() {
+      physicsActive = !physicsActive;
+      network.setOptions({ physics: { enabled: physicsActive } });
+      document.getElementById("physics-toggle").innerText = physicsActive ? "Pause Physics" : "Resume Physics";
+    }
+
+    // Node selection & detail sidebar
+    network.on("selectNode", function(params) {
+      if (params.nodes.length > 0) {
+        const nodeId = params.nodes[0];
+        const node = nodes.get(nodeId);
+        showSidebar(node);
+      }
+    });
+
+    network.on("deselectNode", function() {
+      closeSidebar();
+    });
+
+    function showSidebar(node) {
+      const sidebar = document.getElementById("sidebar");
+      const content = document.getElementById("sidebar-content");
+      
+      const badgeClass = node.group === "Guideline" ? "badge-guideline" : (node.group === "Pattern" ? "badge-pattern" : "badge-antipattern");
+      
+      // Find connected nodes
+      const connectedNodeIds = network.getConnectedNodes(node.id);
+      const connectedNodes = nodes.get(connectedNodeIds);
+
+      let connectedHtml = "";
+      if (connectedNodes.length > 0) {
+        connectedHtml = `<p style="margin-top:14px; font-weight:600; font-size:0.85rem;">Connected Nodes (${connectedNodes.length}):</p><ul class="connected-list">`;
+        connectedNodes.forEach(cn => {
+          connectedHtml += `<li class="connected-item" onclick="focusNode('${cn.id}')"><b>[${cn.group}]</b> ${cn.label}</li>`;
+        });
+        connectedHtml += "</ul>";
+      }
+
+      content.innerHTML = `
+        <span class="node-badge ${badgeClass}">${node.group}</span>
+        <h2 class="node-title">${node.title_full || node.label}</h2>
+        <div class="node-prop"><strong>Identifier:</strong> <code>${node.id}</code></div>
+        <div class="node-prop"><strong>Category:</strong> <code>#${node.category || "general"}</code></div>
+        <div class="node-prop" style="margin-top:10px;">
+          <strong>Summary / Description:</strong>
+          <p style="margin-top:6px; color:#c9d1d9;">${node.description || node.summary || "No description available."}</p>
+        </div>
+        ${connectedHtml}
+      `;
+      sidebar.classList.add("open");
+    }
+
+    function closeSidebar() {
+      document.getElementById("sidebar").classList.remove("open");
+    }
+
+    function focusNode(nodeId) {
+      network.focus(nodeId, { scale: 1.2, animation: { duration: 800, easingFunction: "easeInOutQuad" } });
+      network.selectNodes([nodeId]);
+      const node = nodes.get(nodeId);
+      showSidebar(node);
+    }
+
+    // Search functionality
+    document.getElementById("search-input").addEventListener("input", function(e) {
+      const val = e.target.value.toLowerCase().trim();
+      if (!val) {
+        nodes.update(graphData.nodes.map(n => ({ id: n.id, hidden: false })));
+        return;
+      }
+
+      const matching = graphData.nodes.filter(n => 
+        (n.label && n.label.toLowerCase().includes(val)) ||
+        (n.id && n.id.toLowerCase().includes(val)) ||
+        (n.category && n.category.toLowerCase().includes(val))
+      );
+
+      if (matching.length > 0) {
+        focusNode(matching[0].id);
+      }
+    });
+
+    // Filtering by type
+    function filterType(type) {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      event.target.classList.add("active");
+
+      if (type === "ALL") {
+        nodes.update(graphData.nodes.map(n => ({ id: n.id, hidden: false })));
+      } else {
+        nodes.update(graphData.nodes.map(n => ({ id: n.id, hidden: n.group !== type })));
+      }
+    }
+  </script>
+</body>
+</html>
