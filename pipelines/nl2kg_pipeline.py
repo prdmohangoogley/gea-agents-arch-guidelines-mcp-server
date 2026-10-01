@@ -423,7 +423,14 @@ class GraphBatchHydrator:
                         table="Guidelines",
                         columns=["guideline_id", "title", "category", "summary", "source_url", "created_at"],
                         values=[
-                            [g.guideline_id, g.title, g.category, g.summary, g.source_url or "", spanner.COMMIT_TIMESTAMP]
+                            [
+                                g.guideline_id[:64],
+                                g.title[:256],
+                                g.category[:64],
+                                g.summary,
+                                (g.source_url or "")[:512],
+                                spanner.COMMIT_TIMESTAMP,
+                            ]
                             for g in batch
                         ],
                     )
@@ -436,7 +443,16 @@ class GraphBatchHydrator:
                     b.insert_or_update(
                         table="Patterns",
                         columns=["pattern_id", "name", "category", "description", "created_at"],
-                        values=[[p.pattern_id, p.name, p.category, p.description, spanner.COMMIT_TIMESTAMP] for p in batch],
+                        values=[
+                            [
+                                p.pattern_id[:64],
+                                p.name[:512],
+                                p.category[:64],
+                                p.description,
+                                spanner.COMMIT_TIMESTAMP,
+                            ]
+                            for p in batch
+                        ],
                     )
                 total_mutations += len(batch)
 
@@ -447,7 +463,16 @@ class GraphBatchHydrator:
                     b.insert_or_update(
                         table="Antipatterns",
                         columns=["antipattern_id", "name", "hazard", "remedy", "created_at"],
-                        values=[[a.antipattern_id, a.name, a.hazard, a.remedy, spanner.COMMIT_TIMESTAMP] for a in batch],
+                        values=[
+                            [
+                                a.antipattern_id[:64],
+                                a.name[:512],
+                                a.hazard,
+                                a.remedy,
+                                spanner.COMMIT_TIMESTAMP,
+                            ]
+                            for a in batch
+                        ],
                     )
                 total_mutations += len(batch)
 
@@ -459,7 +484,14 @@ class GraphBatchHydrator:
                         table="Tradeoffs",
                         columns=["tradeoff_id", "dimension", "option_a", "option_b", "analysis", "created_at"],
                         values=[
-                            [t.tradeoff_id, t.dimension, t.option_a, t.option_b, t.analysis, spanner.COMMIT_TIMESTAMP]
+                            [
+                                t.tradeoff_id[:64],
+                                t.dimension[:64],
+                                t.option_a[:128],
+                                t.option_b[:128],
+                                t.analysis,
+                                spanner.COMMIT_TIMESTAMP,
+                            ]
                             for t in batch
                         ],
                     )
@@ -473,7 +505,10 @@ class GraphBatchHydrator:
                     b.insert_or_update(
                         table="PatternMitigatesAntipattern",
                         columns=["pattern_id", "antipattern_id", "rationale"],
-                        values=[[e.source_id, e.target_id, e.rationale or ""] for e in batch],
+                        values=[
+                            [e.source_id[:64], e.target_id[:64], e.rationale or ""]
+                            for e in batch
+                        ],
                     )
                 total_mutations += len(batch)
 
@@ -485,7 +520,10 @@ class GraphBatchHydrator:
                     b.insert_or_update(
                         table="GuidelineImplementsPattern",
                         columns=["guideline_id", "pattern_id", "notes"],
-                        values=[[e.source_id, e.target_id, e.rationale or ""] for e in batch],
+                        values=[
+                            [e.source_id[:64], e.target_id[:64], e.rationale or ""]
+                            for e in batch
+                        ],
                     )
                 total_mutations += len(batch)
 
@@ -539,6 +577,69 @@ class GraphBatchHydrator:
                         "created_at": p.created_at.isoformat(),
                     }
                     for p in payload.patterns
+                ]
+                client.insert_rows_json(table_id, rows)
+                total_rows += len(rows)
+
+            # Antipatterns
+            if payload.antipatterns:
+                table_id = f"{self.project_id}.{self.bq_dataset_id}.antipatterns"
+                rows = [
+                    {
+                        "antipattern_id": a.antipattern_id,
+                        "name": a.name,
+                        "hazard": a.hazard,
+                        "remedy": a.remedy,
+                        "created_at": a.created_at.isoformat(),
+                    }
+                    for a in payload.antipatterns
+                ]
+                client.insert_rows_json(table_id, rows)
+                total_rows += len(rows)
+
+            # Tradeoffs
+            if payload.tradeoffs:
+                table_id = f"{self.project_id}.{self.bq_dataset_id}.tradeoffs"
+                rows = [
+                    {
+                        "tradeoff_id": t.tradeoff_id,
+                        "dimension": t.dimension,
+                        "option_a": t.option_a,
+                        "option_b": t.option_b,
+                        "analysis": t.analysis,
+                        "created_at": t.created_at.isoformat(),
+                    }
+                    for t in payload.tradeoffs
+                ]
+                client.insert_rows_json(table_id, rows)
+                total_rows += len(rows)
+
+            # Edges: PatternMitigatesAntipattern
+            mitigates_edges = [e for e in payload.edges if e.predicate == "MITIGATES"]
+            if mitigates_edges:
+                table_id = f"{self.project_id}.{self.bq_dataset_id}.pattern_mitigates_antipattern"
+                rows = [
+                    {
+                        "pattern_id": e.source_id,
+                        "antipattern_id": e.target_id,
+                        "rationale": e.rationale or "",
+                    }
+                    for e in mitigates_edges
+                ]
+                client.insert_rows_json(table_id, rows)
+                total_rows += len(rows)
+
+            # Edges: GuidelineImplementsPattern
+            implements_edges = [e for e in payload.edges if e.predicate == "IMPLEMENTS"]
+            if implements_edges:
+                table_id = f"{self.project_id}.{self.bq_dataset_id}.guideline_implements_pattern"
+                rows = [
+                    {
+                        "guideline_id": e.source_id,
+                        "pattern_id": e.target_id,
+                        "notes": e.rationale or "",
+                    }
+                    for e in implements_edges
                 ]
                 client.insert_rows_json(table_id, rows)
                 total_rows += len(rows)
@@ -611,10 +712,12 @@ def run_pipeline(
     logger.info("Starting NL2KG Triplification Pipeline...")
     tracker = CheckpointTracker(checkpoint_file)
     consolidated_graph = ExtractedGraphPayload()
+    processed_items: list[tuple[str, str, int, int]] = []
 
     documents_to_process: list[dict[str, str]] = []
 
     # 1. Discover documents from GCS or local directory
+    gcs_found = False
     if gcs_bucket_name:
         try:
             from google.cloud import storage
@@ -623,6 +726,8 @@ def run_pipeline(
             bucket = client.bucket(gcs_bucket_name)
             blobs = list(bucket.list_blobs())
             logger.info(f"Discovered {len(blobs)} objects in GCS bucket gs://{gcs_bucket_name}")
+            if blobs:
+                gcs_found = True
 
             for b in blobs:
                 if b.name.endswith(".md") or b.name.endswith(".txt"):
@@ -637,8 +742,8 @@ def run_pipeline(
         except Exception as e:
             logger.warning(f"GCS listing skipped or failed: {e}. Checking local documents...")
 
-    # Fallback to local documents if GCS yields none
-    if not documents_to_process and local_dir and local_dir.exists():
+    # Fallback to local documents only if GCS bucket had no objects or was not configured
+    if not gcs_found and local_dir and local_dir.exists():
         files = list(local_dir.glob("*.md")) + list(local_dir.glob("**/*.md"))
         for f in files:
             content = f.read_text(encoding="utf-8")
@@ -650,6 +755,10 @@ def run_pipeline(
                 )
             else:
                 logger.info(f"Skipping unchanged local file: {doc_id}")
+
+    if not documents_to_process:
+        logger.info("All documents are up-to-date with zero changes detected. Zero duplicate writes needed.")
+        return consolidated_graph
 
     logger.info(f"Total documents queued for triplification: {len(documents_to_process)}")
 
@@ -679,9 +788,9 @@ def run_pipeline(
         consolidated_graph.tradeoffs.extend(doc_payload.tradeoffs)
         consolidated_graph.edges.extend(doc_payload.edges)
 
-        # Update checkpoint
+        # Record item for checkpointing after successful hydration
         n_nodes = len(doc_payload.guidelines) + len(doc_payload.patterns) + len(doc_payload.antipatterns) + len(doc_payload.tradeoffs)
-        tracker.mark_completed(item["id"], item["checksum"], n_nodes, len(doc_payload.edges))
+        processed_items.append((item["id"], item["checksum"], n_nodes, len(doc_payload.edges)))
 
     # Deduplicate nodes by ID
     consolidated_graph.guidelines = list({g.guideline_id: g for g in consolidated_graph.guidelines}.values())
@@ -701,6 +810,11 @@ def run_pipeline(
 
     hydrator.hydrate_spanner(consolidated_graph)
     hydrator.hydrate_bigquery(consolidated_graph)
+
+    # Persist checkpoints only after database hydration succeeds
+    if not dry_run:
+        for doc_id, checksum, n_nodes, n_edges in processed_items:
+            tracker.mark_completed(doc_id, checksum, n_nodes, n_edges)
 
     logger.info("NL2KG Triplification Pipeline completed successfully!")
     logger.info(f"Summary: {len(consolidated_graph.guidelines)} Guidelines, {len(consolidated_graph.patterns)} Patterns, "

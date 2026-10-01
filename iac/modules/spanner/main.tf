@@ -26,7 +26,7 @@ resource "google_spanner_database" "database" {
     <<-EOT
     CREATE TABLE Patterns (
       pattern_id STRING(64) NOT NULL,
-      name STRING(128) NOT NULL,
+      name STRING(512) NOT NULL,
       category STRING(64) NOT NULL,
       description STRING(MAX),
       created_at TIMESTAMP NOT NULL OPTIONS (allow_commit_timestamp = true)
@@ -47,7 +47,7 @@ resource "google_spanner_database" "database" {
     <<-EOT
     CREATE TABLE Antipatterns (
       antipattern_id STRING(64) NOT NULL,
-      name STRING(128) NOT NULL,
+      name STRING(512) NOT NULL,
       hazard STRING(MAX) NOT NULL,
       remedy STRING(MAX),
       created_at TIMESTAMP NOT NULL OPTIONS (allow_commit_timestamp = true)
