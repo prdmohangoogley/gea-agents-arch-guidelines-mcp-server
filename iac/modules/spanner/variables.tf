@@ -10,9 +10,9 @@ variable "instance_id" {
 }
 
 variable "config" {
-  description = "Spanner configuration (region)"
+  description = "Spanner configuration (region/multi-region)"
   type        = string
-  default     = "regional-us-central1"
+  default     = "nam3"
 }
 
 variable "display_name" {
@@ -22,9 +22,15 @@ variable "display_name" {
 }
 
 variable "processing_units" {
-  description = "Spanner processing units"
+  description = "Spanner processing units (min 100 for dev, 1000 = 1 node)"
   type        = number
   default     = 100
+}
+
+variable "edition" {
+  description = "Spanner edition: STANDARD, ENTERPRISE, or ENTERPRISE_PLUS"
+  type        = string
+  default     = "ENTERPRISE"
 }
 
 variable "database_name" {

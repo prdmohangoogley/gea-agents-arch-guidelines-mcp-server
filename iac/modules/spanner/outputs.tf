@@ -8,6 +8,11 @@ output "database_name" {
   value       = google_spanner_database.database.name
 }
 
+output "database_id" {
+  description = "Full Spanner database resource ID"
+  value       = google_spanner_database.database.id
+}
+
 output "graph_name" {
   description = "Spanner property graph name"
   value       = "ArchGuidelinesGraph"

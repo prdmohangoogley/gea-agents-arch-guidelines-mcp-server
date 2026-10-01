@@ -10,7 +10,7 @@ variable "dataset_id" {
 }
 
 variable "location" {
-  description = "BigQuery dataset location"
+  description = "BigQuery dataset location (e.g. US or region)"
   type        = string
   default     = "US"
 }
