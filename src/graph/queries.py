@@ -29,7 +29,7 @@ RETURN g.title, p.pattern_id, p.name, p.category, p.description;
 QUERY_BEST_PRACTICES_BY_TOPIC = """
 GRAPH ArchGuidelinesGraph
 MATCH (g:Guideline)-[r:IMPLEMENTS]->(p:Pattern)
-WHERE p.name LIKE @topic OR g.title LIKE @topic OR g.category LIKE @topic
+WHERE LOWER(p.name) LIKE LOWER(@topic) OR LOWER(g.title) LIKE LOWER(@topic) OR LOWER(g.category) LIKE LOWER(@topic)
 RETURN g.guideline_id, g.title, g.category AS guideline_category, g.summary, p.pattern_id, p.name AS pattern_name, p.category AS pattern_category, p.description AS pattern_description
 LIMIT @limit;
 """
