@@ -52,6 +52,113 @@ graph TD
 
 ---
 
+## 🌐 Knowledge Graph Visualization (Cloud Spanner Graph)
+
+> **Live Property Graph:** `ArchGuidelinesGraph` in Cloud Spanner database `arch_guidelines_graph`  
+> **Topology:** 38 Guidelines · 110 Architectural Patterns · 1 Antipattern · 138 Directed Relationships
+
+An interactive force-directed graph visualizer with live search, node inspection, and physics simulation is available at [`visualizations/spanner_knowledge_graph.html`](visualizations/spanner_knowledge_graph.html).
+
+To view the interactive graph in your default browser:
+```bash
+open visualizations/spanner_knowledge_graph.html
+```
+
+### Property Graph Schema
+
+```mermaid
+classDiagram
+    direction LR
+
+    class Guideline {
+        +STRING guideline_id [KEY]
+        +STRING title
+        +STRING category
+        +STRING summary
+        +STRING source_url
+    }
+
+    class Pattern {
+        +STRING pattern_id [KEY]
+        +STRING name
+        +STRING category
+        +STRING description
+    }
+
+    class Antipattern {
+        +STRING antipattern_id [KEY]
+        +STRING name
+        +STRING hazard
+        +STRING remedy
+    }
+
+    Guideline --> Pattern : IMPLEMENTS (source_id -> target_id)
+    Pattern --> Antipattern : MITIGATES (pattern_id -> antipattern_id)
+```
+
+### Core Architectural Clusters in Spanner Graph
+
+#### 1. Context Engineering & Memory Architecture
+```mermaid
+graph LR
+    G_CTX["08-context-engineering-stateful-agents"]:::guideline
+
+    P_MEM["Multi-Model Memory Storage"]:::pattern
+    P_TRIG["Asynchronous Memory Triggering"]:::pattern
+    P_RAG["Separated RAG & Memory Tiers"]:::pattern
+    P_GW["Secure Memory Gateway"]:::pattern
+
+    G_CTX -->|IMPLEMENTS| P_MEM
+    G_CTX -->|IMPLEMENTS| P_TRIG
+    G_CTX -->|IMPLEMENTS| P_RAG
+    G_CTX -->|IMPLEMENTS| P_GW
+
+    classDef guideline fill:#1f6feb,stroke:#58a6ff,stroke-width:2px,color:#fff;
+    classDef pattern fill:#8957e5,stroke:#d2a8ff,stroke-width:2px,color:#fff;
+```
+
+#### 2. Security & Zero Ambient Authority (ZAA)
+```mermaid
+graph LR
+    G_SEC["02-vibe-coding-agent-security"]:::guideline
+
+    P_JIT["JIT Downscoped Credentials"]:::pattern
+    P_BOX["Ephemeral Sandboxed Execution"]:::pattern
+    P_SLOP["Anti-Slopsquatting Supply Chain"]:::pattern
+    P_MFA["Vibe Diff with Hardware MFA"]:::pattern
+    P_CB["Stateful Circuit Breaker"]:::pattern
+
+    G_SEC -->|IMPLEMENTS| P_JIT
+    G_SEC -->|IMPLEMENTS| P_BOX
+    G_SEC -->|IMPLEMENTS| P_SLOP
+    G_SEC -->|IMPLEMENTS| P_MFA
+    G_SEC -->|IMPLEMENTS| P_CB
+
+    classDef guideline fill:#1f6feb,stroke:#58a6ff,stroke-width:2px,color:#fff;
+    classDef pattern fill:#8957e5,stroke:#d2a8ff,stroke-width:2px,color:#fff;
+```
+
+#### 3. Agent Quality Engineering & Evaluation Gates
+```mermaid
+graph LR
+    G_QA["01-ai-agent-quality-engineering"]:::guideline
+
+    P_TRJ["Glass Box Trajectory Assertion"]:::pattern
+    P_MET["Black Box Metric Selection"]:::pattern
+    P_GATE["Quality Scorecard Release Gate"]:::pattern
+    P_EVAL["Evaluatable-by-Design Instrumentation"]:::pattern
+
+    G_QA -->|IMPLEMENTS| P_TRJ
+    G_QA -->|IMPLEMENTS| P_MET
+    G_QA -->|IMPLEMENTS| P_GATE
+    G_QA -->|IMPLEMENTS| P_EVAL
+
+    classDef guideline fill:#1f6feb,stroke:#58a6ff,stroke-width:2px,color:#fff;
+    classDef pattern fill:#8957e5,stroke:#d2a8ff,stroke-width:2px,color:#fff;
+```
+
+---
+
 ## 📂 Repository Layout
 
 ```markdown
