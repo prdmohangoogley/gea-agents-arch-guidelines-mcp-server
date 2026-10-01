@@ -1,11 +1,38 @@
 """FastMCP tools for querying enterprise agent architectural guidelines."""
 
+from __future__ import annotations
+
+from typing import Any
 from fastmcp import FastMCP
 from src.graph.client import GraphClient
 
 
 def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
-    """Register guideline search and detail tools with FastMCP."""
+    """Register guideline search, detail, best practice, and deep dive tools with FastMCP."""
+
+    @mcp.tool()
+    async def get_best_practice(topic: str) -> dict[str, Any]:
+        """Retrieve operational architectural best practices and patterns from Cloud Spanner Graph by topic.
+
+        Args:
+            topic: Architectural topic, pattern, or guideline keyword (e.g., 'Quality', 'Security', 'Memory', 'ZAA').
+
+        Returns:
+            Structured envelope containing matching guidelines, patterns, and operational latency metadata.
+        """
+        return await client.get_best_practice(topic=topic)
+
+    @mcp.tool()
+    async def deep_dive_guideline(component: str) -> dict[str, Any]:
+        """Perform deep-dive analytical investigation of an architectural component using BigQuery analytics.
+
+        Args:
+            component: Component or system name to analyze (e.g., 'Security', 'Quality', 'Memory Bank', 'Cloud Run').
+
+        Returns:
+            Analytical lookup envelope including implemented patterns, antipattern hazards, and mitigations.
+        """
+        return await client.deep_dive_guideline(component=component)
 
     @mcp.tool()
     async def search_guidelines(

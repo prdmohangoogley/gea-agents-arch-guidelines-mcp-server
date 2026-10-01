@@ -24,3 +24,12 @@ MATCH (g:Guideline)-[r:IMPLEMENTS]->(p:Pattern)
 WHERE g.guideline_id = @guideline_id
 RETURN g.title, p.pattern_id, p.name, p.category, p.description;
 """
+
+# GQL Query: Operational lookup of best practices and patterns by topic
+QUERY_BEST_PRACTICES_BY_TOPIC = """
+GRAPH ArchGuidelinesGraph
+MATCH (g:Guideline)-[r:IMPLEMENTS]->(p:Pattern)
+WHERE p.name LIKE @topic OR g.title LIKE @topic OR g.category LIKE @topic
+RETURN g.guideline_id, g.title, g.category AS guideline_category, g.summary, p.pattern_id, p.name AS pattern_name, p.category AS pattern_category, p.description AS pattern_description
+LIMIT @limit;
+"""
