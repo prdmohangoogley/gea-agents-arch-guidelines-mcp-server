@@ -2,6 +2,7 @@
 
 from fastmcp import FastMCP
 from src.graph.client import GraphClient
+from src.security.model_armor import model_armor
 
 
 def register_pattern_tools(mcp: FastMCP, client: GraphClient) -> None:
@@ -17,6 +18,11 @@ def register_pattern_tools(mcp: FastMCP, client: GraphClient) -> None:
         Returns:
             Pattern description, domain category, and pitfalls/antipatterns mitigated.
         """
+        # Security sanitization with Model Armor
+        safety_decision = await model_armor.sanitize(pattern_name)
+        if not safety_decision.is_safe:
+            return f"⚠️ Request Blocked by Model Armor: {safety_decision.error_message}"
+
         pattern = await client.get_pattern(pattern_name)
         if not pattern:
             return f"Architectural pattern matching '{pattern_name}' was not found in knowledge base."
@@ -42,6 +48,11 @@ def register_pattern_tools(mcp: FastMCP, client: GraphClient) -> None:
         Returns:
             Structured comparative tradeoff analysis and enterprise recommendations.
         """
+        # Security sanitization with Model Armor
+        safety_decision = await model_armor.sanitize(f"{option_a} vs {option_b}")
+        if not safety_decision.is_safe:
+            return f"⚠️ Request Blocked by Model Armor: {safety_decision.error_message}"
+
         eval_result = await client.evaluate_tradeoffs(option_a, option_b)
         return (
             f"## ⚖️ Architectural Tradeoff Matrix: `{option_a}` vs `{option_b}`\n\n"

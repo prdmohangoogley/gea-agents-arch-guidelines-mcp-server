@@ -25,7 +25,8 @@ resource "google_project_service" "required_apis" {
     "telemetry.googleapis.com",
     "cloudtrace.googleapis.com",
     "monitoring.googleapis.com",
-    "logging.googleapis.com"
+    "logging.googleapis.com",
+    "modelarmor.googleapis.com"
   ])
 
   project            = var.project_id

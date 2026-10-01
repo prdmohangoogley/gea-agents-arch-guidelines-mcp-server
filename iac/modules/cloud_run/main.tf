@@ -58,6 +58,13 @@ resource "google_project_iam_member" "metric_writer" {
   member  = "serviceAccount:${google_service_account.mcp_runner.email}"
 }
 
+# IAM: Model Armor User (Required to sanitize incoming prompts against injections and jailbreaks)
+resource "google_project_iam_member" "modelarmor_user" {
+  project = var.project_id
+  role    = "roles/modelarmor.user"
+  member  = "serviceAccount:${google_service_account.mcp_runner.email}"
+}
+
 # Cloud Run v2 Service Definition
 resource "google_cloud_run_v2_service" "mcp_server" {
   name     = var.service_name
@@ -108,6 +115,18 @@ resource "google_cloud_run_v2_service" "mcp_server" {
         name  = "GCS_BUCKET"
         value = var.gcs_bucket_name
       }
+      env {
+        name  = "MODEL_ARMOR_ENABLED"
+        value = "true"
+      }
+      env {
+        name  = "MODEL_ARMOR_TEMPLATE_ID"
+        value = "mcp-prompt-armor-template"
+      }
+      env {
+        name  = "MODEL_ARMOR_LOCATION"
+        value = "us-central1"
+      }
 
       resources {
         limits = {
@@ -116,6 +135,14 @@ resource "google_cloud_run_v2_service" "mcp_server" {
         }
       }
     }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      template[0].containers[0].image,
+      client,
+      client_version
+    ]
   }
 
   depends_on = [

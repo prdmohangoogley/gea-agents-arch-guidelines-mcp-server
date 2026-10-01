@@ -56,5 +56,27 @@ class ServerConfig(BaseSettings):
         description="Use local mock knowledge store if Spanner is offline",
     )
 
+    # Security & Model Armor configurations
+    model_armor_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("MODEL_ARMOR_ENABLED", "MCP_MODEL_ARMOR_ENABLED"),
+        description="Enable Google Cloud Model Armor prompt sanitization",
+    )
+    model_armor_template_id: str = Field(
+        default="mcp-prompt-armor-template",
+        validation_alias=AliasChoices("MODEL_ARMOR_TEMPLATE_ID", "MCP_MODEL_ARMOR_TEMPLATE_ID"),
+        description="Model Armor template ID",
+    )
+    model_armor_location: str = Field(
+        default="us-central1",
+        validation_alias=AliasChoices("MODEL_ARMOR_LOCATION", "MCP_MODEL_ARMOR_LOCATION"),
+        description="Model Armor template location/region",
+    )
+    model_armor_fail_open: bool = Field(
+        default=False,
+        validation_alias=AliasChoices("MODEL_ARMOR_FAIL_OPEN", "MCP_MODEL_ARMOR_FAIL_OPEN"),
+        description="Fail-open if Model Armor is unreachable (False = fail-secure)",
+    )
+
 
 config = ServerConfig()
