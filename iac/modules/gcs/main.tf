@@ -1,4 +1,5 @@
 resource "google_storage_bucket" "guidelines_bucket" {
+  count                       = var.create_bucket ? 1 : 0
   name                        = var.bucket_name
   project                     = var.project_id
   location                    = var.location
@@ -18,4 +19,9 @@ resource "google_storage_bucket" "guidelines_bucket" {
       with_state         = "ARCHIVED"
     }
   }
+}
+
+data "google_storage_bucket" "existing_bucket" {
+  count = var.create_bucket ? 0 : 1
+  name  = var.bucket_name
 }

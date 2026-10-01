@@ -156,7 +156,8 @@ resource "google_bigquery_routine" "init_property_graph_overlay" {
   project      = var.project_id
 
   definition_body = <<-EOT
-    EXECUTE IMMEDIATE """
+    BEGIN
+      EXECUTE IMMEDIATE """
     CREATE OR REPLACE PROPERTY GRAPH `${var.project_id}.${var.dataset_id}.ArchGuidelinesAnalyticalGraph`
       NODE TABLES (
         `${var.project_id}.${var.dataset_id}.guidelines`
@@ -184,7 +185,8 @@ resource "google_bigquery_routine" "init_property_graph_overlay" {
           LABEL IMPLEMENTS
           PROPERTIES (notes)
       )
-    """;
+      """;
+    END;
   EOT
 
   depends_on = [

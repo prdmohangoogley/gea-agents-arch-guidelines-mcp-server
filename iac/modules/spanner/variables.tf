@@ -16,9 +16,9 @@ variable "config" {
 }
 
 variable "display_name" {
-  description = "Spanner instance display name"
+  description = "Spanner instance display name (between 4-30 chars)"
   type        = string
-  default     = "Enterprise Agents Architectural Guidelines Spanner"
+  default     = "GEA Arch Guidelines"
 }
 
 variable "processing_units" {

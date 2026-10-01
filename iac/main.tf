@@ -72,10 +72,11 @@ module "federation" {
 
 # 5. Storage Layer: GCS Bucket for Raw Guidelines & OKF Corpus
 module "gcs" {
-  source      = "./modules/gcs"
-  project_id  = var.project_id
-  bucket_name = var.gcs_bucket_name
-  location    = var.region
+  source        = "./modules/gcs"
+  project_id    = var.project_id
+  bucket_name   = var.gcs_bucket_name
+  location      = var.region
+  create_bucket = var.create_gcs_bucket
 
   depends_on = [google_project_service.required_apis]
 }

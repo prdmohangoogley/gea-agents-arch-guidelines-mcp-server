@@ -13,3 +13,9 @@ variable "location" {
   type        = string
   default     = "US"
 }
+
+variable "create_bucket" {
+  description = "Whether to create the GCS bucket or bind to an existing bucket"
+  type        = bool
+  default     = false
+}

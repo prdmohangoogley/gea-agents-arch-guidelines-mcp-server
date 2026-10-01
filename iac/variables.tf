@@ -63,6 +63,12 @@ variable "gcs_bucket_name" {
   default     = "gea_agent_development_architectural_best_practices_1790796607"
 }
 
+variable "create_gcs_bucket" {
+  description = "Whether to create the GCS bucket (false if connecting to existing OKF bucket)"
+  type        = bool
+  default     = false
+}
+
 variable "cloud_run_service_name" {
   description = "Cloud Run service name for FastMCP runtime"
   type        = string
