@@ -13,6 +13,9 @@ class GuidelineNode(BaseModel):
     category: str = Field(description="Topic category (security, quality, runtime, etc.)")
     summary: str = Field(description="Executive summary of the guideline")
     source_url: str | None = Field(default=None, description="Original source link or doc reference")
+    content_sha256: str | None = Field(default=None, description="SHA-256 digest of guideline content")
+    version_tag: str | None = Field(default=None, description="Version tag e.g. GEAPL200_2026-09-30_124746")
+    stale_after: datetime | None = Field(default=None, description="TTL expiry date timestamp")
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -47,6 +50,18 @@ class AntipatternNode(BaseModel):
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
+class FDERubricItemNode(BaseModel):
+    """Represents an FDE Field-Readiness and Project Grading Rubric competency item."""
+
+    rubric_id: str = Field(description="Unique rubric ID, e.g. RUBRIC-A-1-1 or RUBRIC-B-2-1")
+    domain: str = Field(description="Domain category, e.g. Part A.1: Problem Definition")
+    sub_competency: str = Field(description="Specific sub-competency title")
+    criteria_level_2: str = Field(description="Level 2 (production threshold) criteria")
+    criteria_level_3: str | None = Field(default=None, description="Level 3 (exemplar) criteria")
+    disqualifier_condition: str | None = Field(default=None, description="Disqualifier condition for Level 0")
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
 class MitigatesEdge(BaseModel):
     """Edge linking a Pattern to an Antipattern it mitigates."""
 
@@ -63,6 +78,15 @@ class ImplementsEdge(BaseModel):
     notes: str | None = None
 
 
+class EnforcesRubricEdge(BaseModel):
+    """Edge linking a Guideline to an FDERubricItem it enforces or fulfills."""
+
+    guideline_id: str
+    rubric_id: str
+    enforcement_level: str = "PRODUCTION_MANDATORY"
+    notes: str | None = None
+
+
 class TriplifiedGraph(BaseModel):
     """Complete graph container holding nodes and edges."""
 
@@ -70,6 +94,8 @@ class TriplifiedGraph(BaseModel):
     patterns: list[PatternNode] = Field(default_factory=list)
     tradeoffs: list[TradeoffNode] = Field(default_factory=list)
     antipatterns: list[AntipatternNode] = Field(default_factory=list)
+    fde_rubric_items: list[FDERubricItemNode] = Field(default_factory=list)
     mitigates_edges: list[MitigatesEdge] = Field(default_factory=list)
     implements_edges: list[ImplementsEdge] = Field(default_factory=list)
+    enforces_rubric_edges: list[EnforcesRubricEdge] = Field(default_factory=list)
     metadata: dict[str, Any] = Field(default_factory=dict)

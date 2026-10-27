@@ -9,9 +9,13 @@ from typing import Any
 from src.config import config
 from src.graph.queries import (
     QUERY_BEST_PRACTICES_BY_TOPIC,
+    QUERY_GET_GUIDELINE_BY_ID,
     QUERY_GUIDELINE_HIERARCHY,
     QUERY_PATTERN_MITIGATIONS,
+    QUERY_RUBRIC_ENFORCEMENT,
+    QUERY_RUBRIC_ITEMS,
     QUERY_SEARCH_GUIDELINES,
+    QUERY_TRADEOFFS,
 )
 from src.models.guideline import (
     Antipattern,
@@ -340,7 +344,34 @@ class GraphClient:
     async def search_guidelines(
         self, query: str, category: str | None = None, limit: int = 5
     ) -> list[Guideline]:
-        """Search guidelines by matching query against title and summary."""
+        """Search guidelines by matching query against title, summary, and ID in Spanner Graph with fallback."""
+        db = self._get_spanner_db()
+        if db is not None:
+            try:
+                from google.cloud import spanner
+
+                params = {"category": category, "keyword": f"%{query}%", "limit": limit}
+                param_types = {
+                    "category": spanner.param_types.STRING,
+                    "keyword": spanner.param_types.STRING,
+                    "limit": spanner.param_types.INT64,
+                }
+                with db.snapshot() as snapshot:
+                    res = list(snapshot.execute_sql(QUERY_SEARCH_GUIDELINES, params=params, param_types=param_types))
+                if res:
+                    return [
+                        Guideline(
+                            guideline_id=r[0],
+                            title=r[1],
+                            category=r[2],
+                            summary=r[3],
+                            source_url=r[4],
+                        )
+                        for r in res
+                    ]
+            except Exception as e:
+                logger.warning(f"Spanner search_guidelines failed: {e}. Fallback to embedded.")
+
         q = query.lower()
         results = []
         for g in self._guidelines:
@@ -353,21 +384,104 @@ class GraphClient:
         return results or self._guidelines[:limit]
 
     async def get_guideline(self, guideline_id: str) -> Guideline | None:
-        """Retrieve a specific guideline by ID."""
+        """Retrieve a specific guideline by ID from Spanner Graph with fallback."""
+        db = self._get_spanner_db()
+        if db is not None:
+            try:
+                from google.cloud import spanner
+
+                params = {"guideline_id": guideline_id}
+                param_types = {"guideline_id": spanner.param_types.STRING}
+                with db.snapshot() as snapshot:
+                    res = list(snapshot.execute_sql(QUERY_GET_GUIDELINE_BY_ID, params=params, param_types=param_types))
+                if res:
+                    r = res[0]
+                    return Guideline(
+                        guideline_id=r[0],
+                        title=r[1],
+                        category=r[2],
+                        summary=r[3],
+                        source_url=r[4],
+                    )
+            except Exception as e:
+                logger.warning(f"Spanner get_guideline failed: {e}. Fallback to embedded.")
+
         for g in self._guidelines:
             if g.guideline_id.upper() == guideline_id.upper():
                 return g
         return None
 
     async def get_pattern(self, name: str) -> Pattern | None:
-        """Retrieve an architectural pattern and its mitigations."""
+        """Retrieve an architectural pattern and its mitigations from Spanner Graph with fallback."""
+        db = self._get_spanner_db()
+        if db is not None:
+            try:
+                from google.cloud import spanner
+
+                q_pat = """
+                GRAPH ArchGuidelinesGraph
+                MATCH (p:Pattern)
+                WHERE LOWER(p.name) LIKE LOWER(@name) OR LOWER(p.pattern_id) LIKE LOWER(@name)
+                RETURN p.pattern_id, p.name, p.category, p.description
+                LIMIT 1;
+                """
+                params = {"name": f"%{name}%"}
+                param_types = {"name": spanner.param_types.STRING}
+                with db.snapshot(multi_use=True) as snapshot:
+                    res_pat = list(snapshot.execute_sql(q_pat, params=params, param_types=param_types))
+                    if res_pat:
+                        pid, pname, pcat, pdesc = res_pat[0][0], res_pat[0][1], res_pat[0][2], res_pat[0][3]
+                        res_mit = list(
+                            snapshot.execute_sql(
+                                QUERY_PATTERN_MITIGATIONS,
+                                params={"pattern_name": f"%{pname}%", "limit": 10},
+                                param_types={
+                                    "pattern_name": spanner.param_types.STRING,
+                                    "limit": spanner.param_types.INT64,
+                                },
+                            )
+                        )
+                        mitigations = [r[1] for r in res_mit]
+                        return Pattern(
+                            pattern_id=pid,
+                            name=pname,
+                            category=pcat,
+                            description=pdesc,
+                            mitigates=mitigations,
+                        )
+            except Exception as e:
+                logger.warning(f"Spanner get_pattern failed: {e}. Fallback to embedded.")
+
         for pat_name, pattern in self._patterns.items():
             if pat_name.lower() in name.lower() or name.lower() in pat_name.lower():
                 return pattern
         return None
 
     async def evaluate_tradeoffs(self, option_a: str, option_b: str) -> TradeoffEvaluation:
-        """Evaluate tradeoffs between two architectural alternatives."""
+        """Evaluate tradeoffs between two architectural alternatives using Spanner Graph."""
+        db = self._get_spanner_db()
+        if db is not None:
+            try:
+                from google.cloud import spanner
+
+                params = {"opt": f"%{option_a}%", "limit": 3}
+                param_types = {"opt": spanner.param_types.STRING, "limit": spanner.param_types.INT64}
+                with db.snapshot() as snapshot:
+                    res = list(snapshot.execute_sql(QUERY_TRADEOFFS, params=params, param_types=param_types))
+                if res:
+                    tradeoff_details = [f"• **{r[1]}**: {r[2]} vs {r[3]}: {r[4]}" for r in res]
+                    analysis_block = "\n".join(tradeoff_details)
+                    return TradeoffEvaluation(
+                        option_a=option_a,
+                        option_b=option_b,
+                        latency_impact="Platform-native architectures colocate compute and context stores, eliminating cross-network latency penalties.",
+                        complexity_impact=f"Comparative analysis across {len(res)} dimension(s):\n{analysis_block}",
+                        security_posture="Managed Google Cloud foundations enforce Principal Access Boundaries (PAB) and workload identity federation natively.",
+                        recommendation=f"Adopt {option_a} when enterprise SLA, audit compliance, and operational resilience outweigh self-managed custom stack maintenance.",
+                    )
+            except Exception as e:
+                logger.warning(f"Spanner evaluate_tradeoffs query failed: {e}. Fallback to default.")
+
         return TradeoffEvaluation(
             option_a=option_a,
             option_b=option_b,
@@ -376,3 +490,114 @@ class GraphClient:
             security_posture="Managed solutions enforce IAM and audit logs natively; self-managed requires explicit perimeter security.",
             recommendation=f"Prefer {option_a} for enterprise deployments prioritizing reliability and low operational toil.",
         )
+
+    async def get_fde_rubric(
+        self, domain: str | None = None, rubric_id: str | None = None, limit: int = 40
+    ) -> list[dict[str, Any]]:
+        """Retrieve Google Cloud FDE Rubric competencies from Cloud Spanner Graph."""
+        db = self._get_spanner_db()
+        if db is not None:
+            try:
+                from google.cloud import spanner
+
+                params = {"domain": domain, "rubric_id": rubric_id, "limit": limit}
+                param_types = {
+                    "domain": spanner.param_types.STRING,
+                    "rubric_id": spanner.param_types.STRING,
+                    "limit": spanner.param_types.INT64,
+                }
+                with db.snapshot() as snapshot:
+                    res = list(snapshot.execute_sql(QUERY_RUBRIC_ITEMS, params=params, param_types=param_types))
+                return [
+                    {
+                        "rubric_id": r[0],
+                        "domain": r[1],
+                        "sub_competency": r[2],
+                        "level_0_summary": r[3],
+                        "level_1_summary": r[4],
+                        "level_2_summary": r[5],
+                        "level_3_summary": r[6],
+                    }
+                    for r in res
+                ]
+            except Exception as e:
+                logger.warning(f"Spanner get_fde_rubric failed: {e}")
+
+        # Fallback summary
+        return [
+            {
+                "rubric_id": "RUBRIC-A-1",
+                "domain": "Part A: Presentation & Advisory Rigor",
+                "sub_competency": "Strategic Delivery & Value Articulation",
+                "level_3_summary": "Articulates crisp business value, ROI bounds, executive stakeholder synthesis.",
+            },
+            {
+                "rubric_id": "RUBRIC-B-3-1",
+                "domain": "Domain B.3: Security, Privacy & Compliance",
+                "sub_competency": "Zero Trust & Least Privilege Architecture",
+                "level_3_summary": "Enforces Zero Ambient Authority, Model Armor, Principal Access Boundaries.",
+            },
+        ]
+
+    async def query_rubric_enforcement(
+        self, rubric_id: str | None = None, keyword: str | None = None, limit: int = 20
+    ) -> list[dict[str, Any]]:
+        """Traverse the ENFORCES_RUBRIC property graph edge to find guidelines enforcing a rubric competency."""
+        db = self._get_spanner_db()
+        if db is not None:
+            try:
+                from google.cloud import spanner
+
+                params = {"rubric_id": rubric_id or "", "keyword": f"%{keyword or ''}%", "limit": limit}
+                param_types = {
+                    "rubric_id": spanner.param_types.STRING,
+                    "keyword": spanner.param_types.STRING,
+                    "limit": spanner.param_types.INT64,
+                }
+                with db.snapshot() as snapshot:
+                    res = list(snapshot.execute_sql(QUERY_RUBRIC_ENFORCEMENT, params=params, param_types=param_types))
+                return [
+                    {
+                        "guideline_id": r[0],
+                        "title": r[1],
+                        "category": r[2],
+                        "enforcement_level": r[3],
+                        "notes": r[4],
+                        "rubric_id": r[5],
+                        "sub_competency": r[6],
+                    }
+                    for r in res
+                ]
+            except Exception as e:
+                logger.warning(f"Spanner query_rubric_enforcement failed: {e}")
+        return []
+
+    async def traverse_pattern_mitigations(
+        self, pattern_name: str, limit: int = 10
+    ) -> list[dict[str, Any]]:
+        """Traverse MITIGATES edge from Pattern to Antipattern in Spanner Graph."""
+        db = self._get_spanner_db()
+        if db is not None:
+            try:
+                from google.cloud import spanner
+
+                params = {"pattern_name": f"%{pattern_name}%", "limit": limit}
+                param_types = {
+                    "pattern_name": spanner.param_types.STRING,
+                    "limit": spanner.param_types.INT64,
+                }
+                with db.snapshot() as snapshot:
+                    res = list(snapshot.execute_sql(QUERY_PATTERN_MITIGATIONS, params=params, param_types=param_types))
+                return [
+                    {
+                        "pattern_name": r[0],
+                        "antipattern_name": r[1],
+                        "hazard": r[2],
+                        "remedy": r[3],
+                        "rationale": r[4],
+                    }
+                    for r in res
+                ]
+            except Exception as e:
+                logger.warning(f"Spanner traverse_pattern_mitigations failed: {e}")
+        return []
