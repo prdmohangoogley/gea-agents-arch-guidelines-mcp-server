@@ -1,6 +1,6 @@
 # Spec: OKF v0.2 Cloud Storage Bundle & Knowledge Catalog Update (`okf-gcs-update-spec.md`)
 
-**Status:** ACTIVE (Living Cumulative Specification — v3.0)  
+**Status:** ACTIVE (Living Cumulative Specification — v4.0)  
 **Target Repository:** [`https://github.com/prdmohangoogley/gea-agents-arch-guidelines-mcp-server`](https://github.com/prdmohangoogley/gea-agents-arch-guidelines-mcp-server)  
 **Canonical Repo Path:** `docs/specs/okf-gcs-update-spec.md` (mirrored at `specs/okf-gcs-update-spec.md`)  
 **Executable Update Script:** `scripts/update_okf_gcs.sh`  
@@ -30,6 +30,7 @@
 | **v1.0** | `2026-09-30` | `gemini-enterprise:gdoc-to-markdown` | `GEAPL200_2026-09-30_124746` | `20` | Initial OKF v0.2 bundle published to `gs://gea_agent_development_architectural_best_practices_1790796607/okf` (`01`–`20` from GEAPL200 Google Docs corpus, 73 Mermaid diagrams, 94 tables, 4 retained figures). |
 | **v2.0** | `2026-10-26` | `gemini-enterprise:okf-synthesizer` | `GEAPL200_2026-09-30_124746` *(preserved)* | `36` | Merged existing 20 L200 concepts (`01`–`20`) with 15 GEAP L300 concepts (`21`–`35`) and standalone **Google Cloud FDE Field-Readiness & Project Grading Rubric** (`00-fde-field-readiness-and-grading-rubric.md`). Injected enforceable FDE Rubric (Part A & Part B) and prevailing customer exemplars into all 36 concepts; added `scripts/update_okf_gcs.sh` and Terraform execution harness. |
 | **v3.0** | `2026-10-27` | `gemini-enterprise:okf-synthesizer` | `GEAPL200_2026-09-30_124746` *(00..35 preserved)* / `L400_version_20261026_0350` *(36..57)* | `58` | Cumulative expansion merging 22 GEAP L400 concepts (`36`–`57`, Architecture A1..A5, Agents B1..B3, Governance G1..G3, Optimization O1..O6, and Synthesis 18..21) into the canonical OKF v0.2 bundle. Injected FDE Rubric enforcement, updated bundle descriptors (875 Mermaid diagrams, 1,533 tables, 4 figures), generated 58 Dataplex catalog aspect payloads, and updated GCS sync orchestrators. |
+| **v4.0** | `2026-10-27` | `gemini-enterprise:arch-spec-lead` | `GEAPL200_2026-09-30_124746` *(preserved)* | `58` | Established modular expansion specification suite: (a) Spanner Graph & BigQuery Graph Propagation (`spanner-bq-graph-sync-spec.md`), (b) MCP Server Best Practices & Skills Registry Audit (`mcp-server-best-practices-audit-spec.md`), (c) Gemini Enterprise Deployment & E2E Testing (`mcp-gemini-enterprise-deployment-spec.md`), (d) Autonomous OKF Evolution Tools & Antigravity Skill (`okf-auto-evolution-tools-spec.md`), and (e) FDE Charter Search & Governance Skill (`fde-charter-governance-skill-spec.md`). |
 
 ---
 
