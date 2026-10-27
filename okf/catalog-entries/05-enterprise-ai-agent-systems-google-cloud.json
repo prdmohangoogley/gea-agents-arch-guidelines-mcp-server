@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud”.",
+      "timestamp": "2026-09-30T00:35:09Z",
+      "status": "draft",
+      "stale_after": "2027-03-29T00:35:09+00:00",
+      "sources": "https://docs.google.com/document/d/1vk61bHa0T-RvYs4ZCvJSILNM0XxIfH_wAiKAURt9KaE/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1vk61bHa0T-RvYs4ZCvJSILNM0XxIfH_wAiKAURt9KaE",
+      "content_sha256": "460f1d02fe5989c12bf2e35472edf909201e236071442f2839dae69166475339"
+    }
+  }
+}

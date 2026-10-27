@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Agent Quality",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Quality”.",
+      "timestamp": "2026-09-25T18:53:05Z",
+      "status": "draft",
+      "stale_after": "2027-03-24T18:53:05+00:00",
+      "sources": "https://docs.google.com/document/d/1FU_Ot69f5lQfDk85fJ4XYaRg6ZC_GvCrLZMZRumRB98/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1FU_Ot69f5lQfDk85fJ4XYaRg6ZC_GvCrLZMZRumRB98",
+      "content_sha256": "f5104daf383d396fb583c1a5de6dbad9d699c5534810574f5d5fde972a34c0ea"
+    }
+  }
+}

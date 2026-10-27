@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Third-Party Identity Provider Integration with Workforce Identity Federation",
+      "description": "Security and identity architecture for integrating third-party enterprise IdPs (Okta, Microsoft Entra ID, PingFederate) with Gemini Enterprise using Google Cloud Workforce Identity Federation (WIF), SAML 2.0 / OIDC, CEL attribute mappings, and SCIM provisioning.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "local://GEAP_L300/prepare_deliver_gemini_deployments_third_party_identity_provider_with_workforce_identity_federation.md",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "prepare_deliver_gemini_deployments_third_party_identity_provider_with_workforce_identity_federation",
+      "content_sha256": "40f7a1f10c180990687522a5c1642f5a49962b1fc926628a53c9ac5a3ce89354"
+    }
+  }
+}

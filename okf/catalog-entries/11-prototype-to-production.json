@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Prototype to Production",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Prototype to Production”.",
+      "timestamp": "2026-09-28T00:09:35Z",
+      "status": "draft",
+      "stale_after": "2027-03-27T00:09:35+00:00",
+      "sources": "https://docs.google.com/document/d/1VU-Bgnp7fHb_3qrOamByEEI0vzctfnhGlW2a1ztmK2k/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1VU-Bgnp7fHb_3qrOamByEEI0vzctfnhGlW2a1ztmK2k",
+      "content_sha256": "505dde76460ead3c6c61f5320c1f5669fa918f8be3c45d066147cbe76d07551f"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "The New SDLC With Vibe Coding: From ad-hoc prompting to Agentic Engineering",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “The New SDLC With Vibe Coding: From ad-hoc prompting to Agentic Engineering”.",
+      "timestamp": "2026-09-04T17:46:43Z",
+      "status": "draft",
+      "stale_after": "2027-03-03T17:46:43+00:00",
+      "sources": "https://docs.google.com/document/d/1-5JB5qi5zIQTBUivakDj7URi99n84xepyTDvk1Yf6qY/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1-5JB5qi5zIQTBUivakDj7URi99n84xepyTDvk1Yf6qY",
+      "content_sha256": "e55f13c3ef8cf3a6e7ce29dc7ff69d53bf8883e50bae53affc696832a7325341"
+    }
+  }
+}

@@ -59,3 +59,7 @@ crash.*.log
 credentials.json
 service-account-key.json
 *.key
+
+# Temporary scratch directories
+_new_temp/
+

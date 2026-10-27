@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Context Engineering — Sessions, Memory",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Context Engineering — Sessions, Memory”.",
+      "timestamp": "2026-09-20T23:06:41Z",
+      "status": "draft",
+      "stale_after": "2027-03-19T23:06:41+00:00",
+      "sources": "https://docs.google.com/document/d/12QmL1MQmbkNLZShKdVoS_64eQxH34qreHCmN-rMGUCs/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "12QmL1MQmbkNLZShKdVoS_64eQxH34qreHCmN-rMGUCs",
+      "content_sha256": "6a55f6b72888afb40e86250fd972fa0c5fc4c9d5601d26a19ab6668cc20d6693"
+    }
+  }
+}

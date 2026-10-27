@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Vibe Coding Agent Security and Evaluation",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Vibe Coding Agent Security and Evaluation”.",
+      "timestamp": "2026-09-25T22:34:19Z",
+      "status": "draft",
+      "stale_after": "2027-03-24T22:34:19+00:00",
+      "sources": "https://docs.google.com/document/d/1vOL-cvTVURqW_vXRq0nx8AhpCkbEyr7Eg6aAed8QZhA/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1vOL-cvTVURqW_vXRq0nx8AhpCkbEyr7Eg6aAed8QZhA",
+      "content_sha256": "a97443c09cb74f9ddc090dd4b5fe4335e6882c654246d1f20753828cfeb9e22d"
+    }
+  }
+}

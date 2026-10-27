@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Securing AI and Agentic Deployments with Google Cloud Model Armor",
+      "description": "Comprehensive security architecture for protecting LLM and multi-agent deployments against prompt injection, jailbreaks, sensitive data leakage (SDP/DLP), malicious URLs, and indirect tool-output poisoning using Google Cloud Model Armor.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "local://GEAP_L300/prepare_and_deliver_gemini_deployments_model_armor_securing_ai_deployments.md",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "prepare_and_deliver_gemini_deployments_model_armor_securing_ai_deployments",
+      "content_sha256": "4dca89193c86a019d588122a0729f78a3f25ec071418bcc73dc1423b3cc92a74"
+    }
+  }
+}

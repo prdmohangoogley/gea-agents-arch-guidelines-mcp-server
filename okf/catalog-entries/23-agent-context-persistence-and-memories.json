@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Agent Context Persistence, Sessions, and Memory Engineering",
+      "description": "Comprehensive architectural framework for overcoming LLM statelessness through Context Engineering, ADK Sessions (short-term working state), and Long-Term Memory consolidation on Gemini Enterprise Agent Platform.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "local://GEAP_L300/agent_context_persistence_and_memories.md",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "agent_context_persistence_and_memories",
+      "content_sha256": "8ade7318972b4aedfee2debe7a960a18c2fca10decca5710dc4466aea9334d77"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Governing the Agent Ecosystem with Agent Gateway, Agent Registry, and Policies",
+      "description": "Enterprise-scale governance architecture for curbing agent sprawl and shadow MCP servers using Google Cloud Agent Registry (system of record), Agent Gateway (centralized egress/ingress enforcement plane), A2A interoperability, and declarative policy guardrails.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "local://GEAP_L300/govern_secure_and_scale_the_agent_ecosystem_govern_agents_with_agent_gateway_agent_registry_policies.md",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "govern_secure_and_scale_the_agent_ecosystem_govern_agents_with_agent_gateway_agent_registry_policies",
+      "content_sha256": "1d252d51738d15169c9fbd4d69d26631837f5e3e720d121693a1250113ceeca8"
+    }
+  }
+}

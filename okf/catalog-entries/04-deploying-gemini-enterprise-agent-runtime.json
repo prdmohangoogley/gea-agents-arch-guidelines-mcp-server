@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Deploying to Agent Runtime — Prerequisites, Cloud Shell Execution & Deployment Troubleshooting",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Deploying to Agent Runtime — Prerequisites, Cloud Shell Execution & Deployment Troubleshooting”.",
+      "timestamp": "2026-09-30T02:41:08Z",
+      "status": "draft",
+      "stale_after": "2027-03-29T02:41:08+00:00",
+      "sources": "https://docs.google.com/document/d/1N5N-KVQwIpeEaN8aXMX1l6pdPjMnmAxFEZABT_7ZL3E/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1N5N-KVQwIpeEaN8aXMX1l6pdPjMnmAxFEZABT_7ZL3E",
+      "content_sha256": "3e2089183eced5502bb38ac887b8b5fcb12186639e4c9262d684aaf66576f5b2"
+    }
+  }
+}

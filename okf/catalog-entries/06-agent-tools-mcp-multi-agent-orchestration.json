@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud”.",
+      "timestamp": "2026-09-30T00:34:51Z",
+      "status": "draft",
+      "stale_after": "2027-03-29T00:34:51+00:00",
+      "sources": "https://docs.google.com/document/d/1SjeHhPQvC-m88pQ3KLXXHGNTDDfgYLtXabMEqJhBxL0/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1SjeHhPQvC-m88pQ3KLXXHGNTDDfgYLtXabMEqJhBxL0",
+      "content_sha256": "24fc574688ec055a3a65a30b0f9ac8046c775a33487710f3c6dca64e408fbe35"
+    }
+  }
+}

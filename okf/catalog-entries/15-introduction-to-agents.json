@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Introduction to Agents",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Introduction to Agents”.",
+      "timestamp": "2026-09-04T17:47:09Z",
+      "status": "draft",
+      "stale_after": "2027-03-03T17:47:09+00:00",
+      "sources": "https://docs.google.com/document/d/1ALKaVbC7jPxjpbt19ET2cL1MaMO0Cs3CM0IWw0GXmAg/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1ALKaVbC7jPxjpbt19ET2cL1MaMO0Cs3CM0IWw0GXmAg",
+      "content_sha256": "9252d8df2e23b49a82a078001bed635893375ad1f6ced904b6885e66bebe27c3"
+    }
+  }
+}

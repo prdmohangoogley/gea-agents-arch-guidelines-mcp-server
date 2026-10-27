@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Model Lifecycle Migration and Upgrading to the Latest Gemini Models",
+      "description": "Enterprise playbook for migrating production agents across Gemini model generations (e.g., Gemini 1.5/2.0/2.5 to Gemini 3), retiring prompt engineering debt, leveraging thinking budgets, and executing safe shadow/canary rollouts.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "local://GEAP_L300/agent_evaluation_hill_climbing_upgrade_to_the_latest_models.md",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "agent_evaluation_hill_climbing_upgrade_to_the_latest_models",
+      "content_sha256": "0b828624bf8dd84a62b0d04b960f2fcf67a1ccd8ae5235f745ef3deb05532811"
+    }
+  }
+}

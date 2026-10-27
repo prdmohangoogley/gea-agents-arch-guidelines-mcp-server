@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Platform-Native State Management with Gemini Enterprise Agent Runtime & Memory Bank",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Platform-Native State Management with Gemini Enterprise Agent Runtime & Memory Bank”.",
+      "timestamp": "2026-09-30T02:33:05Z",
+      "status": "draft",
+      "stale_after": "2027-03-29T02:33:05+00:00",
+      "sources": "https://docs.google.com/document/d/1aQutt8PnKS8joFsYDCnDozNARDHlpTbM9OsalPusBNY/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1aQutt8PnKS8joFsYDCnDozNARDHlpTbM9OsalPusBNY",
+      "content_sha256": "b9fef2b9845dfd18471e24b632d7d2a6348762787edea3941fcb230cf64addef"
+    }
+  }
+}

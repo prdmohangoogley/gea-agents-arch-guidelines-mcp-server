@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Spec-Driven Production Grade Development in the Age of Vibe Coding",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Spec-Driven Production Grade Development in the Age of Vibe Coding”.",
+      "timestamp": "2026-09-28T00:11:37Z",
+      "status": "draft",
+      "stale_after": "2027-03-27T00:11:37+00:00",
+      "sources": "https://docs.google.com/document/d/1uBbH5a6w5oyYsIfAe3Dlb-M-4_TiPk6EuEm1pgRFGsc/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1uBbH5a6w5oyYsIfAe3Dlb-M-4_TiPk6EuEm1pgRFGsc",
+      "content_sha256": "e5402530760da8e6493e89e8bfd57b43655b8b2e48d0f6c824302097b5b4eede"
+    }
+  }
+}

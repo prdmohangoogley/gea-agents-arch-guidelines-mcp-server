@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Agents Concepts Visually Explained",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Agents Concepts Visually Explained”.",
+      "timestamp": "2026-09-09T00:14:42Z",
+      "status": "draft",
+      "stale_after": "2027-03-08T00:14:42+00:00",
+      "sources": "https://docs.google.com/document/d/1FEZZSHrp9_c5AnjJh2AJkwbfPsM0ST0qtizm46JnxT8/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1FEZZSHrp9_c5AnjJh2AJkwbfPsM0ST0qtizm46JnxT8",
+      "content_sha256": "c8bcc2019cd79e71c73ed0f8610add9c0024049622e278835fbc3c10d6d46194"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Agent Tools & Interoperability",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Tools & Interoperability”.",
+      "timestamp": "2026-09-15T21:58:13Z",
+      "status": "draft",
+      "stale_after": "2027-03-14T21:58:13+00:00",
+      "sources": "https://docs.google.com/document/d/1SnupitBTSfAdS9Nob3FA2FLkU8UKSJsdOg8EMsgFN5I/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1SnupitBTSfAdS9Nob3FA2FLkU8UKSJsdOg8EMsgFN5I",
+      "content_sha256": "0bfc942dfba09c5dfc8a35bea8accee306389b50a41d057112406b575309e86c"
+    }
+  }
+}

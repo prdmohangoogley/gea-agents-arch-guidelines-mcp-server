@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Vibe Coding Agent Security & Evaluation — Sandboxing, Zero Ambient Authority, Agentic SecOps & Session Convergence",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Vibe Coding Agent Security & Evaluation — Sandboxing, Zero Ambient Authority, Agentic SecOps & Session Convergence”.",
+      "timestamp": "2026-09-30T03:19:18Z",
+      "status": "draft",
+      "stale_after": "2027-03-29T03:19:18+00:00",
+      "sources": "https://docs.google.com/document/d/1TmYn6ntaoZtLp2eYIfH7mvaxRps58fYnlfiL0DQyu28/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1TmYn6ntaoZtLp2eYIfH7mvaxRps58fYnlfiL0DQyu28",
+      "content_sha256": "b1276fea23dd8e264115777cdd86dbc1ac939f0726d53f0cc09cf34400ca4e25"
+    }
+  }
+}

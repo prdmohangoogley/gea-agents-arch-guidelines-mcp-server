@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Hill Climbing and Continuous Quality Optimization for Agentic Systems",
+      "description": "Systematic engineering methodology for iterative hill-climbing optimization of enterprise agentic systems across prompts, tool definitions, retrieval pipelines, orchestration topologies, and model routing.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "local://GEAP_L300/agent_evaluation_and_hill_climbing_hill_climb_and_agentic_systems.md",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "agent_evaluation_and_hill_climbing_hill_climb_and_agentic_systems",
+      "content_sha256": "afd961212dfa0d35813f20368aa4f729066bf6294bafc82413bd378fdc0e5c22"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Enterprise Agent Skills — Progressive Disclosure, Capability Profiles & Skill Lifecycle Engineering",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Enterprise Agent Skills — Progressive Disclosure, Capability Profiles & Skill Lifecycle Engineering”.",
+      "timestamp": "2026-09-30T01:55:27Z",
+      "status": "draft",
+      "stale_after": "2027-03-29T01:55:27+00:00",
+      "sources": "https://docs.google.com/document/d/1XS3V1hJ6zjbD7QUD5lnFveekj2SCjq2yLsNlnq3GSN4/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1XS3V1hJ6zjbD7QUD5lnFveekj2SCjq2yLsNlnq3GSN4",
+      "content_sha256": "eedcd258be54ce92a72fd01fc5db9f33972e4273fda12bba8446a40c845fdced"
+    }
+  }
+}

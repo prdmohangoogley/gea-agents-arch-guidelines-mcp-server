@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Agent Skills",
+      "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Skills”.",
+      "timestamp": "2026-09-22T21:54:56Z",
+      "status": "draft",
+      "stale_after": "2027-03-21T21:54:56+00:00",
+      "sources": "https://docs.google.com/document/d/1AISjY31IgfCrOhi_xZv3kHzINnF5IR8CIstzAuWd2kM/edit",
+      "generated_by": "gemini-enterprise:gdoc-to-markdown",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "1AISjY31IgfCrOhi_xZv3kHzINnF5IR8CIstzAuWd2kM",
+      "content_sha256": "dfd00b3dcc1d5d3adf9100bd74436f25348c1f7d01c8b6d9eb3e516d4a5002be"
+    }
+  }
+}

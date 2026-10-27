@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Build Enterprise Agents with Code Execution on Gemini Enterprise Agent Platform",
+      "description": "Architectural guide for equipping enterprise agents with secure, isolated code execution sandboxes using the Gemini Enterprise Agent Platform SDK and ADK for deterministic data analysis, visualization, and computation.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "local://GEAP_L300/build_enterprise_agents_with_code_execution_on_gemini_enterprise_agent_platform.md",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "build_enterprise_agents_with_code_execution_on_gemini_enterprise_agent_platform",
+      "content_sha256": "69d75793d6fc139473dd3982a8b1c0081f18c52f6f51e6f63bad8d561b88b380"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Google Cloud FDE Field-Readiness & Project Grading Rubric (Mandatory Governance Standard)",
+      "description": "Enforceable grading rubric and competency standard for all Forward Deployed Engineer (FDE) and Antigravity-driven Agentic AI projects, spanning Presentation & Advisory Rigor (Part A) and Engineering & Implementation Excellence (Part B) across 30+ sub-competencies and prevailing customer case studies.",
+      "timestamp": "2026-09-30T12:47:46-07:00",
+      "status": "draft",
+      "stale_after": "2027-03-29T12:47:46-07:00",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head\nhttps://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-09-30T12:47:46-07:00",
+      "generated_method": "FDE Field-Readiness & Project Grading Rubric synthesized into OKF v0.2 standalone concept",
+      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "GEAPL200_2026-09-30_124746",
+      "source_doc_id": "cloud-fde-grading-rubric-g3doc",
+      "content_sha256": "56f5e0e05267fcad55541a1af64cbb0e38776918d8ee2278a3447e1dc0197856"
+    }
+  }
+}
