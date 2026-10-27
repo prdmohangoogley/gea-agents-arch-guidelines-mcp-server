@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Enterprise Agent Governance — Zero-Trust Network Perimeter & Model Armor",
+      "description": "Enterprise-wide agent governance, Model Armor dual-perimeter sanitization, centralized Agent Gateway policy enforcement, Policy-as-Code guardrails, and deterministic human-in-the-loop (HITL) compliance.",
+      "timestamp": "2026-10-26T03:50:00Z",
+      "status": "draft",
+      "stale_after": "2027-04-26T00:00:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head\nhttps://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-10-26T03:50:00Z",
+      "generated_method": "OKF v0.2 unified synthesis and FDE rubric alignment",
+      "verified": "machine:structural-qa @ 2026-10-26T03:50:00Z :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-10-26T03:50:00Z :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "L400_version_20261026_0350",
+      "source_doc_id": "G3_OKF_Agent_Governance",
+      "content_sha256": "983ace719fd823f98a0fe25fe51169709636ccddf672464f46354b628fb38811"
+    }
+  }
+}

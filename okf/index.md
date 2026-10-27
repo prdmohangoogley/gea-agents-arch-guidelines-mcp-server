@@ -1,7 +1,7 @@
 ---
 type: "Index"
-title: "GEA Agent Development — Unified Architecture Best Practices & FDE Grading Rubric Knowledge Base (L200 + L300)"
-description: "Root progressive-disclosure index for the unified GEAPL200 + GEAPL300 Open Knowledge Format (OKF v0.2) bundle, enforcing the Google Cloud FDE Field-Readiness Grading Rubric across all 36 concepts."
+title: "GEA Agent Development — Unified Architecture Best Practices & FDE Grading Rubric Knowledge Base (L200 + L300 + L400)"
+description: "Root progressive-disclosure index for the unified GEAPL200 + GEAPL300 + L400 Open Knowledge Format (OKF v0.2) bundle, enforcing the Google Cloud FDE Field-Readiness Grading Rubric across all 58 concepts."
 timestamp: "2026-09-30T12:47:46-07:00"
 status: "draft"
 stale_after: "2027-03-29T12:47:46-07:00"
@@ -17,7 +17,7 @@ Open Knowledge Format (`OKF v0.2`) bundle · **Version:** `GEAPL200_2026-09-30_1
 - **Cloud FDE Team Charter Reference:** [`https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head`](https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head)
 - **Mandatory Project Grading Rubric Concept:** [`/concepts/00-fde-field-readiness-and-grading-rubric.md`](/concepts/00-fde-field-readiness-and-grading-rubric.md)
 
-**Bundle Totals:** **36 Concepts** (1 FDE Grading Rubric Standard + 20 Existing GCS Bucket L200 Concepts + 15 Extended L300 Concepts) · **763 Mermaid Diagrams** · **1290 GFM Tables** · **4 Retained Figures** · **100% FDE Grading Rubric Enforcement**
+**Bundle Totals:** **58 Concepts** (1 FDE Grading Rubric Standard + 20 GCS Bucket L200 Concepts + 15 Extended L300 Concepts + 22 Comprehensive L400 Concepts) · **875 Mermaid Diagrams** · **1533 GFM Tables** · **5 Retained Figures** · **100% FDE Grading Rubric Enforcement**
 
 ---
 
@@ -34,7 +34,7 @@ Open Knowledge Format (`OKF v0.2`) bundle · **Version:** `GEAPL200_2026-09-30_1
 | **2** | **Competent (Pass)** | Articulates a solid approach, understands trade-offs, and meets Field-Ready FDE expectations. | **PASS BASELINE:** Requires an average score of **`>= 2.0`** in **Part A** AND **`>= 2.0`** in **Part B**. |
 | **3** | **Proficient (Strong Pass)** | Demonstrates deep, production-level expertise, anticipates complex failure modes, and teaches the panel something new. | Exemplar Reference Architecture. |
 
-### Rubric Competency Architecture (Enforced in Every Concept `01`–`35`)
+### Rubric Competency Architecture (Enforced in Every Concept `01`–`57`)
 
 | Rubric Section | Domain / Competency Cluster | Core Assessment Cutlines (`2 - Competent`) | Primary OKF Concepts |
 |---|---|---|---|
@@ -49,7 +49,7 @@ Open Knowledge Format (`OKF v0.2`) bundle · **Version:** `GEAPL200_2026-09-30_1
 
 ---
 
-## Unified Concepts Catalog (`00`–`35`)
+## Unified Concepts Catalog (`00`–`57`)
 
 ### Governance Anchor (`00`)
 - [`00` — Architecture Best Practice: Google Cloud FDE Field-Readiness & Project Grading Rubric (Mandatory Governance Standard)](/concepts/00-fde-field-readiness-and-grading-rubric.md) — `#fde-grading-rubric` `#field-readiness` `#advisory-rigor` `#engineering-excellence`
@@ -94,6 +94,30 @@ Open Knowledge Format (`OKF v0.2`) bundle · **Version:** `GEAPL200_2026-09-30_1
 - [Architecture Best Practice: Governing the Agent Ecosystem with Agent Gateway, Agent Registry, and Policies](/concepts/35-govern-agents-with-agent-gateway-registry-policies.md) — `agent-governance` `agent-gateway` `agent-registry` `a2a-protocol` `mcp-governance`
 
 ---
+
+### Part III: Extended L400 Concepts (`36`–`57` — Master Architecture, Identity, Security, Scale, Governance, Autoraters, Coding Agents, FinOps, Nexus, AlphaEvolve, FAQ & Cross-KB Best Practices)
+- [Architecture Best Practice: Master OKF Knowledge Catalog Index & Antigravity Agentic AI Blueprint (L400)](/concepts/36-l400-00-master-knowledge-catalog-index.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Gemini Enterprise Overall Architecture — Flattened Orchestration & Spark Sandboxes](/concepts/37-l400-a1-overall-architecture.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Identity Architecture — Cloud Identity, Workforce Identity Federation & SCIM](/concepts/38-l400-a2-identity-architecture.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Gemini Enterprise Network Architecture and Security — PSC, VPC-SC & CMEK](/concepts/39-l400-a3-network-architecture-and-security.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: API Integration, Federated Connector OAuth & Bring-Your-Own MCP](/concepts/40-l400-a4-api-integration-federated-connector-byo-mcp.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: End-to-End Debugging, Observability & Diagnostic Tooling](/concepts/41-l400-a5-debugging-and-troubleshooting.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Anatomy of an Enterprise Agent — ADK 2.0 Internals & Multi-Agent Mechanics](/concepts/42-l400-b1-anatomy-of-an-enterprise-agent.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: A2A Protocol and Multi-Agent Mechanics — Agent Cards & Interoperability](/concepts/43-l400-b2-a2a-protocol-and-multi-agent-mechanics.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Agent Skills and the Skills Registry — Progressive Disclosure & SOPs](/concepts/44-l400-b3-agent-skills-and-skills-registry.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Zero-Trust Identity Foundation for Enterprise Agentic AI](/concepts/45-l400-g1-zero-trust-identity-foundation.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Managing Production Agents at Scale — Multi-Region Fleets & Circuit Breakers](/concepts/46-l400-g2-managing-production-agents-at-scale.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Enterprise Agent Governance — Zero-Trust Network Perimeter & Model Armor](/concepts/47-l400-g3-agent-governance.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: More Reliable Autoraters — Enterprise Agentic AI Evaluation & Bias Mitigation](/concepts/48-l400-o1-more-reliable-autoraters.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: DeepMind Troubleshooting Tool — Label-Free Diagnostics & Trajectory Observability](/concepts/49-l400-o2-deepmind-troubleshooting-tool.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Design & Optimization of Coding Agents — Harness Architecture & Antigravity](/concepts/50-l400-o3-design-and-optimization-of-coding-agents.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Cost & Token Estimation, Analysis, and Optimization (FinOps)](/concepts/51-l400-o4-cost-token-estimation-analysis-and-optimization.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Project Nexus — Gemini Model Quality Reporting & Diagnostic Bisection](/concepts/52-l400-o5-project-nexus-model-quality-reporting.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: AlphaEvolve — Autonomous Evolutionary Algorithm Discovery & Optimization](/concepts/53-l400-o6-alpha-evolve.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Master L400 Topic Modeling, Cross-KB Connectivity & Agent Flow Graph](/concepts/54-l400-18-topic-connection-and-flow-graph.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Master Enterprise Architecture & Implementation FAQ Compendium](/concepts/55-l400-19-master-enterprise-faq-compendium.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Cross-Knowledge-Base Best Practices & Enterprise Customer Use Cases](/concepts/56-l400-20-cross-kb-best-practices-and-customer-use-cases.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
+- [Architecture Best Practice: Enforceable FDE Field-Readiness & Project Grading Rubric Standard (L400 Standard)](/concepts/57-l400-21-fde-grading-rubric-and-field-readiness-standard.md) — `l400` `gemini-enterprise` `google-cloud` `fde-grading-rubric`
 
 ## Freshness, Provenance & Structural Inventory (180-Day TTL Preserved)
 

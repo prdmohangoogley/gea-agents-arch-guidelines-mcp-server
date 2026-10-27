@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Agent Skills and the Skills Registry — Progressive Disclosure & SOPs",
+      "description": "Three-tier progressive disclosure specification for SKILL.md bundles, runtime skill activation ergonomics, skills registry lifecycle management, and token footprint minimization.",
+      "timestamp": "2026-10-26T03:50:00Z",
+      "status": "draft",
+      "stale_after": "2027-04-26T00:00:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head\nhttps://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-10-26T03:50:00Z",
+      "generated_method": "OKF v0.2 unified synthesis and FDE rubric alignment",
+      "verified": "machine:structural-qa @ 2026-10-26T03:50:00Z :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-10-26T03:50:00Z :: content hash recorded in MANIFEST.json",
+      "corpus": "GEAPL200",
+      "version_tag": "L400_version_20261026_0350",
+      "source_doc_id": "B3_OKF_Agent_Skills_and_Skills_Registry",
+      "content_sha256": "c9d6118aaad476a6fe4ac20f8ae76db972249e63af840aff0c870e3df6d412c0"
+    }
+  }
+}

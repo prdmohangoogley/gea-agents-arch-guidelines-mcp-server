@@ -7,8 +7,8 @@
 #
 # Updates the existing Open Knowledge Format (OKF v0.2) bundle in Google Cloud
 # Storage (gs://gea_agent_development_architectural_best_practices_1790796607/okf)
-# with the unified 36-concept bundle (00: FDE Grading Rubric, 01..20: L200,
-# 21..35: L300), preserving version_tag (GEAPL200_2026-09-30_124746) and
+# with the unified 58-concept bundle (00: FDE Grading Rubric, 01..20: L200,
+# 21..35: L300, 36..57: L400), preserving version_tag (GEAPL200_2026-09-30_124746) and
 # 180-day stale_after TTL semantics.
 #
 # Usage:
@@ -21,7 +21,7 @@
 #   --location LOC        Multi-region location (default: us)
 #   --bundle-dir DIR      Local OKF v0.2 bundle directory (auto-detected: okf/ or L300_concepts/)
 #   --with-terraform      Run Terraform (iac/) before syncing the OKF bundle to GCS
-#   --catalog             Also register/update all 36 entries in GCP Knowledge Catalog (Dataplex)
+#   --catalog             Also register/update all 58 entries in GCP Knowledge Catalog (Dataplex)
 #   --run-nl2kg           Trigger the downstream NL2KG Spanner/BigQuery ingestion pipeline after sync
 #   --create-if-missing   Create the GCS bucket if it does not already exist
 #   --readers PRINCIPALS  Comma-separated IAM principals to grant roles/storage.objectViewer
@@ -137,8 +137,8 @@ if version_tag != "GEAPL200_2026-09-30_124746":
     sys.exit("Expected preserved version_tag GEAPL200_2026-09-30_124746, got " + str(version_tag))
 
 concepts = bundle.get("concepts", [])
-if len(concepts) < 36:
-    sys.exit("Expected at least 36 merged concepts (00..35), found " + str(len(concepts)))
+if len(concepts) < 58:
+    sys.exit("Expected at least 58 merged concepts (00..57), found " + str(len(concepts)))
 
 FRONT_MATTER = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n+", re.S)
 errors = []
@@ -177,7 +177,7 @@ if errors:
 
 print("  Verified", len(concepts), "concepts | version_tag=" + version_tag + " | stale_after_days=" + str(bundle.get("stale_after_days")))
 ' "$BUNDLE_DIR"
-ok "All 36 OKF v0.2 concepts, SHA-256 digests, and FDE Grading Rubric sections verified"
+ok "All 58 OKF v0.2 concepts, SHA-256 digests, and FDE Grading Rubric sections verified"
 
 # =============================================================================
 # Step 2: Cloud Shell / gcloud Preflight & Project Guard
@@ -287,9 +287,9 @@ if [ -n "$READER_PRINCIPALS" ]; then
 fi
 
 # =============================================================================
-# Step 5: Sync Unified 36-Concept OKF v0.2 Bundle Directly to GCS
+# Step 5: Sync Unified 58-Concept OKF v0.2 Bundle Directly to GCS
 # =============================================================================
-say "Step 5: Synchronizing Unified 36-Concept OKF v0.2 Bundle to ${BUCKET_URI}/okf"
+say "Step 5: Synchronizing Unified 58-Concept OKF v0.2 Bundle to ${BUCKET_URI}/okf"
 
 for top_file in index.md log.md bundle.json MANIFEST.json; do
   run gcloud storage cp "${BUNDLE_DIR}/${top_file}" "${BUCKET_URI}/okf/${top_file}" --project="$PROJECT_ID"
@@ -313,7 +313,7 @@ if [ -d "${BUNDLE_DIR}/catalog-entries" ]; then
     --delete-unmatched-destination-objects \
     --project="$PROJECT_ID"
 fi
-ok "Synced 36-concept OKF v0.2 bundle (index.md, log.md, bundle.json, MANIFEST.json, concepts/, img/, catalog-entries/) to ${BUCKET_URI}/okf"
+ok "Synced 58-concept OKF v0.2 bundle (index.md, log.md, bundle.json, MANIFEST.json, concepts/, img/, catalog-entries/) to ${BUCKET_URI}/okf"
 
 # =============================================================================
 # Step 6: Post-Upload CRC32C Integrity Verification
@@ -345,7 +345,7 @@ fi
 # Step 7: Optional GCP Knowledge Catalog (Dataplex) Registration (--catalog)
 # =============================================================================
 if [ "$DO_CATALOG" = "true" ]; then
-  say "Step 7: Registering 36 Concepts in GCP Knowledge Catalog (Dataplex)"
+  say "Step 7: Registering 58 Concepts in GCP Knowledge Catalog (Dataplex)"
   REG_SCRIPT=""
   if [ -f "${SCRIPT_DIR}/register_knowledge_catalog.sh" ]; then
     REG_SCRIPT="${SCRIPT_DIR}/register_knowledge_catalog.sh"
@@ -379,5 +379,5 @@ say "Summary"
 printf "  %-18s %s/okf\n" "Target GCS URI:" "$BUCKET_URI"
 printf "  %-18s %s (%s)\n" "GCP Project:" "$PROJECT_ID" "$PROJECT_NUMBER"
 printf "  %-18s %s (preserved)\n" "Version Tag:" "GEAPL200_2026-09-30_124746"
-printf "  %-18s %s\n" "Total Concepts:" "36 (00: FDE Rubric, 01..20: L200, 21..35: L300)"
+printf "  %-18s %s\n" "Total Concepts:" "58 (00: FDE Rubric, 01..20: L200, 21..35: L300, 36..57: L400)"
 printf "  %-18s %s\n" "Living Spec:" "docs/specs/okf-gcs-update-spec.md"
