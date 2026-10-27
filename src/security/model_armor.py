@@ -32,6 +32,47 @@ HEURISTIC_INJECTION_PATTERNS = [
     re.compile(r"(?i)\b(bypass|disable)\s+(guardrails|security|restrictions|filters)\b"),
 ]
 
+# Sensitive Data Protection (SDP/DLP) egress patterns for detecting exfiltration of secrets & SPI
+HEURISTIC_EGRESS_PATTERNS: list[tuple[re.Pattern[str], str, str]] = [
+    (
+        re.compile(r"\bAIza[0-9A-Za-z\-_]{30,40}\b"),
+        "gcp_api_key",
+        "[REDACTED_GCP_API_KEY]",
+    ),
+    (
+        re.compile(r"\bya29\.[0-9A-Za-z\-_]{20,}\b"),
+        "gcp_oauth_token",
+        "[REDACTED_BEARER_TOKEN]",
+    ),
+    (
+        re.compile(
+            r"-----BEGIN (?:RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----[\s\S]+?-----END (?:RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----"
+        ),
+        "private_key",
+        "[REDACTED_PRIVATE_KEY]",
+    ),
+    (
+        re.compile(r'"private_key":\s*"-----BEGIN PRIVATE KEY[^"]+"'),
+        "service_account_key",
+        '"private_key": "[REDACTED_SA_KEY]"',
+    ),
+    (
+        re.compile(r"\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})\b"),
+        "credit_card_pii",
+        "[REDACTED_CREDIT_CARD]",
+    ),
+    (
+        re.compile(r"\b(?!000|666|9\d{2})\d{3}-(?!00)\d{2}-(?!0000)\d{4}\b"),
+        "ssn_pii",
+        "[REDACTED_SSN]",
+    ),
+    (
+        re.compile(r"(?i)\b(client_secret|db_password|api_secret)\s*[:=]\s*['\"][^'\"]{8,}['\"]"),
+        "credential_assignment",
+        r"\1: '[REDACTED_SECRET]'",
+    ),
+]
+
 
 class SanitizationResult(BaseModel):
     """Result of prompt sanitization evaluation."""
@@ -242,6 +283,120 @@ class ModelArmorSanitizer:
                 latency_ms=elapsed_fallback,
                 source="fallback_pass",
             )
+
+    def mask_sensitive_data(self, text: str) -> tuple[str, list[str]]:
+        """Scan text and redact API keys, private keys, service account secrets, and PII."""
+        masked_text = text
+        matched_filters: list[str] = []
+        for pattern, filter_name, replacement in HEURISTIC_EGRESS_PATTERNS:
+            if pattern.search(masked_text):
+                matched_filters.append(filter_name)
+                masked_text = pattern.sub(replacement, masked_text)
+        return masked_text, matched_filters
+
+    async def sanitize_response(
+        self,
+        text: str,
+        mask_in_place: bool = True,
+        block_on_secrets: bool = False,
+    ) -> SanitizationResult:
+        """Sanitize outgoing model or tool output to prevent secret exfiltration and PII leakage (egress DLP)."""
+        start_time = time.perf_counter()
+        if not text or not text.strip():
+            return SanitizationResult(
+                is_safe=True,
+                action="ALLOW",
+                sanitized_text=text,
+                latency_ms=0.0,
+                source="bypass_empty",
+            )
+
+        with tracer.start_as_current_span("security/model_armor:sanitize_response") as span:
+            span.set_attribute("security.location", self.location)
+
+            # Local DLP masking
+            masked_text, matched_filters = self.mask_sensitive_data(text)
+
+            token = self._get_access_token() if self.enabled else None
+            if self.enabled and token:
+                url = (
+                    f"https://modelarmor.{self.location}.rep.googleapis.com/v1/"
+                    f"projects/{self.project_id}/locations/{self.location}/"
+                    f"templates/{self.template_id}:sanitizeModelResponse"
+                )
+                headers = {
+                    "Authorization": f"Bearer {token}",
+                    "Content-Type": "application/json",
+                }
+                payload = {"modelResponseData": {"text": text}}
+                try:
+                    client = self._get_http_client()
+                    response = await client.post(url, headers=headers, json=payload)
+                    if response.status_code == 200:
+                        data = response.json()
+                        sanitization_res = data.get("sanitizationResult", {})
+                        if sanitization_res.get("filterMatchState") == "MATCH_FOUND":
+                            filter_results = sanitization_res.get("filterResults", {})
+                            for f_name in filter_results.keys():
+                                if f_name not in matched_filters:
+                                    matched_filters.append(f_name)
+                except Exception as exc:
+                    logger.warning(f"Error querying Model Armor sanitizeModelResponse API: {exc}")
+
+            elapsed = (time.perf_counter() - start_time) * 1000
+            span.set_attribute("security.egress_filters_count", len(matched_filters))
+
+            if matched_filters:
+                span.set_attribute("security.matched_filters", matched_filters)
+                if block_on_secrets:
+                    span.set_attribute("security.sanitization_status", "BLOCK")
+                    return SanitizationResult(
+                        is_safe=False,
+                        action="BLOCK",
+                        error_message="Output blocked: Sensitive data or credentials detected by Model Armor DLP.",
+                        matched_filters=matched_filters,
+                        latency_ms=elapsed,
+                        source="model_armor_egress_dlp",
+                    )
+                # Mask in place and allow
+                span.set_attribute("security.sanitization_status", "ALLOW_REDACTED")
+                return SanitizationResult(
+                    is_safe=True,
+                    action="ALLOW",
+                    sanitized_text=masked_text if mask_in_place else text,
+                    matched_filters=matched_filters,
+                    latency_ms=elapsed,
+                    source="model_armor_egress_dlp",
+                )
+
+            span.set_attribute("security.sanitization_status", "ALLOW")
+            return SanitizationResult(
+                is_safe=True,
+                action="ALLOW",
+                sanitized_text=text,
+                latency_ms=elapsed,
+                source="model_armor_egress_clean",
+            )
+
+    def verify_principal_access_boundary(
+        self,
+        target_resource: str,
+        caller_identity: str | None = None,
+    ) -> bool:
+        """Verify request adheres to Principal Access Boundaries (PAB) and Zero Ambient Authority."""
+        if not target_resource:
+            return False
+        forbidden_patterns = [
+            r"://.*?(?:internal-corp|metadata\.google\.internal)",
+            r"projects/(?!(" + re.escape(self.project_id) + r"|670560280865))\w+",
+        ]
+        for pattern in forbidden_patterns:
+            if re.search(pattern, target_resource):
+                logger.warning(
+                    f"Principal Access Boundary violation: target {target_resource} forbidden for caller {caller_identity}"
+                )
+                return False
+        return True
 
     async def close(self) -> None:
         """Close persistent HTTP client session."""

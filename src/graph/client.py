@@ -500,7 +500,11 @@ class GraphClient:
             try:
                 from google.cloud import spanner
 
-                params = {"domain": domain, "rubric_id": rubric_id, "limit": limit}
+                params = {
+                    "domain": f"%{domain}%" if domain else None,
+                    "rubric_id": rubric_id,
+                    "limit": limit,
+                }
                 param_types = {
                     "domain": spanner.param_types.STRING,
                     "rubric_id": spanner.param_types.STRING,
@@ -513,10 +517,8 @@ class GraphClient:
                         "rubric_id": r[0],
                         "domain": r[1],
                         "sub_competency": r[2],
-                        "level_0_summary": r[3],
-                        "level_1_summary": r[4],
-                        "level_2_summary": r[5],
-                        "level_3_summary": r[6],
+                        "level_2_criteria": r[3],
+                        "level_3_criteria": r[4],
                     }
                     for r in res
                 ]

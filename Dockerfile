@@ -41,6 +41,7 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy application files
 COPY src/ /app/src/
 COPY pipelines/ /app/pipelines/
+COPY okf/ /app/okf/
 COPY pyproject.toml /app/
 
 RUN chown -R mcpuser:mcpuser /app

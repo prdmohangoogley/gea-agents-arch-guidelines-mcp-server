@@ -137,3 +137,54 @@ async def test_pattern_tools_block_poisoned_input(mcp_app):
     text_out2 = res2.content[0].text if res2.content else ""
     assert "⚠️ Request Blocked by Model Armor" in text_out2
 
+
+@pytest.mark.asyncio
+async def test_egress_dlp_masks_credentials_and_pii(sanitizer: ModelArmorSanitizer):
+    """Verify egress DLP sanitization detects and redacts API keys, tokens, and PII."""
+    raw_output = (
+        "Deployment successful. Generated API key AIzaSyD3x9ExampleKey1234567890abcdef "
+        "and bearer token ya29.a0AfH6SMCxExampleBearerToken1234567890. "
+        "Customer contact SSN: 123-45-6789."
+    )
+    res = await sanitizer.sanitize_response(raw_output, mask_in_place=True)
+    assert res.is_safe is True
+    assert res.action == "ALLOW"
+    assert "AIzaSyD3x9ExampleKey1234567890abcdef" not in res.sanitized_text
+    assert "[REDACTED_GCP_API_KEY]" in res.sanitized_text
+    assert "[REDACTED_BEARER_TOKEN]" in res.sanitized_text
+    assert "[REDACTED_SSN]" in res.sanitized_text
+    assert "gcp_api_key" in res.matched_filters
+    assert "gcp_oauth_token" in res.matched_filters
+    assert "ssn_pii" in res.matched_filters
+
+
+@pytest.mark.asyncio
+async def test_egress_dlp_blocks_on_policy_if_configured(sanitizer: ModelArmorSanitizer):
+    """Verify egress DLP can strictly block responses containing private keys if block_on_secrets=True."""
+    leaked_private_key = (
+        "-----BEGIN RSA PRIVATE KEY-----\n"
+        "MIIEowIBAAKCAQEA0Y3J1\n"
+        "-----END RSA PRIVATE KEY-----"
+    )
+    res = await sanitizer.sanitize_response(leaked_private_key, block_on_secrets=True)
+    assert res.is_safe is False
+    assert res.action == "BLOCK"
+    assert "private_key" in res.matched_filters
+
+
+def test_principal_access_boundary_checks(sanitizer: ModelArmorSanitizer):
+    """Verify Principal Access Boundary (PAB) checks prevent unauthorized resource traversal."""
+    assert sanitizer.verify_principal_access_boundary(
+        f"projects/{sanitizer.project_id}/databases/arch_guidelines_graph"
+    ) is True
+
+    # Reject internal metadata service exfiltration
+    assert sanitizer.verify_principal_access_boundary(
+        "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token"
+    ) is False
+
+    # Reject unauthorized projects
+    assert sanitizer.verify_principal_access_boundary(
+        "projects/unauthorized-foreign-project-9999/secrets/my-key"
+    ) is False
+

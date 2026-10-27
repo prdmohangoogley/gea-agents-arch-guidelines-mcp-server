@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from typing import Any
 from fastmcp import FastMCP
 from src.config import config
 from src.graph.client import GraphClient
@@ -11,6 +12,9 @@ from src.otel_setup import setup_opentelemetry
 from src.tools.guidelines import register_guideline_tools
 from src.tools.health import register_health_tools
 from src.tools.patterns import register_pattern_tools
+from src.tools.fde_governance import register_fde_governance_tools
+from src.tools.skills import register_skill_tools
+from src.tools.evolution import register_evolution_tools
 
 # Initialize OpenTelemetry instrumentation
 setup_opentelemetry("guidelines-mcp-server")
@@ -34,6 +38,9 @@ def create_server() -> FastMCP:
     register_health_tools(mcp)
     register_guideline_tools(mcp, client)
     register_pattern_tools(mcp, client)
+    register_fde_governance_tools(mcp, client)
+    register_skill_tools(mcp, client)
+    register_evolution_tools(mcp)
 
     # Custom HTTP health probe endpoint for Cloud Run and Docker
     @mcp.custom_route("/health", methods=["GET"])

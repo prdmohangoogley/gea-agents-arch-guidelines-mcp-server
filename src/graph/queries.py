@@ -49,9 +49,9 @@ LIMIT @limit;
 QUERY_RUBRIC_ITEMS = """
 GRAPH ArchGuidelinesGraph
 MATCH (f:FDERubricItem)
-WHERE (@domain IS NULL OR f.domain = @domain)
+WHERE (@domain IS NULL OR LOWER(f.domain) LIKE LOWER(@domain))
   AND (@rubric_id IS NULL OR f.rubric_id = @rubric_id)
-RETURN f.rubric_id, f.domain, f.sub_competency, f.level_0_summary, f.level_1_summary, f.level_2_summary, f.level_3_summary
+RETURN f.rubric_id, f.domain, f.sub_competency, f.criteria_level_2, f.criteria_level_3
 LIMIT @limit;
 """
 
