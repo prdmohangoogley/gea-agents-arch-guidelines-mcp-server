@@ -709,8 +709,8 @@ class GraphBatchHydrator:
                         values=[
                             [
                                 r.rubric_id[:64],
-                                r.domain[:128],
-                                r.sub_competency[:256],
+                                r.domain[:64],
+                                r.sub_competency[:128],
                                 r.criteria_level_2,
                                 r.criteria_level_3 or "",
                                 r.disqualifier_condition or "",
@@ -729,7 +729,7 @@ class GraphBatchHydrator:
                         table="GuidelineEnforcesRubric",
                         columns=["guideline_id", "rubric_id", "enforcement_level", "notes"],
                         values=[
-                            [e.guideline_id[:64], e.rubric_id[:64], e.enforcement_level[:64], e.notes or ""]
+                            [e.guideline_id[:64], e.rubric_id[:64], e.enforcement_level[:32], e.notes or ""]
                             for e in batch
                         ],
                     )
@@ -845,8 +845,28 @@ class GraphBatchHydrator:
             client = bigquery.Client(project=self.project_id)
             total_rows = 0
 
+            def _clean_existing(table: str, key_col: str, ids: list[str]) -> None:
+                """Clean existing rows matching IDs before streaming to guarantee idempotency."""
+                unique_ids = list(set(i for i in ids if i))
+                if not unique_ids:
+                    return
+                chunk_size = 500
+                for c in range(0, len(unique_ids), chunk_size):
+                    chunk = unique_ids[c : c + chunk_size]
+                    dq = f"DELETE FROM `{self.project_id}.{self.bq_dataset_id}.{table}` WHERE {key_col} IN UNNEST(@ids)"
+                    try:
+                        client.query(
+                            dq,
+                            job_config=bigquery.QueryJobConfig(
+                                query_parameters=[bigquery.ArrayQueryParameter("ids", "STRING", chunk)]
+                            ),
+                        ).result()
+                    except Exception as ex:
+                        logger.warning(f"BigQuery pre-clean failed on {table}.{key_col}: {ex}")
+
             # 1. Guidelines
             if payload.guidelines:
+                _clean_existing("guidelines", "guideline_id", [g.guideline_id for g in payload.guidelines])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.guidelines"
                 rows = [
                     {
@@ -869,6 +889,7 @@ class GraphBatchHydrator:
 
             # 2. FDE Rubric Items
             if payload.fde_rubric_items:
+                _clean_existing("fde_rubric_items", "rubric_id", [r.rubric_id for r in payload.fde_rubric_items])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.fde_rubric_items"
                 rows = [
                     {
@@ -889,6 +910,7 @@ class GraphBatchHydrator:
 
             # 3. Guideline Enforces Rubric Edges
             if payload.enforces_rubric_edges:
+                _clean_existing("guideline_enforces_rubric", "guideline_id", [e.guideline_id for e in payload.enforces_rubric_edges])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.guideline_enforces_rubric"
                 rows = [
                     {
@@ -906,6 +928,7 @@ class GraphBatchHydrator:
 
             # 4. Patterns
             if payload.patterns:
+                _clean_existing("patterns", "pattern_id", [p.pattern_id for p in payload.patterns])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.patterns"
                 rows = [
                     {
@@ -917,11 +940,14 @@ class GraphBatchHydrator:
                     }
                     for p in payload.patterns
                 ]
-                client.insert_rows_json(table_id, rows)
+                errors = client.insert_rows_json(table_id, rows)
+                if errors:
+                    logger.warning(f"BigQuery insert errors on patterns: {errors}")
                 total_rows += len(rows)
 
             # 5. Antipatterns
             if payload.antipatterns:
+                _clean_existing("antipatterns", "antipattern_id", [a.antipattern_id for a in payload.antipatterns])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.antipatterns"
                 rows = [
                     {
@@ -933,11 +959,14 @@ class GraphBatchHydrator:
                     }
                     for a in payload.antipatterns
                 ]
-                client.insert_rows_json(table_id, rows)
+                errors = client.insert_rows_json(table_id, rows)
+                if errors:
+                    logger.warning(f"BigQuery insert errors on antipatterns: {errors}")
                 total_rows += len(rows)
 
             # 6. Tradeoffs
             if payload.tradeoffs:
+                _clean_existing("tradeoffs", "tradeoff_id", [t.tradeoff_id for t in payload.tradeoffs])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.tradeoffs"
                 rows = [
                     {
@@ -950,12 +979,15 @@ class GraphBatchHydrator:
                     }
                     for t in payload.tradeoffs
                 ]
-                client.insert_rows_json(table_id, rows)
+                errors = client.insert_rows_json(table_id, rows)
+                if errors:
+                    logger.warning(f"BigQuery insert errors on tradeoffs: {errors}")
                 total_rows += len(rows)
 
             # 7. GuidelineImplementsPattern Edges
             implements_edges = [e for e in payload.edges if e.predicate == "IMPLEMENTS"]
             if implements_edges:
+                _clean_existing("guideline_implements_pattern", "guideline_id", [e.source_id for e in implements_edges])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.guideline_implements_pattern"
                 rows = [
                     {
@@ -965,12 +997,15 @@ class GraphBatchHydrator:
                     }
                     for e in implements_edges
                 ]
-                client.insert_rows_json(table_id, rows)
+                errors = client.insert_rows_json(table_id, rows)
+                if errors:
+                    logger.warning(f"BigQuery insert errors on guideline_implements_pattern: {errors}")
                 total_rows += len(rows)
 
             # 8. PatternMitigatesAntipattern Edges
             mitigates_edges = [e for e in payload.edges if e.predicate == "MITIGATES"]
             if mitigates_edges:
+                _clean_existing("pattern_mitigates_antipattern", "pattern_id", [e.source_id for e in mitigates_edges])
                 table_id = f"{self.project_id}.{self.bq_dataset_id}.pattern_mitigates_antipattern"
                 rows = [
                     {
@@ -980,7 +1015,9 @@ class GraphBatchHydrator:
                     }
                     for e in mitigates_edges
                 ]
-                client.insert_rows_json(table_id, rows)
+                errors = client.insert_rows_json(table_id, rows)
+                if errors:
+                    logger.warning(f"BigQuery insert errors on pattern_mitigates_antipattern: {errors}")
                 total_rows += len(rows)
 
             logger.info(f"BigQuery Hydration successful: {total_rows} rows streamed.")
@@ -1014,9 +1051,14 @@ class CheckpointTracker:
         self.checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
         self.checkpoint_path.write_text(json.dumps(self._state, indent=2), encoding="utf-8")
 
+    def _normalize_key(self, doc_id: str) -> str:
+        """Extract basename of document for consistent lookup across GCS/local paths."""
+        return doc_id.split("/")[-1]
+
     def should_process(self, doc_id: str, checksum: str) -> bool:
         """Return True if document is new or changed since last triplification."""
-        record = self._state.get(doc_id)
+        norm_key = self._normalize_key(doc_id)
+        record = self._state.get(doc_id) or self._state.get(norm_key) or self._state.get(f"okf/concepts/{norm_key}")
         if not record:
             return True
         if record.get("checksum") != checksum:
@@ -1024,12 +1066,16 @@ class CheckpointTracker:
         return False
 
     def mark_completed(self, doc_id: str, checksum: str, node_count: int, edge_count: int) -> None:
-        self._state[doc_id] = {
+        norm_key = self._normalize_key(doc_id)
+        entry = {
             "checksum": checksum,
             "synced_at": datetime.now(timezone.utc).isoformat(),
             "nodes": node_count,
             "edges": edge_count,
         }
+        self._state[doc_id] = entry
+        self._state[norm_key] = entry
+        self._state[f"okf/concepts/{norm_key}"] = entry
         self.save()
 
 
@@ -1038,8 +1084,9 @@ class CheckpointTracker:
 # ==============================================================================
 
 def run_pipeline(
-    gcs_bucket_name: str | None = None,
-    local_dir: Path | None = None,
+    gcs_bucket_name: str | None = "gea_agent_development_architectural_best_practices_1790796607",
+    local_dir: Path | None = Path("okf/concepts"),
+    source: str = "gcs",
     project_id: str = "fivedaysai-prd-sandbox-317383",
     spanner_instance_id: str = "gea-arch-guidelines-spanner",
     spanner_database_name: str = "arch_guidelines_graph",
@@ -1048,30 +1095,16 @@ def run_pipeline(
     dry_run: bool = False,
     force_sync: bool = False,
 ) -> ExtractedGraphPayload:
-    """Run end-to-end NL2KG pipeline over local directory or GCS bucket."""
-    logger.info("Starting NL2KG Triplification Pipeline...")
+    """Run end-to-end NL2KG pipeline over GCS bucket or local directory."""
+    logger.info(f"Starting NL2KG Triplification Pipeline (source={source})...")
     tracker = CheckpointTracker(checkpoint_file)
     consolidated_graph = ExtractedGraphPayload()
     processed_items: list[tuple[str, str, int, int]] = []
 
     documents_to_process: list[dict[str, Any]] = []
 
-    # 1. Discover documents from local directory first, or GCS bucket
-    if local_dir and local_dir.exists():
-        files = sorted(list(local_dir.glob("*.md")) + list(local_dir.glob("**/*.md")))
-        logger.info(f"Discovered {len(files)} markdown documents in local directory {local_dir}")
-        for f in files:
-            content = f.read_text(encoding="utf-8")
-            checksum = hashlib.sha256(content.encode("utf-8")).hexdigest()
-            doc_id = str(f.relative_to(local_dir))
-            if force_sync or tracker.should_process(doc_id, checksum):
-                documents_to_process.append(
-                    {"path": f, "uri": str(f), "content": content, "checksum": checksum, "id": doc_id}
-                )
-            else:
-                logger.info(f"Skipping unchanged local file: {doc_id}")
-
-    elif gcs_bucket_name:
+    # 1. Discover documents from GCS bucket first, with local fallback
+    if source == "gcs" and gcs_bucket_name:
         try:
             from google.cloud import storage
 
@@ -1094,8 +1127,25 @@ def run_pipeline(
                                 "id": b.name,
                             }
                         )
+                    else:
+                        logger.info(f"Skipping unchanged GCS file: {b.name}")
         except Exception as e:
-            logger.warning(f"GCS listing failed: {e}")
+            logger.warning(f"GCS listing failed ({e}), falling back to local directory {local_dir}")
+            source = "local"
+
+    if (source == "local" or not documents_to_process) and local_dir and local_dir.exists():
+        files = sorted(set(local_dir.rglob("*.md")))
+        logger.info(f"Discovered {len(files)} unique markdown documents in local directory {local_dir}")
+        for f in files:
+            content = f.read_text(encoding="utf-8")
+            checksum = hashlib.sha256(content.encode("utf-8")).hexdigest()
+            doc_id = str(f.relative_to(local_dir))
+            if force_sync or tracker.should_process(doc_id, checksum):
+                documents_to_process.append(
+                    {"path": f, "uri": str(f), "content": content, "checksum": checksum, "id": doc_id}
+                )
+            else:
+                logger.info(f"Skipping unchanged local file: {doc_id}")
 
     if not documents_to_process:
         logger.info("All documents are up-to-date with zero changes detected. Zero duplicate writes needed.")
@@ -1211,6 +1261,7 @@ def main() -> None:
     parser.add_argument("--spanner-instance", default="gea-arch-guidelines-spanner", help="Spanner Instance ID")
     parser.add_argument("--spanner-database", default="arch_guidelines_graph", help="Spanner Database Name")
     parser.add_argument("--bq-dataset", default="gea_arch_guidelines_analytics", help="BigQuery Dataset ID")
+    parser.add_argument("--source", choices=["gcs", "local"], default="gcs", help="Source for concepts (gcs or local)")
     parser.add_argument("--checkpoint-file", type=Path, default=Path(".sync/checkpoints.json"), help="State file for incremental sync")
     parser.add_argument("--dry-run", action="store_true", help="Perform extraction without database writes")
     parser.add_argument("--force-sync", action="store_true", help="Force full resync ignoring checkpoints")
@@ -1220,6 +1271,7 @@ def main() -> None:
     run_pipeline(
         gcs_bucket_name=args.gcs_bucket,
         local_dir=args.local_dir,
+        source=args.source,
         project_id=args.project_id,
         spanner_instance_id=args.spanner_instance,
         spanner_database_name=args.spanner_database,
