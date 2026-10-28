@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Introduction to Agents"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Introduction to Agents”."
-timestamp: "2026-09-04T17:47:09Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-03T17:47:09+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1ALKaVbC7jPxjpbt19ET2cL1MaMO0Cs3CM0IWw0GXmAg/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "15-introduction-to-agents"
 source_doc_id: "1ALKaVbC7jPxjpbt19ET2cL1MaMO0Cs3CM0IWw0GXmAg"
-content_sha256: "9252d8df2e23b49a82a078001bed635893375ad1f6ced904b6885e66bebe27c3"
+content_sha256: "b6307441d68142505ba179e3597684e49d12de573ecd083b1ce23228da3420f4"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Introduction to Agents

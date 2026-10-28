@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud”."
-timestamp: "2026-09-30T00:35:09Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T00:35:09+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1vk61bHa0T-RvYs4ZCvJSILNM0XxIfH_wAiKAURt9KaE/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - cost-optimization
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "05-enterprise-ai-agent-systems-google-cloud"
 source_doc_id: "1vk61bHa0T-RvYs4ZCvJSILNM0XxIfH_wAiKAURt9KaE"
-content_sha256: "460f1d02fe5989c12bf2e35472edf909201e236071442f2839dae69166475339"
+content_sha256: "31c9acb001bd9a569f5efe75e117681c4787acb36611ef05841390bb4c1fc937"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud

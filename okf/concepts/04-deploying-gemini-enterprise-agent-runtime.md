@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Deploying to Agent Runtime — Prerequisites, Cloud Shell Execution & Deployment Troubleshooting"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Deploying to Agent Runtime — Prerequisites, Cloud Shell Execution & Deployment Troubleshooting”."
-timestamp: "2026-09-30T02:41:08Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T02:41:08+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1N5N-KVQwIpeEaN8aXMX1l6pdPjMnmAxFEZABT_7ZL3E/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - memory-bank
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "04-deploying-gemini-enterprise-agent-runtime"
 source_doc_id: "1N5N-KVQwIpeEaN8aXMX1l6pdPjMnmAxFEZABT_7ZL3E"
-content_sha256: "3e2089183eced5502bb38ac887b8b5fcb12186639e4c9262d684aaf66576f5b2"
+content_sha256: "bffd8d733dff9f64b600608221570410ad4c06a5509bc567ef30f88338231b86"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Deploying to Agent Runtime — Prerequisites, Cloud Shell Execution & Deployment Troubleshooting

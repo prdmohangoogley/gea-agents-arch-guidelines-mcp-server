@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Agent Tools & Interoperability"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Tools & Interoperability”."
-timestamp: "2026-09-15T21:58:13Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-14T21:58:13+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1SnupitBTSfAdS9Nob3FA2FLkU8UKSJsdOg8EMsgFN5I/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - vibe-coding
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "19-agent-tools-interoperability-2"
 source_doc_id: "1SnupitBTSfAdS9Nob3FA2FLkU8UKSJsdOg8EMsgFN5I"
-content_sha256: "0bfc942dfba09c5dfc8a35bea8accee306389b50a41d057112406b575309e86c"
+content_sha256: "5f78a2c41850425a31d37c7b1fa1b996ad7b425b91183867b986c0ad48eb8ffb"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Agent Tools & Interoperability

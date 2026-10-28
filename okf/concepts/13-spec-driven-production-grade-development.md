@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Spec-Driven Production Grade Development in the Age of Vibe Coding"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Spec-Driven Production Grade Development in the Age of Vibe Coding”."
-timestamp: "2026-09-28T00:11:37Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-27T00:11:37+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1uBbH5a6w5oyYsIfAe3Dlb-M-4_TiPk6EuEm1pgRFGsc/edit"
 generated:
@@ -28,10 +28,17 @@ tags:
   - context-engineering
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "13-spec-driven-production-grade-development"
 source_doc_id: "1uBbH5a6w5oyYsIfAe3Dlb-M-4_TiPk6EuEm1pgRFGsc"
-content_sha256: "e5402530760da8e6493e89e8bfd57b43655b8b2e48d0f6c824302097b5b4eede"
+content_sha256: "f47dc2db1a6116aa86807bf8eca5f1bf4a43489c6e1c54172583e1ca331d4d78"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Spec-Driven Production Grade Development in the Age of Vibe Coding

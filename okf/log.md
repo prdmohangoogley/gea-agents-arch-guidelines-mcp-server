@@ -8,6 +8,14 @@ version_tag: "GEAPL200_2026-09-30_124746"
 
 # Change log
 
+## 2026-10-27 (Flat Architecture Consolidation & 83-Concept Unification — v5.0)
+
+- Eliminated all hierarchical `L400_concepts/` subdirectories (`okf/L400_concepts/` and root `L400_concepts/` in GCS and locally); flattened all concepts into `okf/concepts/`.
+- Merged the remaining unmapped L400 and Socratic modules: `58-l400-o7-multi-agent-tokenomics-and-grilling-best-practices.md` and `59-l400-s0-master-socratic-grilling-and-prompting-architecture.md`, bringing the unified flat corpus to **83 architectural concepts**.
+- Synchronized all 83 concepts flat at the same level for the FastMCP server, the Skills Registry, and Antigravity skills.
+- Re-indexed `bundle.json` and `MANIFEST.json`: 83 concepts, 928 Mermaid diagrams, 1,767 GFM tables, 5 retained images.
+- Preserved `version_tag` (`GEAPL200_2026-09-30_124746`) and 180-day TTL semantics across all concepts.
+
 ## 2026-10-27 (Cumulative L400 Extension & Knowledge Catalog Ingestion — v3.0)
 
 - Merged 22 L400 concepts (`36-*.md` through `57-*.md`) into the OKF v0.2 catalog, expanding from 36 to 58 concepts.

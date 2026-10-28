@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Enterprise Agent Skills — Progressive Disclosure, Capability Profiles & Skill Lifecycle Engineering"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Enterprise Agent Skills — Progressive Disclosure, Capability Profiles & Skill Lifecycle Engineering”."
-timestamp: "2026-09-30T01:55:27Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T01:55:27+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1XS3V1hJ6zjbD7QUD5lnFveekj2SCjq2yLsNlnq3GSN4/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - agentops
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "07-enterprise-agent-skills"
 source_doc_id: "1XS3V1hJ6zjbD7QUD5lnFveekj2SCjq2yLsNlnq3GSN4"
-content_sha256: "eedcd258be54ce92a72fd01fc5db9f33972e4273fda12bba8446a40c845fdced"
+content_sha256: "26214b4be66c8449a709e68f120ced8616b6b976340b2e1bdbc96a0bd5073854"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Enterprise Agent Skills — Progressive Disclosure, Capability Profiles & Skill Lifecycle Engineering

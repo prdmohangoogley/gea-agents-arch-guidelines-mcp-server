@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: AI Agent Quality — Evaluation, Observability, Cost & Security Engineering"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: AI Agent Quality — Evaluation, Observability, Cost & Security Engineering”."
-timestamp: "2026-09-30T03:08:43Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T03:08:43+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1RKm8QPIZkriZPGOFUyzH79bOTGeWrf4naqXl-k3-TBU/edit"
 generated:
@@ -28,10 +28,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "01-ai-agent-quality-engineering"
 source_doc_id: "1RKm8QPIZkriZPGOFUyzH79bOTGeWrf4naqXl-k3-TBU"
-content_sha256: "ab7f767a3ae88d65961bb7e4f65061bbb34583a02a54c7471629d01181fe1593"
+content_sha256: "3225bbd15db46430bf2c445a6ca6eff59bf58380e214748ef9a2d300edd3e908"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: AI Agent Quality — Evaluation, Observability, Cost & Security Engineering

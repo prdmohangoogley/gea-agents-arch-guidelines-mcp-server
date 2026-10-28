@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Agents Concepts Visually Explained"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Agents Concepts Visually Explained”."
-timestamp: "2026-09-09T00:14:42Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-08T00:14:42+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1FEZZSHrp9_c5AnjJh2AJkwbfPsM0ST0qtizm46JnxT8/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - multi-agent-systems
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "17-agents-concepts-visually-explained"
 source_doc_id: "1FEZZSHrp9_c5AnjJh2AJkwbfPsM0ST0qtizm46JnxT8"
-content_sha256: "c8bcc2019cd79e71c73ed0f8610add9c0024049622e278835fbc3c10d6d46194"
+content_sha256: "fa438ee010577442371bd8d82b3da61bd71461b73522d6c4040273172f25c024"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Agents Concepts Visually Explained

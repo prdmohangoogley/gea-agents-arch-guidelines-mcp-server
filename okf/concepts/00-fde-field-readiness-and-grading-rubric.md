@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Google Cloud FDE Field-Readiness & Project Grading Rubric (Mandatory Governance Standard)"
 description: "Enforceable grading rubric and competency standard for all Forward Deployed Engineer (FDE) and Antigravity-driven Agentic AI projects, spanning Presentation & Advisory Rigor (Part A) and Engineering & Implementation Excellence (Part B) across 30+ sub-competencies and prevailing customer case studies."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
@@ -29,10 +29,17 @@ tags:
   - well-architected-framework
   - google-cloud
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "00-fde-field-readiness-and-grading-rubric"
 source_doc_id: "cloud-fde-grading-rubric-g3doc"
-content_sha256: "56f5e0e05267fcad55541a1af64cbb0e38776918d8ee2278a3447e1dc0197856"
+content_sha256: "c9ec560df89302f73e6c089cf014ff14540decf2409e31b34a8fe930afb053da"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Google Cloud FDE Field-Readiness & Project Grading Rubric (Mandatory Governance Standard)
@@ -190,3 +197,94 @@ To achieve **`2 - Competent`** or **`3 - Proficient`** on **Part A.1 (Strategic 
 | **Healthcare & Life Sciences** | **Cymbal Health, Aurora Diagnostics & Global HealthTech** | Out-of-network appointment booking, clinical decision support, and prescription refills exposed to indirect prompt injection and HIPAA PHI leakage. | Inline **Model Armor** + **Cloud DLP (SDP)** templates scanning both user prompts and RAG/tool outputs, isolated `AgentSandbox` code execution, and SME-calibrated medical rubrics (κ ≥ 0.80). | [01](/concepts/01-ai-agent-quality-engineering.md), [02](/concepts/02-vibe-coding-agent-security-evaluation-kb.md), [25](/concepts/25-evaluate-generative-agentic-systems.md), [33](/concepts/33-model-armor-securing-ai-deployments.md) |
 | **Omnichannel Retail & E-Commerce** | **Meridian Retail ("ShopMate"), Cymbal Athletic Shoes & Home Improvement Retailer** | High-volume (10M queries/mo) order support and project estimation suffering from 35-tool prompt bloat, hallucinated SKUs, and 30s proxy timeouts. | Progressive Skill Disclosure (`SKILL.md` + `McpToolset` `tool_filter`), Tiered Gemini Flash/Pro routing, Context Caching, and 3–5 min SSE streaming load-balancer timeouts. | [07](/concepts/07-enterprise-agent-skills.md), [14](/concepts/14-agent-skills.md), [18](/concepts/18-agent-tools-interoperability-with-mcp.md), [29](/concepts/29-deploy-the-gemini-enterprise-app.md) |
 | **Global Logistics & Telecom** | **Multinational Freight Dispatch & Telecom B2B Billing** | Autonomous fleet routing and multi-departmental billing experiencing skill trigger collisions, tool API outages, and shadow MCP sprawl. | **Agent Registry** (`VETTED` admission control), **Agent Gateway** circuit breakers & egress policies, actionable tool error messages for self-healing, and progressive deployment rings. | [05](/concepts/05-enterprise-ai-agent-systems-google-cloud.md), [07](/concepts/07-enterprise-agent-skills.md), [32](/concepts/32-plan-change-management-for-gemini-enterprise-agents.md), [35](/concepts/35-govern-agents-with-agent-gateway-registry-policies.md) |
+
+
+---
+
+## Multi-Agent Tokenomics, User-Grilling & Inter-Agent Grilling Grading Addendum (`Concepts 36–43` / `OKF-L400-O7`)
+
+All multi-agent systems where agents grill the user in chatbot scenarios (`Concept 37`) or grill each other in critic/verification/debate loops (`Concepts 38–42`) are additionally evaluated on the following mandatory FDE competencies:
+
+| Competency | `0 — Absent (PAUSE)` | `1 — Awareness` | `2 — Competent (Pass)` | `3 — Proficient (Exemplar)` |
+|---|---|---|---|---|
+| **Tokenomics Production & Shadow Pricing (`Concept 36`)** | Uses raw prompt length; ignores hidden reasoning ($T_H$), price asymmetry ($\rho = p_O/p_I$), and human labor ($w \cdot L$). | Tracks nominal input/output prices ($p_I, p_O$) only. | Decomposes $T_{\text{tot}} = T_I + T_C + T_R + T_O + T_H + M_{\text{comm}}$ and models micro/meso/macro shadow prices ($\tilde{P}$). | Optimizes Nested CES factor substitution ($K, M, L$) and 75–90% prefix context caching ($p_C$). |
+| **Agent-to-User Chatbot Grilling (`Concept 37`)** | Blindly executes on ambiguous prompts ($u_j \gg 1$) or interrogates users across serial turns without checking memory. | Asks unranked clarifying questions without a stopping rule. | Checks Episodic Memory / RAG first, enforces the EVPI stopping rule ($-\Delta \mathbb{E}[C_{\text{MAS}}] > \tilde{P}_{\text{grill}} T_{\text{grill}} + w \cdot \tau_{\text{user}}$), and bundles top-$k$ questions with defaults first. | Dynamically calibrates uncertainty elasticity ($\gamma > 1$) and compresses grilling transcripts into a compact typed `TaskSpec`. |
+| **Inter-Agent Grilling, DAG Adjoints & Security (`Concepts 38–43`)** | Runs dense $O(|V|^2)$ all-to-all prose debate with no loop stop-loss or LLM self-estimated budgets ($r \le 0.39$). | Caps agent count arbitrarily without similarity gating or adjoint allocation. | Enforces Coasian boundary ($N^*$), $S^2$-MAD similarity filtering, CodeAgents YAML critiques, Adjoint DAG allocation ($\mu_w$), `RCR-Router` memory gates, and `CoRL` stop-loss cutoffs. | Combines `DebateOCR`/`LatentMAS` (70–84% savings), `TokenDance`/`KVComm` KV sharing, and joint security budgeting ($C_{\text{defense}}(\pi) + \mathbb{E}[L_{\text{attack}}]$) against sponge attacks. |
+
+
+---
+
+## Multi-Agent Tokenomics, User-Grilling & Inter-Agent Grilling Grading Addendum (`Concepts 36–43` / `OKF-L400-O7`)
+
+All multi-agent systems where agents grill the user in chatbot scenarios (`Concept 37`) or grill each other in critic/verification/debate loops (`Concepts 38–42`) are additionally evaluated on the following mandatory FDE competencies:
+
+| Competency | `0 — Absent (PAUSE)` | `1 — Awareness` | `2 — Competent (Pass)` | `3 — Proficient (Exemplar)` |
+|---|---|---|---|---|
+| **Tokenomics Production & Shadow Pricing (`Concept 36`)** | Uses raw prompt length; ignores hidden reasoning ($T_H$), price asymmetry ($\rho = p_O/p_I$), and human labor ($w \cdot L$). | Tracks nominal input/output prices ($p_I, p_O$) only. | Decomposes $T_{\text{tot}} = T_I + T_C + T_R + T_O + T_H + M_{\text{comm}}$ and models micro/meso/macro shadow prices ($\tilde{P}$). | Optimizes Nested CES factor substitution ($K, M, L$) and 75–90% prefix context caching ($p_C$). |
+| **Agent-to-User Chatbot Grilling (`Concept 37`)** | Blindly executes on ambiguous prompts ($u_j \gg 1$) or interrogates users across serial turns without checking memory. | Asks unranked clarifying questions without a stopping rule. | Checks Episodic Memory / RAG first, enforces the EVPI stopping rule ($-\Delta \mathbb{E}[C_{\text{MAS}}] > \tilde{P}_{\text{grill}} T_{\text{grill}} + w \cdot \tau_{\text{user}}$), and bundles top-$k$ questions with defaults first. | Dynamically calibrates uncertainty elasticity ($\gamma > 1$) and compresses grilling transcripts into a compact typed `TaskSpec`. |
+| **Inter-Agent Grilling, DAG Adjoints & Security (`Concepts 38–43`)** | Runs dense $O(|V|^2)$ all-to-all prose debate with no loop stop-loss or LLM self-estimated budgets ($r \le 0.39$). | Caps agent count arbitrarily without similarity gating or adjoint allocation. | Enforces Coasian boundary ($N^*$), $S^2$-MAD similarity filtering, CodeAgents YAML critiques, Adjoint DAG allocation ($\mu_w$), `RCR-Router` memory gates, and `CoRL` stop-loss cutoffs. | Combines `DebateOCR`/`LatentMAS` (70–84% savings), `TokenDance`/`KVComm` KV sharing, and joint security budgeting ($C_{\text{defense}}(\pi) + \mathbb{E}[L_{\text{attack}}]$) against sponge attacks. |
+
+
+---
+
+## Multi-Agent Tokenomics, User-Grilling & Inter-Agent Grilling Grading Addendum (`Concepts 36–43` / `OKF-L400-O7`)
+
+All multi-agent systems where agents grill the user in chatbot scenarios (`Concept 37`) or grill each other in critic/verification/debate loops (`Concepts 38–42`) are additionally evaluated on the following mandatory FDE competencies:
+
+| Competency | `0 — Absent (PAUSE)` | `1 — Awareness` | `2 — Competent (Pass)` | `3 — Proficient (Exemplar)` |
+|---|---|---|---|---|
+| **Tokenomics Production & Shadow Pricing (`Concept 36`)** | Uses raw prompt length; ignores hidden reasoning ($T_H$), price asymmetry ($\rho = p_O/p_I$), and human labor ($w \cdot L$). | Tracks nominal input/output prices ($p_I, p_O$) only. | Decomposes $T_{\text{tot}} = T_I + T_C + T_R + T_O + T_H + M_{\text{comm}}$ and models micro/meso/macro shadow prices ($\tilde{P}$). | Optimizes Nested CES factor substitution ($K, M, L$) and 75–90% prefix context caching ($p_C$). |
+| **Agent-to-User Chatbot Grilling (`Concept 37`)** | Blindly executes on ambiguous prompts ($u_j \gg 1$) or interrogates users across serial turns without checking memory. | Asks unranked clarifying questions without a stopping rule. | Checks Episodic Memory / RAG first, enforces the EVPI stopping rule ($-\Delta \mathbb{E}[C_{\text{MAS}}] > \tilde{P}_{\text{grill}} T_{\text{grill}} + w \cdot \tau_{\text{user}}$), and bundles top-$k$ questions with defaults first. | Dynamically calibrates uncertainty elasticity ($\gamma > 1$) and compresses grilling transcripts into a compact typed `TaskSpec`. |
+| **Inter-Agent Grilling, DAG Adjoints & Security (`Concepts 38–43`)** | Runs dense $O(|V|^2)$ all-to-all prose debate with no loop stop-loss or LLM self-estimated budgets ($r \le 0.39$). | Caps agent count arbitrarily without similarity gating or adjoint allocation. | Enforces Coasian boundary ($N^*$), $S^2$-MAD similarity filtering, CodeAgents YAML critiques, Adjoint DAG allocation ($\mu_w$), `RCR-Router` memory gates, and `CoRL` stop-loss cutoffs. | Combines `DebateOCR`/`LatentMAS` (70–84% savings), `TokenDance`/`KVComm` KV sharing, and joint security budgeting ($C_{\text{defense}}(\pi) + \mathbb{E}[L_{\text{attack}}]$) against sponge attacks. |
+
+
+---
+
+## Multi-Agent Tokenomics, User-Grilling & Inter-Agent Grilling Grading Addendum (`Concepts 36–43` / `OKF-L400-O7`)
+
+All multi-agent systems where agents grill the user in chatbot scenarios (`Concept 37`) or grill each other in critic/verification/debate loops (`Concepts 38–42`) are additionally evaluated on the following mandatory FDE competencies:
+
+| Competency | `0 — Absent (PAUSE)` | `1 — Awareness` | `2 — Competent (Pass)` | `3 — Proficient (Exemplar)` |
+|---|---|---|---|---|
+| **Tokenomics Production & Shadow Pricing (`Concept 36`)** | Uses raw prompt length; ignores hidden reasoning ($T_H$), price asymmetry ($\rho = p_O/p_I$), and human labor ($w \cdot L$). | Tracks nominal input/output prices ($p_I, p_O$) only. | Decomposes $T_{\text{tot}} = T_I + T_C + T_R + T_O + T_H + M_{\text{comm}}$ and models micro/meso/macro shadow prices ($\tilde{P}$). | Optimizes Nested CES factor substitution ($K, M, L$) and 75–90% prefix context caching ($p_C$). |
+| **Agent-to-User Chatbot Grilling (`Concept 37`)** | Blindly executes on ambiguous prompts ($u_j \gg 1$) or interrogates users across serial turns without checking memory. | Asks unranked clarifying questions without a stopping rule. | Checks Episodic Memory / RAG first, enforces the EVPI stopping rule ($-\Delta \mathbb{E}[C_{\text{MAS}}] > \tilde{P}_{\text{grill}} T_{\text{grill}} + w \cdot \tau_{\text{user}}$), and bundles top-$k$ questions with defaults first. | Dynamically calibrates uncertainty elasticity ($\gamma > 1$) and compresses grilling transcripts into a compact typed `TaskSpec`. |
+| **Inter-Agent Grilling, DAG Adjoints & Security (`Concepts 38–43`)** | Runs dense $O(|V|^2)$ all-to-all prose debate with no loop stop-loss or LLM self-estimated budgets ($r \le 0.39$). | Caps agent count arbitrarily without similarity gating or adjoint allocation. | Enforces Coasian boundary ($N^*$), $S^2$-MAD similarity filtering, CodeAgents YAML critiques, Adjoint DAG allocation ($\mu_w$), `RCR-Router` memory gates, and `CoRL` stop-loss cutoffs. | Combines `DebateOCR`/`LatentMAS` (70–84% savings), `TokenDance`/`KVComm` KV sharing, and joint security budgeting ($C_{\text{defense}}(\pi) + \mathbb{E}[L_{\text{attack}}]$) against sponge attacks. |
+
+
+---
+
+## Multi-Agent Tokenomics, User-Grilling & Inter-Agent Grilling Grading Addendum (`Concepts 36–43` / `OKF-L400-O7`)
+
+All multi-agent systems where agents grill the user in chatbot scenarios (`Concept 37`) or grill each other in critic/verification/debate loops (`Concepts 38–42`) are additionally evaluated on the following mandatory FDE competencies:
+
+| Competency | `0 — Absent (PAUSE)` | `1 — Awareness` | `2 — Competent (Pass)` | `3 — Proficient (Exemplar)` |
+|---|---|---|---|---|
+| **Tokenomics Production & Shadow Pricing (`Concept 36`)** | Uses raw prompt length; ignores hidden reasoning ($T_H$), price asymmetry ($\rho = p_O/p_I$), and human labor ($w \cdot L$). | Tracks nominal input/output prices ($p_I, p_O$) only. | Decomposes $T_{\text{tot}} = T_I + T_C + T_R + T_O + T_H + M_{\text{comm}}$ and models micro/meso/macro shadow prices ($\tilde{P}$). | Optimizes Nested CES factor substitution ($K, M, L$) and 75–90% prefix context caching ($p_C$). |
+| **Agent-to-User Chatbot Grilling (`Concept 37`)** | Blindly executes on ambiguous prompts ($u_j \gg 1$) or interrogates users across serial turns without checking memory. | Asks unranked clarifying questions without a stopping rule. | Checks Episodic Memory / RAG first, enforces the EVPI stopping rule ($-\Delta \mathbb{E}[C_{\text{MAS}}] > \tilde{P}_{\text{grill}} T_{\text{grill}} + w \cdot \tau_{\text{user}}$), and bundles top-$k$ questions with defaults first. | Dynamically calibrates uncertainty elasticity ($\gamma > 1$) and compresses grilling transcripts into a compact typed `TaskSpec`. |
+| **Inter-Agent Grilling, DAG Adjoints & Security (`Concepts 38–43`)** | Runs dense $O(|V|^2)$ all-to-all prose debate with no loop stop-loss or LLM self-estimated budgets ($r \le 0.39$). | Caps agent count arbitrarily without similarity gating or adjoint allocation. | Enforces Coasian boundary ($N^*$), $S^2$-MAD similarity filtering, CodeAgents YAML critiques, Adjoint DAG allocation ($\mu_w$), `RCR-Router` memory gates, and `CoRL` stop-loss cutoffs. | Combines `DebateOCR`/`LatentMAS` (70–84% savings), `TokenDance`/`KVComm` KV sharing, and joint security budgeting ($C_{\text{defense}}(\pi) + \mathbb{E}[L_{\text{attack}}]$) against sponge attacks. |
+
+
+---
+
+## Multi-Agent Tokenomics, User-Grilling & Inter-Agent Grilling Grading Addendum (`Concepts 36–43` / `OKF-L400-O7`)
+
+All multi-agent systems where agents grill the user in chatbot scenarios (`Concept 37`) or grill each other in critic/verification/debate loops (`Concepts 38–42`) are additionally evaluated on the following mandatory FDE competencies:
+
+| Competency | `0 — Absent (PAUSE)` | `1 — Awareness` | `2 — Competent (Pass)` | `3 — Proficient (Exemplar)` |
+|---|---|---|---|---|
+| **Tokenomics Production & Shadow Pricing (`Concept 36`)** | Uses raw prompt length; ignores hidden reasoning ($T_H$), price asymmetry ($\rho = p_O/p_I$), and human labor ($w \cdot L$). | Tracks nominal input/output prices ($p_I, p_O$) only. | Decomposes $T_{\text{tot}} = T_I + T_C + T_R + T_O + T_H + M_{\text{comm}}$ and models micro/meso/macro shadow prices ($\tilde{P}$). | Optimizes Nested CES factor substitution ($K, M, L$) and 75–90% prefix context caching ($p_C$). |
+| **Agent-to-User Chatbot Grilling (`Concept 37`)** | Blindly executes on ambiguous prompts ($u_j \gg 1$) or interrogates users across serial turns without checking memory. | Asks unranked clarifying questions without a stopping rule. | Checks Episodic Memory / RAG first, enforces the EVPI stopping rule ($-\Delta \mathbb{E}[C_{\text{MAS}}] > \tilde{P}_{\text{grill}} T_{\text{grill}} + w \cdot \tau_{\text{user}}$), and bundles top-$k$ questions with defaults first. | Dynamically calibrates uncertainty elasticity ($\gamma > 1$) and compresses grilling transcripts into a compact typed `TaskSpec`. |
+| **Inter-Agent Grilling, DAG Adjoints & Security (`Concepts 38–43`)** | Runs dense $O(|V|^2)$ all-to-all prose debate with no loop stop-loss or LLM self-estimated budgets ($r \le 0.39$). | Caps agent count arbitrarily without similarity gating or adjoint allocation. | Enforces Coasian boundary ($N^*$), $S^2$-MAD similarity filtering, CodeAgents YAML critiques, Adjoint DAG allocation ($\mu_w$), `RCR-Router` memory gates, and `CoRL` stop-loss cutoffs. | Combines `DebateOCR`/`LatentMAS` (70–84% savings), `TokenDance`/`KVComm` KV sharing, and joint security budgeting ($C_{\text{defense}}(\pi) + \mathbb{E}[L_{\text{attack}}]$) against sponge attacks. |
+
+
+---
+
+## Multi-Agent Tokenomics, User-Grilling & Inter-Agent Grilling Grading Addendum (`Concepts 36–43` / `OKF-L400-O7`)
+
+All multi-agent systems where agents grill the user in chatbot scenarios (`Concept 37`) or grill each other in critic/verification/debate loops (`Concepts 38–42`) are additionally evaluated on the following mandatory FDE competencies:
+
+| Competency | `0 — Absent (PAUSE)` | `1 — Awareness` | `2 — Competent (Pass)` | `3 — Proficient (Exemplar)` |
+|---|---|---|---|---|
+| **Tokenomics Production & Shadow Pricing (`Concept 36`)** | Uses raw prompt length; ignores hidden reasoning ($T_H$), price asymmetry ($\rho = p_O/p_I$), and human labor ($w \cdot L$). | Tracks nominal input/output prices ($p_I, p_O$) only. | Decomposes $T_{\text{tot}} = T_I + T_C + T_R + T_O + T_H + M_{\text{comm}}$ and models micro/meso/macro shadow prices ($\tilde{P}$). | Optimizes Nested CES factor substitution ($K, M, L$) and 75–90% prefix context caching ($p_C$). |
+| **Agent-to-User Chatbot Grilling (`Concept 37`)** | Blindly executes on ambiguous prompts ($u_j \gg 1$) or interrogates users across serial turns without checking memory. | Asks unranked clarifying questions without a stopping rule. | Checks Episodic Memory / RAG first, enforces the EVPI stopping rule ($-\Delta \mathbb{E}[C_{\text{MAS}}] > \tilde{P}_{\text{grill}} T_{\text{grill}} + w \cdot \tau_{\text{user}}$), and bundles top-$k$ questions with defaults first. | Dynamically calibrates uncertainty elasticity ($\gamma > 1$) and compresses grilling transcripts into a compact typed `TaskSpec`. |
+| **Inter-Agent Grilling, DAG Adjoints & Security (`Concepts 38–43`)** | Runs dense $O(|V|^2)$ all-to-all prose debate with no loop stop-loss or LLM self-estimated budgets ($r \le 0.39$). | Caps agent count arbitrarily without similarity gating or adjoint allocation. | Enforces Coasian boundary ($N^*$), $S^2$-MAD similarity filtering, CodeAgents YAML critiques, Adjoint DAG allocation ($\mu_w$), `RCR-Router` memory gates, and `CoRL` stop-loss cutoffs. | Combines `DebateOCR`/`LatentMAS` (70–84% savings), `TokenDance`/`KVComm` KV sharing, and joint security budgeting ($C_{\text{defense}}(\pi) + \mathbb{E}[L_{\text{attack}}]$) against sponge attacks. |

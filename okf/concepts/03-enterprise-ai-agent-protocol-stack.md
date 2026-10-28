@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: The Open AI Agent Protocol Stack on Google Cloud (MCP · A2A · UCP · AP2/x402 · A2UI · AG-UI)"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: The Open AI Agent Protocol Stack on Google Cloud (MCP · A2A · UCP · AP2/x402 · A2UI · AG-UI)”."
-timestamp: "2026-09-30T00:56:12Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T00:56:12+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1f_JXAmSvkJRK2xQmHj9DmCaZwLOWJ_1u88wQ1j9spWY/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - enterprise-architecture
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "03-enterprise-ai-agent-protocol-stack"
 source_doc_id: "1f_JXAmSvkJRK2xQmHj9DmCaZwLOWJ_1u88wQ1j9spWY"
-content_sha256: "42ef3f005f3e50696ea924837c56328497643b60c8f606068bf82e9ca671949b"
+content_sha256: "954bef9554220639917029a58e146bd70ec179f824429d0cc078f0ad97a3f04e"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: The Open AI Agent Protocol Stack on Google Cloud (MCP · A2A · UCP · AP2/x402 · A2UI · AG-UI)

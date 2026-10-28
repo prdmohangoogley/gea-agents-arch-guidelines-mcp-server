@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Context Engineering — Sessions, Memory"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Context Engineering — Sessions, Memory”."
-timestamp: "2026-09-20T23:06:41Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-19T23:06:41+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/12QmL1MQmbkNLZShKdVoS_64eQxH34qreHCmN-rMGUCs/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "20-context-engineering-sessions-memory"
 source_doc_id: "12QmL1MQmbkNLZShKdVoS_64eQxH34qreHCmN-rMGUCs"
-content_sha256: "6a55f6b72888afb40e86250fd972fa0c5fc4c9d5601d26a19ab6668cc20d6693"
+content_sha256: "d4f224bf8ae85326cdbdb66b2da7037bdc3fea5159ee6826df717fc6f736bcaa"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Context Engineering — Sessions, Memory

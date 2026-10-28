@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Securing AI and Agentic Deployments with Google Cloud Model Armor"
 description: "Comprehensive security architecture for protecting LLM and multi-agent deployments against prompt injection, jailbreaks, sensitive data leakage (SDP/DLP), malicious URLs, and indirect tool-output poisoning using Google Cloud Model Armor."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/prepare_and_deliver_gemini_deployments_model_armor_securing_ai_deployments.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "33-model-armor-securing-ai-deployments"
 source_doc_id: "prepare_and_deliver_gemini_deployments_model_armor_securing_ai_deployments"
-content_sha256: "4dca89193c86a019d588122a0729f78a3f25ec071418bcc73dc1423b3cc92a74"
+content_sha256: "6a2c6c709a47f5e390e84c89689f0e0107be63bbd3ce6c6bbd1be9dd4bab7187"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Securing AI and Agentic Deployments with Google Cloud Model Armor

@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Hill Climbing and Continuous Quality Optimization for Agentic Systems"
 description: "Systematic engineering methodology for iterative hill-climbing optimization of enterprise agentic systems across prompts, tool definitions, retrieval pipelines, orchestration topologies, and model routing."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/agent_evaluation_and_hill_climbing_hill_climb_and_agentic_systems.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "26-hill-climbing-agentic-systems"
 source_doc_id: "agent_evaluation_and_hill_climbing_hill_climb_and_agentic_systems"
-content_sha256: "afd961212dfa0d35813f20368aa4f729066bf6294bafc82413bd378fdc0e5c22"
+content_sha256: "634e058cff54168fe9cac1842624cab66f44889c0e08026018e1452d91710c8e"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Hill Climbing and Continuous Quality Optimization for Agentic Systems

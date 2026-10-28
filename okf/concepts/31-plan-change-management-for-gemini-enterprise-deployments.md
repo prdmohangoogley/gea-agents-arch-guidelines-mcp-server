@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Organizational Change Management for Gemini Enterprise Deployments"
 description: "Enterprise adoption, governance, and organizational change management (OCM) framework for rolling out Gemini Enterprise across business units, establishing AI Centers of Excellence (CoE), champion networks, and value-realization telemetry."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_deployments.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "31-plan-change-management-for-gemini-enterprise-deployments"
 source_doc_id: "prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_deployments"
-content_sha256: "15314780318ca4dde335a9f914997a1bc1fb262c272cda7d5369e569843f2b05"
+content_sha256: "ff4b2afbed0693063d30b7aaf4e625d08232ee4b6f7a374aad4cfdb0bcd7506f"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Organizational Change Management for Gemini Enterprise Deployments

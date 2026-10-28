@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Build and Deploy Multi-Agent ADK Systems to Gemini Enterprise"
 description: "Architectural blueprint and best practices for designing, orchestrating, testing, and deploying multi-agent systems with Google Agent Development Kit (ADK), MCP tools, graph-based workflows, and Vertex AI Agent Runtime on Gemini Enterprise."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/build_and_deploy_multi-agent_adk_systems_to_gemini_enterprise.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "21-build-and-deploy-multi-agent-adk-systems"
 source_doc_id: "build_and_deploy_multi-agent_adk_systems_to_gemini_enterprise"
-content_sha256: "eb18f02f9f686cb42a4dcd53b53be2fb2946921fc667d4b18a91308530889cdc"
+content_sha256: "7f8d3376bc9fe97cbea826545fbf01abc81c66a872363e73285cc3c561ffd337"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Build and Deploy Multi-Agent ADK Systems to Gemini Enterprise

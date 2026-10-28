@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Third-Party Identity Provider Integration with Workforce Identity Federation"
 description: "Security and identity architecture for integrating third-party enterprise IdPs (Okta, Microsoft Entra ID, PingFederate) with Gemini Enterprise using Google Cloud Workforce Identity Federation (WIF), SAML 2.0 / OIDC, CEL attribute mappings, and SCIM provisioning."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/prepare_deliver_gemini_deployments_third_party_identity_provider_with_workforce_identity_federation.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - gemini-enterprise
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "30-third-party-idp-with-workforce-identity-federation"
 source_doc_id: "prepare_deliver_gemini_deployments_third_party_identity_provider_with_workforce_identity_federation"
-content_sha256: "40f7a1f10c180990687522a5c1642f5a49962b1fc926628a53c9ac5a3ce89354"
+content_sha256: "24a20dda4a9d78ef0768044c84a2e5a12072ad118cec9621aad5abd01e0c5c49"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Third-Party Identity Provider Integration with Workforce Identity Federation

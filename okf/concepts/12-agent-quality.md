@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Agent Quality"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Quality”."
-timestamp: "2026-09-25T18:53:05Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-24T18:53:05+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1FU_Ot69f5lQfDk85fJ4XYaRg6ZC_GvCrLZMZRumRB98/edit"
 generated:
@@ -28,10 +28,17 @@ tags:
   - trajectory-evaluation
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "12-agent-quality"
 source_doc_id: "1FU_Ot69f5lQfDk85fJ4XYaRg6ZC_GvCrLZMZRumRB98"
-content_sha256: "f5104daf383d396fb583c1a5de6dbad9d699c5534810574f5d5fde972a34c0ea"
+content_sha256: "3876e29a2513afccb04c9491ae44c72e9bfe8093ac4fc2cc5b1d43b06b79bb56"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Agent Quality

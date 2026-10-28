@@ -1,6 +1,6 @@
 # Spec: OKF v0.2 Cloud Storage Bundle & Knowledge Catalog Update (`okf-gcs-update-spec.md`)
 
-**Status:** ACTIVE (Living Cumulative Specification — v4.0)  
+**Status:** ACTIVE (Living Cumulative Specification — v5.0)  
 **Target Repository:** [`https://github.com/prdmohangoogley/gea-agents-arch-guidelines-mcp-server`](https://github.com/prdmohangoogley/gea-agents-arch-guidelines-mcp-server)  
 **Canonical Repo Path:** `docs/specs/okf-gcs-update-spec.md` (mirrored at `specs/okf-gcs-update-spec.md`)  
 **Executable Update Script:** `scripts/update_okf_gcs.sh`  
@@ -20,6 +20,7 @@
 > 2. **Cumulative In-Place Evolution (Never Fork Specs):** Any future specification that adds new OKF concepts (e.g., L400 concepts, vertical industry packs, new FDE rubric criteria, or MCP tool updates) **MUST modify and save this exact file in place** as an incremental revision rather than creating disconnected one-off spec files.
 > 3. **Append to the Revision Ledger:** Every update to this specification **must** append a new row to **Section 1 (Cumulative Spec Revision Ledger)**, update the concept inventory in **Section 3**, and keep `scripts/update_okf_gcs.sh` and `iac/` backward-compatible and idempotent.
 > 4. **Preserve Version & TTL Semantics Unless Explicitly Rotated:** Unless the user explicitly commands a version tag rotation, all updates must preserve the active `version_tag` (`GEAPL200_2026-09-30_124746`) and 180-day `stale_after` TTL semantics so downstream graph edges and Dataplex entries are not needlessly invalidated.
+> 5. **Strict Flat Hierarchy Rule:** All OKF concept markdown files MUST reside strictly flat inside `okf/concepts/*.md` (locally and in GCS at `gs://.../okf/concepts/`). Subdirectories (such as `okf/L400_concepts/`) are strictly forbidden across the MCP server, skills registry, and tools.
 
 ---
 
@@ -31,6 +32,8 @@
 | **v2.0** | `2026-10-26` | `gemini-enterprise:okf-synthesizer` | `GEAPL200_2026-09-30_124746` *(preserved)* | `36` | Merged existing 20 L200 concepts (`01`–`20`) with 15 GEAP L300 concepts (`21`–`35`) and standalone **Google Cloud FDE Field-Readiness & Project Grading Rubric** (`00-fde-field-readiness-and-grading-rubric.md`). Injected enforceable FDE Rubric (Part A & Part B) and prevailing customer exemplars into all 36 concepts; added `scripts/update_okf_gcs.sh` and Terraform execution harness. |
 | **v3.0** | `2026-10-27` | `gemini-enterprise:okf-synthesizer` | `GEAPL200_2026-09-30_124746` *(00..35 preserved)* / `L400_version_20261026_0350` *(36..57)* | `58` | Cumulative expansion merging 22 GEAP L400 concepts (`36`–`57`, Architecture A1..A5, Agents B1..B3, Governance G1..G3, Optimization O1..O6, and Synthesis 18..21) into the canonical OKF v0.2 bundle. Injected FDE Rubric enforcement, updated bundle descriptors (875 Mermaid diagrams, 1,533 tables, 4 figures), generated 58 Dataplex catalog aspect payloads, and updated GCS sync orchestrators. |
 | **v4.0** | `2026-10-27` | `gemini-enterprise:arch-spec-lead` | `GEAPL200_2026-09-30_124746` *(preserved)* | `58` | Established modular expansion specification suite: (a) Spanner Graph & BigQuery Graph Propagation (`spanner-bq-graph-sync-spec.md`), (b) MCP Server Best Practices & Skills Registry Audit (`mcp-server-best-practices-audit-spec.md`), (c) Gemini Enterprise Deployment & E2E Testing (`mcp-gemini-enterprise-deployment-spec.md`), (d) Autonomous OKF Evolution Tools & Antigravity Skill (`okf-auto-evolution-tools-spec.md`), and (e) FDE Charter Search & Governance Skill (`fde-charter-governance-skill-spec.md`). |
+| **v4.1** | `2026-10-27` | `gemini-enterprise:okf-synthesizer` | `GEAPL200_2026-10-27_183500` *(active)* | `81` | Synchronized 3 specialized research & architecture packs into Cloud Storage (`gs://gea_agent_development_architectural_best_practices_1790796607/okf`): (1) Socratic Grilling & Prompting (`36-socratic-...`..`41-socratic-...`, S0..S6, 8 PDFs), (2) Multi-Agent Tokenomics & Grilling (`36-foundations-...`..`43-master-...`, O7, 2 PDFs), and (3) Context, Cache & Memory (`36-agentic-...`..`44-fde-...`, 6 PDFs). Total GCS concepts reached 81 files with 16 grounded research PDFs and 24 L400 modules, preserving 180-day TTL policies. |
+| **v5.0** | `2026-10-27` | `gemini-enterprise:okf-synthesizer` | `GEAPL200_2026-09-30_124746` *(preserved)* | `83` | **Strict Flat Architectural Unification:** Completely purged all `L400_concepts/` subdirectories locally and in GCS. Unified all 83 concepts flat under `okf/concepts/*.md` (00..35 base + 24 L400 modules + 7 Socratic + 8 Tokenomics + 9 Context Engineering/Memory), including missing modules O7 (`58-l400-o7-...`) and S0 (`59-l400-s0-...`). Regenerated flat `bundle.json`, `MANIFEST.json` (83 documents, 928 Mermaid diagrams, 1,767 GFM tables, 5 retained figures), and 83-row `index.md`. Synced flat corpus to GCS. |
 
 ---
 
@@ -40,20 +43,20 @@
 flowchart TB
     subgraph Repo ["GitHub Repo: gea-agents-arch-guidelines-mcp-server"]
         Spec["Living Spec<br/>docs/specs/okf-gcs-update-spec.md"]
-        Bundle["Local OKF v0.2 Bundle<br/>okf/ (58 Concepts, index.md, log.md,<br/>bundle.json, MANIFEST.json, img/)"]
+        Bundle["Local OKF v0.2 Bundle<br/>okf/ (83 Flat Concepts in okf/concepts/, index.md, log.md,<br/>bundle.json, MANIFEST.json, img/)"]
         Script["Cloud Shell / CLI Orchestrator<br/>scripts/update_okf_gcs.sh"]
         TF["Terraform IaC<br/>iac/ (main.tf, modules/gcs)"]
     end
 
     subgraph Gates ["Pre-Flight & Structural Verification Gates"]
-        QA["1. OKF Structural & FDE Rubric QA<br/>• 58 Concepts (00..57) present<br/>• SHA-256 content_sha256 match<br/>• FDE Rubric Section & Concept 00 link verified"]
+        QA["1. OKF Structural & FDE Rubric QA<br/>• 83 Concepts flat in okf/concepts/<br/>• Zero L400_concepts subfolders<br/>• SHA-256 content_sha256 match<br/>• FDE Rubric Section & Concept 00 link verified"]
         Auth["2. Cloud Shell / GCP Preflight<br/>• gcloud auth & Project Number (301802433103)<br/>• Bucket Versioning & Lifecycle Check"]
     end
 
     subgraph GCP ["Google Cloud Platform (fivedaysai-prd-sandbox-317383)"]
-        GCS[("Cloud Storage Bucket<br/>gs://gea_agent_development_architectural_best_practices_1790796607/okf<br/>(Object Versioning ON, Uniform Access)")]
+        GCS[("Cloud Storage Bucket<br/>gs://gea_agent_development_architectural_best_practices_1790796607/okf<br/>(Object Versioning ON, Uniform Access, Flat okf/concepts/)")]
         CRC["3. Post-Upload CRC32C Verification<br/>scripts/crc32c_verify.py"]
-        Catalog["4. GCP Knowledge Catalog (Dataplex)<br/>EntryGroup: geapl200-architecture-kb<br/>AspectType: okf (58 Entries)"]
+        Catalog["4. GCP Knowledge Catalog (Dataplex)<br/>EntryGroup: geapl200-architecture-kb<br/>AspectType: okf (83 Entries)"]
         NL2KG["5. Optional NL2KG Downstream Sync<br/>Spanner Graph (arch_guidelines_graph) &<br/>BigQuery (gea_arch_guidelines_analytics)"]
     end
 
@@ -71,19 +74,21 @@ flowchart TB
 
 ---
 
-## 3. Unified OKF v0.2 Bundle Specification (`58 Concepts`)
+## 3. Unified OKF v0.2 Bundle Specification (`83 Concepts Flat`)
 
-The unified OKF v0.2 bundle staged in the repository (`okf/`, `L300_concepts/`, and `L400_concepts/`) and synchronized to `gs://gea_agent_development_architectural_best_practices_1790796607/okf/` comprises:
+The unified OKF v0.2 bundle staged strictly flat in `okf/concepts/` and synchronized to `gs://gea_agent_development_architectural_best_practices_1790796607/okf/` comprises:
 
-- **`index.md` & `INDEX.md`:** Progressive-disclosure root index containing the standalone **Mandatory Governance: Google Cloud FDE Field-Readiness & Project Grading Rubric** section, domain taxonomy clusters, and the 58-concept freshness table.
-- **`log.md`:** Chronological changelog preserving the `2026-09-30` baseline publication, recording the `2026-10-26` L200 + L300 unification, and documenting the `2026-10-27` L400 cumulative integration.
-- **`bundle.json` & `MANIFEST.json`:** Machine-readable descriptors containing per-concept SHA-256 digests, tags, `stale_after` RFC3339 deadlines, and structural counts (**58 concepts**, **875 Mermaid diagrams**, **1,533 GFM pipe tables**, **4 retained PNG figures**).
+- **Strict Flat Topology:** Zero subdirectories inside `okf/concepts/` or `okf/`. All 83 concepts reside at `okf/concepts/*.md`.
+- **`index.md` & `INDEX.md`:** Progressive-disclosure root index containing the standalone **Mandatory Governance: Google Cloud FDE Field-Readiness & Project Grading Rubric** section, domain taxonomy clusters, and the complete 83-concept freshness table.
+- **`log.md`:** Chronological changelog preserving the baseline publication and recording v2.0 (L300), v3.0 (L400), v4.1 (Research Packs), and v5.0 (Flat Corpus Unification & L400 folder purge).
+- **`bundle.json` & `MANIFEST.json`:** Machine-readable descriptors containing per-concept SHA-256 digests, tags, `stale_after` RFC3339 deadlines, and structural counts (**83 concepts**, **928 Mermaid diagrams**, **1,767 GFM pipe tables**, **5 retained images**).
 - **`concepts/00-fde-field-readiness-and-grading-rubric.md`:** Standalone enforceable FDE Grading Rubric concept anchored to [`https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head`](https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head) (0–3 scale, Part A Advisory Rigor, Part B Engineering Excellence across 7 domains / 26 sub-competencies, `>= 2.0` pass cutline, zero `0` disqualifier pause rule, and cross-corpus customer exemplars).
-- **`concepts/01-*.md` to `concepts/20-*.md`:** The 20 preliminary `GEAPL200` concepts from the GCS bucket, preserving their exact original `source_modified` and `stale_after` timestamps while enriched with `## FDE Project Grading Rubric Enforcement & Prevailing Customer Alignment`.
-- **`concepts/21-*.md` to `concepts/35-*.md`:** The 15 `GEAP L300` concepts (ADK Multi-Agent Systems, Code Execution Sandbox, Context Persistence, Memory Bank Deep Dive, Generative/Agentic Evaluation, Hill Climbing, Model Upgrades, Cost/FinOps Optimization, Gemini Enterprise App Deployment, Workforce Identity Federation, Deployment Change Management, Agent Change Management, Model Armor, Securing Agents with PAB & Delegated OAuth, and Governing Agents with Agent Gateway & Agent Registry), each carrying full OKF v0.2 YAML frontmatter and `## FDE Project Grading Rubric Enforcement & Prevailing Customer Alignment`.
-- **`concepts/36-*.md` to `concepts/57-*.md`:** The 22 `GEAP L400` concepts (Master Knowledge Catalog Index, Architecture A1..A5, Agent Deep Dives B1..B3, Zero-Trust Governance G1..G3, Advanced Optimization O1..O6, and Synthesis Compendiums 18..21), each carrying version tag `L400_version_20261026_0350`, 180-day TTL `2027-04-26T00:00:00Z`, and `## FDE Project Grading Rubric Enforcement & Prevailing Customer Alignment`.
-- **`img/`:** Exact set of 4 retained PNG figures referenced by Concepts `14`, `15`, and `16` (zero unreferenced orphan images).
-- **`catalog-entries/*.json`:** 58 Dataplex Knowledge Catalog `okf` AspectType JSON payloads (`00-*.json` through `57-*.json`).
+- **`concepts/01-*.md` to `concepts/20-*.md`:** The 20 baseline `GEAPL200` concepts.
+- **`concepts/21-*.md` to `concepts/35-*.md`:** The 15 `GEAP L300` concepts.
+- **`concepts/36-*.md` to `concepts/44-*.md`:** Research-grounded packs (Socratic Prompting & Grilling, AI Tokenomics & Flow Optimization, Context Engineering & Cache Optimization).
+- **`concepts/36-l400-00-*.md` to `concepts/59-l400-s0-*.md`:** The complete set of 24 L400 modules fully flattened into `okf/concepts/`.
+- **`img/`:** Retained figures referenced across concepts.
+- **`catalog-entries/*.json`:** Dataplex Knowledge Catalog `okf` AspectType JSON payloads for catalog registration.
 
 ---
 

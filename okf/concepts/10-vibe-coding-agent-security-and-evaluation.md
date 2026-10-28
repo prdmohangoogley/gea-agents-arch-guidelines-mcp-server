@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Vibe Coding Agent Security and Evaluation"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Vibe Coding Agent Security and Evaluation”."
-timestamp: "2026-09-25T22:34:19Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-24T22:34:19+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1vOL-cvTVURqW_vXRq0nx8AhpCkbEyr7Eg6aAed8QZhA/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - supply-chain-security
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "10-vibe-coding-agent-security-and-evaluation"
 source_doc_id: "1vOL-cvTVURqW_vXRq0nx8AhpCkbEyr7Eg6aAed8QZhA"
-content_sha256: "a97443c09cb74f9ddc090dd4b5fe4335e6882c654246d1f20753828cfeb9e22d"
+content_sha256: "6d55b298a27548c60c36cc75747db7a8c9fb6fa981a5a4052436f4fa1519c88d"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Vibe Coding Agent Security and Evaluation

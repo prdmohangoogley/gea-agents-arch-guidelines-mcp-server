@@ -117,7 +117,7 @@ async def test_check_okf_freshness(mcp_app):
 
     data = res.structured_content or {}
     assert data.get("status") == "success"
-    assert data.get("total_concepts") == 58
+    assert data.get("total_concepts") == 83
     assert "freshness_index_percentage" in data
     assert "concepts" in data
 

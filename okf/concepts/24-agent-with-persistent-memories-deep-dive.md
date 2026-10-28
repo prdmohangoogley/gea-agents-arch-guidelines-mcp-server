@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Stateful Agents with Persistent Memories and Vertex AI Memory Bank"
 description: "Deep-dive architectural patterns for multi-agent session history isolation (Shared Unified vs. Separate Histories), context window token compaction, and automated memory lifecycle management using Vertex AI Memory Bank and ADK."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/agent_with_persistent_memories_2.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "24-agent-with-persistent-memories-deep-dive"
 source_doc_id: "agent_with_persistent_memories_2"
-content_sha256: "d25ef3bd2f89ffb92cb33a48d430f90b008186ec5b7366a65313c38eeb009e01"
+content_sha256: "c419f3369bfa2df3d940a40e83242aa533d3bc786abc0a10196d18fc82ac9bee"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Stateful Agents with Persistent Memories and Vertex AI Memory Bank

@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Agent Context Persistence, Sessions, and Memory Engineering"
 description: "Comprehensive architectural framework for overcoming LLM statelessness through Context Engineering, ADK Sessions (short-term working state), and Long-Term Memory consolidation on Gemini Enterprise Agent Platform."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/agent_context_persistence_and_memories.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "23-agent-context-persistence-and-memories"
 source_doc_id: "agent_context_persistence_and_memories"
-content_sha256: "8ade7318972b4aedfee2debe7a960a18c2fca10decca5710dc4466aea9334d77"
+content_sha256: "dddc42bc350ac5d2e7f4c7449af3730e2bd978086d852a2b597077d96195649b"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Agent Context Persistence, Sessions, and Memory Engineering

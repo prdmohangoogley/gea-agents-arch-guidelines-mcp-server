@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud”."
-timestamp: "2026-09-30T00:34:51Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T00:34:51+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1SjeHhPQvC-m88pQ3KLXXHGNTDDfgYLtXabMEqJhBxL0/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - durable-orchestration
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "06-agent-tools-mcp-multi-agent-orchestration"
 source_doc_id: "1SjeHhPQvC-m88pQ3KLXXHGNTDDfgYLtXabMEqJhBxL0"
-content_sha256: "24fc574688ec055a3a65a30b0f9ac8046c775a33487710f3c6dca64e408fbe35"
+content_sha256: "ab9ff28a401da1dbbb7053001df5cee5a68f8fe5b4ccb6f94e8a95d0bf25a4af"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud

@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Prototype to Production"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Prototype to Production”."
-timestamp: "2026-09-28T00:09:35Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-27T00:09:35+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1VU-Bgnp7fHb_3qrOamByEEI0vzctfnhGlW2a1ztmK2k/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "11-prototype-to-production"
 source_doc_id: "1VU-Bgnp7fHb_3qrOamByEEI0vzctfnhGlW2a1ztmK2k"
-content_sha256: "505dde76460ead3c6c61f5320c1f5669fa918f8be3c45d066147cbe76d07551f"
+content_sha256: "1fbde53b05c759089d0bee6231f83a70acbe14167184cd06e186ebc2139793f2"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Prototype to Production

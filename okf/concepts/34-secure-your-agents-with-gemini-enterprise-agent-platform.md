@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Securing Enterprise Agents with Gemini Enterprise Agent Platform"
 description: "Zero-Trust security architecture for enterprise agents on Gemini Enterprise Agent Platform, covering distinct Agent Identities (`principal://.../reasoningEngines/...`), Principal Access Boundaries (PAB), 3-legged OAuth delegated authority via Auth Manager, and runtime validation hooks."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/govern_secure_and_scale_the_agent_ecosystem_secure_your_agents With_gemini_enterprise_agent_platform.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "34-secure-your-agents-with-gemini-enterprise-agent-platform"
 source_doc_id: "govern_secure_and_scale_the_agent_ecosystem_secure_your_agents_With_gemini_enterprise_agent_platform"
-content_sha256: "dea29c0abf9c7968aff4a8132f7bdbe8c7a9429b777949d64befb3a50134fc45"
+content_sha256: "6cad0f774a23d3885d5c4227cd9d7296040ab9fff7410aadbf233392c967a41b"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Securing Enterprise Agents with Gemini Enterprise Agent Platform

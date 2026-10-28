@@ -2,14 +2,14 @@
   "okf_version": "0.2",
   "corpus": "GEAPL200",
   "version_tag": "GEAPL200_2026-09-30_124746",
-  "generated_at": "2026-09-30T12:47:46-07:00",
+  "generated_at": "2026-10-27T19:40:00-07:00",
   "generated_by": "gemini-enterprise:okf-synthesizer",
-  "status": "draft",
+  "status": "stable",
   "stale_after_days": 180,
   "gcs_bucket": "gs://gea_agent_development_architectural_best_practices_1790796607",
   "fde_charter_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
   "fde_grading_rubric_concept": "concepts/00-fde-field-readiness-and-grading-rubric.md",
-  "concept_count": 58,
+  "concept_count": 83,
   "concepts": [
     {
       "file": "concepts/00-fde-field-readiness-and-grading-rubric.md",
@@ -24,16 +24,16 @@
         "well-architected-framework",
         "google-cloud"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "source_url": "concepts/00-fde-field-readiness-and-grading-rubric.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "56f5e0e05267fcad55541a1af64cbb0e38776918d8ee2278a3447e1dc0197856",
+      "sha256": "0157acd7c0328ee06d5f8587b0c0292d6b20917de22ddd087fa0eb0c31cc5141",
       "links_rewritten": 0
     },
     {
       "file": "concepts/01-ai-agent-quality-engineering.md",
-      "title": "Architecture Best Practice: AI Agent Quality — Evaluation, Observability, Cost & Security Engineering",
+      "title": "Architecture Best Practice: AI Agent Quality \u2014 Evaluation, Observability, Cost & Security Engineering",
       "tags": [
         "agent-evaluation",
         "trajectory-evaluation",
@@ -44,16 +44,16 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T03:08:43+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1RKm8QPIZkriZPGOFUyzH79bOTGeWrf4naqXl-k3-TBU/edit",
-      "source_modified": "2026-09-30T03:08:43Z",
-      "sha256": "ab7f767a3ae88d65961bb7e4f65061bbb34583a02a54c7471629d01181fe1593",
+      "source_url": "concepts/01-ai-agent-quality-engineering.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "503f38fe1caa6205d3b8e14781e404850db30bfb25a20f2f9ec890f1388c2d93",
       "links_rewritten": 0
     },
     {
       "file": "concepts/02-vibe-coding-agent-security-evaluation-kb.md",
-      "title": "Architecture Best Practice: Vibe Coding Agent Security & Evaluation — Sandboxing, Zero Ambient Authority, Agentic SecOps & Session Convergence",
+      "title": "Architecture Best Practice: Vibe Coding Agent Security & Evaluation \u2014 Sandboxing, Zero Ambient Authority, Agentic SecOps & Session Convergence",
       "tags": [
         "agent-security",
         "vibe-coding",
@@ -65,16 +65,16 @@
         "observability",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T03:19:18+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1TmYn6ntaoZtLp2eYIfH7mvaxRps58fYnlfiL0DQyu28/edit",
-      "source_modified": "2026-09-30T03:19:18Z",
-      "sha256": "b1276fea23dd8e264115777cdd86dbc1ac939f0726d53f0cc09cf34400ca4e25",
+      "source_url": "concepts/02-vibe-coding-agent-security-evaluation-kb.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "c252eeb4e5536ed073db9640a572bcde57687ccfdb493ee30ab0f425f7586a7c",
       "links_rewritten": 0
     },
     {
       "file": "concepts/03-enterprise-ai-agent-protocol-stack.md",
-      "title": "Architecture Best Practice: The Open AI Agent Protocol Stack on Google Cloud (MCP · A2A · UCP · AP2/x402 · A2UI · AG-UI)",
+      "title": "Architecture Best Practice: The Open AI Agent Protocol Stack on Google Cloud (MCP \u00b7 A2A \u00b7 UCP \u00b7 AP2/x402 \u00b7 A2UI \u00b7 AG-UI)",
       "tags": [
         "agent-protocols",
         "mcp",
@@ -84,18 +84,19 @@
         "google-cloud",
         "agentic-commerce",
         "enterprise-architecture",
-        "fde-grading-rubric"
+        "fde-grading-rubric",
+        "en"
       ],
-      "stale_after": "2027-03-29T00:56:12+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1f_JXAmSvkJRK2xQmHj9DmCaZwLOWJ_1u88wQ1j9spWY/edit",
-      "source_modified": "2026-09-30T00:56:12Z",
-      "sha256": "42ef3f005f3e50696ea924837c56328497643b60c8f606068bf82e9ca671949b",
+      "source_url": "concepts/03-enterprise-ai-agent-protocol-stack.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "8c826f2cd5ee08aff6b915a20ba525403607eb7e7478254d702d229e5ed48350",
       "links_rewritten": 0
     },
     {
       "file": "concepts/04-deploying-gemini-enterprise-agent-runtime.md",
-      "title": "Architecture Best Practice: Deploying to Agent Runtime — Prerequisites, Cloud Shell Execution & Deployment Troubleshooting",
+      "title": "Architecture Best Practice: Deploying to Agent Runtime \u2014 Prerequisites, Cloud Shell Execution & Deployment Troubleshooting",
       "tags": [
         "gemini-enterprise",
         "agent-runtime",
@@ -105,13 +106,14 @@
         "cloud-shell",
         "iam",
         "memory-bank",
-        "fde-grading-rubric"
+        "fde-grading-rubric",
+        "trou"
       ],
-      "stale_after": "2027-03-29T02:41:08+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1N5N-KVQwIpeEaN8aXMX1l6pdPjMnmAxFEZABT_7ZL3E/edit",
-      "source_modified": "2026-09-30T02:41:08Z",
-      "sha256": "3e2089183eced5502bb38ac887b8b5fcb12186639e4c9262d684aaf66576f5b2",
+      "source_url": "concepts/04-deploying-gemini-enterprise-agent-runtime.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "6def797f6be49814472ae7b2fec0fbaa99a753f217ed18cef4aad8de06b55275",
       "links_rewritten": 0
     },
     {
@@ -128,11 +130,11 @@
         "cost-optimization",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T00:35:09+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1vk61bHa0T-RvYs4ZCvJSILNM0XxIfH_wAiKAURt9KaE/edit",
-      "source_modified": "2026-09-30T00:35:09Z",
-      "sha256": "460f1d02fe5989c12bf2e35472edf909201e236071442f2839dae69166475339",
+      "source_url": "concepts/05-enterprise-ai-agent-systems-google-cloud.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "f3c8d178761b43fef5cbd87e5b19defc65f9ed0622b982078ccc1a86d25bd713",
       "links_rewritten": 0
     },
     {
@@ -147,18 +149,19 @@
         "prompt-injection",
         "human-in-the-loop",
         "durable-orchestration",
-        "fde-grading-rubric"
+        "fde-grading-rubric",
+        "prompt-inject"
       ],
-      "stale_after": "2027-03-29T00:34:51+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1SjeHhPQvC-m88pQ3KLXXHGNTDDfgYLtXabMEqJhBxL0/edit",
-      "source_modified": "2026-09-30T00:34:51Z",
-      "sha256": "24fc574688ec055a3a65a30b0f9ac8046c775a33487710f3c6dca64e408fbe35",
+      "source_url": "concepts/06-agent-tools-mcp-multi-agent-orchestration.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "b060c68ad3dc36bfea2be9c2dcb758e2225f3c492175dec46dd20cb6049b592c",
       "links_rewritten": 0
     },
     {
       "file": "concepts/07-enterprise-agent-skills.md",
-      "title": "Architecture Best Practice: Enterprise Agent Skills — Progressive Disclosure, Capability Profiles & Skill Lifecycle Engineering",
+      "title": "Architecture Best Practice: Enterprise Agent Skills \u2014 Progressive Disclosure, Capability Profiles & Skill Lifecycle Engineering",
       "tags": [
         "agent-skills",
         "progressive-disclosure",
@@ -168,18 +171,19 @@
         "mcp",
         "least-privilege",
         "agentops",
-        "fde-grading-rubric"
+        "fde-grading-rubric",
+        "context-e"
       ],
-      "stale_after": "2027-03-29T01:55:27+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1XS3V1hJ6zjbD7QUD5lnFveekj2SCjq2yLsNlnq3GSN4/edit",
-      "source_modified": "2026-09-30T01:55:27Z",
-      "sha256": "eedcd258be54ce92a72fd01fc5db9f33972e4273fda12bba8446a40c845fdced",
+      "source_url": "concepts/07-enterprise-agent-skills.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "d7eb0dd06c650cc006551f3988934204b7083d9099438fec1184e78427a37d6b",
       "links_rewritten": 0
     },
     {
       "file": "concepts/08-context-engineering-stateful-agents.md",
-      "title": "Architecture Best Practice: Context Engineering for Stateful AI Agents on Google Cloud — Sessions, Memory & Governance",
+      "title": "Architecture Best Practice: Context Engineering for Stateful AI Agents on Google Cloud \u2014 Sessions, Memory & Governance",
       "tags": [
         "context-engineering",
         "sessions",
@@ -191,11 +195,11 @@
         "governance",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T01:33:12+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/199D5SpIYQGrsZnTwWYou-xIU4K0_G4Qn3asiS6QyX7I/edit",
-      "source_modified": "2026-09-30T01:33:12Z",
-      "sha256": "173441c7ecb4bb28e3be90f3f39f10e8f3f527db2ce5eef3485116559f64b01a",
+      "source_url": "concepts/08-context-engineering-stateful-agents.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "d2adaae1ce18a84e11a68c15603229774f3f8f044449d5157fdb980fb0c68dd1",
       "links_rewritten": 0
     },
     {
@@ -212,11 +216,11 @@
         "buy-vs-build",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T02:33:05+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1aQutt8PnKS8joFsYDCnDozNARDHlpTbM9OsalPusBNY/edit",
-      "source_modified": "2026-09-30T02:33:05Z",
-      "sha256": "b9fef2b9845dfd18471e24b632d7d2a6348762787edea3941fcb230cf64addef",
+      "source_url": "concepts/09-platform-native-state-management.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "2d457835614335061dac36271ca9f2ed93257484959608b699790c8e64fb58fd",
       "links_rewritten": 0
     },
     {
@@ -233,11 +237,11 @@
         "supply-chain-security",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-24T22:34:19+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1vOL-cvTVURqW_vXRq0nx8AhpCkbEyr7Eg6aAed8QZhA/edit",
-      "source_modified": "2026-09-25T22:34:19Z",
-      "sha256": "a97443c09cb74f9ddc090dd4b5fe4335e6882c654246d1f20753828cfeb9e22d",
+      "source_url": "concepts/10-vibe-coding-agent-security-and-evaluation.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "81f562ab8bac42088be3c8ba77375bddbd8e0fb6e685c94a9763cf61607431a9",
       "links_rewritten": 0
     },
     {
@@ -254,11 +258,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-27T00:09:35+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1VU-Bgnp7fHb_3qrOamByEEI0vzctfnhGlW2a1ztmK2k/edit",
-      "source_modified": "2026-09-28T00:09:35Z",
-      "sha256": "505dde76460ead3c6c61f5320c1f5669fa918f8be3c45d066147cbe76d07551f",
+      "source_url": "concepts/11-prototype-to-production.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "7966af315ea8335a7759774b13b8c48844da6e71e2528851001f9bef79a045c5",
       "links_rewritten": 0
     },
     {
@@ -274,11 +278,11 @@
         "trajectory-evaluation",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-24T18:53:05+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1FU_Ot69f5lQfDk85fJ4XYaRg6ZC_GvCrLZMZRumRB98/edit",
-      "source_modified": "2026-09-25T18:53:05Z",
-      "sha256": "f5104daf383d396fb583c1a5de6dbad9d699c5534810574f5d5fde972a34c0ea",
+      "source_url": "concepts/12-agent-quality.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "d59f18cb74ae8b46602ef7b0954cebbcad75c1133a3e293245facb56e84bf1c1",
       "links_rewritten": 0
     },
     {
@@ -294,11 +298,11 @@
         "context-engineering",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-27T00:11:37+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1uBbH5a6w5oyYsIfAe3Dlb-M-4_TiPk6EuEm1pgRFGsc/edit",
-      "source_modified": "2026-09-28T00:11:37Z",
-      "sha256": "e5402530760da8e6493e89e8bfd57b43655b8b2e48d0f6c824302097b5b4eede",
+      "source_url": "concepts/13-spec-driven-production-grade-development.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "cd1216532299f1220cfa259e9c0e028c96c79a723e46c2fd9be57fab0680a92d",
       "links_rewritten": 0
     },
     {
@@ -314,12 +318,12 @@
         "skill-governance",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-21T21:54:56+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1AISjY31IgfCrOhi_xZv3kHzINnF5IR8CIstzAuWd2kM/edit",
-      "source_modified": "2026-09-22T21:54:56Z",
-      "sha256": "dfd00b3dcc1d5d3adf9100bd74436f25348c1f7d01c8b6d9eb3e516d4a5002be",
-      "links_rewritten": 2
+      "source_url": "concepts/14-agent-skills.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "f51345cd5316e43ef21491f76df657aba26d1175ae30a788d223dadb4c36f243",
+      "links_rewritten": 0
     },
     {
       "file": "concepts/15-introduction-to-agents.md",
@@ -335,12 +339,12 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-03T17:47:09+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1ALKaVbC7jPxjpbt19ET2cL1MaMO0Cs3CM0IWw0GXmAg/edit",
-      "source_modified": "2026-09-04T17:47:09Z",
-      "sha256": "9252d8df2e23b49a82a078001bed635893375ad1f6ced904b6885e66bebe27c3",
-      "links_rewritten": 1
+      "source_url": "concepts/15-introduction-to-agents.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "6aae4693dd91917dec262be9b6c2872ad4a38c0a11bc38ac854f35e9e55b7307",
+      "links_rewritten": 0
     },
     {
       "file": "concepts/16-the-new-sdlc-with-vibe-coding.md",
@@ -355,12 +359,12 @@
         "developer-productivity",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-03T17:46:43+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1-5JB5qi5zIQTBUivakDj7URi99n84xepyTDvk1Yf6qY/edit",
-      "source_modified": "2026-09-04T17:46:43Z",
-      "sha256": "e55f13c3ef8cf3a6e7ce29dc7ff69d53bf8883e50bae53affc696832a7325341",
-      "links_rewritten": 1
+      "source_url": "concepts/16-the-new-sdlc-with-vibe-coding.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "9bbf6d784e2352d14478a7244510798c209107f988c1e0823889e59bb49cc7c8",
+      "links_rewritten": 0
     },
     {
       "file": "concepts/17-agents-concepts-visually-explained.md",
@@ -376,11 +380,11 @@
         "multi-agent-systems",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-08T00:14:42+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1FEZZSHrp9_c5AnjJh2AJkwbfPsM0ST0qtizm46JnxT8/edit",
-      "source_modified": "2026-09-09T00:14:42Z",
-      "sha256": "c8bcc2019cd79e71c73ed0f8610add9c0024049622e278835fbc3c10d6d46194",
+      "source_url": "concepts/17-agents-concepts-visually-explained.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "d29d6ed83de2b2e9be99d112a104ea99832a73a3c5f2422a6541c1e692ad7ab6",
       "links_rewritten": 0
     },
     {
@@ -397,11 +401,11 @@
         "protocol-design",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-13T18:59:38+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/17-PfDNQFc2vDyGWQGM1-RT6F18UwuC0UfXqrvRULs64/edit",
-      "source_modified": "2026-09-14T18:59:38Z",
-      "sha256": "84ca058a601761ea143b37b69930722b38a83f3ce3dd647f178f2e56149b856b",
+      "source_url": "concepts/18-agent-tools-interoperability-with-mcp.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "56a819191c67d827bebc6e94bb274a4562b6f633c414be60da70d86d6baffada",
       "links_rewritten": 0
     },
     {
@@ -418,16 +422,16 @@
         "vibe-coding",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-14T21:58:13+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/1SnupitBTSfAdS9Nob3FA2FLkU8UKSJsdOg8EMsgFN5I/edit",
-      "source_modified": "2026-09-15T21:58:13Z",
-      "sha256": "0bfc942dfba09c5dfc8a35bea8accee306389b50a41d057112406b575309e86c",
+      "source_url": "concepts/19-agent-tools-interoperability-2.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "a0ea629298a8f641bd934fc2b82ea7803d6f086c78413bd9ab927f52dbaa943c",
       "links_rewritten": 0
     },
     {
       "file": "concepts/20-context-engineering-sessions-memory.md",
-      "title": "Context Engineering — Sessions, Memory",
+      "title": "Context Engineering \u2014 Sessions, Memory",
       "tags": [
         "context-engineering",
         "sessions",
@@ -439,11 +443,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-19T23:06:41+00:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "https://docs.google.com/document/d/12QmL1MQmbkNLZShKdVoS_64eQxH34qreHCmN-rMGUCs/edit",
-      "source_modified": "2026-09-20T23:06:41Z",
-      "sha256": "6a55f6b72888afb40e86250fd972fa0c5fc4c9d5601d26a19ab6668cc20d6693",
+      "source_url": "concepts/20-context-engineering-sessions-memory.md",
+      "source_modified": "2026-09-30T12:47:46-07:00",
+      "sha256": "05f6ef50c36c962f4979a1df22284af5c92e5e82895c260107cfcca78e9a0679",
       "links_rewritten": 0
     },
     {
@@ -460,11 +464,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/build_and_deploy_multi-agent_adk_systems_to_gemini_enterprise.md",
+      "source_url": "concepts/21-build-and-deploy-multi-agent-adk-systems.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "eb18f02f9f686cb42a4dcd53b53be2fb2946921fc667d4b18a91308530889cdc",
+      "sha256": "832e7d7b6be43886496e1cd5f0e93dcbf145359f5925fc32025850e693511b07",
       "links_rewritten": 0
     },
     {
@@ -481,11 +485,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/build_enterprise_agents_with_code_execution_on_gemini_enterprise_agent_platform.md",
+      "source_url": "concepts/22-build-enterprise-agents-with-code-execution.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "69d75793d6fc139473dd3982a8b1c0081f18c52f6f51e6f63bad8d561b88b380",
+      "sha256": "dc6fa3e0b8c22be078a99bfca9d44d0386c61bf7a38c4e59ba37ce96cb9a8066",
       "links_rewritten": 0
     },
     {
@@ -502,11 +506,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/agent_context_persistence_and_memories.md",
+      "source_url": "concepts/23-agent-context-persistence-and-memories.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "8ade7318972b4aedfee2debe7a960a18c2fca10decca5710dc4466aea9334d77",
+      "sha256": "9079938d1f80159178d2e5584d093c421ee8c3091d617cdd6821678de44ac46d",
       "links_rewritten": 0
     },
     {
@@ -523,11 +527,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/agent_with_persistent_memories_2.md",
+      "source_url": "concepts/24-agent-with-persistent-memories-deep-dive.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "d25ef3bd2f89ffb92cb33a48d430f90b008186ec5b7366a65313c38eeb009e01",
+      "sha256": "987f5ea750676f57f01fe5feb60478e49c3e172ae1b087e892344e2a14d57ca2",
       "links_rewritten": 0
     },
     {
@@ -544,11 +548,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/agent_evaluation_hill_climbing_evaluate_generative_agentic_systems.md",
+      "source_url": "concepts/25-evaluate-generative-agentic-systems.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "84ac1f5f0ab0190b56a13bcc76b56675477930c8834f0f5107ec637173e84963",
+      "sha256": "b52a87a87ef34733c164d90583e26760d9fe22d34e507624174c7d234683801c",
       "links_rewritten": 0
     },
     {
@@ -565,11 +569,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/agent_evaluation_and_hill_climbing_hill_climb_and_agentic_systems.md",
+      "source_url": "concepts/26-hill-climbing-agentic-systems.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "afd961212dfa0d35813f20368aa4f729066bf6294bafc82413bd378fdc0e5c22",
+      "sha256": "993962f7a163e91bbc99ab940dd81c4cde3ff09bdac581d2f6fbf0b42bf63dab",
       "links_rewritten": 0
     },
     {
@@ -584,13 +588,14 @@
         "canary-rollout",
         "agent-evaluation",
         "google-cloud",
-        "fde-grading-rubric"
+        "fde-grading-rubric",
+        "gemini-m"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/agent_evaluation_hill_climbing_upgrade_to_the_latest_models.md",
+      "source_url": "concepts/27-upgrade-to-the-latest-models.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "0b828624bf8dd84a62b0d04b960f2fcf67a1ccd8ae5235f745ef3deb05532811",
+      "sha256": "c66f0a5a867681e1ae7749a563bc1d397b8059577800fee22b3126df07771a38",
       "links_rewritten": 0
     },
     {
@@ -607,11 +612,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/agent_evaluation_and_hill_climbing_cost_estimationm_and_optimization_for_agentic_solutions.md",
+      "source_url": "concepts/28-cost-estimation-and-optimization-for-agentic-solutions.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "640639b3c944f905adc9dd92d67ee86cc4cdd33610a291ed7a712e45acd03974",
+      "sha256": "0eab6f10dbe1a3f7a5b99d65e2b8b45bd8ec8e829a3ee1d2896c5afe8b0058da",
       "links_rewritten": 0
     },
     {
@@ -628,11 +633,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/prepare_deliver_gemini_deployments_deploy_the_gemini_enterprise_app.md",
+      "source_url": "concepts/29-deploy-the-gemini-enterprise-app.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "0b1f471bca16811794f2a27ee44f8c852e797e0905542f04449b31ef20cf176c",
+      "sha256": "3010499eb80fd7317aafd90da7e302742f5588b7df66ff2aa1aed7f9af2028cf",
       "links_rewritten": 0
     },
     {
@@ -649,11 +654,11 @@
         "gemini-enterprise",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/prepare_deliver_gemini_deployments_third_party_identity_provider_with_workforce_identity_federation.md",
+      "source_url": "concepts/30-third-party-idp-with-workforce-identity-federation.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "40f7a1f10c180990687522a5c1642f5a49962b1fc926628a53c9ac5a3ce89354",
+      "sha256": "838809cf6033985668e39d0cfcb9ba38a05b701427d5079f94744a5f89507751",
       "links_rewritten": 0
     },
     {
@@ -670,11 +675,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_deployments.md",
+      "source_url": "concepts/31-plan-change-management-for-gemini-enterprise-deployments.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "15314780318ca4dde335a9f914997a1bc1fb262c272cda7d5369e569843f2b05",
+      "sha256": "a50bc8a7f6c208fbe85de1a081498a3f4943c3b1043f8d8597f6270acdd9c7b4",
       "links_rewritten": 0
     },
     {
@@ -691,11 +696,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_agents.md",
+      "source_url": "concepts/32-plan-change-management-for-gemini-enterprise-agents.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "165cfd3477485f285ade6e041f3d487bd57f76ef591499050836df5ff830913a",
+      "sha256": "40e44848e1a5c44007c1c6b7a898646ede88c34f5c208219fee8d0bce2d2f119",
       "links_rewritten": 0
     },
     {
@@ -712,11 +717,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/prepare_and_deliver_gemini_deployments_model_armor_securing_ai_deployments.md",
+      "source_url": "concepts/33-model-armor-securing-ai-deployments.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "4dca89193c86a019d588122a0729f78a3f25ec071418bcc73dc1423b3cc92a74",
+      "sha256": "945212222df6a624269160a39d203cd0a97548ad7ebfa171853f1a30dd415361",
       "links_rewritten": 0
     },
     {
@@ -733,11 +738,11 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/govern_secure_and_scale_the_agent_ecosystem_secure_your_agents With_gemini_enterprise_agent_platform.md",
+      "source_url": "concepts/34-secure-your-agents-with-gemini-enterprise-agent-platform.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "dea29c0abf9c7968aff4a8132f7bdbe8c7a9429b777949d64befb3a50134fc45",
+      "sha256": "d11e21d1840751f1426b181e563fc8a828887d985a5a86739b4572396e618e05",
       "links_rewritten": 0
     },
     {
@@ -754,11 +759,53 @@
         "google-cloud",
         "fde-grading-rubric"
       ],
-      "stale_after": "2027-03-29T12:47:46-07:00",
+      "stale_after": "2027-04-27T17:21:00-07:00",
       "status": "draft",
-      "source_url": "local://GEAP_L300/govern_secure_and_scale_the_agent_ecosystem_govern_agents_with_agent_gateway_agent_registry_policies.md",
+      "source_url": "concepts/35-govern-agents-with-agent-gateway-registry-policies.md",
       "source_modified": "2026-09-30T12:47:46-07:00",
-      "sha256": "1d252d51738d15169c9fbd4d69d26631837f5e3e720d121693a1250113ceeca8",
+      "sha256": "a4ec0f6aea4fbdbff026cc19102955efd50f62d536ee389aff890d305bd8a390",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/36-agentic-context-engineering-evolving-playbooks.md",
+      "title": "Architecture Best Practice: Agentic Context Engineering (ACE) \u2014 Evolving Playbooks, Incremental Delta Updates, and Context Collapse Defense",
+      "tags": [
+        "\"agentic-context-engineering\"",
+        "\"evolving-playbooks\"",
+        "\"generator-reflector-curator\"",
+        "\"context-collapse\"",
+        "\"brevity-bias\"",
+        "\"incremental-delta-updates\"",
+        "\"grow-and-refine\"",
+        "\"kv-cache-reuse\"",
+        "\"google-adk\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/36-agentic-context-engineering-evolving-playbooks.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "5605f2d0cab1a5014b3207671a7b45be5a7c71c3cb5732e69c6113176724e881",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/36-foundations-of-ai-tokenomics-and-dual-view-production.md",
+      "title": "Architecture Best Practice: Foundations of AI Tokenomics \u2014 Dual-View Production Functions, Token Taxonomy, and Shadow Pricing",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "agent-grilling",
+        "shadow-pricing",
+        "google-adk",
+        "gemini-enterprise",
+        "vertex-ai",
+        "fde-grading-rubric"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/36-foundations-of-ai-tokenomics-and-dual-view-production.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "91c8dc7c9342d17247324e001f65c6df37b2a8ce5fd4d4f6c68d313417023016",
       "links_rewritten": 0
     },
     {
@@ -777,15 +824,85 @@
         "okf"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "b07d0fc1ec2cea228d70c15921cc8f1b4d70fcc2fe9250aa49a498bbf84ca18d",
+      "status": "stable",
+      "source_url": "concepts/36-l400-00-master-knowledge-catalog-index.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "7996c3f0c02565746fd9963404531bc950c9a3a79db509ed865600668a3c9a49",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/36-socratic-prompting-foundations-and-crit-taxonomy.md",
+      "title": "Socratic Prompting Foundations, CRIT Algorithm & The Socratic Method Taxonomy",
+      "tags": [
+        "architecture-best-practice",
+        "google-cloud"
+      ],
+      "stale_after": "2027-04-27T17:27:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/36-socratic-prompting-foundations-and-crit-taxonomy.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "c80e06df1bfe8038f89dbdc00b88a0851cefdea37c41c4926ebde6d80371adaa",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/37-agent-grills-user-structured-socratic-inquiry-kele.md",
+      "title": "Agent Grills the User: Structured Socratic Inquiry, KELE Multi-Agent State Tracking & Assessment Timing",
+      "tags": [
+        "architecture-best-practice",
+        "google-cloud"
+      ],
+      "stale_after": "2027-04-27T17:27:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/37-agent-grills-user-structured-socratic-inquiry-kele.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "3fa8404acc7f06e963733cde45c60578366542f66c8568e83e2ea90f073e3096",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/37-agent-user-grilling-tokenomics-chatbot-elicitation.md",
+      "title": "Architecture Best Practice: Tokenomics of Agent-to-User Grilling in Chatbot Scenarios \u2014 Uncertainty Collapse, Cognitive Labor Substitution, and Optimal Elicitation",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "agent-grilling",
+        "shadow-pricing",
+        "google-adk",
+        "gemini-enterprise",
+        "vertex-ai",
+        "fde-grading-rubric"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/37-agent-user-grilling-tokenomics-chatbot-elicitation.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "dd03b644f9cdb63034605524d9251b29459f01093980c60c4dad0f208e6693af",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/37-cache-engineering-kv-prefix-optimization-for-agents.md",
+      "title": "Architecture Best Practice: Cache Engineering for Agents \u2014 Direct KV-Cache Control (append, drop, repos), Extended Radix Trees, and Prefix-Preserving Compaction",
+      "tags": [
+        "\"cache-engineering\"",
+        "\"kv-cache\"",
+        "\"prefix-caching\"",
+        "\"akv-serving\"",
+        "\"extended-radix-tree\"",
+        "\"segment-batch-attention\"",
+        "\"rope-repositioning\"",
+        "\"tool-response-rolling-drop\"",
+        "\"finops\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/37-cache-engineering-kv-prefix-optimization-for-agents.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "24f1b8f6055b94df6f06873fb3e4c54cdafbe672fae79705efeb0fd6457d231b",
       "links_rewritten": 0
     },
     {
       "file": "concepts/37-l400-a1-overall-architecture.md",
-      "title": "Architecture Best Practice: Gemini Enterprise Overall Architecture — Flattened Orchestration & Spark Sandboxes",
+      "title": "Architecture Best Practice: Gemini Enterprise Overall Architecture \u2014 Flattened Orchestration & Spark Sandboxes",
       "tags": [
         "l400_version_20261026_0350",
         "geminienterprisearchitecture",
@@ -796,19 +913,52 @@
         "automatedbatchevaluation",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "4dfc56642a5a475d76638b13384eb839f9d14edfb74c03f74f748c7057bbb4c0",
+      "status": "stable",
+      "source_url": "concepts/37-l400-a1-overall-architecture.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "b27f6f0831af39b3e247dd8e912e7a95d0c151984a4c09784d37a4f63999a307",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/38-agent-grills-agent-heterogeneous-debate-and-identity-grounding.md",
+      "title": "Case 2A: Agent-Grills-Agent via Identity-Grounded Heterogeneous Debate (HDE) & Dialectical Scaffolding",
+      "tags": [
+        "architecture-best-practice",
+        "google-cloud"
+      ],
+      "stale_after": "2027-04-27T17:27:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/38-agent-grills-agent-heterogeneous-debate-and-identity-grounding.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "1d57cd9b3af8d18fa42652095b452e13922ed970d32937cc3d59c29cde902213",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/38-inter-agent-grilling-debate-critic-tokenomics.md",
+      "title": "Architecture Best Practice: Tokenomics of Inter-Agent Grilling, Critic Loops, and Multi-Agent Debate \u2014 Coasian Boundaries and Extensive-Margin Pruning",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "inter-agent-grilling",
+        "multi-agent-debate",
+        "workflow-dag-optimization",
+        "google-adk",
+        "a2a-protocol",
+        "fde-grading-rubric"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/38-inter-agent-grilling-debate-critic-tokenomics.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "0eab311aef0807cb57e5dfcd15ea6413ec8ff8c29ca48fb7137952bc52ea2868",
       "links_rewritten": 0
     },
     {
       "file": "concepts/38-l400-a2-identity-architecture.md",
-      "title": "Architecture Best Practice: Identity Architecture — Cloud Identity, Workforce Identity Federation & SCIM",
+      "title": "Architecture Best Practice: Identity Architecture \u2014 Cloud Identity, Workforce Identity Federation & SCIM",
       "tags": [
         "l400_version_20261026_0350",
         "identityarchitecture",
@@ -819,19 +969,62 @@
         "geminienterprise",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "305736b8f75e51f70f9340d97a24aacded9e473ff28db0ec0e4860c314f9131e",
+      "status": "stable",
+      "source_url": "concepts/38-l400-a2-identity-architecture.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "c377fec7e0f32bf301689477b807298ec36c9c7108de3eedd6f5009ba42b0b13",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/38-structured-file-native-and-oss-context-engineering.md",
+      "title": "Architecture Best Practice: Structured File-Native & Open-Source Software (OSS) Context Engineering \u2014 AGENTS.md / GEMINI.md Taxonomy, 10,000-Table Domain Partitioning, and Grep-Tax Mitigation",
+      "tags": [
+        "\"file-native-agents\"",
+        "\"structured-context-engineering\"",
+        "\"agents-md\"",
+        "\"gemini-md\"",
+        "\"claude-md\"",
+        "\"grep-tax\"",
+        "\"domain-partitioning\"",
+        "\"schema-navigation\"",
+        "\"progressive-disclosure\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/38-structured-file-native-and-oss-context-engineering.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "c8196cfe3761292736fa6d40bd00a6b59d38534ffee1b08a737ebf5719d8b5b0",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/39-corporate-multi-agent-context-architecture-and-memory-tiers.md",
+      "title": "Architecture Best Practice: Corporate Multi-Agent Context Architecture \u2014 The 4-Level Maturity Pyramid, 5 Quality Criteria, Intelligent Delegation, and Federated Memory Tiers",
+      "tags": [
+        "\"corporate-multi-agent-architecture\"",
+        "\"maturity-pyramid\"",
+        "\"intent-engineering\"",
+        "\"specification-engineering\"",
+        "\"context-quality-criteria\"",
+        "\"intelligent-delegation\"",
+        "\"privilege-attenuation\"",
+        "\"memory-tiers\"",
+        "\"klarna-dual-deficit\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/39-corporate-multi-agent-context-architecture-and-memory-tiers.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "2eee4db21d735c5e32a39fcd6dffbe2fa22f95e531f98d9575392d7c77e2f046",
       "links_rewritten": 0
     },
     {
       "file": "concepts/39-l400-a3-network-architecture-and-security.md",
-      "title": "Architecture Best Practice: Gemini Enterprise Network Architecture and Security — PSC, VPC-SC & CMEK",
+      "title": "Architecture Best Practice: Gemini Enterprise Network Architecture and Security \u2014 PSC, VPC-SC & CMEK",
       "tags": [
         "l400_version_20261026_0350",
         "okf_l400_a3",
@@ -845,10 +1038,64 @@
         "okf"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "204c536db51b8bf5b7a2216ec9a26781c2f5e1fc5aa86d24bdf2c9c72a2ea31b",
+      "status": "stable",
+      "source_url": "concepts/39-l400-a3-network-architecture-and-security.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "aa12c2c7fb3f467d7ed4d3b052a3001d6655bda53b672e2528b3527629a199fa",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/39-multi-agent-collaborative-grilling-and-temporal-planning-maci.md",
+      "title": "Case 2B: Multi-Agent Collaborative Grilling, Constraint Satisfaction & Temporal Planning (MACI)",
+      "tags": [
+        "architecture-best-practice",
+        "google-cloud"
+      ],
+      "stale_after": "2027-04-27T17:27:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/39-multi-agent-collaborative-grilling-and-temporal-planning-maci.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "cb826ebf52b08cc479092f2442340827a9ddb4bb35910fc5b4fb77e5aed8ea78",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/39-workflow-dag-token-allocation-and-adjoint-optimization.md",
+      "title": "Architecture Best Practice: Networked Workflow DAG Token Allocation \u2014 Adjoint Shadow Values, Upstream Planning Leverage, and Risk-Aware Optimization",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "inter-agent-grilling",
+        "multi-agent-debate",
+        "workflow-dag-optimization",
+        "google-adk",
+        "a2a-protocol",
+        "fde-grading-rubric"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/39-workflow-dag-token-allocation-and-adjoint-optimization.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "b20f49eaf767df932e41d5a32d8942612b7a0607771d423e8b715cb713cd9df6",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/40-intensive-margin-protocol-compression-and-runtime-cascades.md",
+      "title": "Architecture Best Practice: Intensive-Margin Communication Compression, Runtime Model Cascades, and Stop-Loss Budget Governance",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "protocol-compression",
+        "kv-cache-sharing",
+        "memory-tokenomics",
+        "security-tokenomics",
+        "google-adk",
+        "fde-grading-rubric"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/40-intensive-margin-protocol-compression-and-runtime-cascades.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "7aedbd8629f174207ec3ff07ba1da8ba4843428ce91e3b7220db4ef9c42b5ced",
       "links_rewritten": 0
     },
     {
@@ -867,10 +1114,46 @@
         "okf"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "9b4716a356248499743096e1d75031eb7a6f57ff73f80750144b30bd3ed13c8b",
+      "status": "stable",
+      "source_url": "concepts/40-l400-a4-api-integration-federated-connector-byo-mcp.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "e583f7bf0929ba6afdd5eb27698cbedf4251bfcfb711051bccdb0e890b81945c",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/40-meta-context-engineering-and-agentic-skill-evolution.md",
+      "title": "Architecture Best Practice: Meta Context Engineering (MCE) via Agentic Skill Evolution \u2014 Bi-Level Optimization, Agentic Crossover, and Programmatic Context Artifacts",
+      "tags": [
+        "\"meta-context-engineering\"",
+        "\"agentic-skill-evolution\"",
+        "\"bi-level-optimization\"",
+        "\"agentic-crossover\"",
+        "\"skill-md\"",
+        "\"programmatic-context\"",
+        "\"strong-to-weak-transfer\"",
+        "\"alpha-evolve\"",
+        "\"google-adk\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/40-meta-context-engineering-and-agentic-skill-evolution.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "b707cfb58fd8e391cf0e002a47f0897719900d9d8260515582c073d99fe6379a",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/40-recursive-socratic-questioning-and-soda-chain-of-thought.md",
+      "title": "Recursive Socratic Questioning (Top-Down Decomposition & Bottom-Up Synthesis) and SoDa Socratic Style Chain-of-Thoughts",
+      "tags": [
+        "architecture-best-practice",
+        "google-cloud"
+      ],
+      "stale_after": "2027-04-27T17:27:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/40-recursive-socratic-questioning-and-soda-chain-of-thought.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "35545df29eec1cb27bae7614eb916f82cd5790c3d0a349f097653acf84006147",
       "links_rewritten": 0
     },
     {
@@ -886,20 +1169,74 @@
         "zerotrustgovernance",
         "antigravityagenticai",
         "google-cloud",
-        "fde-grading-rubric",
-        "l400",
-        "okf"
+        "fde-grading-rubric"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "c17017106dd0bdaaee297f26c241646d45471baffae4926be89646db61251fd8",
+      "status": "stable",
+      "source_url": "concepts/41-l400-a5-debugging-and-troubleshooting.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "ac79fbcaab6884f3f3011b975eb95e2be098eb2614907f856356846fc3bb33a0",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/41-multi-agent-kv-cache-sharing-and-memory-inventory-tokenomics.md",
+      "title": "Architecture Best Practice: Multi-Agent KV-Cache Capital Deepening, Latent Communication, and Memory Inventory Tokenomics",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "protocol-compression",
+        "kv-cache-sharing",
+        "memory-tokenomics",
+        "security-tokenomics",
+        "google-adk",
+        "fde-grading-rubric"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/41-multi-agent-kv-cache-sharing-and-memory-inventory-tokenomics.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "0723404bc2ba6fb92df313c6865bcefddca6f882102bf3b90f5773beaea271c8",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/41-socratic-autoraters-socreval-and-outcome-driven-question-optimization.md",
+      "title": "Socratic Autoraters (SOCREVAL) and Outcome-Driven Question Optimization (ODQS) for Socratic Students",
+      "tags": [
+        "architecture-best-practice",
+        "google-cloud"
+      ],
+      "stale_after": "2027-04-27T17:27:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/41-socratic-autoraters-socreval-and-outcome-driven-question-optimization.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "a0b46ea49fd8c95288293f17ae10a20bbf9a86014bc919130c8d1b962b5ff221",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/41-socratic-grilling-user-to-agent-and-agent-to-agent-protocols.md",
+      "title": "Architecture Best Practice: Socratic Grilling & Prompting in Multi-Agent Systems \u2014 User-Facing Discovery, Agent-to-Agent Adversarial Verification, Cache-Preserving Scratchpads, and Memory Distillation",
+      "tags": [
+        "\"socratic-grilling\"",
+        "\"socratic-prompting\"",
+        "\"multi-agent-debate\"",
+        "\"anti-sycophancy\"",
+        "\"authority-gradient\"",
+        "\"context-clash-prevention\"",
+        "\"cache-preserving-scratchpad\"",
+        "\"generator-reflector-curator\"",
+        "\"intent-elicitation\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/41-socratic-grilling-user-to-agent-and-agent-to-agent-protocols.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "a31182cf41188d1b8e1b410519d40c83611b1a9c522ef4eb03175049861073d8",
       "links_rewritten": 0
     },
     {
       "file": "concepts/42-l400-b1-anatomy-of-an-enterprise-agent.md",
-      "title": "Architecture Best Practice: Anatomy of an Enterprise Agent — ADK 2.0 Internals & Multi-Agent Mechanics",
+      "title": "Architecture Best Practice: Anatomy of an Enterprise Agent \u2014 ADK 2.0 Internals & Multi-Agent Mechanics",
       "tags": [
         "l400_version_20261026_0350",
         "enterpriseagentanatomy",
@@ -910,19 +1247,82 @@
         "controlplanegovernance",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "4e77ecc618d0024e7f3f25d74754755ed9f3cbd3504dd0dd452d96708770d3b1",
+      "status": "stable",
+      "source_url": "concepts/42-l400-b1-anatomy-of-an-enterprise-agent.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "44ac6a62c564cb830daf85484f063906a16cc93188949da180f87592b699ee60",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/42-multi-agent-memory-lifecycle-and-context-rot-prevention.md",
+      "title": "Architecture Best Practice: Multi-Agent Memory Lifecycle & Context-Rot Prevention \u2014 End-to-End ADK & Vertex AI Memory Bank Pipeline, Prefix-Preserving Compaction, and Poisoning Defenses",
+      "tags": [
+        "\"memory-lifecycle\"",
+        "\"context-rot-prevention\"",
+        "\"context-poisoning\"",
+        "\"context-distraction\"",
+        "\"context-confusion\"",
+        "\"context-clash\"",
+        "\"vertex-ai-memory-bank\"",
+        "\"google-adk\"",
+        "\"selective-unlearning\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/42-multi-agent-memory-lifecycle-and-context-rot-prevention.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "cbfa0951a7ad2623053fac6d450c878b0cd81c5a13f9964cff8fe51e06327b25",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/42-security-tokenomics-and-ecosystem-market-design.md",
+      "title": "Architecture Best Practice: Security-Conditioned Token Economics, Grilling-Loop Threat Defense, and Ecosystem Market Design",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "protocol-compression",
+        "kv-cache-sharing",
+        "memory-tokenomics",
+        "security-tokenomics",
+        "google-adk",
+        "fde-grading-rubric"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/42-security-tokenomics-and-ecosystem-market-design.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "aac3a157a492db2bbd61de7e7868e6bd64139dcb08bdb2c3b21ef0033dbc45f3",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/43-context-cache-memory-topic-connection-and-flow-graph.md",
+      "title": "Architecture Best Practice: Cross-KB Topic Connection & Mermaid Flow Graph \u2014 Integrating the 6 Context/Cache/Memory Publications with GEAP L200, L300, and L400 OKF",
+      "tags": [
+        "\"topic-connection-graph\"",
+        "\"knowledge-graph\"",
+        "\"spanner-graph\"",
+        "\"cross-kb-ontology\"",
+        "\"context-engineering\"",
+        "\"cache-engineering\"",
+        "\"memory-bank\"",
+        "\"socratic-grilling\"",
+        "\"l400-integration\"",
+        "\"fde-grading-rubric\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/43-context-cache-memory-topic-connection-and-flow-graph.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "6976898ec58a8f3c2c88d681a8d88607107b3e1a1618ff8065dd66ee7dce8a2d",
       "links_rewritten": 0
     },
     {
       "file": "concepts/43-l400-b2-a2a-protocol-and-multi-agent-mechanics.md",
-      "title": "Architecture Best Practice: A2A Protocol and Multi-Agent Mechanics — Agent Cards & Interoperability",
+      "title": "Architecture Best Practice: A2A Protocol and Multi-Agent Mechanics \u2014 Agent Cards & Interoperability",
       "tags": [
         "l400_version_20261026_0350",
         "agenttoagentprotocol",
@@ -933,20 +1333,62 @@
         "enterpriseagentgateway",
         "antigravityagenticai",
         "google-cloud",
-        "fde-grading-rubric",
-        "l400",
-        "okf"
+        "fde-grading-rubric"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "7a294cd4deae76f4e377f337a5fe5608833898a3ff363522257944624dfd3a28",
+      "status": "stable",
+      "source_url": "concepts/43-l400-b2-a2a-protocol-and-multi-agent-mechanics.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "5f2a09b63abbb91c542bab7f4985792ff4458a9e8cdecd1cfb095044927066dd",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/43-tokenomics-master-faq-and-pca-scenario-compendium.md",
+      "title": "Architecture Best Practice: Multi-Agent Tokenomics & Grilling Master Enterprise FAQ, Decision Matrices, and L400/PCA Scenario Compendium",
+      "tags": [
+        "ai-tokenomics",
+        "multi-agent-systems",
+        "agent-grilling",
+        "inter-agent-debate",
+        "finops-tco-calculator",
+        "decision-matrix",
+        "pca-scenarios",
+        "google-adk",
+        "gemini-enterprise",
+        "vertex-ai"
+      ],
+      "stale_after": "2027-04-27T17:21:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/43-tokenomics-master-faq-and-pca-scenario-compendium.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "5b9556863ddb512ffb0c50236e7380f21e642a5e69784cc4e85e47fa2585723c",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/44-fde-socratic-grilling-rubric-and-faq-compendium.md",
+      "title": "Architecture Best Practice: Master Enterprise FAQ Compendium & Enforceable FDE Socratic Grilling Rubric for Context, Cache & Memory Engineering",
+      "tags": [
+        "\"fde-grading-rubric\"",
+        "\"socratic-grilling-rubric\"",
+        "\"enterprise-faq-compendium\"",
+        "\"quantitative-formulas\"",
+        "\"finops\"",
+        "\"context-engineering\"",
+        "\"cache-engineering\"",
+        "\"memory-bank\"",
+        "\"field-readiness\"",
+        "\"cloud-fde-charter\""
+      ],
+      "stale_after": "2027-04-27T18:35:00-07:00",
+      "status": "stable",
+      "source_url": "concepts/44-fde-socratic-grilling-rubric-and-faq-compendium.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "df7519f5a03c1cd9fff4df02145f0301c4ff980a5f729244db79f683ba957ab3",
       "links_rewritten": 0
     },
     {
       "file": "concepts/44-l400-b3-agent-skills-and-skills-registry.md",
-      "title": "Architecture Best Practice: Agent Skills and the Skills Registry — Progressive Disclosure & SOPs",
+      "title": "Architecture Best Practice: Agent Skills and the Skills Registry \u2014 Progressive Disclosure & SOPs",
       "tags": [
         "l400_version_20261026_0350",
         "enterpriseagenticai",
@@ -957,14 +1399,13 @@
         "googlecloudwaf",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "c9d6118aaad476a6fe4ac20f8ae76db972249e63af840aff0c870e3df6d412c0",
+      "status": "stable",
+      "source_url": "concepts/44-l400-b3-agent-skills-and-skills-registry.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "51c45b09b74f9cb2e47a4599623dd383b97cfb24a8a34c8ed3f37a41afb32e81",
       "links_rewritten": 0
     },
     {
@@ -980,19 +1421,18 @@
         "geminienterpriseplatform",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "2ab1e18b09905054c895d59acf084b21774e016cb45a483b732121303f9dff62",
+      "status": "stable",
+      "source_url": "concepts/45-l400-g1-zero-trust-identity-foundation.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "e908cec37d9deb9d209113f5921c21e7043d5db717e2e43547ac4acb51f2e8c2",
       "links_rewritten": 0
     },
     {
       "file": "concepts/46-l400-g2-managing-production-agents-at-scale.md",
-      "title": "Architecture Best Practice: Managing Production Agents at Scale — Multi-Region Fleets & Circuit Breakers",
+      "title": "Architecture Best Practice: Managing Production Agents at Scale \u2014 Multi-Region Fleets & Circuit Breakers",
       "tags": [
         "l400_version_20261026_0350",
         "productionagentengineering",
@@ -1003,19 +1443,18 @@
         "antigravityagenticai",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "a31e5c5fdd203fbb8f6a023fbe6b3651495d3329ed6f3c0acdc530e1a69716e7",
+      "status": "stable",
+      "source_url": "concepts/46-l400-g2-managing-production-agents-at-scale.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "57a75c098aedbc51abbaecc309566e477271c9a8511191fa13b3c8493aa82ff9",
       "links_rewritten": 0
     },
     {
       "file": "concepts/47-l400-g3-agent-governance.md",
-      "title": "Architecture Best Practice: Enterprise Agent Governance — Zero-Trust Network Perimeter & Model Armor",
+      "title": "Architecture Best Practice: Enterprise Agent Governance \u2014 Zero-Trust Network Perimeter & Model Armor",
       "tags": [
         "l400_version_20261026_0350",
         "agentgovernance",
@@ -1029,15 +1468,15 @@
         "okf"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "983ace719fd823f98a0fe25fe51169709636ccddf672464f46354b628fb38811",
+      "status": "stable",
+      "source_url": "concepts/47-l400-g3-agent-governance.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "c9f0d483f4d43b25e6f7cdb4ef6275c1a733deb38d834fee095646c9dc97e6e9",
       "links_rewritten": 0
     },
     {
       "file": "concepts/48-l400-o1-more-reliable-autoraters.md",
-      "title": "Architecture Best Practice: More Reliable Autoraters — Enterprise Agentic AI Evaluation & Bias Mitigation",
+      "title": "Architecture Best Practice: More Reliable Autoraters \u2014 Enterprise Agentic AI Evaluation & Bias Mitigation",
       "tags": [
         "l400_version_20261026_0350",
         "llmautoraters",
@@ -1048,19 +1487,18 @@
         "ambientqualityagents",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "19f9c442f0c48daf69555dcad282c68fc2e0401bfe96dde3b3e1c8dabd9ccb9a",
+      "status": "stable",
+      "source_url": "concepts/48-l400-o1-more-reliable-autoraters.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "a177d82491ffde47269454ef1fe496c7b0c3d7b26bdd6965fcf1d8acec4f8ae1",
       "links_rewritten": 0
     },
     {
       "file": "concepts/49-l400-o2-deepmind-troubleshooting-tool.md",
-      "title": "Architecture Best Practice: DeepMind Troubleshooting Tool — Label-Free Diagnostics & Trajectory Observability",
+      "title": "Architecture Best Practice: DeepMind Troubleshooting Tool \u2014 Label-Free Diagnostics & Trajectory Observability",
       "tags": [
         "l400_version_20261026_0350",
         "labelfreeagentdiagnostics",
@@ -1071,19 +1509,18 @@
         "genaioperationalexcellence",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "ac32593fb6a91fa563e57e97c5de78557ffaa379a5ce27e16376d466a9fbfd09",
+      "status": "stable",
+      "source_url": "concepts/49-l400-o2-deepmind-troubleshooting-tool.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "8ba4b124619ee75524c6c81c7165e30d09687c70684b87d7511c98fd49b35250",
       "links_rewritten": 0
     },
     {
       "file": "concepts/50-l400-o3-design-and-optimization-of-coding-agents.md",
-      "title": "Architecture Best Practice: Design & Optimization of Coding Agents — Harness Architecture & Antigravity",
+      "title": "Architecture Best Practice: Design & Optimization of Coding Agents \u2014 Harness Architecture & Antigravity",
       "tags": [
         "l400_version_20261026_0350",
         "codingagents",
@@ -1097,10 +1534,10 @@
         "okf"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "2a49a11d907ec22bf6d0647c5bcebc6105991c07684ec6134e1c9f968fc37c63",
+      "status": "stable",
+      "source_url": "concepts/50-l400-o3-design-and-optimization-of-coding-agents.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "a70137de315c7d7e7bdb3dd19d1090586cbf27897db9fb75cead1786721fbf4a",
       "links_rewritten": 0
     },
     {
@@ -1116,20 +1553,18 @@
         "axitooldesign",
         "governanceguardrails",
         "google-cloud",
-        "fde-grading-rubric",
-        "l400",
-        "okf"
+        "fde-grading-rubric"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "cf774cfce1e6a83c088e64d731819e4dbcb50bcb4a88b4c78e1219d116bd925e",
+      "status": "stable",
+      "source_url": "concepts/51-l400-o4-cost-token-estimation-analysis-and-optimization.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "c475fd361e9968301cb94e3cec897dd2d8c06cb9a808716917df2bcb0b16f072",
       "links_rewritten": 0
     },
     {
       "file": "concepts/52-l400-o5-project-nexus-model-quality-reporting.md",
-      "title": "Architecture Best Practice: Project Nexus — Gemini Model Quality Reporting & Diagnostic Bisection",
+      "title": "Architecture Best Practice: Project Nexus \u2014 Gemini Model Quality Reporting & Diagnostic Bisection",
       "tags": [
         "l400_version_20261026_0350",
         "projectnexus",
@@ -1140,20 +1575,18 @@
         "onerecipehillclimbing",
         "antigravityagenticai",
         "google-cloud",
-        "fde-grading-rubric",
-        "l400",
-        "okf"
+        "fde-grading-rubric"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "725d085be4a81aeb024604bbd397ae819b105c9fb7689081c0c65a31b973f203",
+      "status": "stable",
+      "source_url": "concepts/52-l400-o5-project-nexus-model-quality-reporting.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "286f1915a834a0bba3c284394a0c07253aa0b8b46feffa9bae9830ee063223c0",
       "links_rewritten": 0
     },
     {
       "file": "concepts/53-l400-o6-alpha-evolve.md",
-      "title": "Architecture Best Practice: AlphaEvolve — Autonomous Evolutionary Algorithm Discovery & Optimization",
+      "title": "Architecture Best Practice: AlphaEvolve \u2014 Autonomous Evolutionary Algorithm Discovery & Optimization",
       "tags": [
         "l400_version_20261026_0350",
         "alphaevolve",
@@ -1167,10 +1600,10 @@
         "okf"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "4ba094586f158bb06ba10dfeb74c72c54f33a9618938e5393595610eca38ef32",
+      "status": "stable",
+      "source_url": "concepts/53-l400-o6-alpha-evolve.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "3a191fc101f073a91a5e348bcabaf24c56db21731967e680cd6d59ee67d239bf",
       "links_rewritten": 0
     },
     {
@@ -1186,14 +1619,13 @@
         "l400enterprisearchitecture",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "486b2501e23ac0ec969a41d6b3daf06e4b5ccb64e6cb5d24c46cf014e8c5a415",
+      "status": "stable",
+      "source_url": "concepts/54-l400-18-topic-connection-and-flow-graph.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "bbd0fa0e9630cdb22557573e083c7caa958507566bf29655eb587bbf9a56af04",
       "links_rewritten": 0
     },
     {
@@ -1208,13 +1640,14 @@
         "google-cloud",
         "fde-grading-rubric",
         "l400",
-        "okf"
+        "okf",
+        "okfmetadata"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "d341363abd24ecfc1b66a3cdb8e2d600040d3455d7390e7d3b891b616132283a",
+      "status": "stable",
+      "source_url": "concepts/55-l400-19-master-enterprise-faq-compendium.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "12603497c930b38ef87922e66ff2f8ef1c0f6b2e42556d6168f5579cbffe7158",
       "links_rewritten": 0
     },
     {
@@ -1232,10 +1665,10 @@
         "okf"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "1a9e144e6c4fd70840386ae4ae2ade502bd0fcbd4df0b6022fe3dcac84a50dff",
+      "status": "stable",
+      "source_url": "concepts/56-l400-20-cross-kb-best-practices-and-customer-use-cases.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "cad85bed1492f52b7212fe1072179c42422cf238db47cc1aadebe8bd835aa364",
       "links_rewritten": 0
     },
     {
@@ -1251,14 +1684,49 @@
         "antigravityharnessgovernance",
         "google-cloud",
         "fde-grading-rubric",
-        "l400",
-        "okf"
+        "l400"
       ],
       "stale_after": "2027-04-26T00:00:00Z",
-      "status": "draft",
-      "source_url": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
-      "source_modified": "2026-10-26T03:50:00Z",
-      "sha256": "869cb8c8811d362e34c7fa9d81efec42b9cd758d91fbaaf5c6667e3271b18ac5",
+      "status": "stable",
+      "source_url": "concepts/57-l400-21-fde-grading-rubric-and-field-readiness-standard.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "9407f8c6859797b71fd6830cbdec7cb28a1a519ae06d9ff29e9f7cc4631ead09",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/58-l400-o7-multi-agent-tokenomics-and-grilling-best-practices.md",
+      "title": "Multi-Agent Tokenomics, Agent-to-User Grilling & Inter-Agent Critique Optimization (OKF-L400-O7)",
+      "tags": [
+        "l400_version_20261027_1721",
+        "tokenomics_version_20261027_1721",
+        "aitokenomics",
+        "multiagentsystems",
+        "agentusergrilling",
+        "interagentgrilling",
+        "google-cloud",
+        "coasianfirmboundary",
+        "adjointtokenallocation",
+        "riskawareoptimization"
+      ],
+      "stale_after": "2027-04-26T00:00:00Z",
+      "status": "stable",
+      "source_url": "concepts/58-l400-o7-multi-agent-tokenomics-and-grilling-best-practices.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "7662d1f3aae21e494053d54d57d9b0bdfd003f2dd6ed3a4d718ec1a23c379d61",
+      "links_rewritten": 0
+    },
+    {
+      "file": "concepts/59-l400-s0-master-socratic-grilling-and-prompting-architecture.md",
+      "title": "OKF-L400-S0: Socratic Grilling & Prompting for Multi-Agent Systems \u2014 Master Google Open Knowledge Framework (OKF v0.2) Authoritative Reference",
+      "tags": [
+        "architecture-best-practice",
+        "google-cloud"
+      ],
+      "stale_after": "2027-04-26T00:00:00Z",
+      "status": "stable",
+      "source_url": "concepts/59-l400-s0-master-socratic-grilling-and-prompting-architecture.md",
+      "source_modified": "2026-10-27T17:21:00-07:00",
+      "sha256": "b32f1dfbd3c2572136c241e2a07d6c287eeddac7d55251e764eb6ed6d4ae3637",
       "links_rewritten": 0
     }
   ]

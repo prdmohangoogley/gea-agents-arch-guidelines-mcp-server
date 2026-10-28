@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Agent Tools & Interoperability with MCP"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Tools & Interoperability with MCP”."
-timestamp: "2026-09-14T18:59:38Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-13T18:59:38+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/17-PfDNQFc2vDyGWQGM1-RT6F18UwuC0UfXqrvRULs64/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - protocol-design
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "18-agent-tools-interoperability-with-mcp"
 source_doc_id: "17-PfDNQFc2vDyGWQGM1-RT6F18UwuC0UfXqrvRULs64"
-content_sha256: "84ca058a601761ea143b37b69930722b38a83f3ce3dd647f178f2e56149b856b"
+content_sha256: "effb8cba0815089b9c19c26555180fce60942ab9876ed207ca986e9adff7cb5c"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Agent Tools & Interoperability with MCP

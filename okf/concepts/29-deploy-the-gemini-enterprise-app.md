@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Preparing and Deploying the Gemini Enterprise Application"
 description: "End-to-end enterprise deployment architecture for the Gemini Enterprise application, covering Zero-Trust ingress with Context-Aware Access, AI network timeout adaptations (SSE streaming & async polling), data store indexing, CMEK/VPC-SC governance, and telemetry."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/prepare_deliver_gemini_deployments_deploy_the_gemini_enterprise_app.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "29-deploy-the-gemini-enterprise-app"
 source_doc_id: "prepare_deliver_gemini_deployments_deploy_the_gemini_enterprise_app"
-content_sha256: "0b1f471bca16811794f2a27ee44f8c852e797e0905542f04449b31ef20cf176c"
+content_sha256: "221c54cff6aacf7fc24b2a6b50f695358df78cd1840b6b405b0e1a91512dd952"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Preparing and Deploying the Gemini Enterprise Application

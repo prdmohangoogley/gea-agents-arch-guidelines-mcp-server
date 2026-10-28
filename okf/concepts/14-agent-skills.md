@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Agent Skills"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Skills”."
-timestamp: "2026-09-22T21:54:56Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-21T21:54:56+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1AISjY31IgfCrOhi_xZv3kHzINnF5IR8CIstzAuWd2kM/edit"
 generated:
@@ -28,10 +28,17 @@ tags:
   - skill-governance
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "14-agent-skills"
 source_doc_id: "1AISjY31IgfCrOhi_xZv3kHzINnF5IR8CIstzAuWd2kM"
-content_sha256: "dfd00b3dcc1d5d3adf9100bd74436f25348c1f7d01c8b6d9eb3e516d4a5002be"
+content_sha256: "8686bf6a18ba1401f75eb7250e3a047dbb3dc840bbd9ff485ba7c18acd2df67d"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Agent Skills

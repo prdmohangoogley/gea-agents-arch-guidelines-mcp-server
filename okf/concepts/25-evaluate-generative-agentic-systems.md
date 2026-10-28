@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Evaluating Generative and Agentic Systems on Google Cloud"
 description: "End-to-end evaluation engineering framework for probabilistic generative and agentic AI systems, covering Tri-Partite evaluation (deterministic, human SME, autoraters), rubric calibration, glass-box trajectory evaluation, and the online/offline quality flywheel."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/agent_evaluation_hill_climbing_evaluate_generative_agentic_systems.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "25-evaluate-generative-agentic-systems"
 source_doc_id: "agent_evaluation_hill_climbing_evaluate_generative_agentic_systems"
-content_sha256: "84ac1f5f0ab0190b56a13bcc76b56675477930c8834f0f5107ec637173e84963"
+content_sha256: "5f65e181fec0bd3028cfb3301ab657f8052526fd2976ba348e68216d4acbc60a"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Evaluating Generative and Agentic Systems on Google Cloud

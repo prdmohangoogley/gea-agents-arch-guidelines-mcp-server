@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Governing the Agent Ecosystem with Agent Gateway, Agent Registry, and Policies"
 description: "Enterprise-scale governance architecture for curbing agent sprawl and shadow MCP servers using Google Cloud Agent Registry (system of record), Agent Gateway (centralized egress/ingress enforcement plane), A2A interoperability, and declarative policy guardrails."
-timestamp: "2026-09-30T12:47:46-07:00"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T12:47:46-07:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "local://GEAP_L300/govern_secure_and_scale_the_agent_ecosystem_govern_agents_with_agent_gateway_agent_registry_policies.md"
 generated:
@@ -29,10 +29,17 @@ tags:
   - google-cloud
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "35-govern-agents-with-agent-gateway-registry-policies"
 source_doc_id: "govern_secure_and_scale_the_agent_ecosystem_govern_agents_with_agent_gateway_agent_registry_policies"
-content_sha256: "1d252d51738d15169c9fbd4d69d26631837f5e3e720d121693a1250113ceeca8"
+content_sha256: "8d06a1e3c01dd2c5790fea1c9fd9abff5d9cf94f651113b63c778b3b909dabc5"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Governing the Agent Ecosystem with Agent Gateway, Agent Registry, and Policies

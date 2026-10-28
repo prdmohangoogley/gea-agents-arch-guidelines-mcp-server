@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Vibe Coding Agent Security & Evaluation — Sandboxing, Zero Ambient Authority, Agentic SecOps & Session Convergence"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Vibe Coding Agent Security & Evaluation — Sandboxing, Zero Ambient Authority, Agentic SecOps & Session Convergence”."
-timestamp: "2026-09-30T03:19:18Z"
+timestamp: "2026-10-27T17:21:00-07:00"
 status: "draft"
-stale_after: "2027-03-29T03:19:18+00:00"
+stale_after: "2027-04-27T17:21:00-07:00"
 sources:
   - "https://docs.google.com/document/d/1TmYn6ntaoZtLp2eYIfH7mvaxRps58fYnlfiL0DQyu28/edit"
 generated:
@@ -29,10 +29,17 @@ tags:
   - observability
   - fde-grading-rubric
 corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+version_tag: "GEAPL200_2026-10-27_172100"
 document_id: "02-vibe-coding-agent-security-evaluation-kb"
 source_doc_id: "1TmYn6ntaoZtLp2eYIfH7mvaxRps58fYnlfiL0DQyu28"
-content_sha256: "b1276fea23dd8e264115777cdd86dbc1ac939f0726d53f0cc09cf34400ca4e25"
+content_sha256: "7dee729a69373fe738363888f3fb90515da1a503a08b1ebddeceea4457a2224a"
+source_modified: "2026-10-27T17:21:00-07:00"
+expires_at: "2027-04-27T17:21:00-07:00"
+ttl: "6 months (180 days / P6M)"
+tokenomics_version_tag: "Tokenomics_version_20261027_1721"
+l400_version_tag: "L400_version_20261027_1721"
+version_date: "2026-10-27"
+version_time: "17:21:00-07:00"
 ---
 
 # Architecture Best Practice: Vibe Coding Agent Security & Evaluation — Sandboxing, Zero Ambient Authority, Agentic SecOps & Session Convergence
