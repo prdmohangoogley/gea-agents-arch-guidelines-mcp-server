@@ -527,7 +527,7 @@ Here's a practical example showing the power of a structured log, adapted from a
 
 ...
 
-2025-07-10 15:26:13,778 - DEBUG - google_adk.google.adk.models.google_llm - Sending out request, model: gemini-2.0-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
+2025-07-10 15:26:13,778 - DEBUG - google_adk.google.adk.models.google_llm - Sending out request, model: gemini-3.1-flash, backend: GoogleLLMVariant.GEMINI_API, stream: False
 2025-07-10 15:26:13,778 - DEBUG - google_adk.google.adk.models.google_llm - LLM Request:
 -----------------------------------------------------------
 System Instruction:

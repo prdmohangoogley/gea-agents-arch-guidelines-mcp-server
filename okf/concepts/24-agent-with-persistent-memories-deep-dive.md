@@ -663,7 +663,7 @@ Configuration Matrix: memory_bank_config Blocks
 
 | Configuration Block | Primary Key / Field | Default / Example Value | Operational Function |
 | --- | --- | --- | --- |
-| Generation | generation_config.model | models/gemini-2.5-flash | Extracts, condenses, and synthesizes key insights from session turns. |
+| Generation | generation_config.model | models/gemini-3.1-flash | Extracts, condenses, and synthesizes key insights from session turns. |
 | Similarity Search | similarity_search_config.embedding_model | models/text-embedding-005 | Generates vector embeddings for semantic recall during agent runtime. |
 | TTL & Retention | ttl_config.memory_revision_default_ttl | 31536000s (365 days) | Controls automatic expiration and pruning of stored memory revisions. |
 | Customization Topics | customization_configs[].memory_topics | USER_PERSONAL_INFO, USER_PREFERENCES, KEY_CONVERSATION_DETAILS, EXPLICIT_INSTRUCTIONS | Restricts extraction boundaries so only targeted information categories are retained. |

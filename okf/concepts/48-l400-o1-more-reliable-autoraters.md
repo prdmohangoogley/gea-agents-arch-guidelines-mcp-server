@@ -682,7 +682,7 @@ To achieve true **Agent Agnosticism**, the next-generation Google Cloud evaluati
    * When benchmarking a fine-grained modification—such as testing `gcloud-iam-skill@v2` against `gcloud-iam-skill@v1`—background drift in container OS packages, foundation model minor snapshots, or IAM permission scopes introduces confounding noise that invalidates statistical comparison.
    * The sandbox harness enforces **immutable cryptographic content-hash pinning** across all four execution axes:
      * **Container Image Digest:** `sha256:8f4c...` (never mutable `:latest` tags).
-     * **Foundation Model Version Snapshot:** Exact pinned version (e.g., `gemini-2.5-pro-001@sha256:...`).
+     * **Foundation Model Version Snapshot:** Exact pinned version (e.g., `gemini-3.1-pro-001@sha256:...`).
      * **Sandbox Permission Manifest Hash:** Exact tool and network capability envelope.
      * **Agent Skill / Prompt Bundle Hash:** Immutable content address of the skill file under test.
 
@@ -718,7 +718,7 @@ To achieve true **Agent Agnosticism**, the next-generation Google Cloud evaluati
   +---------------------------------------------------+     +------------------------------------------+
   | BOUNDARY CONVERTER 1: Harbor -> Internal EvalTask |     | CRYPTOGRAPHIC CONTENT-HASH PINNING MANIFEST|
   | (Insulates GCP Core from Harbor Schema Changes)   |<--->| * Container Image: sha256:9a3f...        |
-  +-------------------------+-------------------------+     | * Model Snapshot:  gemini-2.5-pro-001    |
+  +-------------------------+-------------------------+     | * Model Snapshot:  gemini-3.1-pro-001    |
                             |                               | * Sandbox Perms:   net=none, fs=ephemeral|
                             v                               | * Skill Bundle:    skill_v2@sha256:4d1e..|
   +====================================================================================================+

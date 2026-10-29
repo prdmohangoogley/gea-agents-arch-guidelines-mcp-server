@@ -421,7 +421,7 @@ graph LR
 **Scenario 1: Global Omnichannel Retail Supply Chain (MCP)**
 
 - *Context & Constraints:* Customer service and logistics agents need real-time stock levels in BigQuery, order status in Cloud Spanner, and third-party shipping updates — without hardcoding API logic into the orchestrator.
-- *Applied Architecture:* ADK host agent on Cloud Run powered by `gemini-2.5-flash`; tool servers packaged as isolated Cloud Run microservices exposing MCP over Streamable HTTP; traffic routed through Apigee / Agent Gateway with Model Armor sanitization and cryptographic Agent Identity headers.
+- *Applied Architecture:* ADK host agent on Cloud Run powered by `gemini-3.1-flash`; tool servers packaged as isolated Cloud Run microservices exposing MCP over Streamable HTTP; traffic routed through Apigee / Agent Gateway with Model Armor sanitization and cryptographic Agent Identity headers.
 - *Outcomes:* New data sources land as new MCP servers with no orchestrator change; credentials stay out of the model context.
 
 **Scenario 2: Financial Services Analytical Tool Platform (MCP quiz)**

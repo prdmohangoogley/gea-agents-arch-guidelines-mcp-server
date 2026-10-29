@@ -262,7 +262,7 @@ Pure embedding similarity retrieves items by *what they say*, not *why they happ
 ### Pattern: Recursive Summarization with a Verbatim Window
 
 - **Description:** On breaching a token threshold, condense older turns into a rolling summary and retain the most recent N turns verbatim.
-- **Implementation Guidance:** Check total session token count in the context pipeline before calling the model. Above threshold (e.g., 8,000 tokens), dispatch a background task (Cloud Tasks / Cloud Run) to a lightweight model (`gemini-2.5-flash`) that folds older turns into an updated `rolling_summary`, feeding the existing summary back in so the operation is incremental rather than re-summarizing from scratch. Assemble the payload as `[Prior Session Summary]` + a synthetic acknowledgement turn + the recent verbatim window.
+- **Implementation Guidance:** Check total session token count in the context pipeline before calling the model. Above threshold (e.g., 8,000 tokens), dispatch a background task (Cloud Tasks / Cloud Run) to a lightweight model (`gemini-3.1-flash`) that folds older turns into an updated `rolling_summary`, feeding the existing summary back in so the operation is incremental rather than re-summarizing from scratch. Assemble the payload as `[Prior Session Summary]` + a synthetic acknowledgement turn + the recent verbatim window.
 - **Alternatives and when they apply:** *Sliding window (FIFO)* — zero LLM cost, instant, but risks catastrophic forgetting; only for ephemeral chat where history is genuinely irrelevant. *Head + tail truncation* — preserves the original goal and current context but drops intermediate decisions and tool outputs; suits structured workflows with static goals.
 - **Guardrails:** Summarization prompts need care — they are where decisions and constraints get silently dropped. Keep the raw log intact elsewhere.
 
@@ -428,13 +428,13 @@ Pure embedding similarity retrieves items by *what they say*, not *why they happ
 **Scenario 7: SRE Troubleshooting Sessions Exceeding 40 Turns (M4)**
 
 - *Context & Constraints:* Sessions carry verbose CLI output and diagnostic logs; resending them overflows the token budget and spikes latency.
-- *Applied Architecture:* Full raw event history append-only in Firestore for audit; a Cloud Run context pipeline checks session token count before each Vertex AI call; above 8,000 tokens a Cloud Tasks background job invokes `gemini-2.5-flash` to condense older turns into a rolling summary, retaining the last four turns verbatim.
+- *Applied Architecture:* Full raw event history append-only in Firestore for audit; a Cloud Run context pipeline checks session token count before each Vertex AI call; above 8,000 tokens a Cloud Tasks background job invokes `gemini-3.1-flash` to condense older turns into a rolling summary, retaining the last four turns verbatim.
 - *Outcomes:* Bounded active context with the complete diagnostic record still available for post-incident review.
 
 **Scenario 8: Insurance Claims Assistant with Quadratic Cost Growth (M4 quiz)**
 
 - *Context & Constraints:* 35-turn average sessions; latency climbs from 1.2s at turn 2 to over 8.5s by turn 30; per-session cost grows quadratically. Adjusters mandate that customer statements and claimed damages from early turns are never lost.
-- *Applied Architecture:* Complete history retained in Cloud Spanner for auditability; an asynchronous Cloud Run compaction worker triggered at a token threshold uses `gemini-2.5-flash` to fold older turns into an incremental summary fed alongside the last N verbatim turns.
+- *Applied Architecture:* Complete history retained in Cloud Spanner for auditability; an asynchronous Cloud Run compaction worker triggered at a token threshold uses `gemini-3.1-flash` to fold older turns into an incremental summary fed alongside the last N verbatim turns.
 - *Outcomes:* Latency and cost bounded without violating the completeness mandate — the one option that satisfies both.
 
 **Scenario 9: Wealth Management Portfolio Assistant (M5)**
@@ -464,7 +464,7 @@ Pure embedding similarity retrieves items by *what they say*, not *why they happ
 **Scenario 13: Corporate Travel Concierge Handling a Qualified Preference (M7)**
 
 - *Context & Constraints:* A traveler who normally flies Delta says: "I'm flying United for this trip because Delta has no direct flights, but I still prefer Delta whenever possible." A naive system overwrites the favorite airline to United.
-- *Applied Architecture:* An asynchronous Cloud Run consolidation worker running `gemini-2.5-pro` interprets the nuance — retains `preferred_airline: Delta`, adds `airline_exception: considers United when Delta offers no non-stop`, and records session provenance and timestamp in Cloud Spanner.
+- *Applied Architecture:* An asynchronous Cloud Run consolidation worker running `gemini-3.1-pro` interprets the nuance — retains `preferred_airline: Delta`, adds `airline_exception: considers United when Delta offers no non-stop`, and records session provenance and timestamp in Cloud Spanner.
 - *Outcomes:* Memory captures intent rather than the most recent literal statement.
 
 **Scenario 14: Fortune 500 Digital Workplace Assistant Under GDPR (M7 quiz)**
@@ -476,7 +476,7 @@ Pure embedding similarity retrieves items by *what they say*, not *why they happ
 **Scenario 15: Airline Support at Thousands of Concurrent Sessions (M8)**
 
 - *Context & Constraints:* Sub-1.5s response SLA; personalization from loyalty tier, dietary choices, and home airport; permanent capture of newly disclosed constraints ("injured leg, need wheelchair assistance for all flights this year"); resilience to traffic spikes without redundant LLM calls on "hello" and "thank you."
-- *Applied Architecture:* Pre-indexed passenger memories read from Memorystore for Redis during prompt assembly (<10ms); on session termination or inactivity the transcript publishes to Pub/Sub; an event-driven Cloud Run worker filters trivial turns, extracts with `gemini-2.5-flash`, and commits consolidated updates to Cloud Spanner.
+- *Applied Architecture:* Pre-indexed passenger memories read from Memorystore for Redis during prompt assembly (<10ms); on session termination or inactivity the transcript publishes to Pub/Sub; an event-driven Cloud Run worker filters trivial turns, extracts with `gemini-3.1-flash`, and commits consolidated updates to Cloud Spanner.
 - *Outcomes:* Read path meets the SLA; write path absorbs spikes and suppresses wasteful extraction.
 
 **Scenario 16: Payment Dispute Resolution Under Fixed Regulation (M9)**

@@ -473,7 +473,7 @@ ADK 2.0 makes A2A consumption and exposure symmetrical and declarative:
   )
 
   root_orchestrator = Agent(
-      model="gemini-2.5-pro",
+      model="gemini-3.1-pro",
       name="institutional_investment_orchestrator",
       instruction="Delegate complex derivatives Monte Carlo pricing tasks to derivatives_pricing_agent.",
       sub_agents=[derivatives_pricing_agent],

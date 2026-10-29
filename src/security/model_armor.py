@@ -23,13 +23,15 @@ tracer = get_tracer("guidelines-mcp-server")
 
 # Known prompt injection & jailbreak regex heuristic signatures for offline / fallback protection
 HEURISTIC_INJECTION_PATTERNS = [
-    re.compile(r"(?i)\bignore\s+(all\s+)?(previous|prior|above)\s+(instructions|prompts|directions)\b"),
+    re.compile(r"(?i)\bignore\s+(all\s+)?(previous\s+|prior\s+|above\s+)?(instructions|prompts|directions|rules)\b"),
     re.compile(r"(?i)\bdisregard\s+(all\s+)?(guardrails|instructions|safety|rules)\b"),
-    re.compile(r"(?i)\bsystem\s+prompt\s+(override|leak|reveal|dump)\b"),
+    re.compile(r"(?i)\b(system\s+prompt\s+(override|leak|reveal|dump)|(override|leak|reveal|dump)\s+(the\s+)?system\s+prompt)\b"),
     re.compile(r"(?i)\byou\s+are\s+now\s+(an\s+unfiltered|DAN|in\s+developer\s+mode)\b"),
     re.compile(r"(?i)\boutput\s+your\s+(system\s+instructions|system\s+prompt|core\s+rules)\b"),
     re.compile(r"(?i)\b(drop\s+table|delete\s+from|alter\s+database|truncate\s+table)\b"),
     re.compile(r"(?i)\b(bypass|disable)\s+(guardrails|security|restrictions|filters)\b"),
+    re.compile(r"(?i)\b(169\.254\.169\.254|metadata\.google\.internal|metadata\.goog)\b"),
+    re.compile(r"(?i)\b(detach\s+delete|match\s+\(n\)\s+detach)\b"),
 ]
 
 # Sensitive Data Protection (SDP/DLP) egress patterns for detecting exfiltration of secrets & SPI
@@ -57,7 +59,9 @@ HEURISTIC_EGRESS_PATTERNS: list[tuple[re.Pattern[str], str, str]] = [
         '"private_key": "[REDACTED_SA_KEY]"',
     ),
     (
-        re.compile(r"\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})\b"),
+        re.compile(
+            r"\b(?:4[0-9]{3}(?:[- ]?[0-9]{4}){3}|5[1-5][0-9]{2}(?:[- ]?[0-9]{4}){3}|3[47][0-9]{2}[- ]?[0-9]{6}[- ]?[0-9]{5}|6(?:011|5[0-9]{2})(?:[- ]?[0-9]{4}){3})\b"
+        ),
         "credit_card_pii",
         "[REDACTED_CREDIT_CARD]",
     ),
@@ -103,9 +107,42 @@ class ModelArmorSanitizer:
         self.enabled = config.model_armor_enabled if enabled is None else enabled
         self.fail_open = config.model_armor_fail_open if fail_open is None else fail_open
 
+        # Low-latency interactive timeout (150ms default) and rolling circuit breaker
+        self.timeout = getattr(config, "model_armor_timeout_seconds", 0.150)
+        self.consecutive_failures = 0
+        self.failure_threshold = 3
+        self.cooldown_seconds = 60.0
+        self.circuit_open_until = 0.0
+
         self._creds: Any = None
         self._http_client: httpx.AsyncClient | None = None
         self._init_auth()
+
+    def is_circuit_breaker_open(self) -> bool:
+        """Return True if the circuit breaker is currently in OPEN state."""
+        return time.time() < self.circuit_open_until
+
+    def trip_circuit_breaker(self, cooldown: float | None = None) -> None:
+        """Trip circuit breaker into OPEN state (for testing or manual incident mitigation)."""
+        duration = cooldown if cooldown is not None else self.cooldown_seconds
+        self.circuit_open_until = time.time() + duration
+        logger.warning(f"Model Armor circuit breaker TRIPPED into OPEN state for {duration}s.")
+
+    def reset_circuit_breaker(self) -> None:
+        """Reset circuit breaker to CLOSED normal operating state."""
+        self.consecutive_failures = 0
+        self.circuit_open_until = 0.0
+        logger.info("Model Armor circuit breaker reset to CLOSED state.")
+
+    def _record_failure(self) -> None:
+        """Increment failure counter and trip circuit breaker if threshold is reached."""
+        self.consecutive_failures += 1
+        if self.consecutive_failures >= self.failure_threshold:
+            self.circuit_open_until = time.time() + self.cooldown_seconds
+            logger.warning(
+                f"Model Armor circuit breaker TRIPPED after {self.consecutive_failures} consecutive failures. "
+                f"Switching to fast-path local heuristic guardrails for {self.cooldown_seconds}s."
+            )
 
     def _init_auth(self) -> None:
         """Initialize Google Cloud application default credentials."""
@@ -130,9 +167,9 @@ class ModelArmorSanitizer:
             return None
 
     def _get_http_client(self) -> httpx.AsyncClient:
-        """Get or initialize persistent async HTTP client."""
+        """Get or initialize persistent async HTTP client with strict SLA timeout."""
         if self._http_client is None or self._http_client.is_closed:
-            self._http_client = httpx.AsyncClient(timeout=4.0)
+            self._http_client = httpx.AsyncClient(timeout=self.timeout)
         return self._http_client
 
     def _check_heuristics(self, text: str, start_time: float) -> SanitizationResult:
@@ -179,6 +216,19 @@ class ModelArmorSanitizer:
         if not heuristic_res.is_safe:
             return heuristic_res
 
+        # Circuit breaker check: if open, route directly to fast-path local heuristics
+        if self.is_circuit_breaker_open():
+            logger.debug("Model Armor circuit breaker is OPEN; evaluating fast-path local heuristics.")
+            return SanitizationResult(
+                is_safe=heuristic_res.is_safe,
+                action=heuristic_res.action,
+                error_message=heuristic_res.error_message,
+                matched_filters=heuristic_res.matched_filters,
+                sanitized_text=heuristic_res.sanitized_text,
+                latency_ms=(time.perf_counter() - start_time) * 1000,
+                source="circuit_breaker_heuristic",
+            )
+
         if not self.enabled:
             return SanitizationResult(
                 is_safe=True,
@@ -217,6 +267,7 @@ class ModelArmorSanitizer:
                 elapsed = (time.perf_counter() - start_time) * 1000
 
                 if response.status_code == 200:
+                    self.consecutive_failures = 0
                     data = response.json()
                     sanitization_res = data.get("sanitizationResult", {})
                     filter_match_state = sanitization_res.get("filterMatchState", "NO_MATCH_FOUND")
@@ -259,12 +310,14 @@ class ModelArmorSanitizer:
                         source="cloud_model_armor",
                     )
 
+                self._record_failure()
                 logger.warning(
                     f"Model Armor API returned status {response.status_code}: {response.text}"
                 )
                 span.set_attribute("security.api_error", response.status_code)
 
             except Exception as exc:
+                self._record_failure()
                 logger.warning(f"Error querying Model Armor API: {exc}")
                 span.set_attribute("security.api_exception", str(exc))
 
@@ -406,3 +459,23 @@ class ModelArmorSanitizer:
 
 # Global default sanitizer instance
 model_armor = ModelArmorSanitizer()
+
+
+def sanitize_tool_output(data: Any, mask_in_place: bool = True) -> Any:
+    """Recursively scan and redact API keys, tokens, private keys, and PII across tool outputs.
+
+    Args:
+        data: Tool result object (string, dict, list, or primitive).
+        mask_in_place: If True, replace sensitive tokens with [REDACTED_*] placeholders.
+
+    Returns:
+        Sanitized tool output structure safe for emission to LLMs and clients.
+    """
+    if isinstance(data, str):
+        masked, _ = model_armor.mask_sensitive_data(data)
+        return masked
+    elif isinstance(data, dict):
+        return {k: sanitize_tool_output(v, mask_in_place) for k, v in data.items()}
+    elif isinstance(data, list):
+        return [sanitize_tool_output(item, mask_in_place) for item in data]
+    return data

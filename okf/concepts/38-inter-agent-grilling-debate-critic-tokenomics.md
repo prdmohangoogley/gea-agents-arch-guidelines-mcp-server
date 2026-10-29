@@ -109,7 +109,7 @@ Where the tokenomic components are defined as follows:
 1. **Node Production Cost $C_{\text{prod}}(G) = \sum_{v \in V} \tilde{P}_{\text{prod}} M_{\text{prod}, v}$:**
    * $M_{\text{prod}, v}$ is the volume of productive task-solving tokens (focused system instructions, local reasoning $T_H$, and direct artifact synthesis $T_O$) consumed internally by agent node $v \in V$.
    * $\tilde{P}_{\text{prod}}$ is the effective quality-adjusted price per productive token (incorporating model tier pricing and context caching discounts).
-   * **Division-of-Labor Effect ($\frac{\partial C_{\text{prod}}}{\partial N} < 0$):** Decomposing a monolithic prompt into $N$ specialized agents (e.g., separating a `SQLGeneratorAgent` from a `SchemaGrillerAgent` and a `SecurityCriticAgent`) *reduces* per-node prompt complexity, keeps each agent within its high-attention context window, allows routing simpler verification subtasks to lower-cost models (`gemini-2.5-flash`), and catches hallucinations early before they corrupt downstream generation. Thus, over the initial regime of specialization, $\frac{\partial C_{\text{prod}}(N)}{\partial N} < 0$ with diminishing returns ($\frac{\partial^2 C_{\text{prod}}(N)}{\partial N^2} > 0$).
+   * **Division-of-Labor Effect ($\frac{\partial C_{\text{prod}}}{\partial N} < 0$):** Decomposing a monolithic prompt into $N$ specialized agents (e.g., separating a `SQLGeneratorAgent` from a `SchemaGrillerAgent` and a `SecurityCriticAgent`) *reduces* per-node prompt complexity, keeps each agent within its high-attention context window, allows routing simpler verification subtasks to lower-cost models (`gemini-3.1-flash`), and catches hallucinations early before they corrupt downstream generation. Thus, over the initial regime of specialization, $\frac{\partial C_{\text{prod}}(N)}{\partial N} < 0$ with diminishing returns ($\frac{\partial^2 C_{\text{prod}}(N)}{\partial N^2} > 0$).
 
 2. **Internal Transaction Cost $C_T(G) = \tilde{P}_{\text{comm}} (M_{\text{comm}} + M_{\text{waste}})$:**
    * $M_{\text{comm}}$ is the volume of inter-agent communication tokens required to serialize state, transmit A2A `Message`/`Task` payloads, replay peer critiques into each debater's context window, and synchronize shared artifacts across edges $e \in E$.
@@ -159,7 +159,7 @@ flowchart LR
 ### 1.3 The Capability Ceiling & Net-Negative Debate Regime (Kim et al., 2025)
 
 Crucially, Chen et al. (2026) synthesize empirical scaling laws from **Kim et al. (2025)** (*Towards a Science of Scaling Agent Systems*) demonstrating that $N^*$ is tightly bounded by the **Capability Ceiling** of the underlying foundation model and the **decomposability** of the task:
-1. **The ~45–60% Baseline Accuracy Threshold:** When a single frontier reasoning model (e.g., `gemini-2.5-pro` with native thinking tokens $T_H$) already achieves a baseline single-agent accuracy $p_0 \gtrsim 45\%\text{--}60\%$ on a **tightly coupled, non-decomposable reasoning task**, adding unconstrained multi-agent debate ($N > N^*$) yields **flat or net-negative accuracy gains** ($\Delta \text{Acc} \le 0$) while multiplying token costs by $4\times\text{--}15\times$.
+1. **The ~45–60% Baseline Accuracy Threshold:** When a single frontier reasoning model (e.g., `gemini-3.1-pro` with native thinking tokens $T_H$) already achieves a baseline single-agent accuracy $p_0 \gtrsim 45\%\text{--}60\%$ on a **tightly coupled, non-decomposable reasoning task**, adding unconstrained multi-agent debate ($N > N^*$) yields **flat or net-negative accuracy gains** ($\Delta \text{Acc} \le 0$) while multiplying token costs by $4\times\text{--}15\times$.
 2. **Why Unconstrained Debate Fails Above the Ceiling:** In free-form natural language debate without deterministic verification anchors, correct minority solutions are frequently overwritten by **persuasive majority hallucinations** (*conformity bias*), while $\tau_{\text{sync}}$ and context bloat degrade the signal-to-noise ratio of each agent's prompt window.
 3. **When Inter-Agent Grilling Beats the Ceiling:** Inter-agent grilling only breaks through the capability ceiling when (a) the task is **structurally decomposable** into orthogonal verification dimensions (e.g., Static Specification Verification vs. Dynamic Execution Testing in Zhu Section 6.2), and (b) critics are grounded in **asymmetric information or deterministic tools** (compilers, AST linters, SQL explain plans, policy engines) rather than symmetric free-text opinion swapping.
 
@@ -682,7 +682,7 @@ def build_coasian_grilling_pipeline(
     # Stage w1: Specification Elicitation Agent (Fixed T1 = 5,000 tokens, beta_1 = 2.5e-4)
     spec_agent = LlmAgent(
         name="specification_agent_w1",
-        model="gemini-2.5-flash",
+        model="gemini-3.1-flash",
         instruction=(
             "You are Stage w1 (Specification Elicitation). Convert the user request into "
             "formal pre/post-conditions, type invariants, and deterministic test contracts. "
@@ -697,7 +697,7 @@ def build_coasian_grilling_pipeline(
     # Stage w2: Lean Code Generator Agent (Policy B: T2 = 5,000 tokens, beta_2 = 1.2e-4)
     code_gen_agent = LlmAgent(
         name="code_generator_agent_w2",
-        model="gemini-2.5-pro",
+        model="gemini-3.1-pro",
         instruction=(
             "You are Stage w2 (Lean Code Synthesis). Using {spec_artifact_w1}, synthesize a "
             "clean, modular initial implementation. Do not over-elaborate; downstream Static "
@@ -712,7 +712,7 @@ def build_coasian_grilling_pipeline(
     # Stage w3: Static Verification / Critic Grilling Agent (Policy B: T3 = 25,000 tokens, beta_3 = 1.0e-4)
     static_critic_agent = LlmAgent(
         name="static_critic_w3",
-        model="gemini-2.5-pro",
+        model="gemini-3.1-pro",
         instruction=(
             "You are Stage w3 (Static Verification Griller). Rigorously audit {draft_code_w2} "
             "against {spec_artifact_w1} for AST type safety, boundary violations, algorithmic "
@@ -727,7 +727,7 @@ def build_coasian_grilling_pipeline(
     # Stage w4: Dynamic Testing / Adversarial Grilling Agent (Policy B: T4 = 25,000 tokens, beta_4 = 1.0e-4)
     dynamic_tester_agent = LlmAgent(
         name="dynamic_tester_w4",
-        model="gemini-2.5-pro",
+        model="gemini-3.1-pro",
         instruction=(
             "You are Stage w4 (Dynamic Adversarial Tester). Generate property-based edge cases "
             "and adversarial inputs against {draft_code_w2} and {spec_artifact_w1}. Pinpoint "
@@ -748,7 +748,7 @@ def build_coasian_grilling_pipeline(
     # Stage w5: Surgical Patch Repair Agent (Policy B: T5 = 10,000 tokens, beta_5 = 0.9e-4)
     patch_repair_agent = LlmAgent(
         name="patch_repair_agent_w5",
-        model="gemini-2.5-pro",
+        model="gemini-3.1-pro",
         instruction=(
             "You are Stage w5 (Surgical Patch Repair). Apply exact fixes to {draft_code_w2} "
             "targeting the S^2-MAD deduplicated fault signatures in {static_critique_w3} and "
@@ -784,7 +784,7 @@ def build_coasian_grilling_pipeline(
 | :--- | :--- | :--- | :--- |
 | **1. Operational Excellence** | **Autonomous Pull-Request & Migration Factory (Global Retail Bank):** 40+ repositories undergoing Java 8 $\to$ Java 21 + Spring Boot 3 refactoring via ADK 2.0 coding agents. | Unbounded Programmer $\leftrightarrow$ Reviewer loops consumed **64% of tokens** with **28x run-to-run token variance** (Bai et al., 2026) and relied on prompt-based token self-estimates ($r = 0.31$). | Enforced **Zhu Section 6.2 Policy B (`5K/5K/25K/25K/10K`)** with external deterministic AST/Maven verifiers (`O1`, `O3`). Improved first-pass merge rate by **+19.4%** and cut variance from **28x to 2.1x**. |
 | **2. Security, Privacy & Compliance** | **Cross-Cloud Financial Crime & AML SAR Narrative Auditing (Tier-1 Investment Bank):** ADK Root Orchestrator on GCP grilling external risk agents on AWS/Azure over A2A. | Forwarding full 15-round internal debate transcripts across A2A edges leaked raw customer PII across cloud boundaries and inflated input tokens by **2.8x per hop** (`AgentTaxo`). | Enforced **A2A Context Minimization (`B2`)** passing only `contextId`, `referenceTaskIds[]`, and sanitized structured fault deltas through the **Enterprise Agent Gateway PEP** + **Model Armor (`33`, `35`)**. Zero PII leakage and **-68% cross-cloud A2A token volume**. |
-| **3. Reliability** | **Clinical Trial Protocol Compliance Grilling (Biotech Enterprise):** Multi-agent Red-Team/Blue-Team debate verifying FDA 21 CFR Part 11 statistical endpoints. | When 6 unconstrained debater agents argued on tasks where single-agent `gemini-2.5-pro` baseline was `62%`, persuasive hallucination conformity caused a **-4.2% accuracy regression** (Kim et al., 2025 Capability Ceiling). | Applied **Coasian $N^*=3$ cap (`ARG-Designer`)** and **`AgentPrune` spatial-temporal masking**, grounding critics strictly in deterministic R/SciPy statistical verifiers. Eliminated conformity regressions and raised SLA reliability to **99.94%**. |
+| **3. Reliability** | **Clinical Trial Protocol Compliance Grilling (Biotech Enterprise):** Multi-agent Red-Team/Blue-Team debate verifying FDA 21 CFR Part 11 statistical endpoints. | When 6 unconstrained debater agents argued on tasks where single-agent `gemini-3.1-pro` baseline was `62%`, persuasive hallucination conformity caused a **-4.2% accuracy regression** (Kim et al., 2025 Capability Ceiling). | Applied **Coasian $N^*=3$ cap (`ARG-Designer`)** and **`AgentPrune` spatial-temporal masking**, grounding critics strictly in deterministic R/SciPy statistical verifiers. Eliminated conformity regressions and raised SLA reliability to **99.94%**. |
 | **4. Performance Optimization** | **Real-Time Telecom Network Outage Root-Cause Grilling (5G Core Carrier):** Multi-agent NOC ensemble correlating BGP, Kubernetes, and optical telemetry under a 15-second P95 SLA. | Sequential 5-round all-to-all debate incurred quadratic $O(N^2 R^2)$ transcript replay and high synchronization latency $\tau_{\text{sync}}$, breaching P95 latency (`41.8s`). | Deployed **ADK 2.0 `ParallelAgent`** for orthogonal critics ($w_3 \parallel w_4$) paired with **$S^2$-MAD similarity gating** ($\theta_{\text{sim}}=0.18$) and **DebateOCR linear compression**. Reduced P95 end-to-end latency from **41.8s to 9.4s (-77.5%)**. |
 | **5. Cost Optimization** | **Enterprise Data Warehouse SQL & LookML Synthesis Platform (Fortune 100 CPG):** 120,000 daily analytical queries audited by multi-agent critic loops. | ChatDev-style full-schema replay across 4 critic agents consumed **59.4% of total tokens** (`$1.42` per complex query) with redundant agreement essays. | Combined **Vertex AI Context Caching** on static schema prefixes (`28`, `O4`), **$S^2$-MAD `<AGREE_CONSENSUS>` 1-token gating**, and **`AgentDropout`**. Reduced grilling token spend by **74.2%** (`$1.42` $\to$ `$0.36` per task) while boosting SQL execution accuracy by **+4.5%**. |
 
@@ -829,7 +829,7 @@ In alignment with **`https://g3doc.corp.google.com/company/teams/cloud-fde/index
 **Topic Tags:** `#KnowledgeCheck` `#L400Certification` `#AssessmentQuestions`
 
 #### Question 1 (Coasian Firm Boundary $N^*$ & Capability Ceiling)
-An enterprise AI engineering team is designing a multi-agent clinical reasoning verifier on Vertex AI using `gemini-2.5-pro`. On their tightly coupled diagnostic benchmark, a single `gemini-2.5-pro` agent with native thinking tokens achieves `61%` baseline accuracy. The team proposes replacing the single agent with an 8-agent all-to-all free-text Multi-Agent Debate (MAD) running for 5 rounds. Based on **Chen et al. (2026, Eq. 5)** and **Kim et al. (2025)**, what is the expected outcome and the correct L400 architectural recommendation?
+An enterprise AI engineering team is designing a multi-agent clinical reasoning verifier on Vertex AI using `gemini-3.1-pro`. On their tightly coupled diagnostic benchmark, a single `gemini-3.1-pro` agent with native thinking tokens achieves `61%` baseline accuracy. The team proposes replacing the single agent with an 8-agent all-to-all free-text Multi-Agent Debate (MAD) running for 5 rounds. Based on **Chen et al. (2026, Eq. 5)** and **Kim et al. (2025)**, what is the expected outcome and the correct L400 architectural recommendation?
 * **A.** Accuracy will increase by `>15%` because communication tokens $M_{\text{comm}}$ scale linearly with $N$.
 * **B.** Because the single-agent baseline (`61%`) already exceeds the ~45–60% capability ceiling on a tightly coupled task and $N=8 > N^*$, marginal transaction cost $\frac{\partial C_T}{\partial N}$ will far exceed marginal production savings $-\frac{\partial C_{\text{prod}}}{\partial N}$ ($O(|V|^2 R)$ token explosion), while persuasive majority hallucinations risk causing **net-negative accuracy**. Instead, cap the topology at $N^* \le 3$ orthogonal roles grounded in deterministic clinical guideline/schema verifiers and enforce $S^2$-MAD gating.
 * **C.** Prompt the root orchestrator LLM at turn 1 to predict the exact token consumption of the 8-agent debate and dynamically halt when predicted tokens reach 80% of budget.

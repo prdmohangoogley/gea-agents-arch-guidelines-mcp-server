@@ -1,211 +1,206 @@
-# Spec (b): MCP Server Best Practices & Skills Registry Audit (`mcp-server-best-practices-audit-spec.md`)
+# Spec (b): First-Class Enterprise Architecture Agent, Skills Registry & Audit Spec (`mcp-server-best-practices-audit-spec.md`)
 
-**Status:** ACTIVE (Target Specification)  
+**Status:** ACTIVE (Target Architecture & Comprehensive Engineering Specification)  
 **Target Repository:** [`https://github.com/prdmohangoogley/gea-agents-arch-guidelines-mcp-server`](https://github.com/prdmohangoogley/gea-agents-arch-guidelines-mcp-server)  
-**Canonical Repo Path:** `docs/specs/mcp-server-best-practices-audit-spec.md` (mirrored at `specs/mcp-server-best-practices-audit-spec.md`)  
+**Canonical Repo Path:** `specs/mcp-server-best-practices-audit-spec.md` (mirrored in `docs/specs/`)  
 **Target GCP Project:** `fivedaysai-prd-sandbox-317383` (`301802433103`)  
-**Governing Standard:** [`concepts/00-fde-field-readiness-and-grading-rubric.md`](../../okf/concepts/00-fde-field-readiness-and-grading-rubric.md) · Google Cloud FDE Charter  
-**Audit Scope:** Codebase (`src/`, `tests/`, `.agents/`, `iac/`) evaluated against OKF v0.2 Knowledge Base (58 Concepts)
+**Governing Standard:** [`concepts/00-fde-field-readiness-and-grading-rubric.md`](../okf/concepts/00-fde-field-readiness-and-grading-rubric.md) · Google Cloud FDE Charter  
+**Knowledge Base Corpus:** Complete OKF v0.2 Corpus (83 Flat Concepts + 25 Root L400 Concepts + Socratic Grilling + Tokenomics + Context Cache Memory)  
 
 ---
 
-## 1. Executive Summary & Audit Mandate
+## 1. Executive Summary & North Star Mandate
 
-This specification establishes an exhaustive, rigorous architectural and operational audit of the `gea-agents-arch-guidelines-mcp-server` repository against the complete 58-concept OKF v0.2 architectural corpus and the **Google Cloud FDE Field-Readiness & Project Grading Rubric** (0–3 scoring scale across Advisory Rigor Part A and Engineering Excellence Part B).
+### The North Star: First-Class Deployed Agent in GCP
+The system is architected as an authoritative **First-Class Deployed Agent in Google Cloud (Gemini Enterprise Agent Runtime / Vertex AI Agent Engine)** that powers **24x7x365 worldwide follow-the-sun enterprise development** of MCP and A2A enterprise prototypes, POCs, and production applications.
 
-### Core Audit Focus Areas:
-1. **Skills & Skills Registry Architecture for Gemini Enterprise Multi-Agent Systems:** Evaluating the decoupling of tools vs. skills, progressive disclosure of tool metadata, dynamic discovery, and multi-agent coordination.
-2. **Trajectory Evaluation Harness:** Auditing current eval coverage against actual agent skills and realistic multi-turn agent interaction traces.
-3. **Missing Enterprise Security & Zero-Trust Architecture:** Auditing Model Armor guardrail depth, Workforce Identity Federation (WIF), Principal Access Boundaries (PAB), and Delegated OAuth user token propagation.
-
----
-
-## 2. Current State Architecture vs. OKF Best Practice Target
+It provides dual-surface vertical integration across Google Cloud infrastructure up to end-user surfaces:
+1. **Antigravity CLI / AGY SDK:** Anywhere, anytime access for autonomous coding agents and human developers worldwide in local terminals and IDEs (via local `stdio`, HTTP/2 multiplexed SSE, `.agents/skills/`, subagents, and progressive disclosure).
+2. **Gemini Enterprise Web App:** Conversational access for enterprise architects, knowledge workers, and executives in Google Cloud's managed chat UI (via Vertex AI Agent Engine / Agent Runtime, Google Cloud Agent Registry, Agent Gateway, and OAuth 2.0 user-delegated credentials). Users can invoke skills to generate technical specifications strictly adhering to the 83-concept OKF v0.2 knowledge base.
 
 ```mermaid
-flowchart TB
-    subgraph Current ["Current MCP Server Implementation (src/)"]
-        CTools["Static Tools in src/tools/<br/>• get_best_practice<br/>• deep_dive_guideline<br/>• search_guidelines<br/>• get_guideline_details<br/>• query_architectural_pattern<br/>• evaluate_design_tradeoffs"]
-        CSecurity["Basic Model Armor in src/security/<br/>• Regex heuristics<br/>• Single prompt template call<br/>❌ No Output Sanitization<br/>❌ No PII / DLP token masking"]
-        CAuth["Ambient Service Account<br/>❌ Broad Cloud Run SA credentials<br/>❌ Zero Delegated OAuth / PAB<br/>❌ Confused Deputy Risk"]
-        CEval["Synthetic Evals in tests/evals/<br/>• 5 static single-turn queries<br/>❌ No trajectory evaluation<br/>❌ No multi-turn auto-raters"]
-        CSkills["Local Skills in .agents/skills/<br/>• 3 standalone folders<br/>❌ No Skills Registry schema<br/>❌ No dynamic registration"]
+flowchart TD
+    subgraph Surfaces ["Dual Enterprise Consumption Surfaces"]
+        SurfCLI["Surface A: Antigravity CLI / AGY SDK<br/>(stdio / .agents/skills, Subagents, Progressive Disclosure)"]
+        LocalAdapter["Local FastMCP Adapter (src/mcp_adapter.py)<br/>• Pure Python bridge over stdio<br/>• Maps call_tool to reasoningEngines.query"]
+        SurfWeb["Surface B: Gemini Enterprise Web App<br/>(Conversational UI, Agent Gateway, Agent Registry, Delegated OAuth)"]
+        SurfCLI --> LocalAdapter
     end
 
-    subgraph Target ["Target Architecture (OKF v0.2 & FDE Rubric Bar)"]
-        TSkills["Skills Registry on Gemini Enterprise<br/>(Concepts 07, 14, 44)<br/>• Standardized SKILL.md & manifest.json<br/>• Capability indexing & semantic discovery<br/>• Progressive disclosure (token budget control)"]
-        TEval["Trajectory Eval Harness<br/>(Concepts 25, 26, 48)<br/>• Multi-turn trajectory datasets<br/>• LLM-as-a-judge auto-raters<br/>• Tool-call precision & argument validation"]
-        TSecurity["Zero-Trust Security & Model Armor<br/>(Concepts 02, 30, 33, 34, 45)<br/>• Dual-pass Model Armor (Ingress + Egress)<br/>• Sensitive Data Protection (SDP/DLP)<br/>• Delegated OAuth & User Identity Exchange<br/>• Principal Access Boundaries (PAB)"]
-        TGraph["Spanner & BigQuery Unified Graph<br/>(Concepts 15, 16, 50)<br/>• Federated graph analytics<br/>• Real-time GQL sub-100ms queries"]
+    subgraph AgentCore ["First-Class Deployed Agent Runtime (Vertex AI Reasoning Engine)"]
+        AgentEngine["EnterpriseArchGuidelinesAgent (reasoningEngines/<id>)<br/>• Managed Python Runtime (No BYOC / No Cloud Run)<br/>• Socratic Reasoning Loop & KELE Questionnaire"]
+        SessionMemory["Platform-Native Sessions & Memory Bank (OKF Concept 04)"]
     end
 
-    CTools -.->|Refactor & Register| TSkills
-    CSkills -.->|Formalize Registry| TSkills
-    CEval -.->|Expand Multi-turn Traces| TEval
-    CSecurity -.->|Harden & Add Egress DLP| TSecurity
-    CAuth -.->|Enforce ZAA & PAB| TSecurity
+    subgraph SkillsRegistry ["Comprehensive Enterprise Skills Registry (12 Core Skills + Dynamic Discovery)"]
+        S_Design["1. Architecture Design (skill-arch-design)<br/>Scope: Spanner Graph SELECT"]
+        S_SpecGen["2. Spec Generation (skill-spec-generation)<br/>Scope: In-Memory / Zero DB"]
+        S_SpecFlow["3. Spec Creation Workflow (skill-spec-workflow)<br/>Scope: Spec State DAG"]
+        S_WAF["4. WAF Holistic Critique (skill-waf-critique)<br/>Scope: BigQuery SELECT"]
+        S_Metrics["5. Google Landing Metric Critique (skill-landing-metrics-critique)<br/>Scope: BigQuery Analytics"]
+        S_SpecCrit["6. Spec Socratic Critique (skill-spec-critique)<br/>Scope: KELE Socratic Engine"]
+        S_WAFPillar["7. WAF Specific Pillar Critique (skill-waf-pillar-critique)<br/>Scope: BigQuery Pillars"]
+        S_Rubric["8. Rubric-Level Critique (skill-fde-rubric-critique)<br/>Scope: 26 Rubric Benchmarks"]
+        S_Audit["9. Complete Full-Stack Audit (skill-complete-audit)<br/>Scope: Full-Stack Inspection"]
+        S_Alexandria["10. Alexandria Best Practices Search (skill-alexandria-search)<br/>Scope: Alexandria Search"]
+        S_Cron["11. OKF LRO Cronjob Agent (skill-okf-lro-cron)<br/>Scope: Dedicated Scheduler SA"]
+        S_TF["12. Terraform Infrastructure (skill-terraform-infra)<br/>Scope: IaC Generator"]
+        S_Discovery["Dynamic Skill Discovery Engine (.agents/skills/ & GCS)"]
+    end
+
+    subgraph EvalsAndOTel ["Trajectory Evaluation & Online Feedback Flywheel"]
+        TrajEvals["Per-Skill & Collection Trajectory Evaluation Suite (LLM-as-a-Judge)"]
+        OTelFeedback["Online OpenTelemetry Session Feedback System (Cloud Trace + BigQuery)"]
+    end
+
+    subgraph DataAndSecurity ["Enterprise Knowledge Substrate & Zero Trust"]
+        Security["Model Armor Dual-Pass + Cloud DLP + Zero Ambient Authority (ZAA)"]
+        Knowledge["Cloud Spanner Graph (ISO GQL) + BigQuery Analytics + GCS OKF Corpus"]
+    end
+
+    LocalAdapter -->|Vertex AI query() via ADC| AgentEngine
+    SurfWeb --> AgentEngine
+    AgentEngine --> SessionMemory
+    AgentEngine --> SkillsRegistry
+    SkillsRegistry --> DataAndSecurity
+    SkillsRegistry -.-> TrajEvals
+    Surfaces -.-> OTelFeedback
+    OTelFeedback --> Knowledge
 ```
 
 ---
 
-## 3. Deep Dive Audit Area 1: Skills & Skills Registry for Multi-Agent Systems
+## 2. Comprehensive Skills Registry Taxonomy
 
-### 3.1 Relevant OKF Architectural Concepts
-- **Concept 07 (`07-skills-and-skill-registry.md`):** Foundations of agent skills, executable scripts, and context compartmentalization.
-- **Concept 14 (`14-skills-registry-architecture.md`):** Enterprise Skills Registry lifecycle, capability indexing, and tool-skill binding.
-- **Concept 44 (`44-agentic-skills-discovery-and-registry-federation.md`):** Dynamic skill federation across multi-agent fleets and Agent Gateway.
-- **Concept 08/20 (`08-progressive-disclosure-for-agent-context-management.md`):** Hierarchical progressive disclosure preventing context window overflow.
+The Skills Registry houses 12 production-grade skills plus an extensible Dynamic Discovery Engine:
 
-### 3.2 Current Implementation Findings
-- **Defect S-1 (Static Tool Tight-Coupling):** All 6 tools in `src/tools/` are statically loaded into the server process. If 100 tools/skills are added, the agent system prompt exceeds token limits on initialization.
-- **Defect S-2 (Lack of Formal Skills Registry):** Skills only exist as loose markdown files in `.agents/skills/` without programmatic discovery, versioning, dependency tracking, or JSON-schema parameter validation.
-- **Defect S-3 (Missing Dynamic Discovery Tool):** No MCP tool exists allowing a Gemini Enterprise agent to search, inspect, or invoke skills dynamically based on intent.
-
-### 3.3 Required Architecture & Remediation
-1. **Registry Manifest (`registry/skills_manifest.json`):**
-   ```json
-   {
-     "$schema": "https://schemas.google.com/gemini-enterprise/skills/v1",
-     "version": "1.0.0",
-     "skills": [
-       {
-         "id": "skill-arch-eval",
-         "name": "Architecture Guidelines Evaluator",
-         "version": "1.2.0",
-         "description": "Evaluates multi-agent topologies against Google Cloud FDE best practices.",
-         "capabilities": ["architecture_audit", "fde_rubric_check"],
-         "entrypoint": "src.tools.guidelines:get_best_practice",
-         "context_token_estimate": 450,
-         "sandbox_tier": "read_only"
-       }
-     ]
-   }
-   ```
-2. **Two-Tier Progressive Disclosure:**
-   - **Tier 1 (Catalog View):** Lightweight skill names, IDs, and 1-line capability summaries (~30 tokens each).
-   - **Tier 2 (On-Demand Hydration):** Full parameter schema and instructions loaded only when an agent invokes `get_skill_definition(skill_id)`.
-
----
-
-## 4. Deep Dive Audit Area 2: Trajectory Evaluation Harness
-
-### 4.1 Relevant OKF Architectural Concepts
-- **Concept 25 (`25-generative-and-agentic-evaluation.md`):** Multi-dimensional agent evaluation (FDE Quality Flywheel, trajectory correctness).
-- **Concept 26 (`26-hill-climbing-and-trajectory-optimization.md`):** Systematic prompt & tool optimization using trajectory rollouts.
-- **Concept 48 (`48-production-trajectory-benchmarking-and-auto-raters.md`):** Automated synthetic trajectory generation, auto-rater alignment, and regression gates.
-- **FDE Rubric Part B.2.1–B.2.3:** Quality Flywheel, Grounded Evaluation Datasets, and Auto-Rater Calibration.
-
-### 4.2 Current Implementation Findings
-- **Defect E-1 (Toy Evaluation Dataset):** `tests/evals/golden_dataset.json` contains only 5 single-turn queries. None of the 38 new L300/L400 concepts or FDE rubric items are tested.
-- **Defect E-2 (Zero Trajectory Evaluation):** Current test (`test_retrieval_quality.py`) only evaluates single-turn keyword retrieval hit rates. There is zero evaluation of:
-  - Multi-turn conversational context retention.
-  - Multi-step tool call chaining (e.g., `search_guidelines` followed by `get_guideline_details` and `evaluate_design_tradeoffs`).
-  - Argument extraction precision and hallucination prevention.
-- **Defect E-3 (Absence of Auto-Raters / LLM-as-a-Judge):** Responses are not evaluated for semantic completeness, correctness against ground truth, or adherence to the 0–3 FDE rubric cutline.
-
-### 4.3 Required Architecture & Remediation
-1. **Multi-Turn Trajectory Dataset Schema (`tests/evals/trajectory_dataset.json`):**
-   ```json
-   {
-     "trajectory_id": "TRAJ-SEC-01",
-     "title": "Mitigating Confused Deputy via Delegated OAuth",
-     "skill_invoked": "skill-security-auditor",
-     "conversation": [
-       {
-         "turn": 1,
-         "user_message": "Our customer agent runs with a broad service account. How do we secure tool calls?",
-         "expected_tool_calls": [
-           {
-             "tool_name": "query_architectural_pattern",
-             "expected_arguments": {"pattern_name": "Zero Ambient Authority"}
-           }
-         ]
-       },
-       {
-         "turn": 2,
-         "user_message": "What specific Google Cloud IAM feature prevents token escalation?",
-         "expected_tool_calls": [
-           {
-             "tool_name": "get_best_practice",
-             "expected_arguments": {"topic": "Principal Access Boundaries"}
-           }
-         ],
-         "ground_truth_criteria": [
-           "Mentions Principal Access Boundaries (PAB)",
-           "Recommends Delegated OAuth user token exchange",
-           "Identifies Confused Deputy antipattern"
-         ]
-       }
-     ]
-   }
-   ```
-2. **LLM-as-a-Judge Auto-Rater (`tests/evals/test_trajectory_evaluator.py`):**
-   - Automatically scores trajectories using Gemini 2.5 Pro judge against:
-     - **Tool Selection Precision (TSP):** `TP / (TP + FP) >= 0.90`
-     - **Argument Accuracy (AA):** `>= 0.95`
-     - **FDE Answer Rigor Score:** `>= 2.0 / 3.0`
-
----
-
-## 5. Deep Dive Audit Area 3: Security & Zero-Trust Best Practice Gap Analysis
-
-### 5.1 Relevant OKF Architectural Concepts
-- **Concept 02 (`02-zero-ambient-authority-and-secure-agentic-execution.md`):** Principle of Least Privilege, avoiding shared ambient credentials.
-- **Concept 30 (`30-workforce-identity-federation-for-multi-agent-enterprise.md`):** WIF integration with enterprise IdPs (Okta, Azure AD, Ping).
-- **Concept 33 (`33-google-cloud-model-armor-enterprise-guardrails.md`):** Dual-pass prompt sanitization, DLP masking, and zero-day jailbreak defense.
-- **Concept 34 (`34-securing-agents-with-pab-and-delegated-oauth.md`):** Principal Access Boundaries and user-delegated OAuth token propagation.
-- **Concept 45 (`45-zero-trust-identity-federation-and-service-mesh.md`):** Mutual TLS, Spiffe/Spire, and runtime network isolation.
-
-### 5.2 Current Implementation Findings
-
-| Security Domain | Current State in Codebase | OKF v0.2 Production Requirement | Severity / FDE Score |
+| Skill ID | Skill Name | Domain / Purpose | Key Tools / Actions |
 |---|---|---|---|
-| **Model Armor Ingress** | Basic heuristic regex + single REST template in `src/security/model_armor.py`. | Cloud Model Armor template with dual-pass Prompt Injection & Jailbreak (PI/JB) detection + automated quota fallback. | **Score: 1.5** (Partial) |
-| **Model Armor Egress** | ❌ None. Tool output returned directly to caller without screening. | Egress sanitization filtering output for PII, secrets (API keys, credentials), and hallucinated system prompts. | **Score: 0.0** (Disqualifier) |
-| **Sensitive Data Protection (SDP/DLP)** | ❌ None. Free-text queries passed without DLP de-identification. | Vertex AI / Cloud DLP inspection template masking SSNs, credit cards, emails before LLM processing. | **Score: 0.0** (Disqualifier) |
-| **Ambient Authority (ZAA)** | Cloud Run service uses broad monolithic Service Account (`mcpuser` identity). | **Zero Ambient Authority:** Service account possesses zero data access; uses per-request Delegated OAuth tokens. | **Score: 1.0** (Major Gap) |
-| **Identity Federation (WIF)** | ❌ No WIF provider configuration or STS exchange logic. | Workforce Identity Federation allowing external enterprise users to invoke MCP server without service account keys. | **Score: 0.0** (Gap) |
-| **Principal Access Boundary (PAB)** | ❌ No PAB policies defined in Terraform or code. | PAB policies enforcing boundary conditions preventing credentials from accessing out-of-scope projects. | **Score: 0.0** (Gap) |
-| **MCP Auth Middleware** | Cloud Run deployed with `allow_unauthenticated = false` (good), but FastMCP server has zero internal auth checks. | MCP transport-level JWT / OIDC validation verifying caller identity, claims, and tenant ID. | **Score: 1.0** (Needs Remediation) |
+| `skill-arch-design` | Architecture Design | Synthesizes end-to-end enterprise architectures, component topologies, data flow diagrams, and landing zones grounded in OKF v0.2. | `design_enterprise_architecture`, `generate_component_topology` |
+| `skill-spec-generation` | Spec Generation | Generates contract-first technical specifications, ADRs, and deployment blueprints strictly adhering to OKF concepts. | `generate_technical_spec`, `create_architecture_decision_record` |
+| `skill-spec-workflow` | Spec Creation Workflow | Orchestrates multi-stage drafting, grilling, refining, and human-in-the-loop approval workflows before execution. | `initiate_spec_workflow`, `advance_spec_stage`, `finalize_spec_approval` |
+| `skill-waf-critique` | WAF Holistic Critique | Evaluates architectures against the Google Cloud Well-Architected Framework across all pillars. | `critique_well_architected_framework`, `get_waf_alignment_matrix` |
+| `skill-landing-metrics-critique` | Google Landing Metric Critique | Evaluates business value, customer ROI bounds, TCO models, and landing metrics (FDE Advisory Rigor Part A). | `critique_landing_metrics`, `calculate_agent_tco_bounds` |
+| `skill-spec-critique` | Spec Socratic Critique | Conducts Socratic grilling (KELE) on specs to identify ambiguity, underspecified SLAs, edge cases, and missing invariants. | `critique_technical_spec`, `grill_spec_assumptions` |
+| `skill-waf-pillar-critique` | WAF Pillar Critique | Deep-dive diagnostic evaluation against specific pillars: Security, Reliability, Performance, Cost, Operational Excellence. | `critique_waf_pillar(pillar="security"\|"cost"\|...)` |
+| `skill-fde-rubric-critique` | Rubric-Level Critique | Audits projects against the 26/31 sub-competencies of the Google Cloud FDE Field-Readiness Rubric ($\ge 2.0 / 3.0$ cutline). | `audit_project_against_fde_rubric`, `check_fde_disqualifiers` |
+| `skill-complete-audit` | Complete Full-Stack Audit | End-to-end composite audit evaluating repository, IaC, data tiers, protocol conformance, and security postures in one pass. | `execute_complete_architecture_audit` |
+| `skill-alexandria-search` | Alexandria Best Practices Search | High-precision search across Alexandria and enterprise knowledge bases for verified architecture patterns. | `search_alexandria_best_practices`, `cross_reference_patterns` |
+| `skill-okf-lro-cron` | OKF LRO Cronjob Agent | Monthly Cloud Scheduler Long-Running Operation agent performing automated freshness audits, concept drafting, and GCS/Spanner sync. | `run_monthly_okf_evolution_lro`, `check_okf_freshness_lro` |
+| `skill-terraform-infra` | Terraform Infrastructure | Synthesizes, validates, and audits production Terraform modules (Spanner, BigQuery, Cloud Run, IAM PAB) with least privilege. | `generate_terraform_infra`, `audit_terraform_compliance` |
+| `skill-dynamic-discovery` | Dynamic Discovery Engine | Scans `.agents/skills/`, GCS, and Agent Registry for new `SKILL.md` manifests and hydrates them dynamically into runtime. | `discover_skills`, `hydrate_skill_manifest` |
 
 ---
 
-## 6. Comprehensive FDE Rubric Scorecard & Gap Matrix
+## 3. Trajectory Evaluation Suite (Per-Skill & Collection Benchmarks)
 
-Grounded in **`concepts/00-fde-field-readiness-and-grading-rubric.md`**:
+Under OKF Concepts 01, 12, 25, 26, and 48, testing static function calls with string assertions is insufficient for an enterprise agent. Spec B establishes:
 
-| Competency Area | Sub-Competency | Baseline Score (0–3) | Target Score | Primary Gap / Remediation Needed | Priority |
-|---|---|:---:|:---:|---|:---:|
-| **Part A: Advisory Rigor** | A.1 Customer Context & Architectural Grounding | 2.5 | 3.0 | Knowledge base covers 58 concepts; needs automated concept freshness checking. | P2 |
-| | A.2 Tradeoff Articulation | 2.0 | 3.0 | `evaluate_design_tradeoffs` tool returns static trade-offs; needs live Spanner Graph GQL queries. | P1 |
-| **Part B.1: Architecture** | B.1.1 Zero Ambient Authority (ZAA) | 1.0 | 2.5 | Replace monolithic Service Account access with Delegated OAuth token exchange. | **P0** |
-| | B.1.2 Progressive Disclosure | 1.5 | 2.5 | Implement two-tier tool metadata disclosure to protect LLM context windows. | **P0** |
-| | B.1.3 Storage Tiering | 2.5 | 3.0 | Spanner (Operational) + BigQuery (Analytics) fully configured; add Vector Indexing. | P2 |
-| **Part B.2: Quality & Evals** | B.2.1 Quality Flywheel & Datasets | 1.0 | 2.5 | Expand `golden_dataset.json` from 5 queries to 50+ multi-turn trajectory evals. | **P0** |
-| | B.2.2 LLM-as-a-Judge Auto-Raters | 0.5 | 2.5 | Implement trajectory evaluator evaluating tool accuracy and response rigor. | **P0** |
-| | B.2.3 CI/CD Regression Gates | 1.5 | 2.5 | Wire trajectory evals into GitHub Actions / Cloud Build PR blocking checks. | P1 |
-| **Part B.3: Security & Identity** | B.3.1 Model Armor Ingress/Egress | 1.5 | 3.0 | Implement egress output sanitization and Cloud DLP token masking. | **P0** |
-| | B.3.2 Workforce Identity Federation (WIF) | 0.0 | 2.0 | Add WIF Terraform module and credential exchange handler. | P1 |
-| | B.3.3 Principal Access Boundaries (PAB) | 0.0 | 2.0 | Configure PAB constraints in IAM policy to prevent lateral movement. | P1 |
-| **Part B.4: Observability** | B.4.1 OpenTelemetry Distributed Tracing | 2.5 | 3.0 | Tracing active on `get_best_practice`; propagate baggage across MCP transport. | P2 |
-| | B.4.2 Audit Logging & Security Telemetry | 2.0 | 2.5 | Log all Model Armor blocked attempts to Cloud Security Command Center. | P1 |
-| **Part B.5: Operational Readiness** | B.5.1 Health Checks & Readiness Probes | 2.5 | 3.0 | `/health` route implemented in FastMCP; add Spanner/BQ connection readiness check. | P2 |
-| | B.5.2 Automated Deployment & IaC | 2.5 | 3.0 | Terraform modules complete; add automated smoke test script. | P1 |
+### 3.1 Per-Skill Trajectory Evaluation
+Each skill in the registry has dedicated multi-turn test trajectories in `tests/evals/trajectory_dataset.json`:
+- **Turn 1 (Elicitation):** User provides high-level requirement $\rightarrow$ Skill initiates Socratic questionnaire.
+- **Turn 2 (Clarification):** User provides SLA/budget parameters $\rightarrow$ Skill queries Spanner Graph / BigQuery.
+- **Turn 3 (Synthesis):** Skill generates compliant specification / critique $\rightarrow$ Model Armor sanitizes egress.
+
+### 3.2 Collection-Level Multi-Skill Trajectory Benchmarks
+End-to-end multi-agent workflow trajectories validating seamless skill handoffs:
+- **Trajectory C1 (Design to Spec to IaC):** `skill-arch-design` $\rightarrow$ `skill-spec-generation` $\rightarrow$ `skill-spec-critique` $\rightarrow$ `skill-terraform-infra`.
+- **Trajectory C2 (Full Governance Audit):** `skill-waf-critique` $\rightarrow$ `skill-fde-rubric-critique` $\rightarrow$ `skill-landing-metrics-critique` $\rightarrow$ `skill-complete-audit`.
+- **Trajectory C3 (Autonomous Evolution):** `skill-okf-lro-cron` $\rightarrow$ `skill-alexandria-search` $\rightarrow$ GCS & Spanner Graph update verification.
+
+### 3.3 LLM-as-a-Judge Auto-Raters
+Automated grading harness using Gemini 2.5 Pro as an impartial judge, evaluating:
+1. **Advisory Rigor ($\ge 2.0 / 3.0$):** Tradeoff depth, landing metrics, ROI grounding.
+2. **Engineering Excellence ($\ge 2.0 / 3.0$):** ZAA adherence, schema validity, zero hallucinations.
+3. **FDE Cutline Enforcement:** Automated PR blocking gate if trajectory score $< 2.0$.
 
 ---
 
-## 7. Remediation Execution Plan
+## 4. Online OpenTelemetry Session Feedback System
 
-### Phase 1: P0 Immediate Blockers (Sprint 1)
-1. **Skills Registry Manifest & Loader:** Implement `src/registry/` and `src/tools/registry_tools.py` with progressive disclosure.
-2. **Trajectory Evaluation Harness:** Build `tests/evals/trajectory_dataset.json` with 25 multi-turn traces and `test_trajectory_evaluator.py`.
-3. **Model Armor Egress & Output Guardrails:** Update `src/security/model_armor.py` with `sanitize_output()` preventing PII/credential egress.
+To continuously improve agent reasoning and learn from real project-building sessions:
 
-### Phase 2: P1 Security & Identity Hardening (Sprint 2)
-1. **Delegated OAuth Middleware:** Implement request context token extraction in FastMCP so tools execute under caller identity.
-2. **PAB & WIF Terraform Provisioning:** Add `iac/modules/pab` and `iac/modules/wif` to restrict service account blast radius.
-3. **Automated CI/CD Quality Gate:** Wire trajectory evaluation suite into GitHub Actions workflow.
+```mermaid
+sequenceDiagram
+    participant User as Developer / Architect
+    participant Client as Antigravity CLI / Gemini Enterprise App
+    participant Agent as First-Class Deployed Agent
+    participant OTel as OpenTelemetry Collector
+    participant BQ as BigQuery Analytics (gea_arch_guidelines_analytics)
+    participant Trace as Google Cloud Trace
 
-### Phase 3: P2 Continuous Optimization (Sprint 3)
-1. **Dynamic Skill Federation:** Connect local Skills Registry to Google Cloud Agent Gateway.
-2. **Automated Concept Freshness Monitor:** Add background crawler tracking documentation drift.
+    User->>Client: "Design multi-agent financial auditing architecture"
+    Client->>Agent: Request + TraceContext (traceparent)
+    Agent->>Agent: Execute Skill Workflow
+    Agent-->>Client: Emits Architecture Spec + Decision Matrix
+    User->>Client: Feedback Rating (★ 5/5, "Approved with Spanner TTL tweak")
+    Client->>Agent: POST /v1/feedback (rating, critique, session_id)
+    Agent->>OTel: Emit Feedback Event Span
+    OTel->>Trace: Correlate traceparent with session
+    OTel->>BQ: Ingest session_feedback (trajectory_json, rating, critique)
+```
+
+- **Instrumentation:** Integrated via `src/otel_setup.py` using `GoogleCloudTraceSpanExporter` and BigQuery streaming inserts into table `session_feedback`.
+- **Captured Attributes:** `session_id`, `caller_identity`, `skill_invoked`, `tools_called`, `prompt_tokens`, `completion_tokens`, `user_rating`, `user_critique`, `spec_adherence_score`.
+
+---
+
+## 5. Comprehensive FDE Rubric Scorecard (26 Sub-Competencies)
+
+Evaluated against [`concepts/00-fde-field-readiness-and-grading-rubric.md`](../okf/concepts/00-fde-field-readiness-and-grading-rubric.md):
+
+| Rubric ID | Domain | Sub-Competency | Baseline | Bar | Status & Target Architecture |
+|---|---|---|:---:|:---:|---|
+| **RUBRIC-A-1** | Advisory Rigor | Strategic Delivery & Value Articulation | **2.5** | $\ge 2.0$ | Automated spec workflow, clear value metrics, ROI bounds. |
+| **RUBRIC-A-2** | Advisory Rigor | Customer Context & Grounding | **2.5** | $\ge 2.0$ | Ingests 83 OKF concepts + 25 L400 concepts directly from GCS. |
+| **RUBRIC-A-3** | Advisory Rigor | Tradeoff Articulation & ADRs | **1.5** | $< 2.0$ | Upgraded via `skill-spec-critique` and Socratic KELE questionnaires. |
+| **RUBRIC-B-1-1** | Architecture | Zero Ambient Authority (ZAA) | **1.0** | $< 2.0$ | **REMEDIATION:** Caller OAuth delegation on Agent Runtime; ADC on stdio. |
+| **RUBRIC-B-1-2** | Architecture | Progressive Disclosure | **1.5** | $< 2.0$ | **REMEDIATION:** Two-tier skills registry (catalog $< 600$ tok + dynamic manifests). |
+| **RUBRIC-B-1-3** | Architecture | Tiered Storage Architecture | **2.5** | $\ge 2.0$ | Spanner Graph (ISO GQL) + BigQuery (analytics SQL) + GCS (corpus). |
+| **RUBRIC-B-1-4** | Architecture | Protocol Standards (MCP/A2A) | **1.5** | $< 2.0$ | **REMEDIATION:** Native FastMCP HTTP/2 SSE + A2A Agent Card export. |
+| **RUBRIC-B-2-1** | Quality & Evals | Quality Flywheel & Datasets | **1.0** | $< 2.0$ | **REMEDIATION:** Expanded golden dataset (25+ traces across all 12 skills). |
+| **RUBRIC-B-2-2** | Quality & Evals | Trajectory Evals & Auto-Raters | **1.0** | $< 2.0$ | **REMEDIATION:** Gemini 2.5 Pro LLM-as-a-judge trajectory auto-rater. |
+| **RUBRIC-B-2-3** | Quality & Evals | CI/CD Regression Quality Gates | **1.5** | $< 2.0$ | Automated PR blocking quality gates enforcing $\ge 2.0$ cutline. |
+| **RUBRIC-B-3-1** | Security | Dual-Pass Model Armor | **2.0** | $\ge 2.0$ | Fast local regex $< 1\text{ms}$ + Async Cloud Model Armor with circuit breaker. |
+| **RUBRIC-B-3-2** | Security | Principal Access Boundaries (PAB) | **1.0** | $< 2.0$ | Enforced GCP IAM PAB policies in Terraform modules. |
+| **RUBRIC-B-3-3** | Security | Workforce Identity Federation | **0.0** | $< 2.0$ | WIF token exchange support for enterprise IdPs. |
+| **RUBRIC-B-3-4** | Security | Sensitive Data Protection (DLP) | **1.0** | $< 2.0$ | In-memory compiled DLP regex + Cloud DLP de-identification templates. |
+| **RUBRIC-B-4-1** | Observability | OpenTelemetry Distributed Tracing | **2.0** | $\ge 2.0$ | **REMEDIATION:** Migrated to `GoogleCloudTraceSpanExporter` (0 warnings). |
+| **RUBRIC-B-4-2** | Observability | Security Telemetry & Audit Logs | **2.0** | $\ge 2.0$ | Comprehensive blocked prompt audit logs and SCC integration. |
+| **RUBRIC-B-4-3** | Observability | Metric Export & Health Monitoring | **1.5** | $\ge 2.0$ | **REMEDIATION:** Fixed Spanner `instance_id` label (eliminated 400 errors). |
+| **RUBRIC-B-5-1** | Operational | Health Checks & Probes | **2.5** | $\ge 2.0$ | FastMCP `/health` endpoint + Docker container `HEALTHCHECK`. |
+| **RUBRIC-B-5-2** | Operational | Automated IaC & Deployments | **2.5** | $\ge 2.0$ | Automated Terraform modules for Agent Engine, Spanner, BQ, and Run. |
+| **RUBRIC-B-5-3** | Operational | Scalability & Concurrency | **1.5** | $< 2.0$ | HTTP/2 multiplexed SSE with backpressure and sliding rate limiting. |
+| **RUBRIC-B-6-1** | Tokenomics | Token Cost Telemetry & Accounting | **0.5** | $< 2.0$ | **REMEDIATION:** Enriched tool response envelopes with token expenditure metadata. |
+| **RUBRIC-B-6-2** | Tokenomics | Intensive Margin Compression | **1.0** | $< 2.0$ | **REMEDIATION:** Compact/machine mode output schemas (`compact=True`). |
+| **RUBRIC-B-7-1** | Context Engine | KV-Prefix Cache Alignment | **0.5** | $< 2.0$ | **REMEDIATION:** Deterministic tool schema sorting for $\ge 32\text{k}$ prefix caching. |
+| **RUBRIC-B-7-2** | Context Engine | Platform-Native Memory Decouple | **1.5** | $< 2.0$ | Native Vertex AI Sessions and Memory Bank integration. |
+| **RUBRIC-B-8-1** | Socratic Engine | Structured Inquiry Protocols (KELE)| **0.5** | $< 2.0$ | **REMEDIATION:** Interactive diagnostic questionnaires in `skill-spec-critique`. |
+| **RUBRIC-B-8-2** | Socratic Engine | Multi-Agent Dialectic Debate (MACI)| **0.5** | $< 2.0$ | **REMEDIATION:** Inter-agent adversarial critique tools in skills registry. |
+
+**Current Score:** $\mathbf{1.78 / 3.00}$ (Below cutline $\ge 2.0$). Target Score post-Spec B: $\mathbf{\ge 2.75 / 3.00}$.
+
+---
+
+## 6. Spec B Sprint Implementation Roadmap
+
+```mermaid
+flowchart LR
+    S1["Sprint 1: P0 Core Infrastructure & Dual-Surface Agent Engine<br/>• Fix 78 OTel Warnings & Spanner 400 Export Labels<br/>• Harden Model Armor & Egress DLP<br/>• Two-Tier Dynamic Skills Registry Engine"]
+    --> S2["Sprint 2: P1 12-Skill Registry & Trajectory Evaluation Suite<br/>• Implement All 12 Core Skills<br/>• Build Per-Skill & Collection Trajectory Datasets (25+ Traces)<br/>• Implement Gemini 2.5 Pro LLM-as-a-Judge Auto-Raters"]
+    --> S3["Sprint 3: P2 Online OTel Feedback & Gemini Enterprise App<br/>• Online Session Feedback Telemetry to BigQuery<br/>• ZAA Caller Identity Propagation Middleware<br/>• Agent Registry / Gateway Publishing & E2E Verification"]
+```
+
+1. **Sprint 1 (P0 Immediate):**
+   - Modernize [`src/otel_setup.py`](file:///Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp/src/otel_setup.py) to eliminate all 78 deprecation warnings and fix Spanner resource labels.
+   - Upgrade [`src/security/model_armor.py`](file:///Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp/src/security/model_armor.py) with dual-pass hybrid sanitization and robust egress DLP.
+   - Refactor tool registration in [`src/server.py`](file:///Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp/src/server.py) and [`src/registry/skills_registry.py`](file:///Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp/src/registry/skills_registry.py) to implement dynamic discovery from `.agents/skills/`.
+2. **Sprint 2 (P1 Complete Skills & Quality Flywheel):**
+   - Populate and validate all 12 core skills in the registry.
+   - Expand [`tests/evals/trajectory_dataset.json`](file:///Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp/tests/evals/trajectory_dataset.json) to cover all 12 skills and collection trajectories.
+   - Implement LLM-as-a-Judge auto-rater in [`tests/evals/test_trajectory_evals.py`](file:///Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp/tests/evals/test_trajectory_evals.py) scoring against the FDE rubric bar ($\ge 2.0$).
+3. **Sprint 3 (P2 Governance & Online Feedback):**
+   - Implement Online OpenTelemetry session feedback logging into BigQuery.
+   - Add ZAA caller identity propagation middleware supporting delegated OAuth bearer tokens.
+   - Publish agent to Google Cloud Agent Registry & Agent Gateway for Gemini Enterprise Web App access.
+   - Verify full test suite (100% pass, 0 warnings) and commit to repository.

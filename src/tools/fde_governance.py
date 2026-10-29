@@ -8,7 +8,7 @@ from typing import Any
 from fastmcp import FastMCP
 from src.graph.client import GraphClient
 from src.otel_setup import get_tracer
-from src.security.model_armor import model_armor
+from src.security.model_armor import model_armor, sanitize_tool_output
 
 tracer = get_tracer("guidelines-mcp-server")
 
@@ -136,7 +136,7 @@ def register_fde_governance_tools(mcp: FastMCP, client: GraphClient) -> None:
             elapsed = (time.perf_counter() - start_time) * 1000
             span.set_attribute("result.count", len(enriched_items))
 
-            return {
+            return sanitize_tool_output({
                 "status": "success",
                 "charter_reference": FDE_CHARTER_URL,
                 "domain_filter": domain,
@@ -144,7 +144,7 @@ def register_fde_governance_tools(mcp: FastMCP, client: GraphClient) -> None:
                 "latency_ms": round(elapsed, 2),
                 "total_items": len(enriched_items),
                 "rubric_items": enriched_items,
-            }
+            })
 
     @mcp.tool()
     async def audit_project_against_fde_rubric(
@@ -326,7 +326,7 @@ def register_fde_governance_tools(mcp: FastMCP, client: GraphClient) -> None:
             span.set_attribute("audit.composite_score", composite_score)
             span.set_attribute("audit.status", status_verdict)
 
-            return {
+            return sanitize_tool_output({
                 "status": "success",
                 "verdict": status_verdict,
                 "composite_score": composite_score,
@@ -337,7 +337,7 @@ def register_fde_governance_tools(mcp: FastMCP, client: GraphClient) -> None:
                 "remediation_roadmap": remediations,
                 "scorecard_markdown": scorecard_md,
                 "latency_ms": round(elapsed, 2),
-            }
+            })
 
     @mcp.tool()
     async def search_fde_charter_best_practices(query: str) -> dict[str, Any]:
@@ -366,7 +366,7 @@ def register_fde_governance_tools(mcp: FastMCP, client: GraphClient) -> None:
             rubric_matches = await client.query_rubric_enforcement(keyword=query, limit=5)
 
             elapsed = (time.perf_counter() - start_time) * 1000
-            return {
+            return sanitize_tool_output({
                 "status": "success",
                 "query": query,
                 "charter_reference": FDE_CHARTER_URL,
@@ -381,4 +381,4 @@ def register_fde_governance_tools(mcp: FastMCP, client: GraphClient) -> None:
                 ],
                 "rubric_enforcements": rubric_matches,
                 "latency_ms": round(elapsed, 2),
-            }
+            })

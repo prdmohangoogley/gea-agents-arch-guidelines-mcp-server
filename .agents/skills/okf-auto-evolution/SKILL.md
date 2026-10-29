@@ -2,13 +2,14 @@
 name: okf-auto-evolution
 description: >-
   Monitors, updates, and evolves the OKF v0.2 Enterprise Architecture Guidelines corpus.
-  Discovers outdated concepts using freshness checks and grounded Google Search, drafts
-  backward-compatible revisions, and synchronizes changes to GCS and Knowledge Catalog.
+  Hosted natively on Vertex AI Reasoning Engine (Zero Cloud Run). Discovers outdated concepts
+  grounded in the Cloud FDE Charter (https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head),
+  drafts backward-compatible revisions, and synchronizes changes to GCS and Knowledge Catalog.
 ---
 
 # OKF Autonomous Evolution Skill
 
-This skill allows Antigravity agents to maintain the 58-concept OKF corpus in an evergreen state.
+This skill allows Antigravity agents and enterprise architects to maintain the 58-concept OKF corpus in an evergreen state, deployed natively on **Vertex AI Reasoning Engine** (No BYOC / Zero Cloud Run) and grounded in the [Google Cloud FDE Field-Readiness Charter & Architecture Index](https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head).
 
 ## Operational Workflow
 

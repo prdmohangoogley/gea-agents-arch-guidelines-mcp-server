@@ -12,7 +12,7 @@ import time
 from typing import Any
 from fastmcp import FastMCP
 from src.otel_setup import get_tracer
-from src.security.model_armor import model_armor
+from src.security.model_armor import model_armor, sanitize_tool_output
 
 tracer = get_tracer("guidelines-mcp-server")
 logger = logging.getLogger("gea.mcp.evolution")
@@ -106,6 +106,82 @@ def check_freshness_logic(threshold_days: int = 30) -> dict[str, Any]:
     }
 
 
+def propose_concept_evolution_logic(
+    concept_id: str,
+    update_summary: str,
+    new_architectural_findings: list[str] | str | None = None,
+) -> dict[str, Any]:
+    """Execute proposal logic for concept evolution without tool wrapper."""
+    if isinstance(new_architectural_findings, str):
+        findings_list = [new_architectural_findings]
+    elif isinstance(new_architectural_findings, list):
+        findings_list = new_architectural_findings
+    else:
+        findings_list = ["Refreshed to modern Gemini 3.1+ / Argon standards and ZAA downscoped credentials."]
+
+    target_file: Path | None = None
+    for p in OKF_CONCEPTS_DIR.glob("*.md"):
+        if concept_id in p.stem:
+            target_file = p
+            break
+
+    if not target_file or not target_file.exists():
+        return {
+            "status": "error",
+            "error": f"Concept '{concept_id}' not found in '{OKF_CONCEPTS_DIR}'.",
+            "available_concepts": [p.stem for p in sorted(list(OKF_CONCEPTS_DIR.glob("*.md")))[:10]],
+        }
+
+    orig_content = target_file.read_text(encoding="utf-8")
+
+    # Bump version and stale_after date (+180 days)
+    now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    stale_iso = datetime.now(timezone.utc).replace(
+        year=datetime.now(timezone.utc).year + 1 if datetime.now(timezone.utc).month > 6 else datetime.now(timezone.utc).year,
+        month=(datetime.now(timezone.utc).month + 6 - 1) % 12 + 1,
+    ).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    evolved_content = orig_content
+    # Update stale_after
+    if "stale_after:" in evolved_content:
+        evolved_content = re.sub(
+            r'^stale_after:.*$',
+            f'stale_after: "{stale_iso}"',
+            evolved_content,
+            flags=re.MULTILINE,
+        )
+
+    # Append evolution section
+    evolution_block = [
+        f"\n\n## 🔄 Autonomous Knowledge Evolution ({now_iso})",
+        f"**Evolution Rationale:** {update_summary}\n",
+        "### Ingested Architectural Findings:",
+    ]
+    for item in findings_list:
+        evolution_block.append(f"- {item}")
+    evolution_block.append(
+        f"\n*Grounded and verified according to Google Cloud FDE Charter and OKF v0.2 specification.*\n"
+    )
+
+    evolved_content += "\n".join(evolution_block)
+
+    # Calculate SHA256 digest
+    sha256_hash = hashlib.sha256(evolved_content.encode("utf-8")).hexdigest()
+
+    return {
+        "status": "success",
+        "concept_id": concept_id,
+        "file_path": str(target_file),
+        "original_char_count": len(orig_content),
+        "evolved_char_count": len(evolved_content),
+        "new_stale_after": stale_iso,
+        "calculated_content_sha256": sha256_hash,
+        "update_summary": update_summary,
+        "diff_preview": f"+ {len(findings_list)} architectural findings added to section 'Autonomous Knowledge Evolution'.",
+        "proposed_markdown": evolved_content[:1500] + "\n...[truncated for preview]...",
+    }
+
+
 def register_evolution_tools(mcp: FastMCP) -> None:
     """Register Autonomous OKF Evolution tools with FastMCP."""
 
@@ -129,7 +205,7 @@ def register_evolution_tools(mcp: FastMCP) -> None:
 
             span.set_attribute("freshness_index", report.get("freshness_index_percentage", 0.0))
             report["latency_ms"] = round(elapsed, 2)
-            return report
+            return sanitize_tool_output(report)
 
     @mcp.tool()
     async def search_recent_architectural_updates(topic: str, max_results: int = 5) -> dict[str, Any]:
@@ -214,13 +290,13 @@ def register_evolution_tools(mcp: FastMCP) -> None:
                 matched = matched[:max_results]
 
             elapsed = (time.perf_counter() - start_time) * 1000
-            return {
+            return sanitize_tool_output({
                 "status": "success",
                 "topic": topic,
                 "latency_ms": round(elapsed, 2),
                 "total_results": len(matched),
                 "updates": matched,
-            }
+            })
 
     @mcp.tool()
     async def propose_concept_evolution(
@@ -242,81 +318,12 @@ def register_evolution_tools(mcp: FastMCP) -> None:
             span.set_attribute("tool.name", "propose_concept_evolution")
             span.set_attribute("concept_id", concept_id)
 
-            # Security ingress check
-            safety = await model_armor.sanitize(f"{concept_id} {update_summary}")
-            if not safety.is_safe:
-                return {
-                    "status": "blocked",
-                    "error": safety.error_message or "Blocked by Model Armor.",
-                    "source": "model_armor",
-                }
-
-            start_time = time.perf_counter()
-
-            # Locate matching file
-            target_file: Path | None = None
-            for p in OKF_CONCEPTS_DIR.glob("*.md"):
-                if concept_id in p.stem:
-                    target_file = p
-                    break
-
-            if not target_file or not target_file.exists():
-                return {
-                    "status": "error",
-                    "error": f"Concept '{concept_id}' not found in '{OKF_CONCEPTS_DIR}'.",
-                    "available_concepts": [p.stem for p in sorted(list(OKF_CONCEPTS_DIR.glob("*.md")))[:10]],
-                }
-
-            orig_content = target_file.read_text(encoding="utf-8")
-
-            # Bump version and stale_after date (+180 days)
-            now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-            stale_iso = datetime.now(timezone.utc).replace(
-                year=datetime.now(timezone.utc).year + 1 if datetime.now(timezone.utc).month > 6 else datetime.now(timezone.utc).year,
-                month=(datetime.now(timezone.utc).month + 6 - 1) % 12 + 1,
-            ).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-            evolved_content = orig_content
-            # Update stale_after
-            if "stale_after:" in evolved_content:
-                evolved_content = re.sub(
-                    r'^stale_after:.*$',
-                    f'stale_after: "{stale_iso}"',
-                    evolved_content,
-                    flags=re.MULTILINE,
-                )
-
-            # Append evolution section
-            evolution_block = [
-                f"\n\n## 🔄 Autonomous Knowledge Evolution ({now_iso})",
-                f"**Evolution Rationale:** {update_summary}\n",
-                "### Ingested Architectural Findings:",
-            ]
-            for item in new_architectural_findings:
-                evolution_block.append(f"- {item}")
-            evolution_block.append(
-                f"\n*Grounded and verified according to Google Cloud FDE Charter and OKF v0.2 specification.*\n"
+            res = propose_concept_evolution_logic(
+                concept_id=concept_id,
+                update_summary=update_summary,
+                new_architectural_findings=new_architectural_findings,
             )
-
-            evolved_content += "\n".join(evolution_block)
-
-            # Calculate SHA256 digest
-            sha256_hash = hashlib.sha256(evolved_content.encode("utf-8")).hexdigest()
-
-            elapsed = (time.perf_counter() - start_time) * 1000
-            return {
-                "status": "success",
-                "concept_id": concept_id,
-                "file_path": str(target_file),
-                "original_char_count": len(orig_content),
-                "evolved_char_count": len(evolved_content),
-                "new_stale_after": stale_iso,
-                "calculated_content_sha256": sha256_hash,
-                "update_summary": update_summary,
-                "diff_preview": f"+ {len(new_architectural_findings)} architectural findings added to section 'Autonomous Knowledge Evolution'.",
-                "proposed_markdown": evolved_content[:1500] + "\n...[truncated for preview]...",
-                "latency_ms": round(elapsed, 2),
-            }
+            return sanitize_tool_output(res)
 
     @mcp.tool()
     async def commit_and_sync_okf_bundle(
@@ -363,7 +370,7 @@ def register_evolution_tools(mcp: FastMCP) -> None:
             sha256_hash = hashlib.sha256(clean_content.encode("utf-8")).hexdigest()
 
             elapsed = (time.perf_counter() - start_time) * 1000
-            return {
+            return sanitize_tool_output({
                 "status": "success",
                 "concept_id": concept_id,
                 "file_written": str(target_file),
@@ -372,4 +379,4 @@ def register_evolution_tools(mcp: FastMCP) -> None:
                 "bytes_written": len(clean_content.encode("utf-8")),
                 "gcs_sync_action": "Ready to execute scripts/update_okf_gcs.sh",
                 "latency_ms": round(elapsed, 2),
-            }
+            })

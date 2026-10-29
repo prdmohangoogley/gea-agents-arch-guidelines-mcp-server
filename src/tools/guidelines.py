@@ -6,7 +6,7 @@ from typing import Any
 from fastmcp import FastMCP
 from src.graph.client import GraphClient
 from src.otel_setup import get_tracer
-from src.security.model_armor import model_armor
+from src.security.model_armor import model_armor, sanitize_tool_output
 
 tracer = get_tracer("guidelines-mcp-server")
 
@@ -47,7 +47,7 @@ def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
             span.set_attribute("result.status", result.get("status", "unknown"))
             span.set_attribute("result.source", result.get("source", "unknown"))
             span.set_attribute("latency_ms", float(result.get("latency_ms", 0.0)))
-            return result
+            return sanitize_tool_output(result)
 
     @mcp.tool()
     async def deep_dive_guideline(component: str) -> dict[str, Any]:
@@ -82,7 +82,7 @@ def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
             span.set_attribute("result.status", result.get("status", "unknown"))
             span.set_attribute("result.source", result.get("source", "unknown"))
             span.set_attribute("latency_ms", float(result.get("latency_ms", 0.0)))
-            return result
+            return sanitize_tool_output(result)
 
     @mcp.tool()
     async def search_guidelines(
@@ -116,7 +116,7 @@ def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
             if g.source_url:
                 lines.append(f"  *Source reference:* `{g.source_url}`")
             lines.append("")
-        return "\n".join(lines)
+        return sanitize_tool_output("\n".join(lines))
 
     @mcp.tool()
     async def get_guideline_details(guideline_id: str) -> str:
@@ -137,7 +137,7 @@ def register_guideline_tools(mcp: FastMCP, client: GraphClient) -> None:
         if not guideline:
             return f"Guideline `{guideline_id}` was not found."
 
-        return (
+        return sanitize_tool_output(
             f"## [{guideline.guideline_id}] {guideline.title}\n"
             f"**Category**: `#{guideline.category}`\n\n"
             f"### Executive Summary\n"

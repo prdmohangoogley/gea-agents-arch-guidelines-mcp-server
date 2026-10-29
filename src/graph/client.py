@@ -104,9 +104,20 @@ class GraphClient:
         """Lazily initialize Google Cloud Spanner client."""
         if self._spanner_database is None and not self.use_mock:
             try:
+                import os
                 from google.cloud import spanner
 
-                client = spanner.Client(project=config.gcp_project_id)
+                # Disable un-instrumented internal SDK client metrics export to prevent Cloud Monitoring 400 Bad Request errors
+                os.environ.setdefault("SPANNER_DISABLE_BUILTIN_METRICS", "true")
+
+                # Defense-in-depth: Bind instance_id on tracer factory if metrics are ever active
+                try:
+                    from google.cloud.spanner_v1.metrics.spanner_metrics_tracer_factory import SpannerMetricsTracerFactory
+                    SpannerMetricsTracerFactory().set_instance(config.spanner_instance_id)
+                except Exception:
+                    pass
+
+                client = spanner.Client(project=config.gcp_project_id, disable_builtin_metrics=True)
                 instance = client.instance(config.spanner_instance_id)
                 self._spanner_database = instance.database(config.spanner_database_id)
             except Exception as e:

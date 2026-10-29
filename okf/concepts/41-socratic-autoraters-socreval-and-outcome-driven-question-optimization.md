@@ -480,7 +480,7 @@ class SocrevalEvaluationSchema(BaseModel):
 
 socreval_autorater_agent = LlmAgent(
     name="SocrevalReferenceFreeAutorater",
-    model="gemini-2.5-pro",
+    model="gemini-3.1-pro",
     output_schema=SocrevalEvaluationSchema,
     output_key="socreval_verdict",
     instruction="""You are a SOCREVAL Socratic Autorater (He et al., NAACL 2024; L400 O1).
@@ -507,7 +507,7 @@ class EpistemicScaffoldedQuestion(BaseModel):
 
 odqs_student_inquisitor = LlmAgent(
     name="ODQSSocraticStudentInquisitor",
-    model="gemini-2.5-flash",  # Low-cost O4 Inquisitor (or Vertex AI ODQS-DPO tuned endpoint)
+    model="gemini-3.1-flash",  # Low-cost O4 Inquisitor (or Vertex AI ODQS-DPO tuned endpoint)
     output_schema=EpistemicScaffoldedQuestion,
     output_key="student_turn_question",
     instruction="""You are an ODQS-Trained Socratic Student solving: {problem_spec}.
@@ -522,7 +522,7 @@ Never ask the Teacher for direct code or the final answer."""
 # Teacher Tier 1: Homogeneous Flash Teacher for Stepwise Math/Logic (Fig 8a Scaling Law)
 math_peer_teacher = LlmAgent(
     name="HomogeneousFlashMathTeacher",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     output_key="teacher_turn_guidance",
     instruction="""You are a Constrained Socratic Math/Logic Teacher.
 Problem: {problem_spec} | History: {dialogue_history} | Student Input: {student_turn_question}
@@ -532,7 +532,7 @@ Provide concise (<100 tokens) methodological guidance or setup critique. DO NOT 
 # Teacher Tier 2: High-Capacity Pro Teacher for Divergent Coding/Architecture (Fig 8b Scaling Law)
 code_pro_teacher = LlmAgent(
     name="HeterogeneousProCodingTeacher",
-    model="gemini-2.5-pro",
+    model="gemini-3.1-pro",
     output_key="teacher_turn_guidance",
     instruction="""You are a Constrained Socratic Principal Coding Architect.
 Problem: {problem_spec} | History: {dialogue_history} | Student Input: {student_turn_question}

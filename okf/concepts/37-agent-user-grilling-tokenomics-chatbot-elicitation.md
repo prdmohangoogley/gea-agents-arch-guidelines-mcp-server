@@ -765,7 +765,7 @@ def build_optimal_grilling_enterprise_agent(
     """Builds an ADK 2.0 LlmAgent protected by the Front-Door Optimal Grilling Coordinator."""
     return LlmAgent(
         name="cymbal_optimal_grilling_orchestrator",
-        model="gemini-2.5-pro",
+        model="gemini-3.1-pro",
         instruction=(
             "You are the Cymbal Enterprise Orchestrator. Execute tasks strictly within "
             "the committed specification parameters injected by the Front-Door Grilling Gate."

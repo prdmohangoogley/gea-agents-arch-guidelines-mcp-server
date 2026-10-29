@@ -15,6 +15,7 @@ from src.tools.patterns import register_pattern_tools
 from src.tools.fde_governance import register_fde_governance_tools
 from src.tools.skills import register_skill_tools
 from src.tools.evolution import register_evolution_tools
+from src.tools.specs import register_spec_tools
 
 # Initialize OpenTelemetry instrumentation
 setup_opentelemetry("guidelines-mcp-server")
@@ -41,8 +42,9 @@ def create_server() -> FastMCP:
     register_fde_governance_tools(mcp, client)
     register_skill_tools(mcp, client)
     register_evolution_tools(mcp)
+    register_spec_tools(mcp)
 
-    # Custom HTTP health probe endpoint for Cloud Run and Docker
+    # Custom HTTP health probe endpoint for managed health checks and observability
     @mcp.custom_route("/health", methods=["GET"])
     async def health_endpoint(request: Any) -> Any:
         from starlette.responses import JSONResponse
@@ -58,6 +60,7 @@ def create_server() -> FastMCP:
 
 
 mcp_server = create_server()
+mcp = mcp_server
 
 
 def main() -> None:

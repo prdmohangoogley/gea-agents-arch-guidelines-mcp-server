@@ -510,7 +510,7 @@ crit_scorer_tool = FunctionTool(func=compute_crit_score)
 
 p1_1_conclusion_agent = LlmAgent(
     name="p1_1_conclusion_extractor",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     instruction=(
         "Execute CRIT Prompt p1.1 (Method of Definition): Identify the primary conclusion (Omega) "
         "in the provided document. Look specifically in the final paragraphs and near rhetorical "
@@ -521,7 +521,7 @@ p1_1_conclusion_agent = LlmAgent(
 
 p1_2_issue_agent = LlmAgent(
     name="p1_2_issue_extractor",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     instruction=(
         "Execute CRIT Prompt p1.2 (Method of Definition): Identify the core central issue or problem "
         "statement addressed by the document (Omega)."
@@ -531,7 +531,7 @@ p1_2_issue_agent = LlmAgent(
 
 p1_3_outcome_agent = LlmAgent(
     name="p1_3_outcome_extractor",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     instruction=(
         "Execute CRIT Prompt p1.3 (Method of Definition): Identify the single most material outcome "
         "or architectural/policy claim presented in the text (Omega)."
@@ -550,7 +550,7 @@ thesis_committee_parallel = ParallelAgent(
 
 elenchus_auditor_agent = LlmAgent(
     name="socratic_elenchus_auditor",
-    model="gemini-2.5-pro",
+    model="gemini-3.1-pro",
     instruction="""You are the Socratic Elenchus & Definition Auditor executing CRIT Steps #1-#3.
 1. THESIS COMMITTEE RECONCILIATION: Synthesize {omega_p1_1}, {omega_p1_2}, and {omega_p1_3} into a single canonical claim Omega.
 2. REASON EXTRACTION (p2): Extract all supporting reasons R = {r_1, ..., r_k} cited in the document for Omega.
@@ -569,7 +569,7 @@ elenchus_auditor_agent = LlmAgent(
 
 dialectic_gadfly_agent = LlmAgent(
     name="socratic_dialectic_gadfly",
-    model="gemini-2.5-pro",
+    model="gemini-3.1-pro",
     instruction="""You are the Socratic Dialectic & Hypothesis Elimination Agent executing CRIT Steps #4-#6.
 Core Maxim (Chang, 2023): "The easiest way to mislead without lying outright is to leave out critical counterarguments."
 Given the Elenchus Audit {elenchus_audit}:
@@ -588,7 +588,7 @@ Given the Elenchus Audit {elenchus_audit}:
 
 maieutic_muse_agent = LlmAgent(
     name="socratic_maieutic_counterfactual_muse",
-    model="gemini-2.5-pro",
+    model="gemini-3.1-pro",
     instruction="""You are the Socratic Maieutic & Counterfactual Synthesis Agent executing CRIT Steps #7-#8.
 1. MAIEUTIC JUSTIFICATION REPORT (p7): Synthesize a rigorous Critical Reading Report presenting Canonical Claim Omega, the Elenchus table of (gamma_r, theta_r) scores, the Dialectical Counterarguments R', and the composite CRIT scores (Gamma_support and Gamma_net).
 2. COUNTERFACTUAL INTERVENTION (p8): Identify the critical causal inflection point (@) in the document's argument. Pose a targeted Counterfactual Challenge ("What if [core premise/context X] were inverted or transplanted to [New Scale/Region/Regulatory Regime Z]?") to stress-test out-of-distribution generalization.""",

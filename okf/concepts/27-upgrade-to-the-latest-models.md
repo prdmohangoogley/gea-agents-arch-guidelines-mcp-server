@@ -87,7 +87,7 @@ version_time: "17:21:00-07:00"
 - **Run an automated Side-by-Side (SxS) Offline Evaluation comparing the incumbent model and target Gemini model** across your Golden Dataset before modifying any prompts, establishing a clean zero-shot migration baseline.
 - **Audit and strip legacy prompt scaffolding** (manual ReAct scratchpads, redundant JSON formatting instructions when `response_schema` is used, and conflicting negative constraints) during the migration sprint.
 - **Execute a phased production rollout:** Shadow Mode (dark traffic logging with zero user impact) → 5% Canary → 25% → 100%, monitored via automated rollback triggers on tool-error rate, P99 latency, and safety guardrail blocks.
-- **Track model deprecation calendars and pin explicit stable model version IDs** (e.g., `gemini-2.5-pro-002` rather than floating `latest` aliases) in production workloads.
+- **Track model deprecation calendars and pin explicit stable model version IDs** (e.g., `gemini-3.1-pro-002` rather than floating `latest` aliases) in production workloads.
 
 ### Anti-Patterns & Guardrails
 

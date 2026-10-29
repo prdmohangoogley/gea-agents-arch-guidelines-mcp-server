@@ -1,0 +1,162 @@
+[
+  {
+    "id": "SKILL-TRAJ-001",
+    "name": "System Design Synthesis Trajectory",
+    "domain": "architecture",
+    "skill_id": "skill_system_design",
+    "parameters": {
+      "system_name": "Global Real-Time Payments Gateway",
+      "requirements": "Process 50k TPS multi-region with 99.999% availability, zero ambient authority, and ISO 20022 compliance.",
+      "constraints": {"sla_p99_ms": 150, "dr_rpo": 0, "dr_rto": 5},
+      "multi_agent_enabled": true
+    },
+    "expected_invariants": [
+      "Zero Ambient Authority",
+      "Cloud Spanner",
+      "Model Armor",
+      "Mermaid"
+    ],
+    "rubric_target": "RUBRIC-B-1-1"
+  },
+  {
+    "id": "SKILL-TRAJ-002",
+    "name": "Arbitrary Spec Generation Trajectory",
+    "domain": "architecture",
+    "skill_id": "skill_arbitrary_spec_generator",
+    "parameters": {
+      "domain_or_topic": "Edge Drone Fleet Telemetry and Autonomous Waypoint Routing",
+      "tech_stack_or_framework": "Rust + Tokio + gRPC + BigQuery",
+      "requirements": "Stream telemetry from 10,000 autonomous drones with sub-100ms routing decisions and offline safety fallback.",
+      "complexity_level": "principal_staff_exhaustive"
+    },
+    "expected_invariants": [
+      "Architectural Decisions",
+      "ADR",
+      "Mermaid",
+      "Observability"
+    ],
+    "rubric_target": "RUBRIC-A-3"
+  },
+  {
+    "id": "SKILL-TRAJ-003",
+    "name": "Spec Best Practices Updater Trajectory",
+    "domain": "architecture",
+    "skill_id": "skill_spec_best_practices_updater",
+    "parameters": {
+      "existing_spec_content": "# Legacy Agent Service\nRuns in Cloud Run with default compute service account. Calls Gemini 2.0 Pro and stores state in local in-memory dict. No OpenTelemetry or Model Armor.",
+      "standards_to_apply": ["ZAA", "WAF", "Model_Armor_Dual_Pass", "Modern_Models", "OTel_gRPC"],
+      "strictness_level": "production_cutline_enforced"
+    },
+    "expected_invariants": [
+      "Zero Ambient Authority",
+      "Dual-Pass",
+      "Model Armor",
+      "Gemini 3.1"
+    ],
+    "rubric_target": "RUBRIC-B-3-1"
+  },
+  {
+    "id": "SKILL-TRAJ-004",
+    "name": "Codebase to Spec Collection Trajectory",
+    "domain": "architecture",
+    "skill_id": "skill_codebase_to_spec_collection",
+    "parameters": {
+      "project_name": "GEA Multi-Agent Architecture Guidelines Platform",
+      "codebase_summary_or_path": "FastMCP server exposing Spanner Graph, BigQuery, Model Armor dual-pass, Vertex AI Reasoning Engine, and dynamic skills registry.",
+      "enforce_fde_cutline": true
+    },
+    "expected_invariants": [
+      "Spec 01",
+      "Spec 02",
+      "Spec 03",
+      "FDE Rubric"
+    ],
+    "rubric_target": "RUBRIC-B-1-2"
+  },
+  {
+    "id": "SKILL-TRAJ-005",
+    "name": "Well-Architected Framework Critique Trajectory",
+    "domain": "governance",
+    "skill_id": "skill_waf_critique",
+    "parameters": {
+      "architecture_description": "Multi-agent architecture with Spanner Graph for knowledge, Model Armor dual-pass for prompt injection defense, and gRPC OpenTelemetry.",
+      "workload_type": "multi_agent_system"
+    },
+    "expected_invariants": [
+      "Operational Excellence",
+      "Security",
+      "Reliability",
+      "Performance"
+    ],
+    "rubric_target": "RUBRIC-B-5-1"
+  },
+  {
+    "id": "SKILL-TRAJ-006",
+    "name": "Google Landing Metrics Critique Trajectory",
+    "domain": "architecture",
+    "skill_id": "skill_google_landing_metrics_critique",
+    "parameters": {
+      "system_or_endpoint_spec": "FastMCP SSE streaming endpoint terminating at Cloud CDN, querying Vertex AI Reasoning Engine with pre-warmed Spanner connection pool.",
+      "target_sla": {"ttft_ms": 250, "p99_latency_ms": 600, "cdn_hit_ratio": 0.95}
+    },
+    "expected_invariants": [
+      "Time-to-First-Token",
+      "p99",
+      "CDN"
+    ],
+    "rubric_target": "RUBRIC-A-1"
+  },
+  {
+    "id": "SKILL-TRAJ-007",
+    "name": "Complete System Audit Trajectory",
+    "domain": "governance",
+    "skill_id": "skill_complete_system_audit",
+    "parameters": {
+      "project_name": "Autonomous Lending Agent",
+      "full_system_spec_or_code_manifest": "Credit underwriting agent running on Vertex AI Reasoning Engine, using ZAA downscoped OAuth tokens, Model Armor ingress/egress filtering, Spanner Graph ISO GQL knowledge base, and full gRPC telemetry."
+    },
+    "expected_invariants": [
+      "FDE Composite Score",
+      "Pillar Evaluation",
+      "Zero Ambient Authority"
+    ],
+    "rubric_target": "RUBRIC-A-1"
+  },
+  {
+    "id": "SKILL-TRAJ-008",
+    "name": "Dynamic Skills Discovery Trajectory",
+    "domain": "knowledge_management",
+    "skill_id": "skill_discovery_and_catalog",
+    "parameters": {
+      "query_or_capability": "spec",
+      "include_manifests": false
+    },
+    "expected_invariants": [
+      "skills",
+      "matched_count",
+      "tier_1_summary"
+    ],
+    "rubric_target": "RUBRIC-B-1-2"
+  },
+  {
+    "id": "SKILL-TRAJ-009",
+    "name": "Online Session Feedback Recording Trajectory",
+    "domain": "observability",
+    "skill_id": "record_session_feedback",
+    "is_tool_call": true,
+    "parameters": {
+      "session_id": "eval-session-999",
+      "skill_id": "skill_system_design",
+      "rating": 4.8,
+      "caller_identity": "eval-harness-agent",
+      "rubric_scores": {"RUBRIC-B-1-1": 3.0, "RUBRIC-B-3-1": 2.8},
+      "qualitative_feedback": "Exemplary ZAA design with accurate Mermaid sequence diagram."
+    },
+    "expected_invariants": [
+      "recorded",
+      "eval-session-999",
+      "skill_system_design"
+    ],
+    "rubric_target": "RUBRIC-B-4-2"
+  }
+]

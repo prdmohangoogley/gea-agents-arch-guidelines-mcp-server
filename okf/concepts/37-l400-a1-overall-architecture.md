@@ -185,7 +185,7 @@ Enterprise organizations deploying generative AI assistants across fragmented Sa
 
 For **Antigravity Agentic AI** platform engineers and Forward Deployed Engineers (FDEs), Module A1 establishes the canonical runtime blueprint:
 1. **Default to Flattened Tool/Skill Pools over Sub-Agent Wrappers**: Package domain capabilities as declarative **Skills** (procedural markdown instructions + few-shot trajectories) paired with stateless **MCP / OpenAPI tools** rather than wrapping every API in its own LLM sub-agent.
-2. **Exploit `Prefill Cache (R/W/K)` & Dynamic Thinking Budgets**: Keep `query_classifier` and `skill_selector` at `thinking_budget: 0` on `gemini-2.5-flash` (`PROVISIONED` throughput), and cap MCP tool response payloads (e.g., `<= 15–25 KB`) so `root_agent` prompt tokens stay well below the `2,400,000` character ceiling.
+2. **Exploit `Prefill Cache (R/W/K)` & Dynamic Thinking Budgets**: Keep `query_classifier` and `skill_selector` at `thinking_budget: 0` on `gemini-3.1-flash` (`PROVISIONED` throughput), and cap MCP tool response payloads (e.g., `<= 15–25 KB`) so `root_agent` prompt tokens stay well below the `2,400,000` character ceiling.
 3. **Stream Thought Tokens to Optimize Perceived Latency (`TTFT`)**: Always stream intermediate reasoning milestones to the UI so users experience a sub-1.5s–3.2s **TTFT** while external tools execute in the background prior to **TTFA** and **TTLT**.
 4. **Shift Multi-Step Code/Browser Loops to VMaaS Sandboxes**: Any workflow requiring `>5` sequential tool calls, filesystem writes, test execution, or self-healing loops must run asynchronously inside a **Spark VMaaS Sandbox with Skill Cache** rather than blocking the conversational thread.
 
@@ -274,7 +274,7 @@ graph TB
 ### 2.2 Flattened Pool (`Planner + Skills V2`) vs. Autonomous Sandbox (`Gemini Spark`)
 **Topic Tags:** `#L400_version_20261026_0350` `#FlattenedToolSkillPool` `#GeminiSparkSandbox` `#VMaaSSandbox` `#SkillCache`
 
-In **Planner + Skills V2**, when a query arrives at `AssistantServer`, the **Skill & Model Selection** tier (`skill_selector`, running `gemini-2.5-flash` with `thinking_budget: 0`) dynamically binds only the relevant procedural skills and tool schemas into the **Root Agent** context window. The Root Agent directly orchestrates calls across `Search API`, `Workspace API`, `Connector Platform (BAP)`, and `Federated Search` without intermediate sub-agent LLM hops.
+In **Planner + Skills V2**, when a query arrives at `AssistantServer`, the **Skill & Model Selection** tier (`skill_selector`, running `gemini-3.1-flash` with `thinking_budget: 0`) dynamically binds only the relevant procedural skills and tool schemas into the **Root Agent** context window. The Root Agent directly orchestrates calls across `Search API`, `Workspace API`, `Connector Platform (BAP)`, and `Federated Search` without intermediate sub-agent LLM hops.
 
 For complex workloads that exceed conversational request-response limits, **Gemini Spark** provisions an **Agent Node / Root Agent** backed by:
 - **Planner + Code Gen for Skills + Tools**: Synthesizes multi-step plans and writes custom Python/shell scripts or dynamic tool adapters on the fly.
@@ -353,7 +353,7 @@ sequenceDiagram
 **Topic Tags:** `#L400_version_20261026_0350` `#LifeOfAQuery` `#SixStagePipeline` `#PersonalContext` `#HybridRelevanceBlending`
 
 Every conversational query entering the Core Assistant executes a deterministic **6-stage pipeline**:
-1. **Stage 1 — Intent Detection, Classification & Model Routing (`query_classifier`)**: Inspects the prompt and conversation history to classify intent (informational retrieval vs. transactional tool action vs. multi-step reasoning) and routes to the optimal model tier (e.g., `gemini-2.5-flash` with `thinking_budget: 0` for fast routing/classification vs. `gemini-2.5-pro` with dynamic `thinking_budget: -1` for complex synthesis).
+1. **Stage 1 — Intent Detection, Classification & Model Routing (`query_classifier`)**: Inspects the prompt and conversation history to classify intent (informational retrieval vs. transactional tool action vs. multi-step reasoning) and routes to the optimal model tier (e.g., `gemini-3.1-flash` with `thinking_budget: 0` for fast routing/classification vs. `gemini-3.1-pro` with dynamic `thinking_budget: -1` for complex synthesis).
 2. **Stage 2 — Query Rewrite & Clarification + Personal Context (`pContext`)**: Injects **Personal Context (`pContext`)** derived from the **People Connector Knowledge Graph** (populated across 8 organizational dimensions: **Collaborators**, **Projects**, **Topics**, **Employer Info**, **Knowledge Cards**, **Internal Lexicon**, **Group Aliases**, and **Employment Info**) to resolve ambiguous pronouns, first names (`"Alex"`), or internal acronyms (`"Project Titan"`). Generates **3–5 semantically varied sub-queries** optimized for target search backends, or emits a clarification prompt if ambiguity remains unresolvable.
 3. **Stage 3 — Parallel Query Fanout (`asyncio.gather`)**: Dispatches all rewritten sub-queries concurrently across enabled **Ingested Data Stores** and **Federated Connectors** (`GOOGLE_DRIVE`, `GOOGLE_MAIL`, `GOOGLE_CHAT`, `GOOGLE_CALENDAR`, `GCS`, `NATIVE_CLOUD_IDENTITY`, and `THIRD_PARTY_FEDERATED` MCPs like Jira/Confluence/SharePoint) using asynchronous non-blocking I/O (`asyncio.gather`).
 4. **Stage 4 — Collate & URL-Keyed Deduplication**: Aggregates raw document chunks and API records returned by parallel sub-queries and deduplicates identical documents using canonical **Document URLs** as primary keys.
@@ -401,7 +401,7 @@ Every conversational query entering the Core Assistant executes a deterministic 
 
 ```mermaid
 flowchart TD
-    Q["User Prompt"] --> S1["1. Intent Detection, Classification & Model Routing<br/>(query_classifier: gemini-2.5-flash, thinking_budget=0)"]
+    Q["User Prompt"] --> S1["1. Intent Detection, Classification & Model Routing<br/>(query_classifier: gemini-3.1-flash, thinking_budget=0)"]
     PC[("pContext Knowledge Graph<br/>Collaborators | Projects | Topics | Lexicon<br/>Group Aliases | Employer & Employment Info")] --> S2
     S1 --> S2["2. Query Rewrite & Clarification<br/>(Disambiguates entities via pContext; emits 3-5 sub-queries)"]
     S2 --> S3["3. Parallel Query Fanout (asyncio.gather)"]
@@ -420,12 +420,12 @@ flowchart TD
 
 | Pipeline Stage | Internal Component / Model | Key Input -> Output Transformation | Latency & Quality Optimization Mechanism |
 | :--- | :--- | :--- | :--- |
-| **1. Intent & Routing** | `query_classifier` (`gemini-2.5-flash`, `thinking_budget: 0`) | Raw prompt -> Intent class + Model tier selection | Zero thinking budget keeps classification under `~150–300ms` on `PROVISIONED` throughput. |
+| **1. Intent & Routing** | `query_classifier` (`gemini-3.1-flash`, `thinking_budget: 0`) | Raw prompt -> Intent class + Model tier selection | Zero thinking budget keeps classification under `~150–300ms` on `PROVISIONED` throughput. |
 | **2. Rewrite & `pContext`** | Query Rewriter + People Connector Knowledge Graph | Ambiguous query + 8 `pContext` dimensions -> 3–5 explicit sub-queries | Resolves `"Alex"` or internal codenames upfront; requests clarification only when necessary. |
 | **3. Parallel Fanout** | `asyncio.gather` Dispatcher | 3–5 sub-queries -> Concurrent requests to all `ACTIVE` connectors | Prevents additive serial network latency; bounded by the slowest single connector plus timeout. |
 | **4. Collate & Dedup** | URL Deduplicator | Overlapping multi-query hits -> Unique candidate set (`All Retrieved Sources`) | Canonical URL primary-key matching strips duplicate documents before token-heavy re-ranking. |
 | **5. Relevance Blend** | Hybrid Reranker (Vector Comparator + LLM Rater) | Candidate snippets -> Calibrated top-K context window | Solves score incompatibility across federated APIs via semantic LLM snippet evaluation. |
-| **6. Grounded Synthesis** | `root_agent` (`gemini-2.5-pro`) + `grounding_score` | Top-K snippets -> Streamed answer + `User Visible Citations` | Enforces citation attribution and verifies factual support via `grounding_score` (`0.0–1.0`). |
+| **6. Grounded Synthesis** | `root_agent` (`gemini-3.1-pro`) + `grounding_score` | Top-K snippets -> Streamed answer + `User Visible Citations` | Enforces citation attribution and verifies factual support via `grounding_score` (`0.0–1.0`). |
 
 #### 2.3.3 Inline Section Best Practices & FAQs (6-Stage Query Lifecycle & `pContext`)
 **Topic Tags:** `#L400_version_20261026_0350` `#SectionBestPractices` `#SectionFAQs` `#QueryPipelineOptimization`
@@ -516,7 +516,7 @@ Gemini Enterprise pairs privacy-governed trace observability with automated batc
      - **Plane A — Personal Context (`pContext`)**: Verifies all 8 Knowledge Graph categories populated from the People connector.
      - **Plane B — Grounding & Citations**: Compares **`User Visible Citations`** (rendered in UI) against **`All Retrieved Sources`** (e.g., all 7 retrieved snippets + URLs) to isolate retrieval failure vs. synthesis filtering.
      - **Plane C — Data Connectors & BAP Logs**: Audits every connector's `DATA SOURCE`, `TYPE`, `STATE` (`ACTIVE`), `COLLECTION ID`, `DEBUG CONSOLE` link, and **`BAP TENANT PROJECT LOGS (Request Logs)`**.
-     - **Plane D — LLM Execution Metrics & Prefill Cache (`R/W/K`)**: Inspects per-call Model ID (`gemini-2.5-flash` vs. `gemini-2.5-pro`), Traffic Type (`PROVISIONED`), Latency (`297ms` vs. `23.79s`), Tokens (`Prompt + Candidates + Thoughts = Total`), **`Prefill Cache (R/W/K)`** (`Read / Write / Key`), `thinking_budget` (`0` vs. `-1`), and `Max Prompt Chars` (`2,400,000`).
+     - **Plane D — LLM Execution Metrics & Prefill Cache (`R/W/K`)**: Inspects per-call Model ID (`gemini-3.1-flash` vs. `gemini-3.1-pro`), Traffic Type (`PROVISIONED`), Latency (`297ms` vs. `23.79s`), Tokens (`Prompt + Candidates + Thoughts = Total`), **`Prefill Cache (R/W/K)`** (`Read / Write / Key`), `thinking_budget` (`0` vs. `-1`), and `Max Prompt Chars` (`2,400,000`).
      - **Plane E — Step-by-Step Execution Sequence & Waterfall**: Profiles every stage (`query_classifier` -> `skill_selector` -> `root_agent` -> MCP tool calls -> `grounding_score`).
 2. **Three Core Streaming Latency Metrics (`TTFT`, `TTFA`, `TTLT`)**:
    - **Time to First Token (`TTFT`, e.g., `3.2s`)**: Elapsed time from query submission until the **first streaming thought token** renders in the transparent UI. Governs **perceived latency**.
@@ -532,8 +532,8 @@ Gemini Enterprise pairs privacy-governed trace observability with automated batc
 |                   STREAMING LATENCY TIMELINE & DOLPHIN DEBUGGER TRACE WATERFALL                   |
 +---------------------------------------------------------------------------------------------------+
 Query Submitted (t = 0.0s)
-  |-- [0.0s - 0.3s] query_classifier (gemini-2.5-flash, PROVISIONED, thinking=0, 297ms)
-  |-- [0.3s - 0.9s] skill_selector   (gemini-2.5-flash, PROVISIONED, thinking=0, 626ms)
+  |-- [0.0s - 0.3s] query_classifier (gemini-3.1-flash, PROVISIONED, thinking=0, 297ms)
+  |-- [0.3s - 0.9s] skill_selector   (gemini-3.1-flash, PROVISIONED, thinking=0, 626ms)
   |-- [0.9s - 3.2s] root_agent Call 1 starts streaming UI Thought Tokens
   |===> t = 3.2s : TTFT (Time to First Token) -> Immediate UI Feedback (Lowers Perceived Latency!)
   |-- [3.2s - 7.8s] Parallel Fanout / MCP Tool Execution (e.g., Confluence/Jira/Drive APIs)
@@ -626,7 +626,7 @@ quadrantChart
 | :--- | :--- | :--- | :--- |
 | **1. Orchestration Topology** | Register SaaS capabilities as atomic MCP/OpenAPI tools and procedural skills inside the **Flattened V2 Pool**. | Wrapping every SaaS connector in its own LLM sub-agent (`CA*-as-tool`) for routine cross-app queries. | `TTLT > 22s`, 4+ serial LLM hops in waterfall, and missing entity IDs in downstream tool arguments. |
 | **2. MCP Tool Payload Sizing** | Filter, paginate, and project MCP tool responses to `<= 15–25 KB` (`<= 3,000–5,000 tokens`) before returning to `root_agent`. | Returning unpaginated raw JSON blobs (`20,000+` tokens) from custom MCP servers into `root_agent`. | `root_agent` Call 2 prompt tokens jump from `3.5k` to `24.6k+`; `TTLT` spikes past `30s`. |
-| **3. Model & Thinking Routing** | Pin `query_classifier` and `skill_selector` to `gemini-2.5-flash` with `thinking_budget: 0` on `PROVISIONED` throughput. | Enabling unconstrained `thinking_budget: -1` on `gemini-2.5-pro` for upfront routing/classification steps. | `TTFT` degrades from `~1.5s` to `>8s` before the Root Agent even begins tool selection. |
+| **3. Model & Thinking Routing** | Pin `query_classifier` and `skill_selector` to `gemini-3.1-flash` with `thinking_budget: 0` on `PROVISIONED` throughput. | Enabling unconstrained `thinking_budget: -1` on `gemini-3.1-pro` for upfront routing/classification steps. | `TTFT` degrades from `~1.5s` to `>8s` before the Root Agent even begins tool selection. |
 | **4. Identity & Write Actions** | Enforce per-user **OAuth 2.0 (3LO)** token pass-through for all federated queries and write mutations. | Using SAML assertions for API writes or binding a shared Super-Admin API key to transactional tools. | Either 401/403 API failures or catastrophic privilege escalation & loss of per-user audit attribution. |
 | **5. Quality & Pre-Launch Sign-Off** | Run **Eval Studio (`Neal Studio`)** with 5–10 queries/connector + 10 cross-source queries and LLM autograder rubrics. | Approving production rollouts based on 3–5 manual ad-hoc chat prompts in the UI. | Undetected connector regressions, silent citation drops, and p95 latency SLA breaches in production. |
 
@@ -663,7 +663,7 @@ quadrantChart
 | **1. Operational Excellence** | Standardize L1–L3 triage around customer-consented **`Assist Tokens`** in **Dolphin Debugger**; automate CI/CD regression gates using **Gemini Enterprise Eval Studio (`Neal Studio`)** with 5–10 queries/connector + 10 cross-source queries. | **Dolphin Debugger** (`pContext`, `Data Connectors`, `BAP Request Logs`), **Cloud Logging**, **Cloud Monitoring**, **Cloud Trace**. |
 | **2. Security, Privacy & Compliance** | Enforce per-user **OAuth 2.0 (3LO)** for live federated APIs/writes and **SAML 2.0 + Identity/ACL Mapping Sync** for ingested stores; encrypt indexes/logs with **Cloud KMS CMEK**; isolate Spark **VMaaS Sandboxes** inside **VPC Service Controls**; gate debugging via tenant allowlisting and **Access Transparency (AX)**. | **Cloud KMS CMEK**, **VPC Service Controls**, **Access Transparency (AX)** logs, **Cloud Audit Logs**, **IAM / WIF**. |
 | **3. Reliability** | Use `asyncio.gather` parallel fanout with per-connector circuit breakers, strict timeout budgets (`2.5s–4.0s`), and exponential backoff with jitter; checkpoint **Gemini Spark** VMaaS Sandbox state after every step so transient tool failures resume cleanly. | **Provisioned Throughput** (`Traffic Type: PROVISIONED`), **Service Monitoring** SLOs & Error Budgets across connector tiers. |
-| **4. Performance Optimization** | Flatten orchestration (`Planner + Skills V2`) to eliminate sub-agent LLM hops; pin `query_classifier` and `skill_selector` to `gemini-2.5-flash` (`thinking_budget: 0`); stream UI thought tokens to minimize **TTFT**; cap MCP tool payloads (`<= 25 KB`); leverage **`Prefill Cache (R/W/K)`** and **Skill Cache**. | **Dolphin Debugger** LLM Waterfall (`TTFT`, `TTFA`, `TTLT`, `Prefill Cache R/W/K`), **Memorystore** for `pContext` caching. |
+| **4. Performance Optimization** | Flatten orchestration (`Planner + Skills V2`) to eliminate sub-agent LLM hops; pin `query_classifier` and `skill_selector` to `gemini-3.1-flash` (`thinking_budget: 0`); stream UI thought tokens to minimize **TTFT**; cap MCP tool payloads (`<= 25 KB`); leverage **`Prefill Cache (R/W/K)`** and **Skill Cache**. | **Dolphin Debugger** LLM Waterfall (`TTFT`, `TTFA`, `TTLT`, `Prefill Cache R/W/K`), **Memorystore** for `pContext` caching. |
 | **5. Cost Optimization (FinOps)** | Prevent token multiplication by replacing multi-agent `CA*-as-tool` chains with the flat tool pool; reuse cached system prefixes via **`Prefill Cache (R/W/K)`** and validated scripts via Spark's **Skill Cache**; right-size **Provisioned Throughput** commitments; track token consumption, connector API costs, and departmental chargebacks using **Cloud Billing reports** export to BigQuery visualized in **Looker Studio** FinOps dashboards. | **Cloud Billing reports**, **BigQuery Billing Export**, **Looker Studio** FinOps & Token Efficiency Dashboards, **Eval Studio** token telemetry. |
 
 ---
@@ -675,7 +675,7 @@ quadrantChart
 
 | Metric Category | Specific SLI / Production Metric | Target Production SLO / Threshold | Measurement Source & Instrumentation Plane | Architectural Remediation if Breached |
 | :--- | :--- | :--- | :--- | :--- |
-| **Perceived Latency** | **Time to First Token (`TTFT`)** | **p50 <= 1.5s \| p95 <= 3.2s** | Eval Studio (`Neal Studio`) & UI Streaming Telemetry | Ensure `query_classifier` & `skill_selector` use `gemini-2.5-flash` (`thinking_budget: 0`) on `PROVISIONED` throughput; verify UI thought streaming is enabled. |
+| **Perceived Latency** | **Time to First Token (`TTFT`)** | **p50 <= 1.5s \| p95 <= 3.2s** | Eval Studio (`Neal Studio`) & UI Streaming Telemetry | Ensure `query_classifier` & `skill_selector` use `gemini-3.1-flash` (`thinking_budget: 0`) on `PROVISIONED` throughput; verify UI thought streaming is enabled. |
 | **Synthesis Start Latency** | **Time to First Answer Token (`TTFA`)** | **p50 <= 5.0s \| p95 <= 8.5s** | Eval Studio & Dolphin Debugger Step Waterfall | Optimize `asyncio.gather` connector timeouts (`<= 3.5s`); reduce sequential MCP tool round trips. |
 | **End-to-End Turn Latency** | **Time to Last Token (`TTLT`)** | **p50 <= 7.5s \| p95 <= 12.0s** (Conversational) | Eval Studio & Dolphin Debugger Summary Banner | Truncate/paginate MCP tool payloads (`<= 25 KB`) so `root_agent` prompt tokens stay `< 8,000`; verify `Prefill Cache (R/W/K)` hit rates. |
 | **Routing & Classification** | `query_classifier` + `skill_selector` Latency | **<= 400ms (`classifier`) \| <= 750ms (`selector`)** | Dolphin Debugger LLM Execution Metrics Table | Confirm `thinking_budget: 0` and compact skill metadata descriptions in the Skills Registry. |
@@ -706,7 +706,7 @@ quadrantChart
 **Topic Tags:** `#L400_version_20261026_0350` `#Question2` `#SkillSelector` `#ModularExtensibility`
 - **Scenario**: When migrating from standalone connector sub-agents to a flattened pool of tools and skills, how does Gemini Enterprise prevent the Root Agent's context window from being overwhelmed by hundreds of enterprise tool definitions?
   - **A.** It hardcodes a maximum limit of 2 tools per enterprise tenant.
-  - **B.** It introduces an upfront **Skill & Model Selection (`skill_selector`)** step (`gemini-2.5-flash`, `thinking_budget: 0`) that dynamically selects and binds only the relevant procedural skills and tool schemas to the Root Agent for that turn.
+  - **B.** It introduces an upfront **Skill & Model Selection (`skill_selector`)** step (`gemini-3.1-flash`, `thinking_budget: 0`) that dynamically selects and binds only the relevant procedural skills and tool schemas to the Root Agent for that turn.
   - **C.** It disables all third-party connectors whenever Google Workspace tools are enabled.
   - **D.** It truncates all tool JSON schemas to their first 50 characters.
 - **Correct Answer**: **B**
@@ -734,11 +734,11 @@ quadrantChart
 
 #### Question 5: Dynamic Model Routing & Thinking Budget Governance
 **Topic Tags:** `#L400_version_20261026_0350` `#Question5` `#ModelRouting` `#ThinkingBudget`
-- **Scenario**: Inspecting a production trace in Dolphin Debugger, you observe `query_classifier` (`297ms`) and `skill_selector` (`626ms`) running on `gemini-2.5-flash` with `thinking_budget: 0`, whereas `root_agent` runs on `gemini-2.5-pro` with `thinking_budget: -1`. Why is the architecture designed with this split?
-  - **A.** `gemini-2.5-pro` does not support JSON output schemas.
+- **Scenario**: Inspecting a production trace in Dolphin Debugger, you observe `query_classifier` (`297ms`) and `skill_selector` (`626ms`) running on `gemini-3.1-flash` with `thinking_budget: 0`, whereas `root_agent` runs on `gemini-3.1-pro` with `thinking_budget: -1`. Why is the architecture designed with this split?
+  - **A.** `gemini-3.1-pro` does not support JSON output schemas.
   - **B.** Upfront classification and skill selection are deterministic routing tasks that require sub-second latency (`thinking_budget: 0` on Flash), while multi-source synthesis and complex tool orchestration benefit from dynamic deep reasoning (`thinking_budget: -1` on Pro).
   - **C.** `thinking_budget: 0` forces the model to skip reading the user's prompt.
-  - **D.** `gemini-2.5-flash` can only be invoked once per 24 hours.
+  - **D.** `gemini-3.1-flash` can only be invoked once per 24 hours.
 - **Correct Answer**: **B**
 - **Architectural Rationale**: Matching model tier and thinking budget to cognitive complexity keeps upfront routing under 1 second (minimizing `TTFT`) while reserving Pro reasoning capacity for `root_agent` tool synthesis.
 
@@ -877,7 +877,7 @@ quadrantChart
 2. **Q: What were the two primary failure modes of the Hierarchical ADK V1 (`CA*-as-tool`) design?**
    - **A:** **Compounding multi-hop latency** (every delegated sub-agent executed its own LLM reasoning/summarization pass, pushing `TTLT` past 20–30s) and **context isolation/loss** (sub-agents could not communicate peer-to-peer, and their summarized responses back to the Root Agent frequently dropped exact entity IDs needed by subsequent tools).
 3. **Q: How does the Flattened Architecture (`Planner + Skills V2`) execute both read retrieval and write actions without sub-agents?**
-   - **A:** `AssistantServer` invokes `skill_selector` (`gemini-2.5-flash`, `thinking_budget: 0`), which selects the relevant procedural skills and binds atomic tools from the unified pool (`Search API`, `Workspace API`, `Connector Platform / BAP`, `Federated MCPs`) directly into the `root_agent` context window.
+   - **A:** `AssistantServer` invokes `skill_selector` (`gemini-3.1-flash`, `thinking_budget: 0`), which selects the relevant procedural skills and binds atomic tools from the unified pool (`Search API`, `Workspace API`, `Connector Platform / BAP`, `Federated MCPs`) directly into the `root_agent` context window.
 4. **Q: When should an architect choose `Gemini Spark` over `Planner + Skills V2`?**
    - **A:** Choose `Planner + Skills V2` for synchronous conversational Q&A, cross-system synthesis, and immediate transactional tool actions (`2s–30s`). Choose `Gemini Spark` when a task requires multi-hour/multi-day autonomous execution, dynamic code generation, shell/test execution inside an isolated **VMaaS Sandbox**, **Skill Cache** reuse, or **Browser Use** with iterative self-healing.
 5. **Q: What happens in each of the 6 stages of the "Life of a Query" pipeline?**
@@ -905,7 +905,7 @@ quadrantChart
 13. **Q: If a user reports a missing citation from a custom MCP connector, how do you isolate whether it failed at the connector layer or synthesis layer?**
     - **A:** In **Dolphin Debugger**, first check the **`Data Connectors`** table to verify the connector is present and `ACTIVE` (and check its **`BAP Tenant Project Request Logs`** link for HTTP errors). Next, inspect **`Grounding & Citations`**: if the source is absent from **`All Retrieved Sources`**, retrieval failed; if it appears in `All Retrieved Sources` but not **`User Visible Citations`**, Stage 5/6 synthesis filtered it out.
 14. **Q: What do `thinking_budget: 0`, `thinking_budget: -1`, and `Max Prompt Chars: 2,400,000` represent in Dolphin Debugger?**
-    - **A:** `thinking_budget: 0` disables extended reasoning tokens on `gemini-2.5-flash` (`query_classifier`, `skill_selector`) for sub-second routing; `thinking_budget: -1` enables dynamic reasoning depth on `gemini-2.5-pro` (`root_agent`, `grounding_score`); `Max Prompt Chars: 2,400,000` (~600k tokens) defines the hard prompt character envelope.
+    - **A:** `thinking_budget: 0` disables extended reasoning tokens on `gemini-3.1-flash` (`query_classifier`, `skill_selector`) for sub-second routing; `thinking_budget: -1` enables dynamic reasoning depth on `gemini-3.1-pro` (`root_agent`, `grounding_score`); `Max Prompt Chars: 2,400,000` (~600k tokens) defines the hard prompt character envelope.
 15. **Q: How should enterprises construct a benchmark CSV for `Gemini Enterprise Eval Studio` (`Neal Studio`)?**
     - **A:** Include **5–10 representative queries per target connector** (e.g., Drive, SharePoint, Jira, Confluence, People/`pContext`) plus **10 cross-source synthesis queries**, paired with golden reference answers and custom **LLM autograder rubrics**.
 16. **Q: How do enterprises govern FinOps and token economics across Flattened V2 and Gemini Spark workloads?**

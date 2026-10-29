@@ -35,6 +35,16 @@ class ServerConfig(BaseSettings):
         validation_alias=AliasChoices("GCP_PROJECT_ID", "PROJECT_ID", "MCP_GCP_PROJECT_ID"),
         description="GCP project ID",
     )
+    gcp_region: str = Field(
+        default="us-central1",
+        validation_alias=AliasChoices("GCP_REGION", "REGION", "MCP_GCP_REGION"),
+        description="GCP default region",
+    )
+    gcs_bucket: str = Field(
+        default="fivedaysai-prd-sandbox-317383-okf",
+        validation_alias=AliasChoices("GCS_BUCKET", "OKF_GCS_BUCKET", "MCP_GCS_BUCKET"),
+        description="GCS bucket for OKF concepts",
+    )
     spanner_instance_id: str = Field(
         default="gea-arch-guidelines-spanner",
         validation_alias=AliasChoices("SPANNER_INSTANCE", "SPANNER_INSTANCE_ID", "MCP_SPANNER_INSTANCE_ID"),

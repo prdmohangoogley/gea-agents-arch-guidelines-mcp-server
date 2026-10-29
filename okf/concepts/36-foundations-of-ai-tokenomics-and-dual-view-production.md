@@ -517,8 +517,8 @@ class ModelHardwareAndPricingSpec:
 
 
 MODEL_SPECS: Dict[str, ModelHardwareAndPricingSpec] = {
-    "gemini-2.5-pro": ModelHardwareAndPricingSpec(
-        model_id="gemini-2.5-pro",
+    "gemini-3.1-pro": ModelHardwareAndPricingSpec(
+        model_id="gemini-3.1-pro",
         capital_index_k=10.0,
         capital_rental_pk_usd=0.008,
         layers_l=88,
@@ -534,8 +534,8 @@ MODEL_SPECS: Dict[str, ModelHardwareAndPricingSpec] = {
         energy_decode_j_per_tok=0.0085,
         tpot_ms_per_tok=16.5,
     ),
-    "gemini-2.5-flash": ModelHardwareAndPricingSpec(
-        model_id="gemini-2.5-flash",
+    "gemini-3.1-flash": ModelHardwareAndPricingSpec(
+        model_id="gemini-3.1-flash",
         capital_index_k=3.2,
         capital_rental_pk_usd=0.0015,
         layers_l=48,
@@ -669,8 +669,8 @@ class DualViewTokenomicsMeterPlugin:
         start_ns = callback_context.state.get("_tok_turn_start_ns", time.perf_counter_ns())
         elapsed_sec = max(1e-4, (time.perf_counter_ns() - start_ns) / 1e9)
 
-        model_id = callback_context.state.get("active_model_id", "gemini-2.5-pro")
-        spec = MODEL_SPECS.get(model_id, MODEL_SPECS["gemini-2.5-pro"])
+        model_id = callback_context.state.get("active_model_id", "gemini-3.1-pro")
+        spec = MODEL_SPECS.get(model_id, MODEL_SPECS["gemini-3.1-pro"])
         role_class: AgentRoleClass = callback_context.state.get("agent_role_class", "planner")
 
         usage = getattr(llm_response, "usage_metadata", None)
@@ -793,7 +793,7 @@ def build_shadow_price_governed_agent(meter_plugin: DualViewTokenomicsMeterPlugi
     """Instantiates an ADK 2.0 LlmAgent wired with Dual-View Tokenomics telemetry."""
     return LlmAgent(
         name="cymbal_tokenomics_governed_architect",
-        model="gemini-2.5-pro",
+        model="gemini-3.1-pro",
         instruction=(
             "You are an enterprise principal architect agent. Keep static instructions "
             "at the top of the prompt prefix to preserve Vertex AI Context Caching capital. "

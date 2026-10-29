@@ -388,12 +388,12 @@ Module `G3` and Module `B2` establish a strict three-tool operational separation
 **Topic Tags:** `#L400_version_20261026_0350` `#ModelRoutingFinOps` `#ThinkingTokenBudgets` `#CostPerResolvedTask`
 
 **Answer:**
-1. **The Golden Metric of Routing (`O4`)**: Never evaluate a model router (e.g., routing between `gemini-2.5-flash` / `gemini-3.5-flash` and `gemini-2.5-pro`) on **cost per API call**. A router that sends 95% of traffic to Flash looks cheap per call, but if complex tasks fail and trigger 4 user re-prompts or a $25 human support escalation, **total cost per resolved task** skyrockets. Always optimize routers on **Cost Per Resolved Task** along the `O3`/`O4` Pareto frontier.
+1. **The Golden Metric of Routing (`O4`)**: Never evaluate a model router (e.g., routing between `gemini-3.1-flash` / `gemini-3.5-flash` and `gemini-3.1-pro`) on **cost per API call**. A router that sends 95% of traffic to Flash looks cheap per call, but if complex tasks fail and trigger 4 user re-prompts or a $25 human support escalation, **total cost per resolved task** skyrockets. Always optimize routers on **Cost Per Resolved Task** along the `O3`/`O4` Pareto frontier.
 2. **Three Router Failure Modes (`O4`)**:
    - **Under-Routing**: Complex reasoning or multi-tool tasks routed to a lightweight tier, causing retry loops, tool errors, and human escalations.
    - **Over-Routing**: Simple classification, extraction, or FAQ queries routed to Pro, causing silent 5x–10x margin erosion without quality lift.
    - **Threshold Drift**: Static router confidence thresholds becoming miscalibrated as production query distributions or underlying model checkpoints shift.
-3. **Thinking Token Budget Interactions (`O4` + `O5`)**: Reasoning models bill internal **Thinking Tokens** (`<ctrl94>thought`) at the **Output Token rate** (`O4` Line 8). As demonstrated in `O5` (Project Nexus), migrating a workload from `gemini-2.5-pro` to `gemini-3.5-flash` without adjusting `thinking_config` / `EFFORT LEVEL` or `max_output_tokens` can cause `MAX_TOKENS` truncation if the model spends its entire output budget on internal chain-of-thought. Properly tuning the thinking budget alongside `O1` Pointwise Autorater regression gates delivered a **~10x token efficiency improvement** within hours.
+3. **Thinking Token Budget Interactions (`O4` + `O5`)**: Reasoning models bill internal **Thinking Tokens** (`<ctrl94>thought`) at the **Output Token rate** (`O4` Line 8). As demonstrated in `O5` (Project Nexus), migrating a workload from `gemini-3.1-pro` to `gemini-3.5-flash` without adjusting `thinking_config` / `EFFORT LEVEL` or `max_output_tokens` can cause `MAX_TOKENS` truncation if the model spends its entire output budget on internal chain-of-thought. Properly tuning the thinking budget alongside `O1` Pointwise Autorater regression gates delivered a **~10x token efficiency improvement** within hours.
 
 ---
 
@@ -491,7 +491,7 @@ Context bloat simultaneously degrades reasoning quality (**context rot at ~100K 
 
 ---
 
-#### Q1.5.2: Why can a single model upgrade (e.g., migrating from `gemini-2.5-pro` to `gemini-3.5-flash`) simultaneously impact ADK 2.0 tool calling (`B1`), Token FinOps (`O4`), Autorater calibration (`O1`), and Project Nexus flat-text serialization (`O5`)?
+#### Q1.5.2: Why can a single model upgrade (e.g., migrating from `gemini-3.1-pro` to `gemini-3.5-flash`) simultaneously impact ADK 2.0 tool calling (`B1`), Token FinOps (`O4`), Autorater calibration (`O1`), and Project Nexus flat-text serialization (`O5`)?
 **Topic Tags:** `#L400_version_20261026_0350` `#ModelMigrationImpacts` `#FC2ToolCalling` `#AutoraterRecalibration`
 
 **Answer:**
@@ -930,7 +930,7 @@ Once authenticated with a 20-hour `connectors-tp-readonly` `AoD`/`MPA` grant, `a
 
 **Answer:**
 Unlike a stateless single-turn LLM call, a production enterprise agent is a stateful distributed system composed of six distinct architectural layers:
-1. **Layer 1 — The Reasoning Core (Models)**: Frontier and lightweight Gemini models (`gemini-2.5-pro`, `gemini-2.5-flash`, `gemini-3.5-flash`) executing probabilistic token generation and chain-of-thought planning.
+1. **Layer 1 — The Reasoning Core (Models)**: Frontier and lightweight Gemini models (`gemini-3.1-pro`, `gemini-3.1-flash`, `gemini-3.5-flash`) executing probabilistic token generation and chain-of-thought planning.
 2. **Layer 2 — Tools & Grounding (The Hands)**: Deterministic interfaces to enterprise APIs, databases, MCP servers, and Vertex AI Search indices.
 3. **Layer 3 — Memory & State Management**: Short-term turn scratchpads (`temp:`), conversation logs (`Session`), per-user profiles (`user:`), and cross-session semantic vector stores (`MemoryBank`).
 4. **Layer 4 — Orchestration & Runtime Harness (`ADK 2.0`)**: Event-sourced execution engine (`Runner`, `App`, `DynamicNodeScheduler`) managing control flow, parallel fan-out, retries, and context assembly.

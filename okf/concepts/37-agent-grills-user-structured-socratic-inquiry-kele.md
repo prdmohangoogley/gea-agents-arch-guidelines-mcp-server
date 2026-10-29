@@ -652,7 +652,7 @@ def anti_leakage_guardrail_callback(
 
 knowledge_planner_agent = LlmAgent(
     name="KnowledgePlannerAgent",
-    model="gemini-2.5-pro",
+    model="gemini-3.1-pro",
     instruction="""You are the Socratic Knowledge Planner & Assessment Timing Architect.
 Given the user's initial problem, requirement request, or architectural proposal:
 1. Extract the 4-part KELE Target Knowledge Schema:
@@ -670,7 +670,7 @@ Given the user's initial problem, requirement request, or architectural proposal
 
 diagnostic_state_tracker_agent = LlmAgent(
     name="DiagnosticStateTrackerAgent",
-    model="gemini-2.5-pro",
+    model="gemini-3.1-pro",
     instruction="""You are the KELE Teaching Consultant & Diagnostic State Tracker (Agent A_c).
 Analyze the dialogue history, the Target Knowledge Schema {target_knowledge_schema}, and the user's latest input.
 Strictly adhere to the 5-stage monotonic Socratic progression: a -> b -> c -> d -> e (never skip or regress):
@@ -688,7 +688,7 @@ Emit valid JSON matching DiagnosticStateOutput.""",
 
 socratic_inquisitor_agent = LlmAgent(
     name="SocraticInquisitorAgent",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     instruction="""You are the Socratic Inquisitor & Heuristic Executor (KELE Agent A_t + Socratic Students SCAFFOLDED Policy).
 You receive:
 - Diagnostic State Evaluation: {diagnostic_state_eval}

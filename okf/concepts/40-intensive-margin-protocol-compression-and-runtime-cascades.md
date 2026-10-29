@@ -608,9 +608,9 @@ class BudgetMLCascadeRouter:
     """
 
     MODEL_TIERS = {
-        "flash_lite": "gemini-2.5-flash-lite",
-        "flash": "gemini-2.5-flash",
-        "pro_expert": "gemini-2.5-pro",
+        "flash_lite": "gemini-3.1-flash",
+        "flash": "gemini-3.1-flash",
+        "pro_expert": "gemini-3.1-pro",
     }
 
     def __init__(

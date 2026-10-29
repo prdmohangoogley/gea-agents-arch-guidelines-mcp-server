@@ -241,7 +241,7 @@ In 2024, enterprise model quality reporting in Google Cloud relied primarily on 
 | **End-to-End Resolution Velocity** | Stalls for months; high triage bounce rate | **50+ days faster** average resolution time across the program | Rapid engineering triage, automated POC assignment, and direct **One Recipe (OR)** ingestion. |
 | **Sherlock (`Sherlog`) Trace Acceleration** | Manual guesswork without internal stack telemetry | **2 to 3 additional weeks faster** resolution when a valid `http://sherlog/` trace is attached | Pinpoints exact failing layer (User Request, API, Servo, or Model) in minutes via zero-touch auto-diagnosis. |
 | **Cluster Deduplication Case Study (Thought Leakage)** | Duplicate tickets filed independently across dozens of accounts | **55 customer bug reports** of thought-token leakage aggregated under **1 parent bug** (**23 fixed** in recent model revisions) | Eliminates redundant triage, tracks cluster-wide burn-down, and notifies all 55 account teams upon checkpoint fix. |
-| **Rapid SME Workaround Case Study (`gemini-2.5-pro` -> `gemini-3.5-flash`)** | Customer blocks migration waiting months for a new model checkpoint | **~10x token efficiency improvement** delivered within **hours** via parameter/prompt tuning | Unblocked a customer hitting `MAX_TOKENS` during migration from `gemini-2.5-pro` to `gemini-3.5-flash` by adjusting thinking levels, temperature, and output format. |
+| **Rapid SME Workaround Case Study (`gemini-3.1-pro` -> `gemini-3.5-flash`)** | Customer blocks migration waiting months for a new model checkpoint | **~10x token efficiency improvement** delivered within **hours** via parameter/prompt tuning | Unblocked a customer hitting `MAX_TOKENS` during migration from `gemini-3.1-pro` to `gemini-3.5-flash` by adjusting thinking levels, temperature, and output format. |
 
 ### 1.2 The Four Structural Hurdles of Diagnosing LLM & Agentic Failures
 **Topic Tags:** `#FourReproductionHurdles` `#SymptomsNotPrompts` `#OneSymptomManyCauses` `#AnyLayerCanFail` `#EncryptedThoughtSignatures`
@@ -872,7 +872,7 @@ quadrantChart
 #### 4.1.1 Case Study 1: Apex Global Wealth Management (FinServ — Checkpoint Migration & 10x Token Efficiency)
 **Topic Tags:** `#FinServUseCase` `#CheckpointMigration` `#TokenEfficiency` `#ThoughtLeakageCluster`
 
-* **Customer Profile & Workload**: Tier-1 investment bank migrating 40+ wealth-advisory and 50-page prospectus-extraction agents from `gemini-2.5-pro` to `gemini-3.5-flash` on Vertex AI to lower latency and cut inference spend.
+* **Customer Profile & Workload**: Tier-1 investment bank migrating 40+ wealth-advisory and 50-page prospectus-extraction agents from `gemini-3.1-pro` to `gemini-3.5-flash` on Vertex AI to lower latency and cut inference spend.
 * **Production Failure**: During staging tests, 3% of complex prospectus summaries hit `MAX_TOKENS` truncation, and occasional internal reasoning tokens leaked into client JSON responses. The customer's VP threatened to halt the migration.
 * **Project Nexus Resolution**:
   1. FDE guided Apex to capture `Sherlog` traces via `go/nexus-repro-colab` (**Flow A**).
@@ -961,9 +961,9 @@ quadrantChart
 **Topic Tags:** `#Question1` `#CheckpointMigration` `#TokenEfficiency` `#SherlogFiling`
 
 **Scenario:**
-Your enterprise retail organization is migrating a high-throughput order-exception agent from `gemini-2.5-pro` to a newer `gemini-3.5-flash` checkpoint on Vertex AI. During canary testing, 2% of requests hit `MAX_TOKENS` limits and fail to return a valid tool call. Your VP of Engineering wants to halt the migration immediately and wait months for Google to release a new model checkpoint, citing *"severe model regression."* As the Lead Cloud Architect working with Google Cloud Support and Forward Deployed Engineering, what is the most effective architectural step to unblock the migration with minimal delay?
+Your enterprise retail organization is migrating a high-throughput order-exception agent from `gemini-3.1-pro` to a newer `gemini-3.5-flash` checkpoint on Vertex AI. During canary testing, 2% of requests hit `MAX_TOKENS` limits and fail to return a valid tool call. Your VP of Engineering wants to halt the migration immediately and wait months for Google to release a new model checkpoint, citing *"severe model regression."* As the Lead Cloud Architect working with Google Cloud Support and Forward Deployed Engineering, what is the most effective architectural step to unblock the migration with minimal delay?
 
-* **A.** Agree with the VP, roll back all staging environments to `gemini-2.5-pro`, and submit a general feedback ticket stating that the new Flash model has worse quality.
+* **A.** Agree with the VP, roll back all staging environments to `gemini-3.1-pro`, and submit a general feedback ticket stating that the new Flash model has worse quality.
 * **B.** Capture a reproducible **Sherlock (`Sherlog`) trace** of the failing `MAX_TOKENS` requests via `go/nexus-repro-colab` and file an actionable bug through **Project Nexus** so SMEs and automated diagnostics can identify fast prompt/parameter workarounds (such as tuning thinking budget, temperature, or response format) that immediately restore reliability and token efficiency while feeding the trace into post-training pipelines.
 * **C.** Fine-tune the new Gemini Flash checkpoint using Supervised Fine-Tuning (SFT) on 500 historical order-exception transcripts to force shorter output token lengths.
 * **D.** Increase the `temperature` parameter to `2.0` and double the `max_output_tokens` limit across all production endpoints without inspecting the underlying request trace.

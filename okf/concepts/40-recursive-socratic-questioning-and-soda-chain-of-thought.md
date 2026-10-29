@@ -548,7 +548,7 @@ class QA2HCompactionOutput(BaseModel):
 # ==============================================================================
 socratic_answerer_agent = LlmAgent(
     name="ConfidenceGatedStudentAnswerer",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     output_schema=ConfidenceGatedQAResult,
     output_key="latest_qa_result",
     instruction="""You are the Confidence-Gated Student Reasoner (R_u).
@@ -567,7 +567,7 @@ Instructions:
 
 socratic_questioner_agent = LlmAgent(
     name="SoDaRecursiveQuestioner",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     output_schema=SocraticQGOutput,
     output_key="latest_qg_output",
     instruction="""You are the Socratic Teacher & Recursive Questioner (R_S).
@@ -589,7 +589,7 @@ Strict Guardrails (Qi et al. + SoDa P_Q):
 
 qa2h_compactor_agent = LlmAgent(
     name="BottomUpQA2HCompactor",
-    model="gemini-2.5-flash",
+    model="gemini-3.1-flash",
     output_schema=QA2HCompactionOutput,
     output_key="latest_qa2h_output",
     instruction="""Merge the resolved sub-question and answer into ONE concise declarative statement (<40 tokens).

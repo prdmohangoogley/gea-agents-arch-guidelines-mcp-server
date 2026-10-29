@@ -200,10 +200,10 @@ One-way ANOVA across 8,401 core evaluations confirms that **model capability is 
 | Model | Capability Tier | File-Native Agent Accuracy (%) | Prompt Baseline Accuracy (%) | Architecture Diff (`File - Prompt`) | L1 (Direct) | L2 (1-Join) | L3 (Multi-Hop) | L4 (CTE/Win) | **L5 (Multi-Step)** | Best Format & Spread |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
 | **`claude-opus-4.5`** | Frontier | **`89.0%`** | N/A | File Only | **100%** | 93% | 94% | **94%** | 64% | `YAML` (92%, spread 5.4%) |
-| **`gemini-2.5-pro`** | Frontier | **`85.1%`** | 81.4% | **`+3.7%` (File)** | 94% | **97%** | 81% | 81% | **`74%` (#1!)** | `JSON` (88%, spread 5.1%) |
+| **`gemini-3.1-pro`** | Frontier | **`85.1%`** | 81.4% | **`+3.7%` (File)** | 94% | **97%** | 81% | 81% | **`74%` (#1!)** | `JSON` (88%, spread 5.1%) |
 | **`gpt-5.2`** | Frontier | **`83.8%`** | 82.0% | **`+1.8%` (File)** | 95% | 89% | **96%** | 85% | 54% | `JSON` (85%, spread 1.8%) |
 | **`gpt-5-mini`** | Frontier Lab | **`77.1%`** | 69.4% | **`+7.7%` (File)** | 95% | 88% | 82% | 71% | 49% | `YAML`/`MD` (78%, spread 1.6%) |
-| **`gemini-2.5-flash`** | Frontier Lab | `77.0%` | **78.0%** | `-1.1%` (Prompt) | 94% | 92% | 83% | 75% | 40% | `YAML`/`MD` (79%, spread 5.1%) |
+| **`gemini-3.1-flash`** | Frontier Lab | `77.0%` | **78.0%** | `-1.1%` (Prompt) | 94% | 92% | 83% | 75% | 40% | `YAML`/`MD` (79%, spread 5.1%) |
 | **`claude-haiku-4.5`** | Frontier Lab | **`76.1%`** | 74.5% | **`+1.6%` (File)** | **100%** | 93% | 87% | 71% | 29% | `YAML` (84%, spread 12.2%) |
 | **`DeepSeek-V3.2`** | Open Source | `75.3%` | **78.6%** | `-3.3%` (Prompt) | 96% | 92% | 82% | 67% | 40% | `MD` (80%, spread 10.2%) |
 | **`kimi-k2`** | Open Source | **`75.0%`** | 74.7% | `+0.3%` (File) | 99% | 89% | 86% | 64% | 37% | `YAML` (82%, spread 11.1%) |

@@ -84,7 +84,7 @@ Standard RLHF/instruction-tuned foundation models optimize for conversational he
 ### 2.2 Identity Drift, Persona Mimicry & Doctrinal Hallucination
 Prompt-only persona definitions ("You are a strict Zero-Trust Security Architect" or "You are Immanuel Kant") erode rapidly over multi-turn interactions. Under adversarial questioning or counterfactual stress-testing, agents adopt the vocabulary, framing, and reasoning heuristics of their interlocutors (**persona mimicry**).
 * In Masłowski & Chudziak's (2026) ablation of multi-turn debates without Identity-Grounded RAG (`Vanilla RAG Only`), **Doctrinal Accuracy ($\text{DA}$) collapsed to $0.51$** overall, with Thomas Aquinas dropping to **$\text{DA} = 0.00$** and John Stuart Mill dropping to **$\text{DA} = 0.33$** under physical-proximity perturbation ($P_1$).
-* Even worse, in the single-agent unified RAG baseline (`B_SingleRAG`, powered by `gemini-2.0-flash-exp` retrieving across all seven philosophical corpora simultaneously), the model suffered from **cross-corpus doctrinal contamination**: in an effort to present an authoritative, unified synthesis, `B_SingleRAG` **fabricated a fatal doctrinal hallucination**, claiming that Kantian deontology endorses pulling the trolley lever to save five lives. Because the single agent spoke with high rhetorical fluency, **$100\%$ of human participants failed to detect the hallucination**.
+* Even worse, in the single-agent unified RAG baseline (`B_SingleRAG`, powered by `gemini-3.1-flash` retrieving across all seven philosophical corpora simultaneously), the model suffered from **cross-corpus doctrinal contamination**: in an effort to present an authoritative, unified synthesis, `B_SingleRAG` **fabricated a fatal doctrinal hallucination**, claiming that Kantian deontology endorses pulling the trolley lever to save five lives. Because the single agent spoke with high rhetorical fluency, **$100\%$ of human participants failed to detect the hallucination**.
 
 ### 2.3 Meta-Epistemological Tangents in Homogeneous Multi-Agent Crews ($\text{ArCo} = 0.06, \Delta\text{ACS} = -0.29$)
 A widespread enterprise anti-pattern is instantiating multiple agents that share the same high-level normative framework (e.g., two slightly different cloud cost-optimization personas, or in the HDE benchmark, **Ancient Virtue Ethics** [Aristotle + Plato] vs. **Christian Virtue Ethics** [Aquinas + Augustine]).
@@ -574,7 +574,7 @@ def build_hde_adversarial_debate_ring(
     # Local LlmAgents with strictly isolated per-identity McpToolsets (or RemoteA2aAgent wrappers)
     kant_agent = LlmAgent(
         name="kant_deontology_agent",
-        model="gemini-2.0-flash",
+        model="gemini-3.1-flash",
         instruction="You are Immanuel Kant. Defend the Categorical Imperative and Formula of Humanity.",
         tools=[build_isolated_id_rag_toolset(kant_profile.mcp_corpus_namespace)],
         before_model_callback=make_id_rag_and_tom_before_model_callback(kant_profile, entails_fn),
@@ -583,7 +583,7 @@ def build_hde_adversarial_debate_ring(
 
     mill_agent = LlmAgent(
         name="mill_utilitarian_agent",
-        model="gemini-2.0-flash",
+        model="gemini-3.1-flash",
         instruction="You are John Stuart Mill. Defend Qualitative Utilitarianism and harm minimization.",
         tools=[build_isolated_id_rag_toolset(mill_profile.mcp_corpus_namespace)],
         before_model_callback=make_id_rag_and_tom_before_model_callback(mill_profile, entails_fn),
@@ -612,7 +612,7 @@ def build_hde_adversarial_debate_ring(
     # Phase 2: Socratic Moderator Pre-Debate Elenchus ("5Ws" Ontology Framing)
     moderator_agent = LlmAgent(
         name="socratic_moderator_agent",
-        model="gemini-2.0-flash",
+        model="gemini-3.1-flash",
         instruction=(
             "You are the neutral Socratic Moderator. In Phase 2, generate ontology-level 5Ws elenctic "
             "questions exposing unstated warrants in team_a_memory and team_b_memory. At Turn 4 of Phase 3, "

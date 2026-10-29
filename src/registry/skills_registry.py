@@ -2,33 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Any
-from pydantic import BaseModel, Field
+from typing import Any, Optional
+from src.skills.base import SkillParameter, SkillManifest, SkillPlugin
+from src.skills.discovery import discover_all_skills, get_plugin_instance, init_skills_registry
 
 
-class SkillParameter(BaseModel):
-    name: str
-    type: str
-    description: str
-    required: bool = True
-    default: Any = None
-
-
-class SkillManifest(BaseModel):
-    id: str
-    name: str
-    version: str
-    category: str
-    description: str
-    capabilities: list[str] = Field(default_factory=list)
-    entrypoint: str
-    context_token_estimate: int = 150
-    sandbox_tier: str = "read_only"
-    parameters: list[SkillParameter] = Field(default_factory=list)
-    instructions: str = ""
-
-
-# Default canonical skills registered for Gemini Enterprise multi-agent fleets
+# Canonical legacy and core skills registered for Gemini Enterprise multi-agent fleets
 CANONICAL_SKILLS: list[SkillManifest] = [
     SkillManifest(
         id="skill-arch-eval",
@@ -111,36 +90,83 @@ CANONICAL_SKILLS: list[SkillManifest] = [
 
 
 class SkillsRegistry:
-    """Enterprise Skills Registry managing progressive disclosure and skill dispatching."""
+    """Enterprise Skills Registry managing progressive disclosure, plugin lifecycle, and skill dispatching."""
 
     def __init__(self, skills: list[SkillManifest] | None = None) -> None:
         self._skills: dict[str, SkillManifest] = {
             s.id: s for s in (skills or CANONICAL_SKILLS)
         }
 
+    def _ensure_dynamic_skills_loaded(self) -> None:
+        """Load discovered dynamic plugins and workspace skills into the active registry."""
+        try:
+            init_skills_registry()
+            discovered = discover_all_skills()
+            for manifest in discovered:
+                # Store under exact ID
+                self._skills[manifest.id] = manifest
+                # Also store hyphenated/underscored alias for flexible lookup
+                alias_hyphen = manifest.id.replace("_", "-")
+                alias_under = manifest.id.replace("-", "_")
+                if alias_hyphen not in self._skills:
+                    self._skills[alias_hyphen] = manifest
+                if alias_under not in self._skills:
+                    self._skills[alias_under] = manifest
+        except Exception:
+            pass
+
     def list_catalog(self, category: str | None = None) -> list[dict[str, Any]]:
         """Tier 1 Progressive Disclosure: Lightweight summary list (~30 tokens per item)."""
+        self._ensure_dynamic_skills_loaded()
         catalog = []
+        seen_ids = set()
+
         for s in self._skills.values():
+            # De-duplicate aliases
+            normalized_id = s.id
+            if normalized_id in seen_ids:
+                continue
+            seen_ids.add(normalized_id)
+
             if category and s.category.lower() != category.lower():
                 continue
+
             catalog.append({
                 "id": s.id,
                 "name": s.name,
                 "version": s.version,
                 "category": s.category,
                 "description": s.description,
+                "capabilities": s.capabilities,
                 "token_estimate": s.context_token_estimate,
             })
         return catalog
 
     def get_manifest(self, skill_id: str) -> SkillManifest | None:
         """Tier 2 Progressive Disclosure: Full detailed schema and execution instructions."""
-        return self._skills.get(skill_id)
+        self._ensure_dynamic_skills_loaded()
+        manifest = self._skills.get(skill_id)
+        if not manifest:
+            # Try alternate formatting (hyphens vs underscores)
+            alt1 = skill_id.replace("-", "_")
+            alt2 = skill_id.replace("_", "-")
+            manifest = self._skills.get(alt1) or self._skills.get(alt2)
+        return manifest
 
     def register_skill(self, skill: SkillManifest) -> None:
         """Dynamically register a new skill."""
         self._skills[skill.id] = skill
+
+    def get_plugin(self, skill_id: str) -> SkillPlugin | None:
+        """Retrieve executable plugin instance if registered."""
+        self._ensure_dynamic_skills_loaded()
+        # Check direct id, underscore id, or hyphen id
+        plugin = get_plugin_instance(skill_id)
+        if not plugin:
+            plugin = get_plugin_instance(skill_id.replace("-", "_"))
+        if not plugin:
+            plugin = get_plugin_instance(skill_id.replace("_", "-"))
+        return plugin
 
 
 skills_registry = SkillsRegistry()
