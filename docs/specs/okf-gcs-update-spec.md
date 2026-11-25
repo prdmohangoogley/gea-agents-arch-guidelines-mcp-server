@@ -57,7 +57,7 @@ flowchart TB
     subgraph GCP ["Google Cloud Platform (fivedaysai-prd-sandbox-317383)"]
         GCS[("Cloud Storage Bucket<br/>gs://gea_agent_development_architectural_best_practices_1790796607/okf<br/>(Object Versioning ON, Uniform Access, Flat okf/concepts/)")]
         CRC["3. Post-Upload CRC32C Verification<br/>scripts/crc32c_verify.py"]
-        Catalog["4. GCP Knowledge Catalog (Dataplex)<br/>EntryGroup: geapl200-architecture-kb<br/>AspectType: okf (83 Entries)"]
+        Catalog["4. GCP Knowledge Catalog (Dataplex)<br/>EntryGroup: geap-architecture-kb<br/>AspectType: okf (83 Entries)"]
         NL2KG["5. Optional NL2KG Downstream Sync<br/>Spanner Graph (arch_guidelines_graph) &<br/>BigQuery (gea_arch_guidelines_analytics)"]
     end
 
@@ -112,7 +112,7 @@ We are updating this bucket in-place (leveraging GCS Object Versioning for insta
 - **GCS_BUCKET_NAME:** `gea_agent_development_architectural_best_practices_1790796607`
 - **GCS_OKF_URI:** `gs://gea_agent_development_architectural_best_practices_1790796607/okf`
 - **DATAPLEX_LOCATION:** `us`
-- **DATAPLEX_ENTRY_GROUP:** `geapl200-architecture-kb`
+- **DATAPLEX_ENTRY_GROUP:** `geap-architecture-kb`
 - **DATAPLEX_ENTRY_TYPE:** `okf-concept`
 - **DATAPLEX_ASPECT_TYPE:** `okf`
 - **PRESERVED_VERSION_TAG:** `GEAPL200_2026-09-30_124746`
@@ -151,7 +151,7 @@ Verifies project identity (`fivedaysai-prd-sandbox-317383` / `301802433103`), en
 ```
 
 ### Mode 3: Full Update + GCP Knowledge Catalog (Dataplex) Registration
-Updates the GCS bucket, verifies CRC32C checksums, regenerates the 58 Dataplex `okf` aspect payloads, and upserts all 58 entries into Dataplex Universal Catalog (`EntryGroup: geapl200-architecture-kb`, `AspectType: okf`):
+Updates the GCS bucket, verifies CRC32C checksums, regenerates the 58 Dataplex `okf` aspect payloads, and upserts all 58 entries into Dataplex Universal Catalog (`EntryGroup: geap-architecture-kb`, `AspectType: okf`):
 ```bash
 ./scripts/update_okf_gcs.sh --catalog
 ```

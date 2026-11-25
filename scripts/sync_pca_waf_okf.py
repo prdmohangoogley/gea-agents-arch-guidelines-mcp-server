@@ -2,8 +2,8 @@
 """Synchronize PCA & Well-Architected Framework (WAF) OKF v0.2 Bundle to Dataplex, Spanner Graph, and BigQuery.
 
 1. Verifies SHA-256 digests of all 9 OKF-PCA-01..09 concepts.
-2. Registers Dataplex Universal Catalog EntryType (`okf-concept`), EntryGroups (`geapl200-architecture-kb`
-   & `geapl200-pca-waf-kb`), and all 9 concept entries via `gcloud dataplex` CLI.
+2. Registers Dataplex Universal Catalog EntryType (`okf-concept`), EntryGroups (`geap-architecture-kb`
+   & `geap-pca-waf-kb`), and all 9 concept entries via `gcloud dataplex` CLI.
 3. Hydrates the 9 OKF-PCA-01..09 guidelines, 6 WAF pillar patterns, 19 forensic anti-patterns, and
    IMPLEMENTS / MITIGATES graph edges into Cloud Spanner Graph (`gea-arch-guidelines-spanner` /
    `arch_guidelines_graph`) and BigQuery (`gea_arch_guidelines_analytics`).
@@ -89,33 +89,33 @@ def register_dataplex_knowledge_base(concepts: list[dict[str, Any]]) -> None:
     else:
         print(f"  ! EntryType okf-concept note: {out[:200]}")
 
-    # 2. Ensure EntryGroup `geapl200-pca-waf-kb` exists
+    # 2. Ensure EntryGroup `geap-pca-waf-kb` exists
     rc, out = run_gcloud([
-        "dataplex", "entry-groups", "create", "geapl200-pca-waf-kb",
+        "dataplex", "entry-groups", "create", "geap-pca-waf-kb",
         f"--project={PROJECT_ID}",
         f"--location={LOCATION}",
         "--display-name=Google Cloud PCA & Well-Architected OKF Knowledge Base",
         "--description=L400 architectural decision knowledge base covering all 8 PCA Service Areas, the 5/6 Well-Architected Pillars, 4 Case Studies, and 18 forensic anti-patterns.",
     ])
     if rc == 0:
-        print("  ✓ Created EntryGroup: geapl200-pca-waf-kb")
+        print("  ✓ Created EntryGroup: geap-pca-waf-kb")
     elif "ALREADY_EXISTS" in out or "already exists" in out:
-        print("  ✓ EntryGroup geapl200-pca-waf-kb already exists")
+        print("  ✓ EntryGroup geap-pca-waf-kb already exists")
     else:
-        print(f"  ! EntryGroup geapl200-pca-waf-kb note: {out[:200]}")
+        print(f"  ! EntryGroup geap-pca-waf-kb note: {out[:200]}")
 
     # 3. Generate aspect payload files for gcloud dataplex entries create/update
     build_dir = REPO_ROOT / "build" / "pca-waf-catalog-entries"
     build_dir.mkdir(parents=True, exist_ok=True)
     okf_aspect_key = f"{PROJECT_ID}.{LOCATION}.okf"
 
-    entry_groups = ["geapl200-architecture-kb", "geapl200-pca-waf-kb"]
+    entry_groups = ["geap-architecture-kb", "geap-pca-waf-kb"]
     for eg in entry_groups:
         print(f"\n  --> Upserting 9 OKF-PCA entries into EntryGroup '{eg}':")
         for c in concepts:
             cid = c["id"]
             slug = c["slug"]
-            entry_id = f"pca-waf-{slug}" if eg == "geapl200-architecture-kb" else slug
+            entry_id = f"pca-waf-{slug}" if eg == "geap-architecture-kb" else slug
             aspect_file = build_dir / f"{entry_id}.json"
 
             aspect_payload = {

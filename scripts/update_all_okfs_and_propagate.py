@@ -407,7 +407,7 @@ def step1_update_all_okf_files() -> tuple[list[dict[str, Any]], list[dict[str, A
             # Update catalog entry JSON
             cat_file = t_cat_dir / f"{slug}.json"
             cat_obj = {
-                "name": f"projects/{PROJECT_ID}/locations/{LOCATION}/entryGroups/geapl200-pca-waf-kb/entries/{slug.replace('-', '_')}",
+                "name": f"projects/{PROJECT_ID}/locations/{LOCATION}/entryGroups/geap-pca-waf-kb/entries/{slug.replace('-', '_')}",
                 "entryType": f"projects/{PROJECT_ID}/locations/{LOCATION}/entryTypes/okf-bundle",
                 "fullyQualifiedName": f"okf:{waf_corpus}.{cid}",
                 "entrySource": {
@@ -658,12 +658,12 @@ def step4_propagate_all_to_dataplex_and_spanner(
     print("\n==> Step 4: Propagating All 92 Updated OKF Entries (L200, L300, L400, WAF) to Dataplex Universal Catalog")
     tasks: list[tuple[str, str, Path, str, str, str]] = []
 
-    # 1. All 83 L200, L300, L400 entries in geapl200-architecture-kb
+    # 1. All 83 L200, L300, L400 entries in geap-architecture-kb
     for c in main_concepts:
         entry_id = c["id"]
         aspect_file = CATALOG_ENTRIES_DIR / f"{entry_id}.json"
         tasks.append((
-            "geapl200-architecture-kb",
+            "geap-architecture-kb",
             entry_id,
             aspect_file,
             c["gcs_uri"],
@@ -671,7 +671,7 @@ def step4_propagate_all_to_dataplex_and_spanner(
             c["description"],
         ))
 
-    # 2. All 9 WAF Pillar entries in both geapl200-architecture-kb and geapl200-pca-waf-kb
+    # 2. All 9 WAF Pillar entries in both geap-architecture-kb and geap-pca-waf-kb
     build_dir = REPO_ROOT / "build" / "pca-waf-catalog-entries"
     build_dir.mkdir(parents=True, exist_ok=True)
     okf_aspect_key = f"{PROJECT_ID}.{LOCATION}.okf"
@@ -689,7 +689,7 @@ def step4_propagate_all_to_dataplex_and_spanner(
         aspect_path.write_text(json.dumps(aspect_only, indent=2) + "\n", encoding="utf-8")
 
         tasks.append((
-            "geapl200-architecture-kb",
+            "geap-architecture-kb",
             f"pca-waf-{slug}",
             aspect_path,
             wc["gcs_uri"],
@@ -697,7 +697,7 @@ def step4_propagate_all_to_dataplex_and_spanner(
             wc["description"],
         ))
         tasks.append((
-            "geapl200-pca-waf-kb",
+            "geap-pca-waf-kb",
             slug,
             aspect_path,
             wc["gcs_uri"],

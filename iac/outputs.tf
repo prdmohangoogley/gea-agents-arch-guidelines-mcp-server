@@ -42,3 +42,18 @@ output "okf_evolution_service_account" {
   description = "Autonomous OKF Evolution Reasoning Engine service account"
   value       = google_service_account.okf_evolution_sa.email
 }
+
+output "gemini_enterprise_data_store_id" {
+  description = "Gemini Enterprise Discovery Engine Data Store ID"
+  value       = module.gemini_enterprise.data_store_id
+}
+
+output "gemini_enterprise_app_id" {
+  description = "Gemini Enterprise App / Engine ID"
+  value       = module.gemini_enterprise.engine_id
+}
+
+output "gemini_enterprise_app_name" {
+  description = "Full Gemini Enterprise App resource name"
+  value       = module.gemini_enterprise.engine_name
+}

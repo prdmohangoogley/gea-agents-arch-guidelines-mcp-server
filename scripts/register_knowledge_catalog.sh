@@ -36,7 +36,7 @@ set -euo pipefail
 PROJECT_ID="fivedaysai-prd-sandbox-317383"
 BUCKET=""
 LOCATION="us"          # Dataplex location (region or multi-region, lowercase)
-ENTRY_GROUP="geapl200-architecture-kb"
+ENTRY_GROUP="geap-architecture-kb"
 ASPECT_TYPE="okf"
 ENTRY_TYPE="okf-bundle"
 APPLY="false"

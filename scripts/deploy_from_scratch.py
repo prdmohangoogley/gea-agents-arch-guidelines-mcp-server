@@ -242,8 +242,8 @@ def stage5_propagate_to_dataplex(
             dry_run=dry_run,
         )
     for eg_id, eg_name in [
-        ("geapl200-architecture-kb", "GEA Agent Development - Unified L200/L300/L400/WAF Architecture KB"),
-        ("geapl200-pca-waf-kb", "Google Cloud PCA & Well-Architected Framework OKF Knowledge Base"),
+        ("geap-architecture-kb", "GEA Agent Development - Unified L200/L300/L400/WAF Architecture KB"),
+        ("geap-pca-waf-kb", "Google Cloud PCA & Well-Architected Framework OKF Knowledge Base"),
     ]:
         run_cmd(
             [
@@ -256,7 +256,7 @@ def stage5_propagate_to_dataplex(
         )
 
     if dry_run:
-        print("    [DRY-RUN] Would upsert 92 entries in geapl200-architecture-kb and 9 entries in geapl200-pca-waf-kb.")
+        print("    [DRY-RUN] Would upsert 92 entries in geap-architecture-kb and 9 entries in geap-pca-waf-kb.")
         return
 
     # Rewrite aspect keys dynamically for target `project_id`
@@ -280,7 +280,7 @@ def stage5_propagate_to_dataplex(
         gcs_uri = f"gs://{okf_bucket}/{doc['source_url']}"
         tasks.append((
             project_id,
-            "geapl200-architecture-kb",
+            "geap-architecture-kb",
             doc_id,
             out_file,
             gcs_uri,
@@ -305,7 +305,7 @@ def stage5_propagate_to_dataplex(
         gcs_uri = f"gs://{waf_bucket}/{waf_vtag}/okf/concepts/{slug}.md"
         tasks.append((
             project_id,
-            "geapl200-architecture-kb",
+            "geap-architecture-kb",
             f"pca-waf-{slug}",
             out_file,
             gcs_uri,
@@ -314,7 +314,7 @@ def stage5_propagate_to_dataplex(
         ))
         tasks.append((
             project_id,
-            "geapl200-pca-waf-kb",
+            "geap-pca-waf-kb",
             slug,
             out_file,
             gcs_uri,
@@ -352,7 +352,8 @@ def stage6_provision_and_hydrate_spanner_and_bq(
             "gcloud", "spanner", "instances", "create", spanner_instance,
             f"--project={project_id}",
             f"--config=regional-{region}",
-            "--description=GEA Architecture Guidelines Graph",
+            "--description=GEA Arch Guidelines Graph",
+            "--edition=ENTERPRISE",
             "--processing-units=100",
         ],
         dry_run=dry_run,

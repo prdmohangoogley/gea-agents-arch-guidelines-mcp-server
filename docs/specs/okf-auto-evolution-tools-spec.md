@@ -40,7 +40,7 @@ flowchart TB
     subgraph Storage ["Persistent Knowledge Targets"]
         GCS[("GCS OKF v0.2 Bucket<br/>gs://.../okf")]
         Spanner[("Cloud Spanner Graph<br/>arch_guidelines_graph")]
-        Catalog[("Dataplex Knowledge Catalog<br/>geapl200-architecture-kb")]
+        Catalog[("Dataplex Knowledge Catalog<br/>geap-architecture-kb")]
     end
 
     Trigger --> TFreshen

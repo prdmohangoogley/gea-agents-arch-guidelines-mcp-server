@@ -63,7 +63,7 @@ flowchart TB
 
     subgraph TargetStores ["Enterprise Knowledge Targets"]
         GCS[("GCS OKF v0.2 Bucket<br/>gs://fivedaysai-prd-sandbox-317383-okf")]
-        Catalog[("Dataplex Knowledge Catalog<br/>geapl200-architecture-kb")]
+        Catalog[("Dataplex Knowledge Catalog<br/>geap-architecture-kb")]
         Spanner[("Cloud Spanner Graph<br/>arch_guidelines_graph")]
         BQ[("BigQuery Session Feedback<br/>session_feedback table")]
     end
@@ -220,7 +220,7 @@ okf-evolution-agent-sa@fivedaysai-prd-sandbox-317383.iam.gserviceaccount.com
 | `projects/301802433103` | `roles/aiplatform.user` | Invokes Vertex AI modern foundation models (`gemini-3.1-pro`, `gemini-4-argon`) for drift synthesis. |
 | `gs://fivedaysai-prd-sandbox-317383-okf/*` | `roles/storage.objectAdmin` | Read/write OKF concept bundles, SHA-256 manifests, and CRC32C digests. (No project-wide storage admin). |
 | `arch_guidelines_graph` | `roles/spanner.databaseUser` | Read and update graph triples representing evolved architectural patterns. |
-| `geapl200-architecture-kb` | `roles/datacatalog.tagEditor` | Update Dataplex Knowledge Catalog entry tags and schema descriptions. |
+| `geap-architecture-kb` | `roles/datacatalog.tagEditor` | Update Dataplex Knowledge Catalog entry tags and schema descriptions. |
 | `cloud-scheduler` | `roles/iam.serviceAccountTokenCreator` | Allows Cloud Scheduler to mint short-lived downscoped OIDC tokens for invocation. |
 
 **Strict Disqualifier Enforcement:**

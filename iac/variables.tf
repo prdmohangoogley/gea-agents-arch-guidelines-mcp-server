@@ -74,3 +74,33 @@ variable "reasoning_engine_display_name" {
   type        = string
   default     = "gea-agents-arch-guidelines-mcp-server"
 }
+
+variable "gemini_enterprise_location" {
+  description = "Location for the Gemini Enterprise (Discovery Engine) app (global, us, or eu)"
+  type        = string
+  default     = "global"
+}
+
+variable "gemini_enterprise_data_store_id" {
+  description = "Discovery Engine data store ID for OKF architecture guidelines"
+  type        = string
+  default     = "geap-architecture-okf-ds"
+}
+
+variable "gemini_enterprise_engine_id" {
+  description = "Gemini Enterprise app / engine ID"
+  type        = string
+  default     = "geap-architecture-guidelines-app"
+}
+
+variable "gemini_enterprise_display_name" {
+  description = "Display name for the Gemini Enterprise app"
+  type        = string
+  default     = "Enterprise Architecture Guidelines App"
+}
+
+variable "gemini_enterprise_company_name" {
+  description = "Company / org display name for the Gemini Enterprise app"
+  type        = string
+  default     = "Enterprise Architecture"
+}

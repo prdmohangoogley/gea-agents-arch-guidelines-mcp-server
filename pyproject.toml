@@ -31,6 +31,7 @@ dependencies = [
     "opentelemetry-exporter-gcp-trace>=1.15.0",
     "opentelemetry-instrumentation>=0.45b0",
     "cloudpickle>=3.1.0",
+    "google-adk>=1.0.0",
 ]
 
 [project.optional-dependencies]

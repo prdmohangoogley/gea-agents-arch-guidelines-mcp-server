@@ -258,12 +258,12 @@ run_tolerant gcloud dataplex entry-types create okf-concept \
   --display-name="OKF PCA WAF Concept" \
   --description="Google Cloud PCA & Well-Architected Framework OKF v0.2 Concept Document."
 
-run_tolerant gcloud dataplex entry-groups create geapl200-architecture-kb \
+run_tolerant gcloud dataplex entry-groups create geap-architecture-kb \
   --project="${PROJECT_ID}" \
   --location=us \
   --display-name="GEA Agent Development - Unified L200/L300/L400/WAF Architecture KB"
 
-run_tolerant gcloud dataplex entry-groups create geapl200-pca-waf-kb \
+run_tolerant gcloud dataplex entry-groups create geap-pca-waf-kb \
   --project="${PROJECT_ID}" \
   --location=us \
   --display-name="Google Cloud PCA & Well-Architected Framework OKF Knowledge Base"
@@ -301,7 +301,7 @@ else
     entry_id="$(basename "${cat_file}" .json)"
     target_aspect="${BUILD_ASPECTS_DIR}/${entry_id}.json"
     sed "s/fivedaysai-prd-sandbox-317383\.us\.okf/${PROJECT_ID}.us.okf/g" "${cat_file}" > "${target_aspect}"
-    upsert_dataplex_entry "geapl200-architecture-kb" "${entry_id}" "gs://${OKF_BUCKET}/okf/concepts/${entry_id}.md" "${target_aspect}"
+    upsert_dataplex_entry "geap-architecture-kb" "${entry_id}" "gs://${OKF_BUCKET}/okf/concepts/${entry_id}.md" "${target_aspect}"
   done
 
   for waf_cat in "${DATA_OKF_DIR}/pca_waf/catalog-entries"/[0-9][0-9]-*.json; do
@@ -315,10 +315,10 @@ first_val = next(iter(aspects.values()))
 out = {f'{sys.argv[2]}.us.okf': {'data': first_val['data']}}
 json.dump(out, open(sys.argv[3], 'w'), indent=2)
 " "${waf_cat}" "${PROJECT_ID}" "${target_aspect}"
-    upsert_dataplex_entry "geapl200-architecture-kb" "pca-waf-${slug}" "gs://${WAF_BUCKET}/${WAF_VTAG}/okf/concepts/${slug}.md" "${target_aspect}"
-    upsert_dataplex_entry "geapl200-pca-waf-kb" "${slug}" "gs://${WAF_BUCKET}/${WAF_VTAG}/okf/concepts/${slug}.md" "${target_aspect}"
+    upsert_dataplex_entry "geap-architecture-kb" "pca-waf-${slug}" "gs://${WAF_BUCKET}/${WAF_VTAG}/okf/concepts/${slug}.md" "${target_aspect}"
+    upsert_dataplex_entry "geap-pca-waf-kb" "${slug}" "gs://${WAF_BUCKET}/${WAF_VTAG}/okf/concepts/${slug}.md" "${target_aspect}"
   done
-  echo "  ✓ Propagated all ${TOTAL_OKF} OKF concepts to Dataplex Universal Catalog (geapl200-architecture-kb & geapl200-pca-waf-kb)"
+  echo "  ✓ Propagated all ${TOTAL_OKF} OKF concepts to Dataplex Universal Catalog (geap-architecture-kb & geap-pca-waf-kb)"
 fi
 
 # ==============================================================================
@@ -330,7 +330,8 @@ echo "==> [Stage 6/8] Provisioning & Hydrating Cloud Spanner Graph (${SPANNER_IN
 run_tolerant gcloud spanner instances create "${SPANNER_INSTANCE}" \
   --project="${PROJECT_ID}" \
   --config="regional-${REGION}" \
-  --description="GEA Architecture Guidelines Graph" \
+  --description="GEA Arch Guidelines Graph" \
+  --edition=ENTERPRISE \
   --processing-units=100
 
 DDL_FILE="${REPO_ROOT}/iac/modules/spanner/schema.sql"

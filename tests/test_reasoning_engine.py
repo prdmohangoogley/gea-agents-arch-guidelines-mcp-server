@@ -104,3 +104,16 @@ def test_mcp_adapter_tools():
 
     freshness = check_okf_freshness(threshold_days=30)
     assert freshness.get("status") == "success"
+
+
+def test_adk_app_playground_contract():
+    """Verify ADK Agent + AdkApp contract for Google Cloud Console Playground (`google-adk`)."""
+    from src.agent.adk_agent import build_adk_app, build_root_agent
+
+    agent = build_root_agent()
+    assert agent.name == "enterprise_arch_guidelines_agent"
+    assert len(agent.tools) >= 11
+
+    app = build_adk_app(enable_tracing=False)
+    assert hasattr(app, "async_create_session")
+    assert hasattr(app, "async_stream_query")

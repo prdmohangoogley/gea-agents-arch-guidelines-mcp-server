@@ -14,7 +14,7 @@ Use this skill to search and retrieve authoritative Google Cloud architectural b
 ## Backing Cloud Storage & Dataplex Knowledge Base
 
 - **GCS Bucket**: `gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/`
-- **Dataplex Entry Group**: `projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb` & `projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-pca-waf-kb`
+- **Dataplex Entry Group**: `projects/arch-best-practices-mcp-server/locations/us/entryGroups/geap-architecture-kb` & `projects/arch-best-practices-mcp-server/locations/us/entryGroups/geap-pca-waf-kb`
 - **Dataplex Aspect Types**: `projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf` & `okf-pca-waf`
 
 ## Execution via MCP

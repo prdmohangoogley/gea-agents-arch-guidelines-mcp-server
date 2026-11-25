@@ -28,3 +28,8 @@ The architecture comprises three primary tiers:
 - All tools must return clean, markdown-formatted outputs or structured Pydantic models.
 - Support graceful degradation: if Spanner Graph is unreachable in local dev mode, provide informative fallback messaging or cached responses.
 - Implement comprehensive health checks and telemetry.
+
+## 5. Vertex AI Agent Runtime & Interactive Console Playground Standard
+- **Always deploy agents wrapped in Google ADK (`google.adk.agents.Agent` + `vertexai.agent_engines.AdkApp`)** using `vertexai.agent_engines.create(...)` with `enable_tracing=True`.
+- **Never deploy raw custom pickled Python classes** (`reasoning_engines.ReasoningEngine.create(...)`) for interactive agents, because raw custom classes omit `agent_framework = "google-adk"` and the ADK session/streaming contract (`async_create_session`, `async_stream_query`, `streaming_agent_run_with_events`), preventing the agent from appearing in the Google Cloud Console Playground and Gemini Platform Studio UI.
+- Expose all MCP server tools and registered skills as typed ADK function tools in `src/agent/adk_agent.py`.

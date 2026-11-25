@@ -3,7 +3,7 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "~> 5.25"
+      version = "~> 5.45"
     }
   }
 }
@@ -27,7 +27,8 @@ resource "google_project_service" "required_apis" {
     "cloudtrace.googleapis.com",
     "monitoring.googleapis.com",
     "logging.googleapis.com",
-    "modelarmor.googleapis.com"
+    "modelarmor.googleapis.com",
+    "discoveryengine.googleapis.com"
   ])
 
   project            = var.project_id
@@ -119,4 +120,17 @@ resource "google_project_iam_member" "okf_evolution_dataplex_editor" {
   project = var.project_id
   role    = "roles/dataplex.catalogEditor"
   member  = "serviceAccount:${google_service_account.okf_evolution_sa.email}"
+}
+
+# 7. Gemini Enterprise (Discovery Engine / Agentspace) App Layer
+module "gemini_enterprise" {
+  source              = "./modules/gemini_enterprise"
+  project_id          = var.project_id
+  location            = var.gemini_enterprise_location
+  data_store_id       = var.gemini_enterprise_data_store_id
+  engine_id           = var.gemini_enterprise_engine_id
+  engine_display_name = var.gemini_enterprise_display_name
+  company_name        = var.gemini_enterprise_company_name
+
+  depends_on = [google_project_service.required_apis]
 }

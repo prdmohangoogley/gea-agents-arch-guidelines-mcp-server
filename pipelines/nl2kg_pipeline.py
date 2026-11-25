@@ -357,9 +357,14 @@ def triplify_document(
     title = meta.get("title", doc_path.stem.replace("-", " ").title())
     category = meta.get("tags", ["architecture"])[0] if meta.get("tags") else "architecture"
     summary = meta.get("description", body[:300].strip().replace("\n", " ") + "...")
-    source_url = meta.get("sources", [str(doc_path)])[0] if meta.get("sources") else str(doc_path)
-    content_sha = meta.get("content_sha256", hashlib.sha256(content.encode("utf-8")).hexdigest())
-    version_tag = meta.get("version_tag", default_version)
+    raw_sources = meta.get("sources")
+    if isinstance(raw_sources, list) and raw_sources:
+        first_src = raw_sources[0]
+        source_url = first_src.get("uri") or first_src.get("url") or str(first_src) if isinstance(first_src, dict) else str(first_src)
+    else:
+        source_url = str(doc_path)
+    content_sha = str(meta.get("content_sha256", hashlib.sha256(content.encode("utf-8")).hexdigest()))
+    version_tag = str(meta.get("version_tag", default_version))
     stale_after_raw = meta.get("stale_after")
     stale_after = parse_iso_datetime(stale_after_raw)
     created_at = parse_iso_datetime(meta.get("timestamp")) or datetime.now(timezone.utc)

@@ -26,7 +26,7 @@ flowchart TB
     subgraph CloudStorage["2. Google Cloud Storage & Dataplex Universal Catalog"]
         GCS1["🗄️ Main OKF Bucket\ngs://gea_agent_development_architectural_best_practices_1790796607"]
         GCS2["🗄️ WAF Pillars Bucket\ngs://gea_agent_development_architectural_best_practices_pca_waf"]
-        DP["🏷️ Dataplex Universal Catalog\n• EntryGroup: geapl200-architecture-kb (92 entries)\n• EntryGroup: geapl200-pca-waf-kb (9 WAF entries)\n• AspectType: okf (SHA-256 + 6M stale_after)"]
+        DP["🏷️ Dataplex Universal Catalog\n• EntryGroup: geap-architecture-kb (92 entries)\n• EntryGroup: geap-pca-waf-kb (9 WAF entries)\n• AspectType: okf (SHA-256 + 6M stale_after)"]
     end
 
     subgraph HybridGraph["3. Hybrid Knowledge Graph & Analytics Tier"]
@@ -58,7 +58,7 @@ flowchart TB
 | **GCP Project** | `fivedaysai-prd-sandbox-317383` (Project Number `301802433103`) | Sandbox hosting project (portable to Argolis via `data/`) |
 | **Main OKF GCS Bucket** | `gs://gea_agent_development_architectural_best_practices_1790796607` | Stores `/okf/` unified corpus and `/tiers/{L200,L300,L400,WAF_Pillars}/` |
 | **WAF Pillars GCS Bucket** | `gs://gea_agent_development_architectural_best_practices_pca_waf` | Stores `/WAF_OKF_2026-11-24_182000/okf/` and `/okf/` with Uniform Bucket-Level Access & PAP |
-| **Dataplex Entry Groups** | `projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb`<br>`projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-pca-waf-kb` | Houses all 101 catalog entries (`92` in unified KB + `9` in dedicated WAF KB) with `okf` aspects |
+| **Dataplex Entry Groups** | `projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geap-architecture-kb`<br>`projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geap-pca-waf-kb` | Houses all 101 catalog entries (`92` in unified KB + `9` in dedicated WAF KB) with `okf` aspects |
 | **Cloud Spanner Graph** | Instance: `gea-arch-guidelines-spanner`<br>Database: `arch_guidelines_graph`<br>Graph: `ArchGuidelinesGraph` | Operational ISO GQL property graph (`Guidelines`, `Patterns`, `Antipatterns`, `FDERubricItems`, `Tradeoffs`) |
 | **BigQuery Dataset** | `fivedaysai-prd-sandbox-317383.gea_arch_guidelines_analytics` | Analytical deep-dive tables (`guidelines`, `patterns`, `antipatterns`, `fde_rubric_items`, `mcp_query_audit_logs`) |
 | **Local Gitignored Staging** | `/Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp/data/` | Full offline/portable copy of `L200/`, `L300/`, `L400/`, `WAF_Pillars/`, `unified_okf/`, and `dataplex_catalog_entries/` for Argolis migration |
