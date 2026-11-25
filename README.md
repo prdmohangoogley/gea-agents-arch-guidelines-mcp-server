@@ -8,6 +8,17 @@
 
 ---
 
+## 📚 Official Documentation & Runbooks
+
+| Document | Description |
+| :--- | :--- |
+| [**1. MCP Server Reference Documentation**](docs/01_MCP_SERVER_DOCUMENTATION.md) | End-to-end architecture, Multi-Tier OKF v0.2 Corpus (`L200`, `L300`, `L400`, `WAF_Pillars` — 92 concepts with 6-month TTL), Dataplex & Spanner Graph topology, and all **29 FastMCP Tools**. |
+| [**2. Skills Registry & Progressive Disclosure Guide**](docs/02_SKILLS_REGISTRY_DOCUMENTATION.md) | Two-Tier Progressive Disclosure architecture (`Tier 1 Catalog` vs `Tier 2 Manifest Hydration`), dynamic discovery engine, and complete catalog of all **38 Registered Skills**. |
+| [**3. Local Antigravity Installation & Argolis Migration Guide**](docs/03_ANTIGRAVITY_LOCAL_INSTALLATION_GUIDE.md) | Step-by-step instructions to install and configure `arch-guidelines` in local Antigravity (`~/.gemini/config/mcp_config.json`), enable the 26 `.agents/skills/`, and migrate via `data/` to Argolis. |
+| [**4. Skills Usage Runbook (Examples & Expected Outputs)**](docs/04_SKILLS_USAGE_RUNBOOK.md) | Getting-started invocation examples (`invoke_skill` and direct MCP tools) and expected JSON/Markdown outputs for **every single one of the 38 skills**. |
+
+---
+
 ## 🏛️ System Architecture
 
 ```mermaid
