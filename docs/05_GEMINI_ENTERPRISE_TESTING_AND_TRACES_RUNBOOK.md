@@ -31,12 +31,21 @@ gcloud agent-registry services describe gea-arch-guidelines-agent \
 
 ## 2. Testing the Chatbot in Google Cloud Console (Gemini Enterprise / Vertex AI UI)
 
-### Step 2.1: Open Gemini Enterprise / Vertex AI Reasoning Engine Playground
-1. **Vertex AI Reasoning Engines Console:**
-   Open `https://console.cloud.google.com/vertex-ai/reasoning-engines?project=fivedaysai-prd-sandbox-317383` (replace project ID if deployed to Argolis).
-2. **Gemini Enterprise / Agentspace Web App:**
-   Open `https://console.cloud.google.com/gen-app-builder/engines?project=fivedaysai-prd-sandbox-317383`.
-3. Select **`Enterprise Architecture Guidelines Agent`** (or **`Autonomous OKF Evolution Agent`**).
+### Step 2.1: Open Gemini Enterprise / Vertex AI Agent Engine in Google Cloud Console
+
+> **Note on Google Cloud Console URLs:** While the underlying API resource is `reasoningEngines/<id>`, Google Cloud Console's web UI routes them under **Vertex AI Agent Engine** (`/vertex-ai/agents` and `/vertex-ai/agents/agent-engines`).
+
+1. **Vertex AI Agent Engine (Reasoning Engines) Console:**
+   * **Agent Overview:** `https://console.cloud.google.com/vertex-ai/agents?project=fivedaysai-prd-sandbox-317383`
+   * **Agent Engines List:** `https://console.cloud.google.com/vertex-ai/agents/agent-engines?project=fivedaysai-prd-sandbox-317383`
+   * **Live Deployed Reasoning Engine Resources (`us-central1`):**
+     * **Enterprise Architecture Guidelines Agent:** `projects/301802433103/locations/us-central1/reasoningEngines/2766980659804110848`
+     * **Autonomous OKF Evolution Agent:** `projects/301802433103/locations/us-central1/reasoningEngines/4506777490852675584`
+2. **Gemini Enterprise / Agent Builder (Agentspace) Web App:**
+   * `https://console.cloud.google.com/gen-app-builder/engines?project=fivedaysai-prd-sandbox-317383`
+3. **Dataplex Universal Catalog (Knowledge Catalog) Search:**
+   * `https://console.cloud.google.com/dataplex/search?project=fivedaysai-prd-sandbox-317383`
+4. Select **`Enterprise Architecture Guidelines Agent`** (`2766980659804110848`) or **`Autonomous OKF Evolution Agent`** (`4506777490852675584`).
 
 ---
 
