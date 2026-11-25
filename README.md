@@ -16,7 +16,8 @@
 | [**2. Skills Registry & Progressive Disclosure Guide**](docs/02_SKILLS_REGISTRY_DOCUMENTATION.md) | Two-Tier Progressive Disclosure architecture (`Tier 1 Catalog` vs `Tier 2 Manifest Hydration`), dynamic discovery engine, and complete catalog of all **38 Registered Skills**. |
 | [**3. Local Antigravity Installation & Argolis Migration Guide**](docs/03_ANTIGRAVITY_LOCAL_INSTALLATION_GUIDE.md) | Step-by-step instructions to install and configure `arch-guidelines` in local Antigravity (`~/.gemini/config/mcp_config.json`), enable the 26 `.agents/skills/`, and migrate via `data/` to Argolis. |
 | [**4. Skills Usage Runbook (Examples & Expected Outputs)**](docs/04_SKILLS_USAGE_RUNBOOK.md) | Getting-started invocation examples (`invoke_skill` and direct MCP tools) and expected JSON/Markdown outputs for **every single one of the 38 skills**. |
-| [**5. Gemini Enterprise & Antigravity Testing & Trace Runbook**](docs/05_GEMINI_ENTERPRISE_AND_ANTIGRAVITY_TESTING_RUNBOOK.md) | Turnkey from-scratch shell deployment (`scripts/deploy_from_scratch.sh`), testing in **Gemini Enterprise** (Google Cloud Chatbot) with **Cloud Trace / Experimental Traces**, and running the **All-38-Skills Runbook Test** in Antigravity. |
+| [**5. Gemini Enterprise Testing & Experimental Traces Runbook**](docs/05_GEMINI_ENTERPRISE_TESTING_AND_TRACES_RUNBOOK.md) | Publishing & testing the agent in **Gemini Enterprise (Google Cloud Console Chatbot / Vertex AI Agent Engine)** and inspecting **Experimental Traces (`Cloud Trace`), Trajectory Waterfalls, Logs, and BigQuery Audit Tables**. |
+| [**6. Antigravity Skills, Deployment & Runbook Testing Guide**](docs/06_ANTIGRAVITY_SKILLS_AND_TESTING_RUNBOOK.md) | Turnkey from-scratch shell deployment (`scripts/deploy_from_scratch.sh`), installing skills in **Local Antigravity**, running the **Single-Command All-38-Skills Runbook Test**, and interactive Antigravity verification prompts. |
 
 ---
 
