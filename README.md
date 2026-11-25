@@ -16,6 +16,7 @@
 | [**2. Skills Registry & Progressive Disclosure Guide**](docs/02_SKILLS_REGISTRY_DOCUMENTATION.md) | Two-Tier Progressive Disclosure architecture (`Tier 1 Catalog` vs `Tier 2 Manifest Hydration`), dynamic discovery engine, and complete catalog of all **38 Registered Skills**. |
 | [**3. Local Antigravity Installation & Argolis Migration Guide**](docs/03_ANTIGRAVITY_LOCAL_INSTALLATION_GUIDE.md) | Step-by-step instructions to install and configure `arch-guidelines` in local Antigravity (`~/.gemini/config/mcp_config.json`), enable the 26 `.agents/skills/`, and migrate via `data/` to Argolis. |
 | [**4. Skills Usage Runbook (Examples & Expected Outputs)**](docs/04_SKILLS_USAGE_RUNBOOK.md) | Getting-started invocation examples (`invoke_skill` and direct MCP tools) and expected JSON/Markdown outputs for **every single one of the 38 skills**. |
+| [**5. Gemini Enterprise & Antigravity Testing & Trace Runbook**](docs/05_GEMINI_ENTERPRISE_AND_ANTIGRAVITY_TESTING_RUNBOOK.md) | Turnkey from-scratch deployment (`scripts/deploy_from_scratch.py`), testing in **Gemini Enterprise** (Google Cloud Chatbot) with **Cloud Trace / Experimental Traces**, and running the **All-38-Skills Runbook Test** in Antigravity. |
 
 ---
 

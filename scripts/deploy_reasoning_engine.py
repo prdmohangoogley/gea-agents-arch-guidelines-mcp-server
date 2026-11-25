@@ -68,11 +68,17 @@ def deploy(dry_run: bool = False) -> None:
     print("==> Initializing Vertex AI...")
     vertexai.init(project=PROJECT_ID, location=REGION, staging_bucket=STAGING_BUCKET)
 
+    extra_pkgs = ["./src", "./.agents"]
+    if os.path.exists("./data/okf"):
+        extra_pkgs.append("./data/okf")
+    elif os.path.exists("./okf"):
+        extra_pkgs.append("./okf")
+
     print("==> Packaging and deploying agent to Vertex AI Reasoning Engine...")
     remote_agent = reasoning_engines.ReasoningEngine.create(
         agent,
         requirements=requirements,
-        extra_packages=["./src", "./.agents", "./okf"],
+        extra_packages=extra_pkgs,
         display_name="Enterprise Architecture Guidelines Agent",
         description=(
             "Authoritative First-Class Agent for 24x7x365 architecture design, "
