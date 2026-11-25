@@ -117,7 +117,12 @@ class GraphClient:
             else:
                 from pipelines.nl2kg_pipeline import extract_triples_from_documents, load_local_markdown_corpus
 
-                docs = load_local_markdown_corpus(str(repo_root / "okf" / "concepts"))
+                concepts_dir = (
+                    (repo_root / "data" / "okf" / "concepts")
+                    if (repo_root / "data" / "okf" / "concepts").exists()
+                    else (repo_root / "okf" / "concepts")
+                )
+                docs = load_local_markdown_corpus(str(concepts_dir))
                 triples = extract_triples_from_documents(docs)
                 existing_ids = {g.guideline_id for g in self._guidelines}
                 for g_dict in triples.get("guidelines", []):
@@ -144,7 +149,11 @@ class GraphClient:
             import json
 
             repo_root = Path(__file__).resolve().parent.parent.parent
-            pca_manifest = repo_root / "okf" / "pca_waf" / "MANIFEST.json"
+            pca_manifest = (
+                (repo_root / "data" / "okf" / "pca_waf" / "MANIFEST.json")
+                if (repo_root / "data" / "okf" / "pca_waf" / "MANIFEST.json").exists()
+                else (repo_root / "okf" / "pca_waf" / "MANIFEST.json")
+            )
             if pca_manifest.exists():
                 mdata = json.loads(pca_manifest.read_text(encoding="utf-8"))
                 existing_ids = {g.guideline_id for g in self._guidelines}

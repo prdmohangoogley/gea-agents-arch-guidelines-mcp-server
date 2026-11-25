@@ -17,7 +17,12 @@ from src.security.model_armor import model_armor, sanitize_tool_output
 tracer = get_tracer("guidelines-mcp-server")
 logger = logging.getLogger("gea.mcp.evolution")
 
-OKF_CONCEPTS_DIR = Path(__file__).resolve().parent.parent.parent / "okf" / "concepts"
+_REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+OKF_CONCEPTS_DIR = (
+    (_REPO_ROOT / "data" / "okf" / "concepts")
+    if (_REPO_ROOT / "data" / "okf" / "concepts").exists()
+    else (_REPO_ROOT / "okf" / "concepts")
+)
 
 
 def check_freshness_logic(threshold_days: int = 30) -> dict[str, Any]:

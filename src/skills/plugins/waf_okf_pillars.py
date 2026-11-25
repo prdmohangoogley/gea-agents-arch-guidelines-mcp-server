@@ -22,8 +22,9 @@ from src.skills.base import (
     SkillResult,
 )
 
-# Locate the PCA/WAF OKF bundle in the MCP repository or fallback to PCA-Exam-Prep source
+# Locate the PCA/WAF OKF bundle in the MCP repository (`data/okf/pca_waf` or `okf/pca_waf`) or fallback to PCA-Exam-Prep source
 _REPO_ROOT = Path(__file__).resolve().parents[3]
+_DATA_PCA_WAF_DIR = _REPO_ROOT / "data" / "okf" / "pca_waf"
 _MCP_PCA_WAF_DIR = _REPO_ROOT / "okf" / "pca_waf"
 _SOURCE_PCA_WAF_DIR = Path("/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices")
 
@@ -395,11 +396,13 @@ WAF_ANTIPATTERN_RULES: list[dict[str, Any]] = [
 
 def _get_okf_bundle_dir() -> Path:
     """Resolve the active local directory for the PCA/WAF OKF bundle."""
+    if (_DATA_PCA_WAF_DIR / "MANIFEST.json").exists():
+        return _DATA_PCA_WAF_DIR
     if (_MCP_PCA_WAF_DIR / "MANIFEST.json").exists():
         return _MCP_PCA_WAF_DIR
     if (_SOURCE_PCA_WAF_DIR / "MANIFEST.json").exists():
         return _SOURCE_PCA_WAF_DIR
-    return _MCP_PCA_WAF_DIR
+    return _DATA_PCA_WAF_DIR
 
 
 def load_pca_waf_okf_corpus() -> dict[str, Any]:

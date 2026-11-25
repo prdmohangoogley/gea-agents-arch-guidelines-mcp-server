@@ -50,12 +50,12 @@ CORPUS_NAMES = {
 }
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-OKF_DIR = REPO_ROOT / "okf"
+DATA_DIR = REPO_ROOT / "data"
+OKF_DIR = (DATA_DIR / "okf") if (DATA_DIR / "okf").exists() else (REPO_ROOT / "okf")
 CONCEPTS_DIR = OKF_DIR / "concepts"
 CATALOG_ENTRIES_DIR = OKF_DIR / "catalog-entries"
 PCA_WAF_DIR = OKF_DIR / "pca_waf"
 EXT_PCA_WAF_DIR = Path("/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices")
-DATA_DIR = REPO_ROOT / "data"
 
 FRONT_MATTER_RE = re.compile(r"\A---\r?\n(.*?)\r?\n---\r?\n+", re.S)
 
