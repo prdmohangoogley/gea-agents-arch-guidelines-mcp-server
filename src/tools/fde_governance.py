@@ -14,35 +14,59 @@ tracer = get_tracer("guidelines-mcp-server")
 
 FDE_CHARTER_URL = "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
 
-# Canonical sub-competencies for FDE rubric evaluation
+# Canonical 34 competencies for Google Cloud FDE Field-Readiness Rubric evaluation (Concept 00)
 CANONICAL_RUBRIC_DOMAINS = {
     "Part A: Advisory Rigor": [
         ("RUBRIC-A-1", "Strategic Delivery & Value Articulation"),
         ("RUBRIC-A-2", "Customer Context & Architectural Grounding"),
         ("RUBRIC-A-3", "Tradeoff Articulation & Decision Records"),
+        ("RUBRIC-A-4", "Executive Stakeholder & ARB Synthesis"),
+        ("RUBRIC-A-5", "Field Reproducibility & Customer Handoff"),
     ],
-    "Part B.1: Architecture": [
+    "Part B.1: Architecture & Agentic SDLC": [
         ("RUBRIC-B-1-1", "Zero Ambient Authority (ZAA)"),
         ("RUBRIC-B-1-2", "Progressive Disclosure Context Management"),
         ("RUBRIC-B-1-3", "Tiered Storage Architecture (Spanner + BigQuery)"),
+        ("RUBRIC-B-1-4", "Spec-Driven Vibe Coding & Formal Invariants"),
+        ("RUBRIC-B-1-5", "Multi-Agent Orchestration & Bounded Autonomy"),
     ],
-    "Part B.2: Quality & Evals": [
+    "Part B.2: Quality, Evals & Protocols": [
         ("RUBRIC-B-2-1", "Quality Flywheel & Golden Eval Datasets"),
         ("RUBRIC-B-2-2", "Trajectory Evaluation & LLM-as-a-Judge"),
         ("RUBRIC-B-2-3", "CI/CD Regression Quality Gates"),
+        ("RUBRIC-B-2-4", "MCP & A2A Protocol Interoperability"),
+        ("RUBRIC-B-2-5", "Skills Registry & Dynamic Tool Hydration"),
+        ("RUBRIC-B-2-6", "Adversarial Red-Teaming & Benchmark Coverage"),
     ],
-    "Part B.3: Security & Identity": [
+    "Part B.3: Security, Identity & Memory": [
         ("RUBRIC-B-3-1", "Dual-Pass Model Armor (Ingress & Egress DLP)"),
         ("RUBRIC-B-3-2", "Principal Access Boundaries (PAB)"),
         ("RUBRIC-B-3-3", "Workforce Identity Federation (WIF) & Delegated OAuth"),
+        ("RUBRIC-B-3-4", "Stateful Memory Bank & Session Isolation"),
     ],
-    "Part B.4: Observability": [
+    "Part B.4: Observability & FinOps": [
         ("RUBRIC-B-4-1", "OpenTelemetry Distributed Tracing"),
         ("RUBRIC-B-4-2", "Security Telemetry & Audit Logs"),
+        ("RUBRIC-B-4-3", "Tokenomics, Prefix KV Caching & Cost Attribution"),
     ],
     "Part B.5: Operational Readiness": [
         ("RUBRIC-B-5-1", "Health Checks & Container Probes"),
         ("RUBRIC-B-5-2", "Automated IaC & Reproducible Deployments"),
+    ],
+    "Part B.6: Runtime Scale & Resilience": [
+        ("RUBRIC-B-6-1", "Vertex AI Reasoning Engine Managed Runtime (Zero Cloud Run)"),
+        ("RUBRIC-B-6-2", "Circuit Breakers & Graceful Degradation"),
+        ("RUBRIC-B-6-3", "Multi-Model Frontier Failover (Gemini 3.1+ / GPT-5 / Claude 5)"),
+    ],
+    "Part B.7: Change Management & Governance": [
+        ("RUBRIC-B-7-1", "Autonomous OKF Corpus Freshness & TTL Governance"),
+        ("RUBRIC-B-7-2", "Dataplex Universal Catalog Lineage & Trust Signals"),
+        ("RUBRIC-B-7-3", "Cross-Project Portable Packaging & Disaster Recovery"),
+    ],
+    "Addendum: Tokenomics & Socratic Grilling": [
+        ("RUBRIC-ADD-1", "KV Cache Prefix Alignment & >=75% Cache Hit Ratio"),
+        ("RUBRIC-ADD-2", "Socratic Dialectic Tradeoff Grilling"),
+        ("RUBRIC-ADD-3", "Zero-Score Disqualifier Enforcement Gate"),
     ],
 }
 

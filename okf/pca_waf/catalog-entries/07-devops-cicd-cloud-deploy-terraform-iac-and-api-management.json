@@ -1,0 +1,51 @@
+{
+  "name": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb/entries/07_devops_cicd_cloud_deploy_terraform_iac_and_api_management",
+  "entryType": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryTypes/okf-concept",
+  "fullyQualifiedName": "okf:GEAPL200_PCA_WAF.OKF-PCA-07",
+  "entrySource": {
+    "resource": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/07-devops-cicd-cloud-deploy-terraform-iac-and-api-management.md",
+    "system": "GeminiEnterprise_OKF_v0.2",
+    "platform": "GoogleCloudDataplex",
+    "displayName": "OKF-PCA-07: DevOps, CI/CD, Cloud Deploy, Terraform IaC, GitOps & API Management (WAF Automation & Delivery)",
+    "description": "L400 architectural decision framework for Cloud Build Private Pools, Artifact Registry, Google Cloud Deploy, Progressive Delivery (Rolling, Blue-Green, Canary, Shadow), Terraform IaC, Config Sync/Connector, and Apigee/API Gateway/Endpoints.",
+    "createTime": "2026-11-24T17:30:00-08:00",
+    "updateTime": "2026-11-24T17:30:00-08:00",
+    "labels": {
+      "corpus": "geapl200_pca_waf",
+      "version_tag": "pca_waf_okf_2026-11-24_172000",
+      "l400_version": "l400_version_20261124_1720",
+      "ttl_months": "6",
+      "framework": "google-cloud-well-architected"
+    }
+  },
+  "aspects": {
+    "fivedaysai-prd-sandbox-317383.us.okf": {
+      "aspectType": "projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf",
+      "data": {
+        "id": "OKF-PCA-07",
+        "type": "concept",
+        "title": "DevOps, CI/CD, Cloud Deploy, Terraform IaC, GitOps & API Management (WAF Automation & Delivery)",
+        "description": "L400 architectural decision framework for Cloud Build Private Pools, Artifact Registry, Google Cloud Deploy, Progressive Delivery (Rolling, Blue-Green, Canary, Shadow), Terraform IaC, Config Sync/Connector, and Apigee/API Gateway/Endpoints.",
+        "corpus": "GEAPL200_PCA_WAF",
+        "version_tag": "PCA_WAF_OKF_2026-11-24_173000",
+        "l400_version": "L400_version_20261124_1730",
+        "timestamp": "2026-11-24T17:30:00-08:00",
+        "ttl": "P6M",
+        "ttl_days": 180,
+        "stale_after": "2027-05-24T17:30:00-08:00",
+        "status": "active",
+        "verified": true,
+        "content_sha256": "8d17ea948c6d262e4e17589981779a810549499cae053a1dc8f3376e194cc714",
+        "file_sha256": "48fd9c4bd1c1e814271646e9556aa8b4c518557a6ff06861f07ee4944179d2c2",
+        "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices/concepts/07-devops-cicd-cloud-deploy-terraform-iac-and-api-management.md",
+        "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/07-devops-cicd-cloud-deploy-terraform-iac-and-api-management.md",
+        "source_citations": [
+          "Dan Sullivan, Official Google Cloud Certified Professional Cloud Architect Study Guide (Sybex / Wiley, ISBN 978-1-119-60244-6, PCA_Book.pdf)",
+          "Google Cloud Professional Cloud Architect (PCA) Complete Course & Architectural Reference Deck (242 Slides, UDEMY-Course-PCA.pdf)",
+          "Google Cloud Architecture Framework / Well-Architected Framework Official Documentation (https://cloud.google.com/architecture/framework)",
+          "Forensic Diagnostic Corpus: GCP PCA Mock Exams 1-4 (Nov 2, 3, 6, 9, 2026), Security Set 1 & Service Area Simulators 1-8"
+        ]
+      }
+    }
+  }
+}

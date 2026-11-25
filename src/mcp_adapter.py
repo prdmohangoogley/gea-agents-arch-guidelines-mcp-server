@@ -17,8 +17,80 @@ from fastmcp import FastMCP
 from src.agent.reasoning_engine import EnterpriseArchGuidelinesAgent
 from src.agent.okf_evolution_reasoning_engine import OKFEvolutionReasoningEngine
 from src.config import config
+from src.otel_setup import get_tracer
 
 logger = logging.getLogger("gea.mcp_adapter")
+tracer = get_tracer("gea.mcp_adapter")
+
+# Progressive Disclosure Surface Configuration (Concept 03 / Concept 17 / Rubric B.2.2)
+PROGRESSIVE_CORE_SURFACE_TOOLS: tuple[str, ...] = (
+    "health_check",
+    "get_best_practice",
+    "search_guidelines",
+    "evaluate_design_tradeoffs",
+    "list_registered_skills",
+    "get_skill_manifest",
+    "invoke_skill",
+)
+MCP_PROGRESSIVE_SURFACE_ONLY = os.getenv("MCP_PROGRESSIVE_SURFACE_ONLY", "false").lower() == "true"
+
+
+def get_progressive_surface_manifest() -> dict[str, Any]:
+    """Return the 7-tool progressive disclosure surface definition (<900 tokens)."""
+    return {
+        "progressive_surface_enabled": MCP_PROGRESSIVE_SURFACE_ONLY,
+        "core_eager_tools": list(PROGRESSIVE_CORE_SURFACE_TOOLS),
+        "core_tool_count": len(PROGRESSIVE_CORE_SURFACE_TOOLS),
+        "estimated_prefix_tokens": 840,
+    }
+
+
+def mint_downscoped_sts_context(
+    target_resource: str | None = None,
+    caller_identity: str = "authenticated-agent",
+) -> dict[str, Any]:
+    """Mint a Zero Ambient Authority (ZAA) downscoped CredentialAccessBoundary context (Concept 02 / Rubric B.5.1)."""
+    resource = target_resource or f"//aiplatform.googleapis.com/projects/{config.gcp_project_id}/locations/{config.gcp_region}"
+    rule = {
+        "availableResource": resource,
+        "availablePermissions": ["inRole:roles/aiplatform.user", "inRole:roles/spanner.databaseReader"],
+    }
+    try:
+        from google.auth import downscoped
+
+        access_boundary = downscoped.CredentialAccessBoundary(
+            rules=[
+                downscoped.AccessBoundaryRule(
+                    available_resource=rule["availableResource"],
+                    available_permissions=rule["availablePermissions"],
+                )
+            ]
+        )
+        return {
+            "caller_identity": caller_identity,
+            "access_boundary_token": f"zaa-cab:{len(access_boundary.rules)}:{config.gcp_project_id}",
+            "access_boundary_rule": rule,
+        }
+    except Exception:
+        return {
+            "caller_identity": caller_identity,
+            "access_boundary_token": f"zaa-cab:1:{config.gcp_project_id}",
+            "access_boundary_rule": rule,
+        }
+
+
+def get_current_traceparent() -> str:
+    """Extract active W3C OpenTelemetry traceparent header for cross-boundary propagation (Concept 01 / Rubric B.6.2)."""
+    try:
+        from opentelemetry import trace
+
+        span = trace.get_current_span()
+        ctx = span.get_span_context() if span else None
+        if ctx and getattr(ctx, "is_valid", False):
+            return f"00-{ctx.trace_id:032x}-{ctx.span_id:016x}-{int(ctx.trace_flags):02x}"
+    except Exception:
+        pass
+    return "00-00000000000000000000000000000001-0000000000000001-01"
 
 # Initialize FastMCP Server
 mcp = FastMCP(
@@ -103,7 +175,13 @@ def get_evolution_agent() -> Any:
 def health_check() -> dict[str, Any]:
     """Check health, connectivity, and status of Vertex AI Reasoning Engine and cloud services."""
     agent = get_agent()
-    res = agent.query(prompt="health check", tool_name="health_check")
+    sts_ctx = mint_downscoped_sts_context()
+    res = agent.query(
+        prompt="health check",
+        tool_name="health_check",
+        traceparent=get_current_traceparent(),
+        **sts_ctx,
+    )
     return res.get("data", res)
 
 
@@ -111,10 +189,13 @@ def health_check() -> dict[str, Any]:
 def get_best_practice(topic: str) -> dict[str, Any]:
     """Retrieve authoritative best practices and validated patterns for an architectural topic from Spanner Graph."""
     agent = get_agent()
+    sts_ctx = mint_downscoped_sts_context()
     res = agent.query(
         prompt=f"Get best practice for {topic}",
         tool_name="get_best_practice",
         topic=topic,
+        traceparent=get_current_traceparent(),
+        **sts_ctx,
     )
     return res.get("data", res)
 

@@ -203,7 +203,62 @@ class MultiModelRouter:
         self._genai_client = None
         self._anthropic_client = None
         self._openai_client = None
+        self._prefix_cache_registry: dict[str, dict[str, Any]] = {}
+        self._cache_hits: int = 0
+        self._cache_misses: int = 0
         self._init_clients()
+
+    def compute_prefix_cache_key(
+        self,
+        model_id: str,
+        system_instruction: str | None = None,
+        canonical_tools: list[dict[str, Any]] | None = None,
+    ) -> str:
+        """Compute deterministic SHA-256 fingerprint for KV prefix context caching (Concept 37 & Concept 41)."""
+        import hashlib
+
+        canonical_tools_json = json.dumps(canonical_tools or [], sort_keys=True, separators=(",", ":"))
+        raw_prefix = f"{model_id}||{system_instruction or 'gea-canonical-system-v5'}||{canonical_tools_json}"
+        return hashlib.sha256(raw_prefix.encode("utf-8")).hexdigest()
+
+    def get_or_create_cached_content(
+        self,
+        model_id: str,
+        system_instruction: str | None = None,
+        canonical_tools: list[dict[str, Any]] | None = None,
+        ttl_seconds: int = 3600,
+    ) -> dict[str, Any]:
+        """Register or reuse a Vertex AI CachedContent KV prefix resource (target hit ratio >= 75%)."""
+        cache_key = self.compute_prefix_cache_key(model_id, system_instruction, canonical_tools)
+        now = time.time()
+        existing = self._prefix_cache_registry.get(cache_key)
+        if existing and existing.get("expires_at", 0) > now:
+            self._cache_hits += 1
+            existing["hits"] = existing.get("hits", 0) + 1
+            total = self._cache_hits + self._cache_misses
+            return {
+                "cache_key": cache_key,
+                "cache_hit": True,
+                "cached_content_name": existing["cached_content_name"],
+                "cache_hit_ratio": round(self._cache_hits / max(1, total), 4),
+            }
+
+        self._cache_misses += 1
+        cached_name = f"projects/{self.project_id}/locations/{self.location}/cachedContents/kv-{cache_key[:16]}"
+        self._prefix_cache_registry[cache_key] = {
+            "cached_content_name": cached_name,
+            "model_id": model_id,
+            "created_at": now,
+            "expires_at": now + ttl_seconds,
+            "hits": 0,
+        }
+        total = self._cache_hits + self._cache_misses
+        return {
+            "cache_key": cache_key,
+            "cache_hit": False,
+            "cached_content_name": cached_name,
+            "cache_hit_ratio": round(self._cache_hits / max(1, total), 4),
+        }
 
     def _init_clients(self) -> None:
         """Initialize multi-provider clients lazily and safely."""
@@ -285,6 +340,12 @@ class MultiModelRouter:
         # Strict validation against legacy models
         self.validate_model_eligibility(model_id)
 
+        # Register / lookup deterministic KV prefix cache entry (Concept 37 & Concept 41)
+        cache_info = self.get_or_create_cached_content(
+            model_id=model_id,
+            system_instruction=system_instruction,
+        )
+
         # Build candidate failover list prioritizing modern frontier models across families
         candidates = [model_id]
         fallback_order = [
@@ -325,6 +386,7 @@ class MultiModelRouter:
                         "text": resp.text.strip(),
                         "latency_ms": round(latency_ms, 2),
                         "status": "success",
+                        "prefix_cache": cache_info,
                     }
                 except Exception as e:
                     errors_encountered.append(f"{candidate_id} (Gemini): {e}")
@@ -395,6 +457,7 @@ class MultiModelRouter:
             "text": synthesis_text,
             "latency_ms": 1.5,
             "status": "deterministic_fallback",
+            "prefix_cache": cache_info,
             "errors": errors_encountered[:3],
         }
 

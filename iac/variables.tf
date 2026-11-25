@@ -9,8 +9,8 @@ variable "region" {
   default     = "US"
 }
 
-variable "cloud_run_region" {
-  description = "Google Cloud region for Cloud Run runtime service (e.g. us-central1)"
+variable "vertex_region" {
+  description = "Google Cloud region for Vertex AI Reasoning Engine (e.g. us-central1)"
   type        = string
   default     = "us-central1"
 }
@@ -69,14 +69,8 @@ variable "create_gcs_bucket" {
   default     = false
 }
 
-variable "cloud_run_service_name" {
-  description = "Cloud Run service name for FastMCP runtime"
+variable "reasoning_engine_display_name" {
+  description = "Display name for Vertex AI Reasoning Engine deployment"
   type        = string
   default     = "gea-agents-arch-guidelines-mcp-server"
-}
-
-variable "cloud_run_container_image" {
-  description = "Container image for Cloud Run MCP service (placeholder default)"
-  type        = string
-  default     = "us-docker.pkg.dev/cloudrun/container/hello"
 }

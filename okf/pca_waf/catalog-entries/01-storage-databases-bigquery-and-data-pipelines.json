@@ -1,0 +1,51 @@
+{
+  "name": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb/entries/01_storage_databases_bigquery_and_data_pipelines",
+  "entryType": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryTypes/okf-concept",
+  "fullyQualifiedName": "okf:GEAPL200_PCA_WAF.OKF-PCA-01",
+  "entrySource": {
+    "resource": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/01-storage-databases-bigquery-and-data-pipelines.md",
+    "system": "GeminiEnterprise_OKF_v0.2",
+    "platform": "GoogleCloudDataplex",
+    "displayName": "OKF-PCA-01: Storage, Databases, BigQuery Analytics & Data Pipeline Architecture (WAF Performance & Reliability)",
+    "description": "L400 architectural decision framework for selecting, scaling, securing, and optimizing Google Cloud relational, NoSQL, analytical, in-memory, and object storage systems under the Google Cloud Well-Architected Framework.",
+    "createTime": "2026-11-24T17:30:00-08:00",
+    "updateTime": "2026-11-24T17:30:00-08:00",
+    "labels": {
+      "corpus": "geapl200_pca_waf",
+      "version_tag": "pca_waf_okf_2026-11-24_172000",
+      "l400_version": "l400_version_20261124_1720",
+      "ttl_months": "6",
+      "framework": "google-cloud-well-architected"
+    }
+  },
+  "aspects": {
+    "fivedaysai-prd-sandbox-317383.us.okf": {
+      "aspectType": "projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf",
+      "data": {
+        "id": "OKF-PCA-01",
+        "type": "concept",
+        "title": "Storage, Databases, BigQuery Analytics & Data Pipeline Architecture (WAF Performance & Reliability)",
+        "description": "L400 architectural decision framework for selecting, scaling, securing, and optimizing Google Cloud relational, NoSQL, analytical, in-memory, and object storage systems under the Google Cloud Well-Architected Framework.",
+        "corpus": "GEAPL200_PCA_WAF",
+        "version_tag": "PCA_WAF_OKF_2026-11-24_173000",
+        "l400_version": "L400_version_20261124_1730",
+        "timestamp": "2026-11-24T17:30:00-08:00",
+        "ttl": "P6M",
+        "ttl_days": 180,
+        "stale_after": "2027-05-24T17:30:00-08:00",
+        "status": "active",
+        "verified": true,
+        "content_sha256": "4812308516c042b2f61222c28584a573b77562e4032e28952efccea6363e5877",
+        "file_sha256": "1235beb12ab782a46af3c7e719a1f6bfc371ed70bac43c254f6184105b655d37",
+        "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices/concepts/01-storage-databases-bigquery-and-data-pipelines.md",
+        "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/01-storage-databases-bigquery-and-data-pipelines.md",
+        "source_citations": [
+          "Dan Sullivan, Official Google Cloud Certified Professional Cloud Architect Study Guide (Sybex / Wiley, ISBN 978-1-119-60244-6, PCA_Book.pdf)",
+          "Google Cloud Professional Cloud Architect (PCA) Complete Course & Architectural Reference Deck (242 Slides, UDEMY-Course-PCA.pdf)",
+          "Google Cloud Architecture Framework / Well-Architected Framework Official Documentation (https://cloud.google.com/architecture/framework)",
+          "Forensic Diagnostic Corpus: GCP PCA Mock Exams 1-4 (Nov 2, 3, 6, 9, 2026), Security Set 1 & Service Area Simulators 1-8"
+        ]
+      }
+    }
+  }
+}

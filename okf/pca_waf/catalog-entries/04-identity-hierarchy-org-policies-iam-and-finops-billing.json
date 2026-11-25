@@ -1,0 +1,51 @@
+{
+  "name": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb/entries/04_identity_hierarchy_org_policies_iam_and_finops_billing",
+  "entryType": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryTypes/okf-concept",
+  "fullyQualifiedName": "okf:GEAPL200_PCA_WAF.OKF-PCA-04",
+  "entrySource": {
+    "resource": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/04-identity-hierarchy-org-policies-iam-and-finops-billing.md",
+    "system": "GeminiEnterprise_OKF_v0.2",
+    "platform": "GoogleCloudDataplex",
+    "displayName": "OKF-PCA-04: Identity, Resource Hierarchy, Organization Policies, IAM & Cloud Billing FinOps (WAF Governance & Cost)",
+    "description": "L400 architectural decision framework for Cloud Identity vs. Managed Microsoft AD, Resource Hierarchy, Organization Policies, IAM Conditions/Deny/Impersonation, and Cloud Billing FinOps governance.",
+    "createTime": "2026-11-24T17:30:00-08:00",
+    "updateTime": "2026-11-24T17:30:00-08:00",
+    "labels": {
+      "corpus": "geapl200_pca_waf",
+      "version_tag": "pca_waf_okf_2026-11-24_172000",
+      "l400_version": "l400_version_20261124_1720",
+      "ttl_months": "6",
+      "framework": "google-cloud-well-architected"
+    }
+  },
+  "aspects": {
+    "fivedaysai-prd-sandbox-317383.us.okf": {
+      "aspectType": "projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf",
+      "data": {
+        "id": "OKF-PCA-04",
+        "type": "concept",
+        "title": "Identity, Resource Hierarchy, Organization Policies, IAM & Cloud Billing FinOps (WAF Governance & Cost)",
+        "description": "L400 architectural decision framework for Cloud Identity vs. Managed Microsoft AD, Resource Hierarchy, Organization Policies, IAM Conditions/Deny/Impersonation, and Cloud Billing FinOps governance.",
+        "corpus": "GEAPL200_PCA_WAF",
+        "version_tag": "PCA_WAF_OKF_2026-11-24_173000",
+        "l400_version": "L400_version_20261124_1730",
+        "timestamp": "2026-11-24T17:30:00-08:00",
+        "ttl": "P6M",
+        "ttl_days": 180,
+        "stale_after": "2027-05-24T17:30:00-08:00",
+        "status": "active",
+        "verified": true,
+        "content_sha256": "b1084c2f54a64a664d69c6a76c539eb7cc9b73e7cbbcab76837a10480dc89605",
+        "file_sha256": "a4b580e384810b897a8298aee3ce8203e5df58c798fb2a1e30c3f7eaefb46d9b",
+        "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices/concepts/04-identity-hierarchy-org-policies-iam-and-finops-billing.md",
+        "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/04-identity-hierarchy-org-policies-iam-and-finops-billing.md",
+        "source_citations": [
+          "Dan Sullivan, Official Google Cloud Certified Professional Cloud Architect Study Guide (Sybex / Wiley, ISBN 978-1-119-60244-6, PCA_Book.pdf)",
+          "Google Cloud Professional Cloud Architect (PCA) Complete Course & Architectural Reference Deck (242 Slides, UDEMY-Course-PCA.pdf)",
+          "Google Cloud Architecture Framework / Well-Architected Framework Official Documentation (https://cloud.google.com/architecture/framework)",
+          "Forensic Diagnostic Corpus: GCP PCA Mock Exams 1-4 (Nov 2, 3, 6, 9, 2026), Security Set 1 & Service Area Simulators 1-8"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "okf_version": "0.2.0",
+  "bundle_id": "PCA_WAF_OKF_2026-11-24_173000",
+  "l400_version": "L400_version_20261124_1730",
+  "corpus": "GEAPL200_PCA_WAF",
+  "title": "Google Cloud Professional Cloud Architect (PCA) & Well-Architected Framework (WAF) OKF Knowledge Base",
+  "description": "Production L400 architectural decision knowledge base for Gemini Enterprise and Google Cloud Dataplex, synthesizing all 8 PCA Service Areas, the 5 Well-Architected Pillars, 4 Official Case Studies, and 350+ forensic diagnostic scenarios.",
+  "timestamp": "2026-11-24T17:30:00-08:00",
+  "ttl": "P6M",
+  "ttl_days": 180,
+  "stale_after": "2027-05-24T17:30:00-08:00",
+  "dataplex_target": {
+    "project_id": "fivedaysai-prd-sandbox-317383",
+    "location": "us",
+    "entry_group": "geapl200-architecture-kb",
+    "aspect_type": "fivedaysai-prd-sandbox-317383.us.okf",
+    "gcs_bucket": "gs://gea_agent_development_architectural_best_practices_pca_waf",
+    "primary_graph_cache": "Cloud Spanner Graph (geapl200-okf-graph)",
+    "secondary_analytics_kg": "BigQuery Graph (geapl200_okf_kg)"
+  },
+  "source_bibliography": [
+    {
+      "filename": "PCA_Book.pdf",
+      "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/PCA_Book.pdf",
+      "title": "Official Google Cloud Certified Professional Cloud Architect Study Guide",
+      "authors": [
+        "Dan Sullivan"
+      ],
+      "publisher": "Sybex / John Wiley & Sons, Inc.",
+      "isbn": "978-1-119-60244-6",
+      "url": "https://cloud.google.com/certification/cloud-architect"
+    },
+    {
+      "filename": "UDEMY-Course-PCA.pdf",
+      "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/UDEMY-Course-PCA.pdf",
+      "title": "Google Cloud Professional Cloud Architect (PCA): Complete Certification Course & Architectural Reference Deck (242 Slides)",
+      "authors": [
+        "GCP PCA Curriculum Architecture Team"
+      ],
+      "publisher": "Udemy / Google Cloud Partner Training",
+      "url": "https://cloud.google.com/architecture/framework"
+    },
+    {
+      "filename": "ExamTopics.pdf & GCP PCA Mock Tests 1-4 (gcppcatest.com)",
+      "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/ExamTopics.pdf",
+      "title": "Forensic Diagnostic Corpus: PCA Mock Exams 1-4 (Nov 2, 3, 6, 9, 2026), Security Set 1 & Service Area Simulators 1-8",
+      "authors": [
+        "Pradeep Mohan",
+        "GCP PCA Test Bank"
+      ],
+      "publisher": "Google Cloud Forward Deployed Engineering (FDE)",
+      "url": "https://cloud.google.com/certification/practice-exam/cloud-architect"
+    },
+    {
+      "filename": "Google Cloud Well-Architected Framework",
+      "title": "Google Cloud Architecture Framework (Operational Excellence, Security, Reliability, Cost Optimization, Performance Optimization)",
+      "authors": [
+        "Google Cloud Architecture Center"
+      ],
+      "publisher": "Google LLC",
+      "url": "https://cloud.google.com/architecture/framework"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "OKF-PCA-01",
+      "slug": "01-storage-databases-bigquery-and-data-pipelines",
+      "title": "Storage, Databases, BigQuery Analytics & Data Pipeline Architecture (WAF Performance & Reliability)",
+      "description": "L400 architectural decision framework for selecting, scaling, securing, and optimizing Google Cloud relational, NoSQL, analytical, in-memory, and object storage systems under the Google Cloud Well-Architected Framework.",
+      "concept_path": "okf/concepts/01-storage-databases-bigquery-and-data-pipelines.md",
+      "catalog_entry_path": "okf/catalog-entries/01-storage-databases-bigquery-and-data-pipelines.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/01-storage-databases-bigquery-and-data-pipelines.md",
+      "content_sha256": "4812308516c042b2f61222c28584a573b77562e4032e28952efccea6363e5877",
+      "file_sha256": "1235beb12ab782a46af3c7e719a1f6bfc371ed70bac43c254f6184105b655d37",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-02",
+      "slug": "02-compute-engine-gke-serverless-and-vertex-ai",
+      "title": "Compute Engine, GKE, Serverless & Vertex AI Architecture (WAF Compute, Security & AI)",
+      "description": "L400 architectural decision framework for Compute Engine MIGs, Google Kubernetes Engine (Standard vs. Autopilot, Confidential/Shielded Nodes, Windows Pools, GPUs), Cloud Run, and Vertex AI.",
+      "concept_path": "okf/concepts/02-compute-engine-gke-serverless-and-vertex-ai.md",
+      "catalog_entry_path": "okf/catalog-entries/02-compute-engine-gke-serverless-and-vertex-ai.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/02-compute-engine-gke-serverless-and-vertex-ai.md",
+      "content_sha256": "d7a7fe9dbdd1629a0bb387d66e5596776873443d6586c03c782ded7bddb0c82b",
+      "file_sha256": "5d0bff6443f5a28e643339baee6dbd0a562a9e08311126fe577eb0047ead0bcb",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-03",
+      "slug": "03-vpc-networking-load-balancing-hybrid-and-dns",
+      "title": "VPC Networking, Load Balancing, Hybrid Connectivity & Cloud DNS Architecture (WAF Networking)",
+      "description": "L400 architectural decision framework for Google Cloud VPCs, Network Service Tiers, Load Balancers, Private GKE Control Plane access, Hybrid Interconnect/VPN, NCC, PSC, and Cloud DNS.",
+      "concept_path": "okf/concepts/03-vpc-networking-load-balancing-hybrid-and-dns.md",
+      "catalog_entry_path": "okf/catalog-entries/03-vpc-networking-load-balancing-hybrid-and-dns.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/03-vpc-networking-load-balancing-hybrid-and-dns.md",
+      "content_sha256": "38a0bed10565e2f87f9d473adf5272013c6bf2fb7a40c9f7d7332684e081f329",
+      "file_sha256": "35968965e6796df52423362ffac90a2e313c716456f154c12b42f9fb829d4ca3",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-04",
+      "slug": "04-identity-hierarchy-org-policies-iam-and-finops-billing",
+      "title": "Identity, Resource Hierarchy, Organization Policies, IAM & Cloud Billing FinOps (WAF Governance & Cost)",
+      "description": "L400 architectural decision framework for Cloud Identity vs. Managed Microsoft AD, Resource Hierarchy, Organization Policies, IAM Conditions/Deny/Impersonation, and Cloud Billing FinOps governance.",
+      "concept_path": "okf/concepts/04-identity-hierarchy-org-policies-iam-and-finops-billing.md",
+      "catalog_entry_path": "okf/catalog-entries/04-identity-hierarchy-org-policies-iam-and-finops-billing.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/04-identity-hierarchy-org-policies-iam-and-finops-billing.md",
+      "content_sha256": "b1084c2f54a64a664d69c6a76c539eb7cc9b73e7cbbcab76837a10480dc89605",
+      "file_sha256": "a4b580e384810b897a8298aee3ce8203e5df58c798fb2a1e30c3f7eaefb46d9b",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-05",
+      "slug": "05-security-kms-secret-manager-vpc-sc-and-compliance",
+      "title": "Security, KMS, Secret Manager, VPC Service Controls & Compliance Architecture (WAF Security Pillar)",
+      "description": "L400 architectural decision framework for Encryption Key Management (GMEK, CMEK, CSEK, EKM, Tink ALE), Secret Manager, Binary Authorization, VPC Service Controls, Cloud Armor, IAP, and PCI-DSS/HIPAA compliance.",
+      "concept_path": "okf/concepts/05-security-kms-secret-manager-vpc-sc-and-compliance.md",
+      "catalog_entry_path": "okf/catalog-entries/05-security-kms-secret-manager-vpc-sc-and-compliance.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/05-security-kms-secret-manager-vpc-sc-and-compliance.md",
+      "content_sha256": "830c4c267760b6ce84360bec6cf8004cf94860b3d9be1bb9daa7192c89c2c4e9",
+      "file_sha256": "7b612833ebc0f4a6de25da3346986db95fe9b329f328e2e75f6e83007ee4121f",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-06",
+      "slug": "06-cloud-operations-observability-trace-profiler-and-sre",
+      "title": "Cloud Operations, Observability, Trace, Profiler & Site Reliability Engineering (WAF Operational Excellence)",
+      "description": "L400 architectural decision framework for Cloud Logging (_Required vs. _Default, Aggregated Sinks, Exclusions), Cloud Monitoring (Ops Agent, Heatmaps, GMP), Cloud Trace vs. Profiler, and SRE (SLIs/SLOs/Error Budgets).",
+      "concept_path": "okf/concepts/06-cloud-operations-observability-trace-profiler-and-sre.md",
+      "catalog_entry_path": "okf/catalog-entries/06-cloud-operations-observability-trace-profiler-and-sre.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/06-cloud-operations-observability-trace-profiler-and-sre.md",
+      "content_sha256": "629d76d3ade8b03fd04a273039af8657b628e654129d913282d7c155487ab435",
+      "file_sha256": "b7630caa82f077c004e76eb9d644955206552eefca2eb80fbab8caa0625c9539",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-07",
+      "slug": "07-devops-cicd-cloud-deploy-terraform-iac-and-api-management",
+      "title": "DevOps, CI/CD, Cloud Deploy, Terraform IaC, GitOps & API Management (WAF Automation & Delivery)",
+      "description": "L400 architectural decision framework for Cloud Build Private Pools, Artifact Registry, Google Cloud Deploy, Progressive Delivery (Rolling, Blue-Green, Canary, Shadow), Terraform IaC, Config Sync/Connector, and Apigee/API Gateway/Endpoints.",
+      "concept_path": "okf/concepts/07-devops-cicd-cloud-deploy-terraform-iac-and-api-management.md",
+      "catalog_entry_path": "okf/catalog-entries/07-devops-cicd-cloud-deploy-terraform-iac-and-api-management.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/07-devops-cicd-cloud-deploy-terraform-iac-and-api-management.md",
+      "content_sha256": "8d17ea948c6d262e4e17589981779a810549499cae053a1dc8f3376e194cc714",
+      "file_sha256": "48fd9c4bd1c1e814271646e9556aa8b4c518557a6ff06861f07ee4944179d2c2",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-08",
+      "slug": "08-migration-6rs-dr-rto-rpo-and-enterprise-case-studies",
+      "title": "Cloud Migration (6 Rs), Disaster Recovery Tiers (RTO/RPO) & The 4 Official PCA Case Studies (WAF Reliability)",
+      "description": "L400 architectural decision framework for the 4-Phase Migration Journey, Migration Tooling (M2VM, M2C, GCVE, DMS, STS, Transfer Appliance), DR Tiers (Cold, Warm, Hot), and the 4 Official PCA Case Studies (EHR, HRL, Mountkirk, TerramEarth).",
+      "concept_path": "okf/concepts/08-migration-6rs-dr-rto-rpo-and-enterprise-case-studies.md",
+      "catalog_entry_path": "okf/catalog-entries/08-migration-6rs-dr-rto-rpo-and-enterprise-case-studies.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/08-migration-6rs-dr-rto-rpo-and-enterprise-case-studies.md",
+      "content_sha256": "8479db6b4c2733cce2d8221d96051d7c3118fd784d9e0d028028d561d3597363",
+      "file_sha256": "4d8c8c06c0e0d54812d5804ec98c292611253ddaa2c05437e826806cd528adbd",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    },
+    {
+      "id": "OKF-PCA-09",
+      "slug": "09-well-architected-5-second-decision-matrices-and-anti-patterns",
+      "title": "Google Cloud Well-Architected 5-Pillar Decision Engine, Trade-Off Matrices & Anti-Pattern Registry",
+      "description": "Master L400 architectural decision engine mapping the 5 Pillars of the Google Cloud Well-Architected Framework, 5-Second Service Selection Matrices, and the 18 Highest-Frequency Architectural Anti-Patterns for Gemini Enterprise / Dataplex application builders.",
+      "concept_path": "okf/concepts/09-well-architected-5-second-decision-matrices-and-anti-patterns.md",
+      "catalog_entry_path": "okf/catalog-entries/09-well-architected-5-second-decision-matrices-and-anti-patterns.json",
+      "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/09-well-architected-5-second-decision-matrices-and-anti-patterns.md",
+      "content_sha256": "edb493840e5b6d291ad25f20b17622155e01506773788785066f2be8e9254709",
+      "file_sha256": "3b9aa794b054a89e654ed1f5ff5ead0d18e0ed8dee1fcd768d3d9215a8d653b6",
+      "timestamp": "2026-11-24T17:30:00-08:00",
+      "ttl": "P6M",
+      "stale_after": "2027-05-24T17:30:00-08:00"
+    }
+  ]
+}

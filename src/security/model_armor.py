@@ -347,6 +347,53 @@ class ModelArmorSanitizer:
                 masked_text = pattern.sub(replacement, masked_text)
         return masked_text, matched_filters
 
+    def _check_fast_heuristics(self, text: str) -> list[str]:
+        """Fast synchronous check for prompt injection or leak heuristics in text."""
+        res = self._check_heuristics(text, time.perf_counter())
+        return res.matched_filters if not res.is_safe else []
+
+    def _check_egress_heuristics(
+        self,
+        text: str,
+        start_time: float | None = None,
+        block_on_secrets: bool = False,
+        mask_in_place: bool = True,
+    ) -> SanitizationResult:
+        """Synchronous egress DLP check and in-place masking."""
+        t0 = start_time if start_time is not None else time.perf_counter()
+        masked_text, matched_filters = self.mask_sensitive_data(text)
+        elapsed = (time.perf_counter() - t0) * 1000
+        if matched_filters and block_on_secrets:
+            return SanitizationResult(
+                is_safe=False,
+                action="BLOCK",
+                error_message="Output blocked: Sensitive data or credentials detected by Model Armor DLP.",
+                matched_filters=matched_filters,
+                latency_ms=elapsed,
+                source="model_armor_egress_dlp",
+            )
+        return SanitizationResult(
+            is_safe=True,
+            action="ALLOW",
+            sanitized_text=masked_text if mask_in_place else text,
+            matched_filters=matched_filters,
+            latency_ms=elapsed,
+            source="model_armor_egress_dlp" if matched_filters else "model_armor_egress_clean",
+        )
+
+    async def sanitize_egress(
+        self,
+        text: str,
+        mask_in_place: bool = True,
+        block_on_secrets: bool = False,
+    ) -> SanitizationResult:
+        """Alias for sanitize_response supporting dual-pass egress DLP."""
+        return await self.sanitize_response(
+            text=text,
+            mask_in_place=mask_in_place,
+            block_on_secrets=block_on_secrets,
+        )
+
     async def sanitize_response(
         self,
         text: str,

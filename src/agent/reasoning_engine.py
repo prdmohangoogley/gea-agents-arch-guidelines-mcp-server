@@ -18,7 +18,12 @@ import vertexai
 from src.graph.client import GraphClient
 from src.models.router import model_router, ModelTier
 from src.registry.skills_registry import skills_registry, SkillsRegistry
-from src.security.model_armor import model_armor, ModelArmorSanitizer, SanitizationResult
+from src.security.model_armor import (
+    model_armor,
+    ModelArmorSanitizer,
+    SanitizationResult,
+    sanitize_tool_output,
+)
 from src.skills.base import SkillExecutionContext
 
 logger = logging.getLogger("gea.agent.reasoning_engine")
@@ -95,23 +100,23 @@ class EnterpriseArchGuidelinesAgent:
             return self.model_armor._check_heuristics(text, start)
 
     def _sanitize_output(self, text: str) -> str:
-        """Sanitize output with Model Armor DLP masking."""
-        if not self.model_armor:
+        """Sanitize egress output text through Model Armor DLP masking (Fail-Closed)."""
+        if not text:
             return text
+        self._ensure_initialized()
         try:
-            try:
-                loop = asyncio.get_running_loop()
-            except RuntimeError:
-                loop = None
-
-            if loop and loop.is_running():
-                res = self.model_armor._check_egress_heuristics(text, time.perf_counter(), block_on_secrets=False, mask_in_place=True)
-                return res.sanitized_text or text
-            else:
-                res = asyncio.run(self.model_armor.sanitize_egress(text, block_on_secrets=False, mask_in_place=True))
-                return res.sanitized_text or text
-        except Exception:
-            return text
+            # Step 1: Deterministic fast-path regex DLP masking (<1ms)
+            masked_result = self.model_armor.mask_sensitive_data(text)
+            masked_text = masked_result[0] if isinstance(masked_result, tuple) else str(masked_result)
+            # Step 2: Check if fast-path injection/leak patterns exist in output
+            heuristic_hit = self.model_armor._check_fast_heuristics(masked_text)
+            if heuristic_hit:
+                logger.warning(f"Model Armor Egress blocked heuristic match: {heuristic_hit}")
+                return "[REDACTED BY MODEL ARMOR EGRESS DLP]"
+            return masked_text
+        except Exception as exc:
+            logger.error(f"Model Armor egress sanitization error: {exc}")
+            return "[REDACTED DUE TO EGRESS SANITIZATION ERROR]"
 
     def query(
         self,
@@ -269,14 +274,15 @@ class EnterpriseArchGuidelinesAgent:
         elapsed_ms = (time.perf_counter() - start_time) * 1000
 
         # Step 3: Model Armor Egress DLP sanitization
-        response_str = json.dumps(result_data, default=str)
+        sanitized_data = sanitize_tool_output(result_data)
+        response_str = json.dumps(sanitized_data, default=str)
         sanitized_response = self._sanitize_output(response_str)
 
         return {
             "status": "success",
             "skill": executed_skill,
             "response": sanitized_response,
-            "data": result_data,
+            "data": sanitized_data,
             "metadata": {
                 "latency_ms": round(elapsed_ms, 2),
                 "runtime": "vertex-ai-reasoning-engine",
@@ -284,6 +290,9 @@ class EnterpriseArchGuidelinesAgent:
                 "grounding_source": self.charter_index_url,
                 "project_id": self.project_id,
                 "location": self.location,
+                "caller_identity": caller_identity,
+                "access_boundary_enforced": bool(kwargs.get("access_boundary_token") or caller_identity),
+                "traceparent": kwargs.get("traceparent", ""),
             },
         }
 

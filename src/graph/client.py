@@ -30,14 +30,27 @@ logger = logging.getLogger("graph_client")
 class GraphClient:
     """Manages connections, ISO GQL queries to Spanner Graph, and analytical SQL to BigQuery."""
 
-    def __init__(self, use_mock: bool = False):
+    def __init__(
+        self,
+        use_mock: bool = False,
+        project_id: str | None = None,
+        instance_id: str | None = None,
+        database_id: str | None = None,
+        bq_dataset_id: str | None = None,
+    ):
         self.use_mock = use_mock or config.use_mock_graph
+        self.project_id = project_id or config.gcp_project_id
+        self.instance_id = instance_id or config.spanner_instance_id
+        self.database_id = database_id or config.spanner_database_id
+        self.bq_dataset_id = bq_dataset_id or config.bq_dataset_id
         self._spanner_database = None
         self._bq_client = None
+        self._rubric_items: list[dict[str, Any]] = []
+        self._rubric_edges: list[dict[str, Any]] = []
         self._init_knowledge_store()
 
     def _init_knowledge_store(self) -> None:
-        """Seed embedded knowledge store for local execution or fallback."""
+        """Seed embedded knowledge store from the full 83-concept OKF v0.2 corpus for offline/mock parity."""
         self._guidelines = [
             Guideline(
                 guideline_id="DOC-01",
@@ -75,6 +88,81 @@ class GraphClient:
                 source_url="09-platform-native-state-management.md",
             ),
         ]
+
+        # Dynamically hydrate all 83 OKF v0.2 concepts & 37 FDE rubric items from local corpus
+        try:
+            import json
+            from pathlib import Path
+
+            repo_root = Path(__file__).resolve().parent.parent.parent
+            snapshot_file = repo_root / "dist" / "portable_bundle" / "okf" / "nl2kg_graph_triples_snapshot.json"
+            if snapshot_file.exists():
+                snap = json.loads(snapshot_file.read_text(encoding="utf-8"))
+                existing_ids = {g.guideline_id for g in self._guidelines}
+                for g_dict in snap.get("guidelines", []):
+                    gid = g_dict.get("guideline_id", "")
+                    if gid and gid not in existing_ids:
+                        self._guidelines.append(
+                            Guideline(
+                                guideline_id=gid,
+                                title=g_dict.get("title", gid),
+                                category=g_dict.get("category", "architecture"),
+                                summary=g_dict.get("summary", ""),
+                                source_url=g_dict.get("source_url", ""),
+                            )
+                        )
+                        existing_ids.add(gid)
+                self._rubric_items = snap.get("fde_rubric_items") or snap.get("fde_rubrics", [])
+                self._rubric_edges = snap.get("enforces_rubric_edges") or snap.get("rubric_edges", [])
+            else:
+                from pipelines.nl2kg_pipeline import extract_triples_from_documents, load_local_markdown_corpus
+
+                docs = load_local_markdown_corpus(str(repo_root / "okf" / "concepts"))
+                triples = extract_triples_from_documents(docs)
+                existing_ids = {g.guideline_id for g in self._guidelines}
+                for g_dict in triples.get("guidelines", []):
+                    gid = g_dict.get("guideline_id", "")
+                    if gid and gid not in existing_ids:
+                        self._guidelines.append(
+                            Guideline(
+                                guideline_id=gid,
+                                title=g_dict.get("title", gid),
+                                category=g_dict.get("category", "architecture"),
+                                summary=g_dict.get("summary", ""),
+                                source_url=g_dict.get("source_url", ""),
+                            )
+                        )
+                        existing_ids.add(gid)
+                self._rubric_items = triples.get("fde_rubrics", [])
+                self._rubric_edges = triples.get("rubric_edges", [])
+        except Exception as exc:
+            logger.debug(f"Dynamic OKF mock corpus hydration skipped: {exc}")
+
+        # Hydrate the 9 PCA & Well-Architected Framework OKF v0.2 concepts (OKF-PCA-01..09)
+        try:
+            from pathlib import Path
+            import json
+
+            repo_root = Path(__file__).resolve().parent.parent.parent
+            pca_manifest = repo_root / "okf" / "pca_waf" / "MANIFEST.json"
+            if pca_manifest.exists():
+                mdata = json.loads(pca_manifest.read_text(encoding="utf-8"))
+                existing_ids = {g.guideline_id for g in self._guidelines}
+                for c in mdata.get("concepts", []):
+                    cid = c.get("id", "")
+                    if cid and cid not in existing_ids:
+                        self._guidelines.append(
+                            Guideline(
+                                guideline_id=cid,
+                                title=c.get("title", cid),
+                                category="well_architected",
+                                summary=c.get("description", ""),
+                                source_url=c.get("gcs_uri", c.get("concept_path", "")),
+                            )
+                        )
+                        existing_ids.add(cid)
+        except Exception as exc:
+            logger.debug(f"PCA WAF OKF hydration skipped: {exc}")
 
         self._patterns = {
             "Zero Ambient Authority": Pattern(
@@ -536,7 +624,16 @@ class GraphClient:
             except Exception as e:
                 logger.warning(f"Spanner get_fde_rubric failed: {e}")
 
-        # Fallback summary
+        # Fallback to dynamically hydrated 37 FDE rubric items
+        if self._rubric_items:
+            items = self._rubric_items
+            if rubric_id:
+                items = [i for i in items if i.get("rubric_id") == rubric_id]
+            if domain:
+                d_low = domain.lower()
+                items = [i for i in items if d_low in i.get("domain", "").lower() or d_low in i.get("sub_competency", "").lower()]
+            return items[:limit]
+
         return [
             {
                 "rubric_id": "RUBRIC-A-1",
@@ -583,6 +680,39 @@ class GraphClient:
                 ]
             except Exception as e:
                 logger.warning(f"Spanner query_rubric_enforcement failed: {e}")
+
+        # Fallback to dynamically hydrated rubric enforcement edges
+        if self._rubric_edges:
+            g_map = {g.guideline_id: g for g in self._guidelines}
+            r_map = {r.get("rubric_id"): r for r in self._rubric_items}
+            matched = []
+            kw = (keyword or "").lower()
+            for edge in self._rubric_edges:
+                rid = edge.get("rubric_id", "")
+                gid = edge.get("guideline_id", "")
+                if rubric_id and rid != rubric_id:
+                    continue
+                g_obj = g_map.get(gid)
+                r_obj = r_map.get(rid, {})
+                title = g_obj.title if g_obj else gid
+                sub_comp = r_obj.get("sub_competency", rid)
+                notes = edge.get("notes", "")
+                if kw and kw not in title.lower() and kw not in sub_comp.lower() and kw not in notes.lower():
+                    continue
+                matched.append(
+                    {
+                        "guideline_id": gid,
+                        "title": title,
+                        "category": g_obj.category if g_obj else "architecture",
+                        "enforcement_level": edge.get("enforcement_level", "REQUIRED"),
+                        "notes": notes,
+                        "rubric_id": rid,
+                        "sub_competency": sub_comp,
+                    }
+                )
+                if len(matched) >= limit:
+                    break
+            return matched
         return []
 
     async def traverse_pattern_mitigations(

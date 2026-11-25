@@ -1,0 +1,51 @@
+{
+  "name": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb/entries/06_cloud_operations_observability_trace_profiler_and_sre",
+  "entryType": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryTypes/okf-concept",
+  "fullyQualifiedName": "okf:GEAPL200_PCA_WAF.OKF-PCA-06",
+  "entrySource": {
+    "resource": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/06-cloud-operations-observability-trace-profiler-and-sre.md",
+    "system": "GeminiEnterprise_OKF_v0.2",
+    "platform": "GoogleCloudDataplex",
+    "displayName": "OKF-PCA-06: Cloud Operations, Observability, Trace, Profiler & Site Reliability Engineering (WAF Operational Excellence)",
+    "description": "L400 architectural decision framework for Cloud Logging (_Required vs. _Default, Aggregated Sinks, Exclusions), Cloud Monitoring (Ops Agent, Heatmaps, GMP), Cloud Trace vs. Profiler, and SRE (SLIs/SLOs/Error Budgets).",
+    "createTime": "2026-11-24T17:30:00-08:00",
+    "updateTime": "2026-11-24T17:30:00-08:00",
+    "labels": {
+      "corpus": "geapl200_pca_waf",
+      "version_tag": "pca_waf_okf_2026-11-24_172000",
+      "l400_version": "l400_version_20261124_1720",
+      "ttl_months": "6",
+      "framework": "google-cloud-well-architected"
+    }
+  },
+  "aspects": {
+    "fivedaysai-prd-sandbox-317383.us.okf": {
+      "aspectType": "projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf",
+      "data": {
+        "id": "OKF-PCA-06",
+        "type": "concept",
+        "title": "Cloud Operations, Observability, Trace, Profiler & Site Reliability Engineering (WAF Operational Excellence)",
+        "description": "L400 architectural decision framework for Cloud Logging (_Required vs. _Default, Aggregated Sinks, Exclusions), Cloud Monitoring (Ops Agent, Heatmaps, GMP), Cloud Trace vs. Profiler, and SRE (SLIs/SLOs/Error Budgets).",
+        "corpus": "GEAPL200_PCA_WAF",
+        "version_tag": "PCA_WAF_OKF_2026-11-24_173000",
+        "l400_version": "L400_version_20261124_1730",
+        "timestamp": "2026-11-24T17:30:00-08:00",
+        "ttl": "P6M",
+        "ttl_days": 180,
+        "stale_after": "2027-05-24T17:30:00-08:00",
+        "status": "active",
+        "verified": true,
+        "content_sha256": "629d76d3ade8b03fd04a273039af8657b628e654129d913282d7c155487ab435",
+        "file_sha256": "b7630caa82f077c004e76eb9d644955206552eefca2eb80fbab8caa0625c9539",
+        "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices/concepts/06-cloud-operations-observability-trace-profiler-and-sre.md",
+        "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/06-cloud-operations-observability-trace-profiler-and-sre.md",
+        "source_citations": [
+          "Dan Sullivan, Official Google Cloud Certified Professional Cloud Architect Study Guide (Sybex / Wiley, ISBN 978-1-119-60244-6, PCA_Book.pdf)",
+          "Google Cloud Professional Cloud Architect (PCA) Complete Course & Architectural Reference Deck (242 Slides, UDEMY-Course-PCA.pdf)",
+          "Google Cloud Architecture Framework / Well-Architected Framework Official Documentation (https://cloud.google.com/architecture/framework)",
+          "Forensic Diagnostic Corpus: GCP PCA Mock Exams 1-4 (Nov 2, 3, 6, 9, 2026), Security Set 1 & Service Area Simulators 1-8"
+        ]
+      }
+    }
+  }
+}

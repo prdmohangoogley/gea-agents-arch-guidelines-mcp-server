@@ -10,16 +10,17 @@ terraform {
 
 provider "google" {
   project = var.project_id
-  region  = var.cloud_run_region
+  region  = var.vertex_region
 }
 
-# 1. Enable Required GCP APIs
+# 1. Enable Required GCP APIs (Zero Cloud Run)
 resource "google_project_service" "required_apis" {
   for_each = toset([
     "spanner.googleapis.com",
     "bigquery.googleapis.com",
     "bigqueryconnection.googleapis.com",
-    "run.googleapis.com",
+    "aiplatform.googleapis.com",
+    "dataplex.googleapis.com",
     "storage.googleapis.com",
     "iam.googleapis.com",
     "telemetry.googleapis.com",
@@ -86,23 +87,36 @@ module "gcs" {
   depends_on = [google_project_service.required_apis]
 }
 
-# 6. Runtime Layer: FastMCP Server on Cloud Run
-module "cloud_run" {
-  source                = "./modules/cloud_run"
-  project_id            = var.project_id
-  service_name          = var.cloud_run_service_name
-  region                = var.cloud_run_region
-  container_image       = var.cloud_run_container_image
-  spanner_instance_id   = module.spanner.instance_id
-  spanner_database_name = module.spanner.database_name
-  bq_dataset_id         = module.bigquery.dataset_id
-  gcs_bucket_name       = module.gcs.bucket_name
-  allow_unauthenticated = false
+# 6. Runtime Layer: Vertex AI Reasoning Engine Staging Bucket & Dedicated Service Accounts (Zero Cloud Run)
+resource "google_storage_bucket" "reasoning_engine_staging" {
+  name                        = "${var.project_id}-reasoning-engine-staging"
+  location                    = var.vertex_region
+  project                     = var.project_id
+  uniform_bucket_level_access = true
 
-  depends_on = [
-    module.spanner,
-    module.bigquery,
-    module.gcs,
-    google_project_service.required_apis
-  ]
+  depends_on = [google_project_service.required_apis]
+}
+
+resource "google_service_account" "reasoning_engine_sa" {
+  account_id   = "arch-guidelines-re-sa"
+  display_name = "Enterprise Architecture Guidelines Reasoning Engine SA"
+  project      = var.project_id
+}
+
+resource "google_service_account" "okf_evolution_sa" {
+  account_id   = "okf-evolution-agent-sa"
+  display_name = "Autonomous OKF Evolution Reasoning Engine SA"
+  project      = var.project_id
+}
+
+resource "google_project_iam_member" "reasoning_engine_aiplatform_user" {
+  project = var.project_id
+  role    = "roles/aiplatform.user"
+  member  = "serviceAccount:${google_service_account.reasoning_engine_sa.email}"
+}
+
+resource "google_project_iam_member" "okf_evolution_dataplex_editor" {
+  project = var.project_id
+  role    = "roles/dataplex.catalogEditor"
+  member  = "serviceAccount:${google_service_account.okf_evolution_sa.email}"
 }

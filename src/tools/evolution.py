@@ -268,11 +268,11 @@ def register_evolution_tools(mcp: FastMCP) -> None:
                     "release_date": "2026-09-30",
                 },
                 {
-                    "title": "FastMCP HTTP/2 SSE Transport Deployment on Cloud Run",
-                    "topic": "fastmcp cloud run sse",
+                    "title": "Vertex AI Reasoning Engine Native Agent Deployment & Stdio MCP Adapter",
+                    "topic": "vertex ai reasoning engine fastmcp stdio",
                     "category": "runtime",
-                    "source_url": "https://cloud.google.com/run/docs/configuring/http2",
-                    "summary": "Direct streaming Server-Sent Events (SSE) over HTTP/2 with health probes, non-root user execution, and horizontal concurrency scaling.",
+                    "source_url": "https://cloud.google.com/vertex-ai/generative-ai/docs/reasoning-engine/overview",
+                    "summary": "Managed Python agent hosting on Vertex AI Reasoning Engine (Zero Cloud Run / Zero BYOC) with local FastMCP stdio bridging and ADC authentication.",
                     "release_date": "2026-09-01",
                 },
             ]

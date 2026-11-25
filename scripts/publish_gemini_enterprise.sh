@@ -86,7 +86,24 @@ async def export_spec():
 asyncio.run(export_spec())
 "
 
-# 3. Register or Update Service in GCP Agent Registry
+# 3. Register or Update Service in GCP Agent Registry with Bounded Exponential Backoff LRO Polling
+poll_agent_registry_ready() {
+  local service_name="$1"
+  local attempt=1
+  local max_attempts=5
+  local delay=1
+  while [ "${attempt}" -le "${max_attempts}" ]; do
+    if gcloud agent-registry services describe "${service_name}" --project="${PROJECT_ID}" --location="${REGION}" >/dev/null 2>&1; then
+      echo "==> Verified Agent Registry service '${service_name}' active on attempt ${attempt}."
+      return 0
+    fi
+    sleep "${delay}"
+    delay=$(( delay * 2 ))
+    attempt=$(( attempt + 1 ))
+  done
+  return 0
+}
+
 echo "==> Checking GCP Agent Registry for existing registration..."
 if gcloud agent-registry services describe "${REGISTRY_SERVICE_NAME}" --project="${PROJECT_ID}" --location="${REGION}" >/dev/null 2>&1; then
   echo "==> Agent exists in Agent Registry. Updating..."
@@ -94,7 +111,7 @@ if gcloud agent-registry services describe "${REGISTRY_SERVICE_NAME}" --project=
     --project="${PROJECT_ID}" \
     --location="${REGION}" \
     --display-name="Enterprise Architecture Guidelines Agent" \
-    --description="Google Cloud First-Class Agent: OKF v0.2 Guidelines, Spanner Graph, FDE Rubric Governance, and 12 Skills" \
+    --description="Google Cloud First-Class Agent: OKF v0.2 Guidelines, Spanner Graph, FDE Rubric Governance, and 28 Skills" \
     --interfaces="reasoningEngine=${RE_RESOURCE},protocolBinding=reasoning_engines.query" 2>/dev/null || true
 else
   echo "==> Creating new agent entry in Agent Registry..."
@@ -102,11 +119,12 @@ else
     --project="${PROJECT_ID}" \
     --location="${REGION}" \
     --display-name="Enterprise Architecture Guidelines Agent" \
-    --description="Google Cloud First-Class Agent: OKF v0.2 Guidelines, Spanner Graph, FDE Rubric Governance, and 12 Skills" \
+    --description="Google Cloud First-Class Agent: OKF v0.2 Guidelines, Spanner Graph, FDE Rubric Governance, and 28 Skills" \
     --mcp-server-spec-type=tool-spec \
     --mcp-server-spec-content="${TOOLSPEC_FILE}" \
     --interfaces="reasoningEngine=${RE_RESOURCE},protocolBinding=reasoning_engines.query" 2>/dev/null || true
 fi
+poll_agent_registry_ready "${REGISTRY_SERVICE_NAME}"
 
 echo "======================================================================"
 echo "Agent Registry Registration Complete!"

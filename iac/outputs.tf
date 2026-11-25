@@ -28,17 +28,17 @@ output "gcs_bucket" {
   value       = module.gcs.bucket_name
 }
 
-output "cloud_run_service" {
-  description = "Cloud Run FastMCP service name"
-  value       = module.cloud_run.service_name
+output "reasoning_engine_staging_bucket" {
+  description = "Vertex AI Reasoning Engine staging bucket"
+  value       = google_storage_bucket.reasoning_engine_staging.name
 }
 
-output "cloud_run_service_uri" {
-  description = "Cloud Run FastMCP service URI"
-  value       = module.cloud_run.service_uri
+output "reasoning_engine_service_account" {
+  description = "Primary Reasoning Engine runtime service account"
+  value       = google_service_account.reasoning_engine_sa.email
 }
 
-output "cloud_run_service_account" {
-  description = "FastMCP runtime service account"
-  value       = module.cloud_run.service_account_email
+output "okf_evolution_service_account" {
+  description = "Autonomous OKF Evolution Reasoning Engine service account"
+  value       = google_service_account.okf_evolution_sa.email
 }
