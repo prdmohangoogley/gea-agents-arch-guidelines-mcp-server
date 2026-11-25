@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Cost & Token Estimation, Analysis, and Optimization (FinOps)"
 description: "End-to-end Generative AI FinOps, mathematical 16-line TCO modeling, context caching economic thresholds, Provisioned Throughput vs. Pay-As-You-Go sizing, and multi-tier model routing."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -32,12 +32,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "51-l400-o4-cost-token-estimation-analysis-and-optimization"
 source_doc_id: "O4_OKF_Cost_Token_Estimation_Analysis_and_Optimization"
-content_sha256: "cf774cfce1e6a83c088e64d731819e4dbcb50bcb4a88b4c78e1219d116bd925e"
+content_sha256: "10449e394b76bf963c775d6bb0783b20ac4a596881a33a27616601a691348a7c"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # O4 OKF: Cost & Token Estimation, Analysis, and Optimization (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#GenAIFinOps` `#TokenOptimization` `#ProvisionedThroughput` `#ContextCaching` `#AgentRouting` `#AXIToolDesign` `#GovernanceGuardrails`
 

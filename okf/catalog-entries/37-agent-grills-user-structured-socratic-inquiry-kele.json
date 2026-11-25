@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Agent Grills the User: Structured Socratic Inquiry, KELE Multi-Agent State Tracking & Assessment Timing",
+      "description": "Authoritative architectural reference for Case 1 (Agent-Grills-User) Socratic systems, synthesizing the KELE multi-agent framework (5-stage monotonic progression a->b->c->d->e, 34/43 pedagogical strategies, and No Direct Answer Rate NDAR enforcement) with Socratic Students domain-adaptive assessment timing (PRE-ASSESSMENT vs. MID-ASSESSMENT) and SCAFFOLDED 3-part questioning in Google Cloud ADK 2.0.",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "37-agent-grills-user-structured-socratic-inquiry-kele",
+      "content_sha256": "33202c630ebba32feafe7a1595fd9e0bb4aa47cafea48b10135d3eff5f60a604"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Foundations of AI Tokenomics — Dual-View Production Functions, Token Taxonomy, and Shadow Pricing",
+      "description": "Unified economic and physical framework for AI Tokenomics on Google Cloud, synthesizing Zhu (2026) hardware-level token footprint decomposition with Chen et al. (2026) agentic token lifecycle, triple economic attributes, nested CES production functions, and Micro/Meso/Macro shadow pricing in Google ADK 2.0 and Vertex AI.",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "36-foundations-of-ai-tokenomics-and-dual-view-production",
+      "content_sha256": "c1a74bcac09989aa1a5a0cd7556119d4d577fd70a9d1f4e32c22e8d9b18221b0"
+    }
+  }
+}

@@ -5,14 +5,14 @@ module_id: "OKF-TOK-38"
 document_id: "38-inter-agent-grilling-debate-critic-tokenomics"
 title: "Architecture Best Practice: Tokenomics of Inter-Agent Grilling, Critic Loops, and Multi-Agent Debate — Coasian Boundaries and Extensive-Margin Pruning"
 description: "Authoritative mathematical, empirical, and architectural framework for governing the token economics of inter-agent grilling, generator-critic verification loops, and multi-agent debate on Google Cloud ADK 2.0 and A2A Protocol — deriving Coase's Theory of the Firm equilibrium agent count (N*), proving Zhu (2026) Section 6.2 verification/testing dominance, and implementing extensive-margin pruning (S2-MAD, DebateOCR, AgentPrune, AgentDropout, G-Designer, ARG-Designer, GTD)."
-timestamp: "2026-10-27T17:21:00-07:00"
-source_modified: "2026-10-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+source_modified: "2026-11-24T18:20:00-08:00"
 status: "stable"
 verified: true
-stale_after: "2027-04-27T17:21:00-07:00"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
-l400_version_tag: "L400_version_20261027_1721"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
+l400_version_tag: "L400_version_20261124_1820"
 sources:
   - "local://sources/AI Tokenomics- The Economics of Tokens, Computation, and Pricing in Foundation Models.pdf (Quanyan Zhu, NYU, arXiv:2606.24616v1, 10 Jun 2026)"
   - "local://sources/token_economics_llm_agents.pdf (Yuxi Chen et al., Zhejiang Univ & Alibaba Cloud, arXiv:2605.09104v1, 9 May 2026)"
@@ -29,12 +29,13 @@ tags:
   - google-adk
   - a2a-protocol
   - fde-grading-rubric
-content_sha256: "dc2bfcbb3e7a9a8f876d1c602efd1722eef916a6a09e20dd264b90ca278871e4"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "649233aed9aeefcc8065fca197304daa800669131bad378cc5c2c2f1d17ddc89"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # OKF-TOK-38: Architecture Best Practice — Tokenomics of Inter-Agent Grilling, Critic Loops, and Multi-Agent Debate (`L400_version_20261027_1721` / `GEAPL200_2026-10-27_172100`)

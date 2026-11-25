@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Master Enterprise Architecture & Implementation FAQ Compendium"
 description: "Exhaustive enterprise architecture FAQ compendium covering technical defense, failure modes, scale constraints, identity topologies, and PCA certification scenarios across the entire curriculum."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -29,12 +29,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "55-l400-19-master-enterprise-faq-compendium"
 source_doc_id: "19_OKF_MASTER_ENTERPRISE_FAQ_COMPENDIUM"
-content_sha256: "d341363abd24ecfc1b66a3cdb8e2d600040d3455d7390e7d3b891b616132283a"
+content_sha256: "916b4ba2882b40259b4d26d8e585d2e9641f1caaba64276e1b3d6cd9a30c05ae"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # Google Open Knowledge Framework (OKF): Master Enterprise FAQ Compendium (`A1`–`O6`)
 **Topic Tags:** `#L400_version_20261026_0350` `#OKFMasterFAQ` `#GeminiEnterpriseArchitecture` `#GCPKnowledgeCatalog` `#AntigravityAgenticAI`
 

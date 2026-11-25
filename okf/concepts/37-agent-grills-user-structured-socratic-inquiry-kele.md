@@ -2,10 +2,10 @@
 type: "Architecture Best Practice"
 title: "Agent Grills the User: Structured Socratic Inquiry, KELE Multi-Agent State Tracking & Assessment Timing"
 description: "Authoritative architectural reference for Case 1 (Agent-Grills-User) Socratic systems, synthesizing the KELE multi-agent framework (5-stage monotonic progression a->b->c->d->e, 34/43 pedagogical strategies, and No Direct Answer Rate NDAR enforcement) with Socratic Students domain-adaptive assessment timing (PRE-ASSESSMENT vs. MID-ASSESSMENT) and SCAFFOLDED 3-part questioning in Google Cloud ADK 2.0."
-timestamp: "2026-10-27T17:27:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
 status: "stable"
-stale_after: "2027-04-27T17:27:00-07:00"
-ttl: "6 months (180 days / P6M)"
+stale_after: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
 ttl_months: 6
 ttl_days: 180
 sources:
@@ -14,14 +14,17 @@ sources:
   - "L400_concepts/B1_OKF_Anatomy_of_an_Enterprise_Agent.md"
   - "L400_concepts/B3_OKF_Agent_Skills_and_Skills_Registry.md"
 generated_by: "gemini-enterprise:okf-synthesizer"
-generated_at: "2026-10-27T17:27:00-07:00"
+generated_at: "2026-11-24T18:20:00-08:00"
 verified: "true"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_1726"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 okf_module_id: "OKF-L400-S2"
-l400_version_tag: "L400_version_20261027_1726"
+l400_version_tag: "L400_version_20261124_1820"
 fde_rubric_reference: "concepts/00-fde-field-readiness-and-grading-rubric.md"
 fde_charter_url: "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
+content_sha256: "33202c630ebba32feafe7a1595fd9e0bb4aa47cafea48b10135d3eff5f60a604"
 ---
 
 # Agent Grills the User: Structured Socratic Inquiry, KELE Multi-Agent State Tracking & Assessment Timing (`OKF-L400-S2`)

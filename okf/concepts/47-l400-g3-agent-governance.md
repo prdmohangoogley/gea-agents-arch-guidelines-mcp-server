@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Enterprise Agent Governance — Zero-Trust Network Perimeter & Model Armor"
 description: "Enterprise-wide agent governance, Model Armor dual-perimeter sanitization, centralized Agent Gateway policy enforcement, Policy-as-Code guardrails, and deterministic human-in-the-loop (HITL) compliance."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -30,12 +30,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "47-l400-g3-agent-governance"
 source_doc_id: "G3_OKF_Agent_Governance"
-content_sha256: "983ace719fd823f98a0fe25fe51169709636ccddf672464f46354b628fb38811"
+content_sha256: "cda684ac142a3d4ddbee1755744306e94dd790c76afb59c02861043671ec5a4f"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # G3: Enterprise Agent Governance — Zero-Trust Network Perimeter, Cryptographic Identity, Policy-as-Code, Model Armor Guardrails & Regulatory Compliance (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#AgentGovernance` `#ZeroTrustArchitecture` `#EnterpriseAgenticAI` `#GoogleCloudSecurity` `#AntigravityOKF`
 

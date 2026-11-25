@@ -3,15 +3,15 @@ type: concept
 id: OKF-PCA-09
 title: "Google Cloud Well-Architected 5-Pillar Decision Engine, Trade-Off Matrices & Anti-Pattern Registry"
 description: "Master L400 architectural decision engine mapping the 5 Pillars of the Google Cloud Well-Architected Framework, 5-Second Service Selection Matrices, and the 18 Highest-Frequency Architectural Anti-Patterns for Gemini Enterprise / Dataplex application builders."
-timestamp: "2026-11-24T17:30:00-08:00"
-generated_at: "2026-11-24T17:30:00-08:00"
-status: active
+timestamp: "2026-11-24T18:20:00-08:00"
+generated_at: "2026-11-24T18:20:00-08:00"
+status: "stable"
 ttl: "P6M"
 ttl_days: 180
-stale_after: "2027-05-24T17:30:00-08:00"
-corpus: "GEAPL200_PCA_WAF"
-version_tag: "PCA_WAF_OKF_2026-11-24_173000"
-l400_version: "L400_version_20261124_1730"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_WAF_PILLARS"
+version_tag: "WAF_OKF_2026-11-24_182000"
+l400_version: "L400_version_20261124_1820"
 generated_by: "Gemini Enterprise (PCA & Well-Architected OKF Synthesis Engine)"
 generated_method: "okf-v0.2-dataplex-synthesis"
 verified: true
@@ -36,8 +36,9 @@ sources:
     affiliation: "Google Cloud Forward Deployed Engineering (FDE)"
     venue: "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/PCA_Exam_Printable_Cheat_Sheet.md"
 content_sha256: "edb493840e5b6d291ad25f20b17622155e01506773788785066f2be8e9254709"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
 ---
-
 
 # OKF-PCA-09: Google Cloud Well-Architected 5-Pillar Decision Engine, Trade-Off Matrices & Anti-Pattern Registry
 

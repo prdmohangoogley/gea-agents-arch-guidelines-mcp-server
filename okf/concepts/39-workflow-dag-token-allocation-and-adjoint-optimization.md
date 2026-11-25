@@ -5,14 +5,14 @@ module_id: "OKF-TOK-39"
 document_id: "39-workflow-dag-token-allocation-and-adjoint-optimization"
 title: "Architecture Best Practice: Networked Workflow DAG Token Allocation — Adjoint Shadow Values, Upstream Planning Leverage, and Risk-Aware Optimization"
 description: "Authoritative mathematical and architectural specification for optimal token allocation across networked multi-agent workflow DAGs on Google Cloud ADK 2.0 — deriving reverse-topological adjoint shadow values (mu_w), KKT first-order optimality conditions, Zhu (2026) Section 6 quantitative case studies (Sequential Interpretation Bottlenecks, 6.15x Reasoning vs. RAG Retrieval Leverage, and 21.4% Planner vs. Executor Elasticity), and the 4-Channel Risk-Aware Token Allocation functional."
-timestamp: "2026-10-27T17:21:00-07:00"
-source_modified: "2026-10-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+source_modified: "2026-11-24T18:20:00-08:00"
 status: "stable"
 verified: true
-stale_after: "2027-04-27T17:21:00-07:00"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
-l400_version_tag: "L400_version_20261027_1721"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
+l400_version_tag: "L400_version_20261124_1820"
 sources:
   - "local://sources/AI Tokenomics- The Economics of Tokens, Computation, and Pricing in Foundation Models.pdf (Quanyan Zhu, NYU, arXiv:2606.24616v1, 10 Jun 2026)"
   - "local://sources/token_economics_llm_agents.pdf (Yuxi Chen et al., Zhejiang Univ & Alibaba Cloud, arXiv:2605.09104v1, 9 May 2026)"
@@ -29,12 +29,13 @@ tags:
   - google-adk
   - a2a-protocol
   - fde-grading-rubric
-content_sha256: "8b37abbed505b65b0608e66fcd57190bea1876a52460d164572ba87dd6882487"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "0828a26d23ffa7e17b2a8874c11d22357148406fb7bf64b7485aab4036098805"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # OKF-TOK-39: Architecture Best Practice — Networked Workflow DAG Token Allocation, Adjoint Shadow Values, and Risk-Aware Optimization (`L400_version_20261027_1721` / `GEAPL200_2026-10-27_172100`)

@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: More Reliable Autoraters — Enterprise Agentic AI Evaluation & Bias Mitigation"
 description: "Methodology for building bias-hardened, statistically calibrated LLM-as-a-Judge autoraters, pointwise vs. pairwise rating architectures, atomic rubrics, and automated sandbox validation."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "48-l400-o1-more-reliable-autoraters"
 source_doc_id: "O1_OKF_More_Reliable_Autoraters"
-content_sha256: "19f9c442f0c48daf69555dcad282c68fc2e0401bfe96dde3b3e1c8dabd9ccb9a"
+content_sha256: "e51abdc21ca5894e162bfdae3781ce2c9ed6c90ac7fc9cc0ef253ae85112fd64"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # OKF-L400-O1: More Reliable Autoraters — Enterprise Agentic AI Evaluation, Statistical Calibration, Black-Box Sandboxes & Ambient Production Optimization (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#LLMAutoRaters` `#PointwiseVsPairwiseEvaluation` `#RubricEngineering` `#StatisticalInterRaterReliability` `#BlackBoxSandboxEvaluation` `#AmbientQualityAgents`
 

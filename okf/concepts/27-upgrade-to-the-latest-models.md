@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Model Lifecycle Migration and Upgrading to the Latest Gemini Models"
 description: "Enterprise playbook for migrating production agents across Gemini model generations (e.g., Gemini 1.5/2.0/2.5 to Gemini 3), retiring prompt engineering debt, leveraging thinking budgets, and executing safe shadow/canary rollouts."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "local://GEAP_L300/agent_evaluation_hill_climbing_upgrade_to_the_latest_models.md"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - model-migration
@@ -28,18 +28,19 @@ tags:
   - agent-evaluation
   - google-cloud
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L300"
+version_tag: "L300_OKF_2026-11-24_182000"
 document_id: "27-upgrade-to-the-latest-models"
 source_doc_id: "agent_evaluation_hill_climbing_upgrade_to_the_latest_models"
-content_sha256: "2345c5ec18119e2729b775b1637ea03127a49d002705c86c1e10550bc8aecdec"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "064bc13b5c6a44fe629b69b84cc9d8de60907d97537888d8a938d914004a2823"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Model Lifecycle Migration and Upgrading to the Latest Gemini Models

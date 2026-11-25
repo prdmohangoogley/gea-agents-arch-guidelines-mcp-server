@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Google Cloud FDE Field-Readiness & Project Grading Rubric (Mandatory Governance Standard)"
 description: "Enforceable grading rubric and competency standard for all Forward Deployed Engineer (FDE) and Antigravity-driven Agentic AI projects, spanning Presentation & Advisory Rigor (Part A) and Engineering & Implementation Excellence (Part B) across 30+ sub-competencies and prevailing customer case studies."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "FDE Field-Readiness & Project Grading Rubric synthesized into OKF v0.2 standalone concept"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - fde-grading-rubric
@@ -28,18 +28,19 @@ tags:
   - landing-metrics
   - well-architected-framework
   - google-cloud
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L200"
+version_tag: "L200_OKF_2026-11-24_182000"
 document_id: "00-fde-field-readiness-and-grading-rubric"
 source_doc_id: "cloud-fde-grading-rubric-g3doc"
-content_sha256: "c9ec560df89302f73e6c089cf014ff14540decf2409e31b34a8fe930afb053da"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "0f3c54695cc8fa050064b70e0bedbd7544665628f4eb77c32f7487ccc6fead04"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Google Cloud FDE Field-Readiness & Project Grading Rubric (Mandatory Governance Standard)

@@ -3,15 +3,15 @@ type: concept
 id: OKF-PCA-05
 title: "Security, KMS, Secret Manager, VPC Service Controls & Compliance Architecture (WAF Security Pillar)"
 description: "L400 architectural decision framework for Encryption Key Management (GMEK, CMEK, CSEK, EKM, Tink ALE), Secret Manager, Binary Authorization, VPC Service Controls, Cloud Armor, IAP, and PCI-DSS/HIPAA compliance."
-timestamp: "2026-11-24T17:30:00-08:00"
-generated_at: "2026-11-24T17:30:00-08:00"
-status: active
+timestamp: "2026-11-24T18:20:00-08:00"
+generated_at: "2026-11-24T18:20:00-08:00"
+status: "stable"
 ttl: "P6M"
 ttl_days: 180
-stale_after: "2027-05-24T17:30:00-08:00"
-corpus: "GEAPL200_PCA_WAF"
-version_tag: "PCA_WAF_OKF_2026-11-24_173000"
-l400_version: "L400_version_20261124_1730"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_WAF_PILLARS"
+version_tag: "WAF_OKF_2026-11-24_182000"
+l400_version: "L400_version_20261124_1820"
 generated_by: "Gemini Enterprise (PCA & Well-Architected OKF Synthesis Engine)"
 generated_method: "okf-v0.2-dataplex-synthesis"
 verified: true
@@ -36,8 +36,9 @@ sources:
     affiliation: "Google Cloud Forward Deployed Engineering (FDE)"
     venue: "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/"
 content_sha256: "830c4c267760b6ce84360bec6cf8004cf94860b3d9be1bb9daa7192c89c2c4e9"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
 ---
-
 
 # OKF-PCA-05: Security, KMS, Secret Manager, VPC Service Controls & Compliance Architecture
 

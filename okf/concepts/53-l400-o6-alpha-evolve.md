@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: AlphaEvolve — Autonomous Evolutionary Algorithm Discovery & Optimization"
 description: "Autonomous evolutionary algorithm discovery framework, MAP-Elites quality-diversity search heuristics, combinatorial optimization, and automated algorithm synthesis with Gemini."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -30,12 +30,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "53-l400-o6-alpha-evolve"
 source_doc_id: "O6_OKF_Alpha_Evolve"
-content_sha256: "4ba094586f158bb06ba10dfeb74c72c54f33a9618938e5393595610eca38ef32"
+content_sha256: "a742127d5f75d919175961bd739172deaeb453078de659551c40b526babac396"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # O6: AlphaEvolve — Autonomous Evolutionary Algorithm Discovery, Mathematical Search Heuristics & Enterprise Implementation Best Practices (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#AlphaEvolve` `#EvolutionaryCodingAgent` `#CombinatorialOptimization` `#MAPElitesSearchHeuristic` `#EvaluationHarnessArchitecture`
 

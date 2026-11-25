@@ -5,14 +5,14 @@ module_id: "OKF-TOK-36"
 document_id: "36-foundations-of-ai-tokenomics-and-dual-view-production"
 title: "Architecture Best Practice: Foundations of AI Tokenomics — Dual-View Production Functions, Token Taxonomy, and Shadow Pricing"
 description: "Unified economic and physical framework for AI Tokenomics on Google Cloud, synthesizing Zhu (2026) hardware-level token footprint decomposition with Chen et al. (2026) agentic token lifecycle, triple economic attributes, nested CES production functions, and Micro/Meso/Macro shadow pricing in Google ADK 2.0 and Vertex AI."
-timestamp: "2026-10-27T17:21:00-07:00"
-source_modified: "2026-10-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+source_modified: "2026-11-24T18:20:00-08:00"
 status: "stable"
 verified: true
-stale_after: "2027-04-27T17:21:00-07:00"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
-l400_version_tag: "L400_version_20261027_1721"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
+l400_version_tag: "L400_version_20261124_1820"
 sources:
   - "local://sources/AI Tokenomics- The Economics of Tokens, Computation, and Pricing in Foundation Models.pdf (Quanyan Zhu, NYU, arXiv:2606.24616v1, 10 Jun 2026)"
   - "local://sources/token_economics_llm_agents.pdf (Yuxi Chen et al., Zhejiang Univ & Alibaba Cloud, arXiv:2605.09104v1, 9 May 2026)"
@@ -29,12 +29,13 @@ tags:
   - gemini-enterprise
   - vertex-ai
   - fde-grading-rubric
-content_sha256: "1062f154e6a9af299fd643e9d658befa38bc8786824435c06917643ac18cc926"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "c1a74bcac09989aa1a5a0cd7556119d4d577fd70a9d1f4e32c22e8d9b18221b0"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Foundations of AI Tokenomics — Dual-View Production Functions, Token Taxonomy, and Shadow Pricing (`OKF-TOK-36` · `L400_version_20261027_1721`)

@@ -2,10 +2,10 @@
 type: "Architecture Best Practice"
 title: "Case 2B: Multi-Agent Collaborative Grilling, Constraint Satisfaction & Temporal Planning (MACI)"
 description: "Authoritative architectural reference for Multi-Agent Collaborative Intelligence (MACI), detailing how a higher-order Meta-Planner (MP), context-bounded 5W Node Agents, programmatic Edge Verifier Agents, Early Information Agents, and Clean-State Resets overcome the Gödelian Self-Reference Barrier and Stale Memory Propagation in Google Cloud ADK 2.0 and A2A temporal planning workflows."
-timestamp: "2026-10-27T17:27:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
 status: "stable"
-stale_after: "2027-04-27T17:27:00-07:00"
-ttl: "6 months (180 days / P6M)"
+stale_after: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
 ttl_months: 6
 ttl_days: 180
 sources:
@@ -13,14 +13,17 @@ sources:
   - "L400_concepts/B2_OKF_A2A_Protocol_and_Multi_Agent_Mechanics.md"
   - "L400_concepts/B1_OKF_Anatomy_of_an_Enterprise_Agent.md"
 generated_by: "gemini-enterprise:okf-synthesizer"
-generated_at: "2026-10-27T17:27:00-07:00"
+generated_at: "2026-11-24T18:20:00-08:00"
 verified: "true"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_1726"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 okf_module_id: "OKF-L400-S4"
-l400_version_tag: "L400_version_20261027_1726"
+l400_version_tag: "L400_version_20261124_1820"
 fde_rubric_reference: "concepts/00-fde-field-readiness-and-grading-rubric.md"
 fde_charter_url: "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
+content_sha256: "9f4fbfc955505ee2a28aba5c5a8d3f47753272344649db1447a4c1fd40cb4d9d"
 ---
 
 # Case 2B: Multi-Agent Collaborative Grilling, Constraint Satisfaction & Temporal Planning (MACI) (`OKF-L400-S4`)

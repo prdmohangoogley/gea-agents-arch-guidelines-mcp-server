@@ -4,18 +4,18 @@
       "type": "Architecture Best Practice",
       "title": "Architecture Best Practice: Stateful Agents with Persistent Memories and Vertex AI Memory Bank",
       "description": "Deep-dive architectural patterns for multi-agent session history isolation (Shared Unified vs. Separate Histories), context window token compaction, and automated memory lifecycle management using Vertex AI Memory Bank and ADK.",
-      "timestamp": "2026-09-30T12:47:46-07:00",
-      "status": "draft",
-      "stale_after": "2027-03-29T12:47:46-07:00",
-      "sources": "local://GEAP_L300/agent_with_persistent_memories_2.md",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
       "generated_by": "gemini-enterprise:okf-synthesizer",
-      "generated_at": "2026-09-30T12:47:46-07:00",
-      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
-      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
-      "corpus": "GEAPL200",
-      "version_tag": "GEAPL200_2026-09-30_124746",
-      "source_doc_id": "agent_with_persistent_memories_2",
-      "content_sha256": "d25ef3bd2f89ffb92cb33a48d430f90b008186ec5b7366a65313c38eeb009e01"
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L300 unified synthesis (L300_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L300",
+      "version_tag": "L300_OKF_2026-11-24_182000",
+      "source_doc_id": "24-agent-with-persistent-memories-deep-dive",
+      "content_sha256": "e2d414f2d92ccf5de5dd50f13cee04ef4c08e014df278f4db93cafa771389ec1"
     }
   }
 }

@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Multi-Agent Tokenomics, Agent-to-User Grilling & Inter-Agent Critique Optimization (OKF-L400-O7)",
+      "description": "Master L400 architectural synthesis of Multi-Agent Tokenomics, Agent-to-User Grilling in Chatbot Elicitation, and Inter-Agent Grilling/Debate Optimization, mapped to Google Cloud ADK 2.0, A2A Protocol, and Vertex AI.",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "58-l400-o7-multi-agent-tokenomics-and-grilling-best-practices",
+      "content_sha256": "2f729a64c789e9054066c89baa8bf807c18b9485e3b00f0682fd9ce5aba085b7"
+    }
+  }
+}

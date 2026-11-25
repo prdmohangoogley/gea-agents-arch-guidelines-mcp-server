@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Governing the Agent Ecosystem with Agent Gateway, Agent Registry, and Policies"
 description: "Enterprise-scale governance architecture for curbing agent sprawl and shadow MCP servers using Google Cloud Agent Registry (system of record), Agent Gateway (centralized egress/ingress enforcement plane), A2A interoperability, and declarative policy guardrails."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "local://GEAP_L300/govern_secure_and_scale_the_agent_ecosystem_govern_agents_with_agent_gateway_agent_registry_policies.md"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - agent-governance
@@ -28,18 +28,19 @@ tags:
   - gemini-enterprise
   - google-cloud
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L300"
+version_tag: "L300_OKF_2026-11-24_182000"
 document_id: "35-govern-agents-with-agent-gateway-registry-policies"
 source_doc_id: "govern_secure_and_scale_the_agent_ecosystem_govern_agents_with_agent_gateway_agent_registry_policies"
-content_sha256: "8d06a1e3c01dd2c5790fea1c9fd9abff5d9cf94f651113b63c778b3b909dabc5"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "a478ade9c1cffe4add55e38a347e29b17a89152d27fa45a31485777acd1dd8bf"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Governing the Agent Ecosystem with Agent Gateway, Agent Registry, and Policies

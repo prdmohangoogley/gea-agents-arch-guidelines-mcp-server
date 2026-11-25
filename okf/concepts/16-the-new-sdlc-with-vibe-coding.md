@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "The New SDLC With Vibe Coding: From ad-hoc prompting to Agentic Engineering"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “The New SDLC With Vibe Coding: From ad-hoc prompting to Agentic Engineering”."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://docs.google.com/document/d/1-5JB5qi5zIQTBUivakDj7URi99n84xepyTDvk1Yf6qY/edit"
 generated:
   by: "gemini-enterprise:gdoc-to-markdown"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - vibe-coding
@@ -27,18 +27,19 @@ tags:
   - ai-coding-agents
   - developer-productivity
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L200"
+version_tag: "L200_OKF_2026-11-24_182000"
 document_id: "16-the-new-sdlc-with-vibe-coding"
 source_doc_id: "1-5JB5qi5zIQTBUivakDj7URi99n84xepyTDvk1Yf6qY"
-content_sha256: "df2723271ab769042cb20f9d6779465a9a24e795fb7178430fd84ef6e38aa54d"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "b49cf75fd299679a2efc3453579bb1348ec6e2cd3ae71275b715710b1a0da49b"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # The New SDLC With Vibe Coding: From ad-hoc prompting to Agentic Engineering

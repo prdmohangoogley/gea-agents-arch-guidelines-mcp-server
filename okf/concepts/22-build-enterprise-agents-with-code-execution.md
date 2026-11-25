@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Build Enterprise Agents with Code Execution on Gemini Enterprise Agent Platform"
 description: "Architectural guide for equipping enterprise agents with secure, isolated code execution sandboxes using the Gemini Enterprise Agent Platform SDK and ADK for deterministic data analysis, visualization, and computation."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "local://GEAP_L300/build_enterprise_agents_with_code_execution_on_gemini_enterprise_agent_platform.md"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - code-execution
@@ -28,18 +28,19 @@ tags:
   - data-analysis
   - google-cloud
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L300"
+version_tag: "L300_OKF_2026-11-24_182000"
 document_id: "22-build-enterprise-agents-with-code-execution"
 source_doc_id: "build_enterprise_agents_with_code_execution_on_gemini_enterprise_agent_platform"
-content_sha256: "8a2e0f59105524e2466edf889ee53282d4b0065b87ab36b3712bc6723c12bfe2"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "2511982e029edf35eb8a612ceaa8483c0fb4d2110c05b7443dadc6fb92a0c0ef"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Build Enterprise Agents with Code Execution on Gemini Enterprise Agent Platform

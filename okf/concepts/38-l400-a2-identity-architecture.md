@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Identity Architecture — Cloud Identity, Workforce Identity Federation & SCIM"
 description: "Architectural patterns and trade-offs for Cloud Identity vs. Workforce Identity Federation (WIF), Security Token Service (STS) credential exchange, SCIM group pre-synchronization, and SAML/OIDC enterprise federation."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "38-l400-a2-identity-architecture"
 source_doc_id: "A2_OKF_Identity_Architecture"
-content_sha256: "305736b8f75e51f70f9340d97a24aacded9e473ff28db0ec0e4860c314f9131e"
+content_sha256: "ea14565872595b3108d7baad65a5cc9fb1dcb8cf0762bf89e4577341bb64bfdc"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # Google Cloud Gemini Enterprise L400 OKF — Module A2: Identity Architecture (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#IdentityArchitecture` `#GoogleCloudIdentity` `#WorkforceIdentityFederation` `#SCIMProvisioning` `#AgentIdentitySPIFFE` `#GeminiEnterprise`
 

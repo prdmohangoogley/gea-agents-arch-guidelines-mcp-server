@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Enforceable FDE Field-Readiness & Project Grading Rubric Standard (L400 Standard)"
 description: "The definitive Google Cloud Forward Deployed Engineer (FDE) Field-Readiness and Project Grading Rubric standard for L400 enterprise architectures, establishing 30+ competencies across Advisory Rigor and Engineering Excellence."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "57-l400-21-fde-grading-rubric-and-field-readiness-standard"
 source_doc_id: "21_OKF_FDE_GRADING_RUBRIC_AND_FIELD_READINESS_STANDARD"
-content_sha256: "869cb8c8811d362e34c7fa9d81efec42b9cd758d91fbaaf5c6667e3271b18ac5"
+content_sha256: "88ab82c6c96e55372a22dbbf01bfe3d44803948c225b5587d5ac94c3e0742d83"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # 21: Enforceable FDE Field-Readiness & Project Grading Rubric Standard (`OKF-L400-21` | `L400_version_20261026_0350`) — Google Cloud OKF Specification
 **Topic Tags:** `#L400_version_20261026_0350` `#FDEGradingRubric` `#FieldReadinessStandard` `#CloudFDECharter` `#PresentationAndAdvisoryRigor` `#EngineeringAndImplementationExcellence` `#AntigravityHarnessGovernance`
 

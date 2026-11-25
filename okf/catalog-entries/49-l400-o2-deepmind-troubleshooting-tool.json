@@ -4,18 +4,18 @@
       "type": "Architecture Best Practice",
       "title": "Architecture Best Practice: DeepMind Troubleshooting Tool — Label-Free Diagnostics & Trajectory Observability",
       "description": "Advanced diagnostic framework using Gemini Task Analysis (GTA), label-free N-sampling consistency analysis, JetSki execution traces, and automated prompt defect isolation.",
-      "timestamp": "2026-10-26T03:50:00Z",
-      "status": "draft",
-      "stale_after": "2027-04-26T00:00:00Z",
-      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head\nhttps://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
       "generated_by": "gemini-enterprise:okf-synthesizer",
-      "generated_at": "2026-10-26T03:50:00Z",
-      "generated_method": "OKF v0.2 unified synthesis and FDE rubric alignment",
-      "verified": "machine:structural-qa @ 2026-10-26T03:50:00Z :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-10-26T03:50:00Z :: content hash recorded in MANIFEST.json",
-      "corpus": "GEAPL200",
-      "version_tag": "L400_version_20261026_0350",
-      "source_doc_id": "O2_OKF_DeepMind_Troubleshooting_Tool",
-      "content_sha256": "ac32593fb6a91fa563e57e97c5de78557ffaa379a5ce27e16376d466a9fbfd09"
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "49-l400-o2-deepmind-troubleshooting-tool",
+      "content_sha256": "88b56db8bea2c8cb8b6b8caa219ab5911e73958dc6d844e77778ca6e56a62de5"
     }
   }
 }

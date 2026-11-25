@@ -1,19 +1,18 @@
 {
-  "name": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb/entries/03_vpc_networking_load_balancing_hybrid_and_dns",
-  "entryType": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryTypes/okf-concept",
-  "fullyQualifiedName": "okf:GEAPL200_PCA_WAF.OKF-PCA-03",
+  "name": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-pca-waf-kb/entries/03_vpc_networking_load_balancing_hybrid_and_dns",
+  "entryType": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryTypes/okf-bundle",
+  "fullyQualifiedName": "okf:GEAP_WAF_PILLARS.OKF-PCA-03",
   "entrySource": {
-    "resource": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/03-vpc-networking-load-balancing-hybrid-and-dns.md",
+    "resource": "gs://gea_agent_development_architectural_best_practices_pca_waf/WAF_OKF_2026-11-24_182000/okf/concepts/03-vpc-networking-load-balancing-hybrid-and-dns.md",
     "system": "GeminiEnterprise_OKF_v0.2",
     "platform": "GoogleCloudDataplex",
     "displayName": "OKF-PCA-03: VPC Networking, Load Balancing, Hybrid Connectivity & Cloud DNS Architecture (WAF Networking)",
     "description": "L400 architectural decision framework for Google Cloud VPCs, Network Service Tiers, Load Balancers, Private GKE Control Plane access, Hybrid Interconnect/VPN, NCC, PSC, and Cloud DNS.",
-    "createTime": "2026-11-24T17:30:00-08:00",
-    "updateTime": "2026-11-24T17:30:00-08:00",
+    "createTime": "2026-11-24T18:20:00-08:00",
+    "updateTime": "2026-11-24T18:20:00-08:00",
     "labels": {
-      "corpus": "geapl200_pca_waf",
-      "version_tag": "pca_waf_okf_2026-11-24_172000",
-      "l400_version": "l400_version_20261124_1720",
+      "corpus": "geap_waf_pillars",
+      "version_tag": "waf_okf_2026-11-24_182000",
       "ttl_months": "6",
       "framework": "google-cloud-well-architected"
     }
@@ -22,29 +21,21 @@
     "fivedaysai-prd-sandbox-317383.us.okf": {
       "aspectType": "projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf",
       "data": {
-        "id": "OKF-PCA-03",
         "type": "concept",
         "title": "VPC Networking, Load Balancing, Hybrid Connectivity & Cloud DNS Architecture (WAF Networking)",
         "description": "L400 architectural decision framework for Google Cloud VPCs, Network Service Tiers, Load Balancers, Private GKE Control Plane access, Hybrid Interconnect/VPN, NCC, PSC, and Cloud DNS.",
-        "corpus": "GEAPL200_PCA_WAF",
-        "version_tag": "PCA_WAF_OKF_2026-11-24_173000",
-        "l400_version": "L400_version_20261124_1730",
-        "timestamp": "2026-11-24T17:30:00-08:00",
-        "ttl": "P6M",
-        "ttl_days": 180,
-        "stale_after": "2027-05-24T17:30:00-08:00",
-        "status": "active",
-        "verified": true,
-        "content_sha256": "38a0bed10565e2f87f9d473adf5272013c6bf2fb7a40c9f7d7332684e081f329",
-        "file_sha256": "35968965e6796df52423362ffac90a2e313c716456f154c12b42f9fb829d4ca3",
-        "local_path": "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices/concepts/03-vpc-networking-load-balancing-hybrid-and-dns.md",
-        "gcs_uri": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf/concepts/03-vpc-networking-load-balancing-hybrid-and-dns.md",
-        "source_citations": [
-          "Dan Sullivan, Official Google Cloud Certified Professional Cloud Architect Study Guide (Sybex / Wiley, ISBN 978-1-119-60244-6, PCA_Book.pdf)",
-          "Google Cloud Professional Cloud Architect (PCA) Complete Course & Architectural Reference Deck (242 Slides, UDEMY-Course-PCA.pdf)",
-          "Google Cloud Architecture Framework / Well-Architected Framework Official Documentation (https://cloud.google.com/architecture/framework)",
-          "Forensic Diagnostic Corpus: GCP PCA Mock Exams 1-4 (Nov 2, 3, 6, 9, 2026), Security Set 1 & Service Area Simulators 1-8"
-        ]
+        "timestamp": "2026-11-24T18:20:00Z",
+        "status": "stable",
+        "stale_after": "2027-05-24T18:20:00Z",
+        "sources": "PCA_Book.pdf\nUDEMY-Course-PCA.pdf\nExamTopics.pdf\nhttps://cloud.google.com/architecture/framework",
+        "generated_by": "Gemini Enterprise (PCA & Well-Architected OKF Synthesis Engine)",
+        "generated_at": "2026-11-24T18:20:00Z",
+        "generated_method": "okf-v0.2-dataplex-synthesis (WAF_OKF_2026-11-24_182000)",
+        "verified": "Pradeep Mohan @ 2026-11-24T18:20:00Z :: 6-month TTL (2027-05-24T18:20:00Z) & SHA-256 verified",
+        "corpus": "GEAP_WAF_PILLARS",
+        "version_tag": "WAF_OKF_2026-11-24_182000",
+        "source_doc_id": "OKF-PCA-03",
+        "content_sha256": "38a0bed10565e2f87f9d473adf5272013c6bf2fb7a40c9f7d7332684e081f329"
       }
     }
   }

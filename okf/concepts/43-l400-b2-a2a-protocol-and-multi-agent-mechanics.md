@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: A2A Protocol and Multi-Agent Mechanics — Agent Cards & Interoperability"
 description: "Agent-to-Agent (A2A) protocol specification vs. Model Context Protocol (MCP), declarative Agent Cards, distributed task state machines, protocol shims (v0.3 to v1.0), and enterprise Agent Gateway registration."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -32,12 +32,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "43-l400-b2-a2a-protocol-and-multi-agent-mechanics"
 source_doc_id: "B2_OKF_A2A_Protocol_and_Multi_Agent_Mechanics"
-content_sha256: "7a294cd4deae76f4e377f337a5fe5608833898a3ff363522257944624dfd3a28"
+content_sha256: "df52533d25d0056481b2decd34529315f450e8d59f2d513ff1fe0d09f99bc659"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # OKF-L400-B2: A2A Protocol and Multi-Agent Mechanics — Google Open Knowledge Framework (OKF) Authoritative Reference (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#AgentToAgentProtocol` `#ModelContextProtocol` `#MultiAgentOrchestration` `#AgentDevelopmentKit` `#GeminiEnterprise` `#EnterpriseAgentGateway` `#AntigravityAgenticAI`
 

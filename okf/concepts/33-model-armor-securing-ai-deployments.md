@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Securing AI and Agentic Deployments with Google Cloud Model Armor"
 description: "Comprehensive security architecture for protecting LLM and multi-agent deployments against prompt injection, jailbreaks, sensitive data leakage (SDP/DLP), malicious URLs, and indirect tool-output poisoning using Google Cloud Model Armor."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "local://GEAP_L300/prepare_and_deliver_gemini_deployments_model_armor_securing_ai_deployments.md"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - model-armor
@@ -28,18 +28,19 @@ tags:
   - gemini-enterprise
   - google-cloud
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L300"
+version_tag: "L300_OKF_2026-11-24_182000"
 document_id: "33-model-armor-securing-ai-deployments"
 source_doc_id: "prepare_and_deliver_gemini_deployments_model_armor_securing_ai_deployments"
-content_sha256: "6a2c6c709a47f5e390e84c89689f0e0107be63bbd3ce6c6bbd1be9dd4bab7187"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "b955a7ec82f82d875fe614e2adc2f00cf4434e428619e7be6ea30b94672f47c5"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Securing AI and Agentic Deployments with Google Cloud Model Armor

@@ -4,18 +4,18 @@
       "type": "Architecture Best Practice",
       "title": "Architecture Best Practice: Platform-Native State Management with Gemini Enterprise Agent Runtime & Memory Bank",
       "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Platform-Native State Management with Gemini Enterprise Agent Runtime & Memory Bank”.",
-      "timestamp": "2026-09-30T02:33:05Z",
-      "status": "draft",
-      "stale_after": "2027-03-29T02:33:05+00:00",
-      "sources": "https://docs.google.com/document/d/1aQutt8PnKS8joFsYDCnDozNARDHlpTbM9OsalPusBNY/edit",
-      "generated_by": "gemini-enterprise:gdoc-to-markdown",
-      "generated_at": "2026-09-30T12:47:46-07:00",
-      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
-      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
-      "corpus": "GEAPL200",
-      "version_tag": "GEAPL200_2026-09-30_124746",
-      "source_doc_id": "1aQutt8PnKS8joFsYDCnDozNARDHlpTbM9OsalPusBNY",
-      "content_sha256": "b9fef2b9845dfd18471e24b632d7d2a6348762787edea3941fcb230cf64addef"
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L200 unified synthesis (L200_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L200",
+      "version_tag": "L200_OKF_2026-11-24_182000",
+      "source_doc_id": "09-platform-native-state-management",
+      "content_sha256": "518eb553e97503e0f51c7553c22d00c7b38866baf4272cea04977107171d1f74"
     }
   }
 }

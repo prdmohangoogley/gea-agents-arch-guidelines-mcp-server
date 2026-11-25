@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud”."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://docs.google.com/document/d/1SjeHhPQvC-m88pQ3KLXXHGNTDDfgYLtXabMEqJhBxL0/edit"
 generated:
   by: "gemini-enterprise:gdoc-to-markdown"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - agent-tools
@@ -28,18 +28,19 @@ tags:
   - human-in-the-loop
   - durable-orchestration
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L200"
+version_tag: "L200_OKF_2026-11-24_182000"
 document_id: "06-agent-tools-mcp-multi-agent-orchestration"
 source_doc_id: "1SjeHhPQvC-m88pQ3KLXXHGNTDDfgYLtXabMEqJhBxL0"
-content_sha256: "ab9ff28a401da1dbbb7053001df5cee5a68f8fe5b4ccb6f94e8a95d0bf25a4af"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "3653d272e6fbbb569c64ee838c5a7c20c594a8ef3235bf0b5c47893571a75cb7"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Agent Tools, MCP Interoperability & Multi-Agent Orchestration on Google Cloud

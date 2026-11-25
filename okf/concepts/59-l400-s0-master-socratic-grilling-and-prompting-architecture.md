@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "OKF-L400-S0: Socratic Grilling & Prompting for Multi-Agent Systems — Master Google Open Knowledge Framework (OKF v0.2) Authoritative Reference"
 description: "Master L400 architectural synthesis of Socratic Grilling and Prompting across Agent-Grills-User interactive inquiry topologies (KELE, Socratic Students, CRIT/Chang) and Agent-Grills-Agent dialectical verification, temporal planning, recursive decomposition, and reference-free autorater pipelines (HDE, MACI, Recursive Socratic Questioning, SoDa, SOCREVAL, ODQS), mapped to Google Cloud ADK 2.0, A2A v0.3, Spanner Graph, and Vertex AI."
-timestamp: "2026-10-27T15:50:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
 status: "stable"
-stale_after: "2027-04-26T00:00:00Z"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "Heterogeneous Debate Engine: Identity-Grounded Cognitive Architecture for Resilient LLM-Based Ethical Tutoring (HDE)"
   - "KELE: A Multi-Agent Framework for Structured Socratic Teaching with Large Language Models (72nd ACL 2024)"
@@ -23,14 +23,19 @@ sources:
   - "L400_concepts/O4_OKF_Cost_Token_Estimation_Analysis_and_Optimization.md"
   - "L400_concepts/O6_OKF_AlphaEvolve_Evolutionary_Test_Time_Compute.md"
 generated_by: "gemini-enterprise:okf-synthesizer"
-generated_at: "2026-10-27T15:50:00-07:00"
+generated_at: "2026-11-24T18:20:00-08:00"
 verified: "true"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 okf_module_id: "OKF-L400-S0"
-l400_version_tag: "L400_version_20261026_0350"
+l400_version_tag: "L400_version_20261124_1820"
 fde_rubric_reference: "concepts/00-fde-field-readiness-and-grading-rubric.md"
 fde_charter_url: "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
+content_sha256: "0e6b066bdc8543148ada1a77be3dcba49d5beff83b602e6a290579a8ddde4fce"
 ---
 
 # OKF-L400-S0: Socratic Grilling & Prompting for Multi-Agent Systems — Master Google Open Knowledge Framework (OKF v0.2) Authoritative Reference (L400_version_20261026_0350)

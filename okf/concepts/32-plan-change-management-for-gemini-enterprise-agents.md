@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Lifecycle Change Management and Rollout Governance for Gemini Enterprise Agents"
 description: "Operational and technical change management framework for custom and partner agents on Gemini Enterprise, covering agent versioning, progressive ring deployments, HITL trust calibration, behavioral drift monitoring, and deprecation lifecycles."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "local://GEAP_L300/prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_agents.md"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - agent-change-management
@@ -28,18 +28,19 @@ tags:
   - observability
   - google-cloud
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L300"
+version_tag: "L300_OKF_2026-11-24_182000"
 document_id: "32-plan-change-management-for-gemini-enterprise-agents"
 source_doc_id: "prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_agents"
-content_sha256: "51196f86bf1da0ba87daa65794e6948e0e5b81d801ea36ff0df34717699e8f18"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "b9c7f1ac6bd5eeda5b8d6f8071e1dfc9e1c073494c4e28e1edb67626ec56496e"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Lifecycle Change Management and Rollout Governance for Gemini Enterprise Agents

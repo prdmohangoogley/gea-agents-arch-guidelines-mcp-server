@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: API Integration, Federated Connector OAuth & Bring-Your-Own MCP"
 description: "Protocols and integration patterns for StreamAssist APIs, third-party federated OAuth 3LO authorization flows, and Bring-Your-Own Model Context Protocol (BYO MCP) servers hosted on Cloud Run."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -30,12 +30,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "40-l400-a4-api-integration-federated-connector-byo-mcp"
 source_doc_id: "A4_OKF_API_Integration_Federated_Connector_and_BYO_MCP"
-content_sha256: "9b4716a356248499743096e1d75031eb7a6f57ff73f80750144b30bd3ed13c8b"
+content_sha256: "8513777c9fad2a04a2b73569f42dd9c67cf0f899f240ab01d7433b3eb6e2438b"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # Gemini Enterprise L400 OKF: API Integration, Federated Connector OAuth 3LO & BYO MCP Architecture (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#GeminiEnterprise` `#DiscoveryEngineAPI` `#FederatedOAuth3LO` `#BYOMCPConnector` `#AntigravityAgenticAI`
 

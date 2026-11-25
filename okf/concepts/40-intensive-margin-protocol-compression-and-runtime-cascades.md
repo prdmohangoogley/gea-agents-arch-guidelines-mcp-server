@@ -5,14 +5,14 @@ module_id: "OKF-TOK-40"
 document_id: "40-intensive-margin-protocol-compression-and-runtime-cascades"
 title: "Architecture Best Practice: Intensive-Margin Communication Compression, Runtime Model Cascades, and Stop-Loss Budget Governance"
 description: "Comprehensive unit-economics and systems-engineering blueprint for intensive-margin token optimization in multi-agent systems: message-level protocol compression (CodeAgents, Optima), prompt/context pruning (LLMLingua, LongLLMLingua, Gisting, AutoCompressors, Selective Context), runtime model cascades and LLM-free loop interceptors (BudgetMLAgent, SupervisorAgent, MasRouter, MASS, CoRL), and reasoning spectrum stop-loss governance (GoT, BAVT, FlashThink, AXI, and differentiable Lagrangian token budgets) on Google Cloud Vertex AI and ADK 2.0."
-timestamp: "2026-10-27T17:21:00-07:00"
-source_modified: "2026-10-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+source_modified: "2026-11-24T18:20:00-08:00"
 status: "stable"
 verified: true
-stale_after: "2027-04-27T17:21:00-07:00"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
-l400_version_tag: "L400_version_20261027_1721"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
+l400_version_tag: "L400_version_20261124_1820"
 sources:
   - "local://sources/AI Tokenomics- The Economics of Tokens, Computation, and Pricing in Foundation Models.pdf (Quanyan Zhu, NYU, arXiv:2606.24616v1, 10 Jun 2026)"
   - "local://sources/token_economics_llm_agents.pdf (Yuxi Chen et al., Zhejiang Univ & Alibaba Cloud, arXiv:2605.09104v1, 9 May 2026)"
@@ -29,12 +29,13 @@ tags:
   - security-tokenomics
   - google-adk
   - fde-grading-rubric
-content_sha256: "f8f079231f30c622595377f94f8e538e192a3873330644255874061e94e97aab"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "3680987e4b95721c66c17794f64e443af6043150019ced0b2916b02f1f6dfd72"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Intensive-Margin Communication Compression, Runtime Model Cascades, and Stop-Loss Budget Governance (`OKF-TOK-40`)

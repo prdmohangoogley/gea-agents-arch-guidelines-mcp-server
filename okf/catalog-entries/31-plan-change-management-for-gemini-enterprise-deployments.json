@@ -4,18 +4,18 @@
       "type": "Architecture Best Practice",
       "title": "Architecture Best Practice: Organizational Change Management for Gemini Enterprise Deployments",
       "description": "Enterprise adoption, governance, and organizational change management (OCM) framework for rolling out Gemini Enterprise across business units, establishing AI Centers of Excellence (CoE), champion networks, and value-realization telemetry.",
-      "timestamp": "2026-09-30T12:47:46-07:00",
-      "status": "draft",
-      "stale_after": "2027-03-29T12:47:46-07:00",
-      "sources": "local://GEAP_L300/prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_deployments.md",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
       "generated_by": "gemini-enterprise:okf-synthesizer",
-      "generated_at": "2026-09-30T12:47:46-07:00",
-      "generated_method": "OKF v0.2 synthesis from GEAP L300 markdown corpus; tables normalized to GFM pipe tables and concept graphs validated as Mermaid.js",
-      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
-      "corpus": "GEAPL200",
-      "version_tag": "GEAPL200_2026-09-30_124746",
-      "source_doc_id": "prepare_and_deliver_gemini_deployments_plan_change_management_for_gemini_enterprise_deployments",
-      "content_sha256": "15314780318ca4dde335a9f914997a1bc1fb262c272cda7d5369e569843f2b05"
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L300 unified synthesis (L300_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L300",
+      "version_tag": "L300_OKF_2026-11-24_182000",
+      "source_doc_id": "31-plan-change-management-for-gemini-enterprise-deployments",
+      "content_sha256": "750b332fbbe86ccc210f925433888cd763a7f2dcddd7848874ba666cfe80b860"
     }
   }
 }

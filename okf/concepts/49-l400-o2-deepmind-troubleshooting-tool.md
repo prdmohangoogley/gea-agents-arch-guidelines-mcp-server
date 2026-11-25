@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: DeepMind Troubleshooting Tool — Label-Free Diagnostics & Trajectory Observability"
 description: "Advanced diagnostic framework using Gemini Task Analysis (GTA), label-free N-sampling consistency analysis, JetSki execution traces, and automated prompt defect isolation."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "49-l400-o2-deepmind-troubleshooting-tool"
 source_doc_id: "O2_OKF_DeepMind_Troubleshooting_Tool"
-content_sha256: "ac32593fb6a91fa563e57e97c5de78557ffaa379a5ce27e16376d466a9fbfd09"
+content_sha256: "88b56db8bea2c8cb8b6b8caa219ab5911e73958dc6d844e77778ca6e56a62de5"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # Google OKF Authoritative Reference: O2 — DeepMind Troubleshooting Tool (`go/gemini-task-analysis` & `go/auto-analysis`) [`L400_version_20261026_0350`]
 **Topic Tags:** `#L400_version_20261026_0350` `#LabelFreeAgentDiagnostics` `#OutputConsistencyAnalysis` `#AgentTrajectoryObservability` `#AutomatedPromptEngineering` `#SelfReflectiveGeminiCritique` `#GenAIOperationalExcellence`
 

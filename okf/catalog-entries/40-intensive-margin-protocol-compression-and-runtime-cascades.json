@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Intensive-Margin Communication Compression, Runtime Model Cascades, and Stop-Loss Budget Governance",
+      "description": "Comprehensive unit-economics and systems-engineering blueprint for intensive-margin token optimization in multi-agent systems: message-level protocol compression (CodeAgents, Optima), prompt/context pruning (LLMLingua, LongLLMLingua, Gisting, AutoCompressors, Selective Context), runtime model cascades and LLM-free loop interceptors (BudgetMLAgent, SupervisorAgent, MasRouter, MASS, CoRL), and reasoning spectrum stop-loss governance (GoT, BAVT, FlashThink, AXI, and differentiable Lagrangian token ",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "40-intensive-margin-protocol-compression-and-runtime-cascades",
+      "content_sha256": "3680987e4b95721c66c17794f64e443af6043150019ced0b2916b02f1f6dfd72"
+    }
+  }
+}

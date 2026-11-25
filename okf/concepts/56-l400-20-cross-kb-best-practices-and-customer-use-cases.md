@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Cross-Knowledge-Base Best Practices & Enterprise Customer Use Cases"
 description: "Cross-cutting architectural best practices, anti-patterns, and battle-tested customer deployment case studies mapped across all five Google Cloud Well-Architected Framework pillars."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -29,12 +29,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "56-l400-20-cross-kb-best-practices-and-customer-use-cases"
 source_doc_id: "20_OKF_CROSS_KB_BEST_PRACTICES_AND_CUSTOMER_USE_CASES"
-content_sha256: "1a9e144e6c4fd70840386ae4ae2ade502bd0fcbd4df0b6022fe3dcac84a50dff"
+content_sha256: "894ec684d26ba509c7c0c4a3c12ec9ddb6928c258b7b0bd43369381b86fea89c"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # 20. Google OKF Cross-Knowledge-Base Best Practices & Enterprise Customer Use Cases Compendium (`A1`–`O6`)
 **Topic Tags:** `#L400_version_20261026_0350` `#Cross_KB_Best_Practices` `#Enterprise_Customer_Use_Cases` `#Google_Cloud_WAF` `#Gemini_Enterprise_L400`
 

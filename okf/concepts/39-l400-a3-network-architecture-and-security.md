@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Gemini Enterprise Network Architecture and Security — PSC, VPC-SC & CMEK"
 description: "Production network topology, Private Service Connect (PSC), VPC Service Controls (VPC-SC) perimeters, Customer-Managed Encryption Keys (CMEK), and Cloud DLP/Sensitive Data Protection inspection for agentic AI workloads."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -30,12 +30,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "39-l400-a3-network-architecture-and-security"
 source_doc_id: "A3_OKF_Network_Architecture_and_Security"
-content_sha256: "204c536db51b8bf5b7a2216ec9a26781c2f5e1fc5aa86d24bdf2c9c72a2ea31b"
+content_sha256: "6373b6bb7b6fe49b2d820af98b10ac0d4279444d9ae653962bf8b981ef745a7e"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # Google Open Knowledge Framework (OKF): Gemini Enterprise Network Architecture & Security (Module A3) — `L400_version_20261026_0350`
 **Topic Tags:** `#L400_version_20261026_0350` `#OKF_L400_A3` `#GeminiEnterprise` `#NetworkArchitectureAndSecurity` `#AntigravityAgenticAI` `#GCPKnowledgeCatalog`
 

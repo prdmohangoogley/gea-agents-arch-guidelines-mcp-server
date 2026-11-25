@@ -2,10 +2,10 @@
 type: "Architecture Best Practice"
 title: "Case 2A: Agent-Grills-Agent via Identity-Grounded Heterogeneous Debate (HDE) & Dialectical Scaffolding"
 description: "Authoritative architectural reference for identity-grounded heterogeneous multi-agent debate (HDE), detailing how orthogonal axiomatic grounding, negative doctrinal boundary filtering (ID-RAG), heuristic Theory-of-Mind (ToM-Lite) opponent modeling, and Socratic Moderator perturbations prevent consensus collapse and sycophancy in Google Cloud ADK 2.0 and A2A adversarial debate rings."
-timestamp: "2026-10-27T17:27:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
 status: "stable"
-stale_after: "2027-04-27T17:27:00-07:00"
-ttl: "6 months (180 days / P6M)"
+stale_after: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
 ttl_months: 6
 ttl_days: 180
 sources:
@@ -13,14 +13,17 @@ sources:
   - "L400_concepts/B2_OKF_A2A_Protocol_and_Multi_Agent_Mechanics.md"
   - "L400_concepts/B1_OKF_Anatomy_of_an_Enterprise_Agent.md"
 generated_by: "gemini-enterprise:okf-synthesizer"
-generated_at: "2026-10-27T17:27:00-07:00"
+generated_at: "2026-11-24T18:20:00-08:00"
 verified: "true"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_1726"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 okf_module_id: "OKF-L400-S3"
-l400_version_tag: "L400_version_20261027_1726"
+l400_version_tag: "L400_version_20261124_1820"
 fde_rubric_reference: "concepts/00-fde-field-readiness-and-grading-rubric.md"
 fde_charter_url: "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
+content_sha256: "1caf3c4687cbab0c74f4d4ce87680d11ce466418bdc545affd4ef5c3119c4f96"
 ---
 
 # Case 2A: Agent-Grills-Agent via Identity-Grounded Heterogeneous Debate (HDE) & Dialectical Scaffolding (`OKF-L400-S3`)

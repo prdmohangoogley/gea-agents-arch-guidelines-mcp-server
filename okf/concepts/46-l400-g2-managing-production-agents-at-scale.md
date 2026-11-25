@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Managing Production Agents at Scale — Multi-Region Fleets & Circuit Breakers"
 description: "Operational blueprint for managing global multi-region agent fleets, progressive canary rollouts, semantic circuit breakers, distributed OpenTelemetry tracing, and sub-second failover SLOs."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "46-l400-g2-managing-production-agents-at-scale"
 source_doc_id: "G2_OKF_Managing_Production_Agents_at_Scale"
-content_sha256: "a31e5c5fdd203fbb8f6a023fbe6b3651495d3329ed6f3c0acdc530e1a69716e7"
+content_sha256: "b8c3180bd99fc68d601bbb86e095d113be8d2df7d2c06b6ad3ad3f026380d296"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # Google Cloud Organizational Knowledge Framework (OKF): Managing Production Agents at Scale — Continuous Evaluation, Fleet Resilience, Cost Attribution & Zero Trust Architectures (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#ProductionAgentEngineering` `#QualityFlywheel` `#SemanticCircuitBreakers` `#SpanCostAttribution` `#ZeroTrustAgentSecurity` `#AntigravityAgenticAI`
 

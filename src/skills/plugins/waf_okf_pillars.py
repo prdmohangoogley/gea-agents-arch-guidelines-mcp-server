@@ -28,9 +28,18 @@ _MCP_PCA_WAF_DIR = _REPO_ROOT / "okf" / "pca_waf"
 _SOURCE_PCA_WAF_DIR = Path("/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/Architect-Best-Practices")
 
 DATAPLEX_KB_METADATA = {
-    "corpus": "GEAPL200_PCA_WAF",
-    "version_tag": "PCA_WAF_OKF_2026-11-24_173000",
-    "l400_version": "L400_version_20261124_1730",
+    "corpus": "GEAP_WAF_PILLARS",
+    "version_tag": "WAF_OKF_2026-11-24_182000",
+    "tier_version_tags": {
+        "L200": "L200_OKF_2026-11-24_182000",
+        "L300": "L300_OKF_2026-11-24_182000",
+        "L400": "L400_OKF_2026-11-24_182000",
+        "WAF": "WAF_OKF_2026-11-24_182000",
+    },
+    "l400_version": "L400_version_20261124_1820",
+    "timestamp": "2026-11-24T18:20:00-08:00",
+    "stale_after": "2027-05-24T18:20:00-08:00",
+    "ttl": "P6M",
     "project_id": "fivedaysai-prd-sandbox-317383",
     "location": "us",
     "dataplex_entry_group": "projects/fivedaysai-prd-sandbox-317383/locations/us/entryGroups/geapl200-architecture-kb",
@@ -38,8 +47,8 @@ DATAPLEX_KB_METADATA = {
     "dataplex_aspect_type": "projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf",
     "dataplex_pca_waf_aspect_type": "projects/fivedaysai-prd-sandbox-317383/locations/us/aspectTypes/okf-pca-waf",
     "gcs_bucket": "gs://gea_agent_development_architectural_best_practices_pca_waf",
-    "gcs_versioned_prefix": "gs://gea_agent_development_architectural_best_practices_pca_waf/PCA_WAF_OKF_2026-11-24_173000/okf",
-    "mcp_gcs_mirror": "gs://gea_agent_development_architectural_best_practices_1790796607/okf/pca_waf",
+    "gcs_versioned_prefix": "gs://gea_agent_development_architectural_best_practices_pca_waf/WAF_OKF_2026-11-24_182000/okf",
+    "mcp_gcs_mirror": "gs://gea_agent_development_architectural_best_practices_1790796607/okf",
 }
 
 # Mapping of each WAF Pillar to its authoritative OKF-PCA concepts, principles, enablers, and verification checks

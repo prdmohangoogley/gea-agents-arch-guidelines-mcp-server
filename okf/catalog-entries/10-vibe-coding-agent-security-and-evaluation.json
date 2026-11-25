@@ -4,18 +4,18 @@
       "type": "Architecture Best Practice",
       "title": "Vibe Coding Agent Security and Evaluation",
       "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Vibe Coding Agent Security and Evaluation”.",
-      "timestamp": "2026-09-25T22:34:19Z",
-      "status": "draft",
-      "stale_after": "2027-03-24T22:34:19+00:00",
-      "sources": "https://docs.google.com/document/d/1vOL-cvTVURqW_vXRq0nx8AhpCkbEyr7Eg6aAed8QZhA/edit",
-      "generated_by": "gemini-enterprise:gdoc-to-markdown",
-      "generated_at": "2026-09-30T12:47:46-07:00",
-      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
-      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
-      "corpus": "GEAPL200",
-      "version_tag": "GEAPL200_2026-09-30_124746",
-      "source_doc_id": "1vOL-cvTVURqW_vXRq0nx8AhpCkbEyr7Eg6aAed8QZhA",
-      "content_sha256": "a97443c09cb74f9ddc090dd4b5fe4335e6882c654246d1f20753828cfeb9e22d"
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L200 unified synthesis (L200_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L200",
+      "version_tag": "L200_OKF_2026-11-24_182000",
+      "source_doc_id": "10-vibe-coding-agent-security-and-evaluation",
+      "content_sha256": "07d45cfd0e688297d9404caba50704392653e05ced10971206606e6a8069caeb"
     }
   }
 }

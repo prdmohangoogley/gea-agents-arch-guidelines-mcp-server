@@ -2,10 +2,10 @@
 type: "Architecture Best Practice"
 title: "Socratic Prompting Foundations, CRIT Algorithm & The Socratic Method Taxonomy"
 description: "Comprehensive architectural reference on Edward Y. Chang's Socratic Prompting taxonomy (Type 2 Focused vs. Type 3 Exploratory questioning), the CRIT (Critical Reading Inquisitive Template) mathematical verification algorithm, abductive error mitigation over Chain-of-Thought, psychological safety asymmetry, and Google Cloud ADK 2.0 multi-agent implementation."
-timestamp: "2026-10-27T17:27:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
 status: "stable"
-stale_after: "2027-04-27T17:27:00-07:00"
-ttl: "6 months (180 days / P6M)"
+stale_after: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
 ttl_months: 6
 ttl_days: 180
 sources:
@@ -14,14 +14,17 @@ sources:
   - "L400_concepts/B1_OKF_Anatomy_of_an_Enterprise_Agent.md"
   - "L400_concepts/B3_OKF_Agent_Skills_and_Skills_Registry.md"
 generated_by: "gemini-enterprise:okf-synthesizer"
-generated_at: "2026-10-27T17:27:00-07:00"
+generated_at: "2026-11-24T18:20:00-08:00"
 verified: "true"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_1726"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 okf_module_id: "OKF-L400-S1"
-l400_version_tag: "L400_version_20261027_1726"
+l400_version_tag: "L400_version_20261124_1820"
 fde_rubric_reference: "concepts/00-fde-field-readiness-and-grading-rubric.md"
 fde_charter_url: "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
+content_sha256: "c296188214fbae2cbb4466dbe69cd111b5457d76b72b11b8e9370b044e7f0648"
 ---
 
 # Socratic Prompting Foundations, CRIT Algorithm & The Socratic Method Taxonomy (`OKF-L400-S1`)

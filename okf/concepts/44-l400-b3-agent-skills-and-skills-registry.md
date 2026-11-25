@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Agent Skills and the Skills Registry — Progressive Disclosure & SOPs"
 description: "Three-tier progressive disclosure specification for SKILL.md bundles, runtime skill activation ergonomics, skills registry lifecycle management, and token footprint minimization."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "44-l400-b3-agent-skills-and-skills-registry"
 source_doc_id: "B3_OKF_Agent_Skills_and_Skills_Registry"
-content_sha256: "c9d6118aaad476a6fe4ac20f8ae76db972249e63af840aff0c870e3df6d412c0"
+content_sha256: "bbe42848d287f809fc9fef5ef200a6d60c381e32c4850e3fafb1df29dc19da73"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # B3: Agent Skills and the Skills Registry (`OKF-L400-B3` | `L400_version_20261026_0350`) — Authoritative Google Cloud OKF Knowledge Specification
 **Topic Tags:** `#L400_version_20261026_0350` `#EnterpriseAgenticAI` `#AgentSkills` `#SkillsRegistry` `#GeminiEnterprisePlatform` `#AntigravityAICatalog` `#GoogleCloudWAF`
 

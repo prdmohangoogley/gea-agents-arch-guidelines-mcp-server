@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Master L400 Topic Modeling, Cross-KB Connectivity & Agent Flow Graph"
 description: "Complete structural dependency graph, inter-concept knowledge flow maps, and semantic cross-linking matrices across all 58 concepts in the unified enterprise knowledge catalog."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "54-l400-18-topic-connection-and-flow-graph"
 source_doc_id: "18_OKF_TOPIC_CONNECTION_AND_FLOW_GRAPH"
-content_sha256: "486b2501e23ac0ec969a41d6b3daf06e4b5ccb64e6cb5d24c46cf014e8c5a415"
+content_sha256: "5c5346f106dffbfae3df3cda26ce97052b7f4b90e504fdc083e066b606513e72"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # 18_OKF_TOPIC_CONNECTION_AND_FLOW_GRAPH: Master L400 Topic Modeling, Cross-Module Semantic Graph & Antigravity Routing Specification
 **Topic Tags:** `#L400_version_20261026_0350` `#OpenKnowledgeFormat` `#TopicConnectionGraph` `#GCPKnowledgeCatalog` `#AntigravityAgenticAI` `#MasterTaxonomy` `#L400EnterpriseArchitecture`
 

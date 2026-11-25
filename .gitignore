@@ -63,3 +63,8 @@ service-account-key.json
 # Temporary scratch directories
 _new_temp/
 
+# Local OKF data staging folder for Argolis migration
+data/
+/data/
+
+

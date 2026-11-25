@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Agents Concepts Visually Explained"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Agents Concepts Visually Explained”."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://docs.google.com/document/d/1FEZZSHrp9_c5AnjJh2AJkwbfPsM0ST0qtizm46JnxT8/edit"
 generated:
   by: "gemini-enterprise:gdoc-to-markdown"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - ai-agents
@@ -28,18 +28,19 @@ tags:
   - google-cloud
   - multi-agent-systems
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L200"
+version_tag: "L200_OKF_2026-11-24_182000"
 document_id: "17-agents-concepts-visually-explained"
 source_doc_id: "1FEZZSHrp9_c5AnjJh2AJkwbfPsM0ST0qtizm46JnxT8"
-content_sha256: "fa438ee010577442371bd8d82b3da61bd71461b73522d6c4040273172f25c024"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "de1e0259e61000ec624d8550bffe5c4b28b67a254956c777588af72a51930ca7"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Agents Concepts Visually Explained

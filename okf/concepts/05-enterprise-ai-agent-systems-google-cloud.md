@@ -2,21 +2,21 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud"
 description: "Architecture best-practice knowledge base entry converted from the source Google Doc “Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud”."
-timestamp: "2026-10-27T17:21:00-07:00"
-status: "draft"
-stale_after: "2027-04-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://docs.google.com/document/d/1vk61bHa0T-RvYs4ZCvJSILNM0XxIfH_wAiKAURt9KaE/edit"
 generated:
   by: "gemini-enterprise:gdoc-to-markdown"
-  at: "2026-09-30T12:47:46-07:00"
+  at: "2026-11-24T18:20:00-08:00"
   method: "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-09-30T12:47:46-07:00"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - enterprise-agents
@@ -28,18 +28,19 @@ tags:
   - adk
   - cost-optimization
   - fde-grading-rubric
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
+corpus: "GEAP_L200"
+version_tag: "L200_OKF_2026-11-24_182000"
 document_id: "05-enterprise-ai-agent-systems-google-cloud"
 source_doc_id: "1vk61bHa0T-RvYs4ZCvJSILNM0XxIfH_wAiKAURt9KaE"
-content_sha256: "31c9acb001bd9a569f5efe75e117681c4787acb36611ef05841390bb4c1fc937"
-source_modified: "2026-10-27T17:21:00-07:00"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-l400_version_tag: "L400_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "3a9d28b747f0e095cbcd5b5a99f8fb4283c7864c6a6c36ac30749bda15d12dea"
+source_modified: "2026-11-24T18:20:00-08:00"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+l400_version_tag: "L400_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Enterprise AI Agent Systems on Google Cloud

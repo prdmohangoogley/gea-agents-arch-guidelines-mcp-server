@@ -2,9 +2,9 @@
 type: "Architecture Best Practice"
 title: "Multi-Agent Tokenomics, Agent-to-User Grilling & Inter-Agent Critique Optimization (OKF-L400-O7)"
 description: "Master L400 architectural synthesis of Multi-Agent Tokenomics, Agent-to-User Grilling in Chatbot Elicitation, and Inter-Agent Grilling/Debate Optimization, mapped to Google Cloud ADK 2.0, A2A Protocol, and Vertex AI."
-timestamp: "2026-10-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
 status: "stable"
-stale_after: "2027-04-26T00:00:00Z"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "Quanyan Zhu, AI Tokenomics: The Economics of Tokens, Computation, and Pricing in Foundation Models, NYU, June 2026 (arXiv:2606.24616v1)"
   - "Yuxi Chen et al., Token Economics for LLM Agents: A Dual-View Study from Computing and Economics, Zhejiang Univ & Alibaba Cloud, May 2026 (arXiv:2605.09104v1)"
@@ -12,10 +12,10 @@ sources:
   - "L400_concepts/B2_OKF_A2A_Protocol_and_Multi_Agent_Mechanics.md"
   - "L400_concepts/O4_OKF_Cost_Token_Estimation_Analysis_and_Optimization.md"
 generated_by: "gemini-enterprise:okf-synthesizer"
-generated_at: "2026-10-27T17:21:00-07:00"
+generated_at: "2026-11-24T18:20:00-08:00"
 verified: "true"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-09-30_124746"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 okf_module_id: "OKF-L400-O7"
 tags:
   - l400_version_20261027_1721
@@ -25,6 +25,11 @@ tags:
   - agentusergrilling
   - interagentgrilling
   - google-cloud
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
+content_sha256: "2f729a64c789e9054066c89baa8bf807c18b9485e3b00f0682fd9ce5aba085b7"
 ---
 
 # O7: Multi-Agent Tokenomics, Agent-to-User Grilling & Inter-Agent Critique Optimization (`OKF-L400-O7`)

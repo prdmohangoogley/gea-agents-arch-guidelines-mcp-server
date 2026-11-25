@@ -3,15 +3,15 @@ type: concept
 id: OKF-PCA-07
 title: "DevOps, CI/CD, Cloud Deploy, Terraform IaC, GitOps & API Management (WAF Automation & Delivery)"
 description: "L400 architectural decision framework for Cloud Build Private Pools, Artifact Registry, Google Cloud Deploy, Progressive Delivery (Rolling, Blue-Green, Canary, Shadow), Terraform IaC, Config Sync/Connector, and Apigee/API Gateway/Endpoints."
-timestamp: "2026-11-24T17:30:00-08:00"
-generated_at: "2026-11-24T17:30:00-08:00"
-status: active
+timestamp: "2026-11-24T18:20:00-08:00"
+generated_at: "2026-11-24T18:20:00-08:00"
+status: "stable"
 ttl: "P6M"
 ttl_days: 180
-stale_after: "2027-05-24T17:30:00-08:00"
-corpus: "GEAPL200_PCA_WAF"
-version_tag: "PCA_WAF_OKF_2026-11-24_173000"
-l400_version: "L400_version_20261124_1730"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_WAF_PILLARS"
+version_tag: "WAF_OKF_2026-11-24_182000"
+l400_version: "L400_version_20261124_1820"
 generated_by: "Gemini Enterprise (PCA & Well-Architected OKF Synthesis Engine)"
 generated_method: "okf-v0.2-dataplex-synthesis"
 verified: true
@@ -36,8 +36,9 @@ sources:
     affiliation: "Google Cloud Forward Deployed Engineering (FDE)"
     venue: "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/"
 content_sha256: "8d17ea948c6d262e4e17589981779a810549499cae053a1dc8f3376e194cc714"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
 ---
-
 
 # OKF-PCA-07: DevOps, CI/CD, Cloud Deploy, Terraform IaC, GitOps & API Management
 

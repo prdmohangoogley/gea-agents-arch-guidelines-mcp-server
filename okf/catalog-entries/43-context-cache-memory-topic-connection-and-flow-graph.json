@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Cross-KB Topic Connection & Mermaid Flow Graph — Integrating the 6 Context/Cache/Memory Publications with GEAP L200, L300, and L400 OKF",
+      "description": "Cross-KB ontology, Mermaid architectural flow graphs, FDE diagnostic routing trees, and Cloud Spanner Property Graph (GQL) schemas uniting Concepts 36–44 (the 6 Context, Cache, Memory, and Socratic Grilling publications) with GEAP L200/L300 (Concepts 00–35) and L400 (A1–O6, 18–21).",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "43-context-cache-memory-topic-connection-and-flow-graph",
+      "content_sha256": "9571aae2b36bb9f69025888a8a785cc53643709a2d2390a83aadba01873d6ab6"
+    }
+  }
+}

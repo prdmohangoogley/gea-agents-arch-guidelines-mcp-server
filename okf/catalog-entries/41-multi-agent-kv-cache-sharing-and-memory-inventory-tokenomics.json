@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Multi-Agent KV-Cache Capital Deepening, Latent Communication, and Memory Inventory Tokenomics",
+      "description": "Production systems and unit-economics blueprint for cross-context KV-cache reuse across multi-agent grilling rounds (KVComm, Q-KVComm, TokenDance, LRAgent, DroidSpeak), continuous latent inter-agent communication (LatentMAS, Coconut, CODI), and Arrow-Karlin-Scarf memory inventory control theory across single-agent (Reflexion, Generative Agents, Voyager, A-MEM, Mem0, MemGPT, MemoryBank) and multi-agent topologies (SRMT, LEGOMem, Intrinsic Memory Agents, EvoCF, RCR-Router, G-Memory, AgentNet) on G",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "41-multi-agent-kv-cache-sharing-and-memory-inventory-tokenomics",
+      "content_sha256": "101b4f1cdd3aac902a111eaa1434d564fba7801f00c32d367737bac6aa573024"
+    }
+  }
+}

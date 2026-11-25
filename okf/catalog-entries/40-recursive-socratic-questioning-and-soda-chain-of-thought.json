@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Recursive Socratic Questioning (Top-Down Decomposition & Bottom-Up Synthesis) and SoDa Socratic Style Chain-of-Thoughts",
+      "description": "Authoritative L400 architectural specification synthesizing Qi et al.'s Recursive Socratic Questioning (Top-Down Confidence-Gated Decomposition and Bottom-Up Hint-Guided Synthesis) with SoDa (Socratic-Guided Dialogue Chain-of-Thoughts) across the 8 Socratic Principles for in-trajectory self-correction, SFT distillation, and Google Cloud ADK 2.0 LoopAgent orchestration.",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "40-recursive-socratic-questioning-and-soda-chain-of-thought",
+      "content_sha256": "f806b4e82d2611003cd0285412d557a3f60fd51d30c5200445a69513dd06c366"
+    }
+  }
+}

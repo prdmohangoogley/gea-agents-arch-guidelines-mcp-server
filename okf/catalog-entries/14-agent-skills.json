@@ -4,18 +4,18 @@
       "type": "Architecture Best Practice",
       "title": "Agent Skills",
       "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Agent Skills”.",
-      "timestamp": "2026-09-22T21:54:56Z",
-      "status": "draft",
-      "stale_after": "2027-03-21T21:54:56+00:00",
-      "sources": "https://docs.google.com/document/d/1AISjY31IgfCrOhi_xZv3kHzINnF5IR8CIstzAuWd2kM/edit",
-      "generated_by": "gemini-enterprise:gdoc-to-markdown",
-      "generated_at": "2026-09-30T12:47:46-07:00",
-      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
-      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
-      "corpus": "GEAPL200",
-      "version_tag": "GEAPL200_2026-09-30_124746",
-      "source_doc_id": "1AISjY31IgfCrOhi_xZv3kHzINnF5IR8CIstzAuWd2kM",
-      "content_sha256": "dfd00b3dcc1d5d3adf9100bd74436f25348c1f7d01c8b6d9eb3e516d4a5002be"
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L200 unified synthesis (L200_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L200",
+      "version_tag": "L200_OKF_2026-11-24_182000",
+      "source_doc_id": "14-agent-skills",
+      "content_sha256": "22e3c55e4162d2dcf9cce47ef711178367057a44e57c167c79f77ed8fb23ed9f"
     }
   }
 }

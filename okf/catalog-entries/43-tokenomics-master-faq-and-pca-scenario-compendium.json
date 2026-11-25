@@ -1,0 +1,21 @@
+{
+  "fivedaysai-prd-sandbox-317383.us.okf": {
+    "data": {
+      "type": "Architecture Best Practice",
+      "title": "Architecture Best Practice: Multi-Agent Tokenomics & Grilling Master Enterprise FAQ, Decision Matrices, and L400/PCA Scenario Compendium",
+      "description": "Capstone L200/L300/L400 synthesis for Multi-Agent AI Tokenomics and Grilling Architectures on Google Cloud, uniting a 12-dimension quantitative decision matrix, an extended 16-line Cymbal Enterprise FinOps TCO calculator (11.0x / 90.9% cost reduction), a production ADK 2.0 Unified Tokenomics Governance Harness, 16 multi-tier enterprise FAQs, 8 PCA/L400 certification scenarios with mathematical derivations, and 5 Well-Architected Framework pillar case studies.",
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L400 unified synthesis (L400_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L400",
+      "version_tag": "L400_OKF_2026-11-24_182000",
+      "source_doc_id": "43-tokenomics-master-faq-and-pca-scenario-compendium",
+      "content_sha256": "464fe5aa2d2a950e4aa3142e8c92bbf76a3f3e966632f48ae1cd91def4680899"
+    }
+  }
+}

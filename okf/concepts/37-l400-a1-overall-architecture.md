@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Gemini Enterprise Overall Architecture — Flattened Orchestration & Spark Sandboxes"
 description: "Deep architectural blueprint of the Gemini Enterprise four-layer stack, flattened agent pools, autonomous Spark sandboxes, and end-to-end conversational query lifecycles for high-throughput enterprise deployments."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "37-l400-a1-overall-architecture"
 source_doc_id: "A1_OKF_Overall_Architecture"
-content_sha256: "4dfc56642a5a475d76638b13384eb839f9d14edfb74c03f74f748c7057bbb4c0"
+content_sha256: "96cedd25d0e5f60e9f56378dd38cd54f6fc100b75ab4f45777639573e9b17985"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # OKF-L400-A1: Gemini Enterprise Overall Architecture — Flattened Orchestration, Autonomous Spark Sandboxes, 6-Stage Query Lifecycle, Dolphin Observability & Automated Batch Evaluation (`L400_version_20261026_0350`)
 **Topic Tags:** `#L400_version_20261026_0350` `#GeminiEnterpriseArchitecture` `#FlattenedAgentOrchestration` `#AutonomousSparkSandboxes` `#ConversationalQueryLifecycle` `#DolphinObservabilityAndLatency` `#AutomatedBatchEvaluation`
 

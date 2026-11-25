@@ -3,15 +3,15 @@ type: concept
 id: OKF-PCA-06
 title: "Cloud Operations, Observability, Trace, Profiler & Site Reliability Engineering (WAF Operational Excellence)"
 description: "L400 architectural decision framework for Cloud Logging (_Required vs. _Default, Aggregated Sinks, Exclusions), Cloud Monitoring (Ops Agent, Heatmaps, GMP), Cloud Trace vs. Profiler, and SRE (SLIs/SLOs/Error Budgets)."
-timestamp: "2026-11-24T17:30:00-08:00"
-generated_at: "2026-11-24T17:30:00-08:00"
-status: active
+timestamp: "2026-11-24T18:20:00-08:00"
+generated_at: "2026-11-24T18:20:00-08:00"
+status: "stable"
 ttl: "P6M"
 ttl_days: 180
-stale_after: "2027-05-24T17:30:00-08:00"
-corpus: "GEAPL200_PCA_WAF"
-version_tag: "PCA_WAF_OKF_2026-11-24_173000"
-l400_version: "L400_version_20261124_1730"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_WAF_PILLARS"
+version_tag: "WAF_OKF_2026-11-24_182000"
+l400_version: "L400_version_20261124_1820"
 generated_by: "Gemini Enterprise (PCA & Well-Architected OKF Synthesis Engine)"
 generated_method: "okf-v0.2-dataplex-synthesis"
 verified: true
@@ -36,8 +36,9 @@ sources:
     affiliation: "Google Cloud Forward Deployed Engineering (FDE)"
     venue: "/Users/prdmohan/ge_spark_workspace/projects/PCA-Exam-Prep/"
 content_sha256: "629d76d3ade8b03fd04a273039af8657b628e654129d913282d7c155487ab435"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
 ---
-
 
 # OKF-PCA-06: Cloud Operations, Observability, Trace, Profiler & Site Reliability Engineering
 

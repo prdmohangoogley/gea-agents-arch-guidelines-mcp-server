@@ -2,22 +2,22 @@
 type: "Architecture Best Practice"
 title: "Architecture Best Practice: Anatomy of an Enterprise Agent — ADK 2.0 Internals & Multi-Agent Mechanics"
 description: "Detailed decomposition of the seven core organs of enterprise agents, Google ADK 2.0 Runner, App, and DynamicNode graph execution models, hierarchical state scopes, and deterministic orchestration delegation."
-timestamp: "2026-10-26T03:50:00Z"
-status: "draft"
-stale_after: "2027-04-26T00:00:00Z"
+timestamp: "2026-11-24T18:20:00-08:00"
+status: "stable"
+stale_after: "2027-05-24T18:20:00-08:00"
 sources:
   - "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
   - "https://pantheon.corp.google.com/storage/browser/gea_agent_development_architectural_best_practices_1790796607?forceOnBucketsSortingFiltering=true&project=fivedaysai-prd-sandbox-317383"
 generated:
   by: "gemini-enterprise:okf-synthesizer"
-  at: "2026-10-26T03:50:00Z"
+  at: "2026-11-24T18:20:00-08:00"
   method: "OKF v0.2 unified synthesis and FDE rubric alignment"
 verified:
   - by: "machine:structural-qa"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity"
   - by: "machine:crc32c-manifest"
-    at: "2026-10-26T03:50:00Z"
+    at: "2026-11-24T18:20:00-08:00"
     scope: "content hash recorded in MANIFEST.json"
 tags:
   - l400_version_20261026_0350
@@ -31,12 +31,17 @@ tags:
   - fde-grading-rubric
   - l400
   - okf
-corpus: "GEAPL200"
-version_tag: "L400_version_20261026_0350"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 document_id: "42-l400-b1-anatomy-of-an-enterprise-agent"
 source_doc_id: "B1_OKF_Anatomy_of_an_Enterprise_Agent"
-content_sha256: "4e77ecc618d0024e7f3f25d74754755ed9f3cbd3504dd0dd452d96708770d3b1"
+content_sha256: "cfd06b8bf4a560b699fc59732831c4b0e6b794ad39fe1870aac460bfd596714a"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+ttl_days: 180
+version_date: "2026-11-24"
 ---
+
 # OKF-L400-B1: Anatomy of an Enterprise Agent (ADK 2.0 Internals & Multi-Agent Architecture) — `L400_version_20261026_0350`
 **Topic Tags:** `#L400_version_20261026_0350` `#EnterpriseAgentAnatomy` `#ADK2NodeRuntime` `#ContextStatePerimeter` `#OrchestrationDelegationModes` `#ConfusedDeputyDefense` `#ControlPlaneGovernance`
 

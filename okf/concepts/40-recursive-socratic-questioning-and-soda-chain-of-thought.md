@@ -2,10 +2,10 @@
 type: "Architecture Best Practice"
 title: "Recursive Socratic Questioning (Top-Down Decomposition & Bottom-Up Synthesis) and SoDa Socratic Style Chain-of-Thoughts"
 description: "Authoritative L400 architectural specification synthesizing Qi et al.'s Recursive Socratic Questioning (Top-Down Confidence-Gated Decomposition and Bottom-Up Hint-Guided Synthesis) with SoDa (Socratic-Guided Dialogue Chain-of-Thoughts) across the 8 Socratic Principles for in-trajectory self-correction, SFT distillation, and Google Cloud ADK 2.0 LoopAgent orchestration."
-timestamp: "2026-10-27T17:27:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
 status: "stable"
-stale_after: "2027-04-27T17:27:00-07:00"
-ttl: "6 months (180 days / P6M)"
+stale_after: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
 ttl_months: 6
 ttl_days: 180
 sources:
@@ -14,14 +14,17 @@ sources:
   - "L400_concepts/O1_OKF_More_Reliable_Autoraters.md"
   - "L400_concepts/O4_OKF_Cost_Token_Estimation_Analysis_and_Optimization.md"
 generated_by: "gemini-enterprise:okf-synthesizer"
-generated_at: "2026-10-27T17:27:00-07:00"
+generated_at: "2026-11-24T18:20:00-08:00"
 verified: "true"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_1726"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
 okf_module_id: "OKF-L400-S5"
-l400_version_tag: "L400_version_20261027_1726"
+l400_version_tag: "L400_version_20261124_1820"
 fde_rubric_reference: "concepts/00-fde-field-readiness-and-grading-rubric.md"
 fde_charter_url: "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head"
+expires_at: "2027-05-24T18:20:00-08:00"
+version_date: "2026-11-24"
+content_sha256: "f806b4e82d2611003cd0285412d557a3f60fd51d30c5200445a69513dd06c366"
 ---
 
 # Concept 40: Recursive Socratic Questioning and SoDa Socratic Style Chain-of-Thoughts (`OKF-L400-S5`)

@@ -5,14 +5,14 @@ module_id: "OKF-TOK-42"
 document_id: "42-security-tokenomics-and-ecosystem-market-design"
 title: "Architecture Best Practice: Security-Conditioned Token Economics, Grilling-Loop Threat Defense, and Ecosystem Market Design"
 description: "Comprehensive security-tokenomics and macro-market mechanism design blueprint covering the 5 lifecycle token risk categories (Many-Shot Jailbreaking, PoisonedRAG as Akerlof's Market for Lemons, Sleeper Agents, AgentDojo cross-agent infection, and Engorgio/Crabs Denial-of-Wallet sponge attacks), security-adjusted shadow pricing, Google Cloud Zero-Trust Token Defense (Model Armor, Principal Access Boundaries, RFC 8693 OBO attenuation), Prefill-Decode disaggregation (Splitwise, DistServe, Sarathi-Serve, Mooncake), PACT contract-theoretic pricing against moral hazard, and the Jevons Paradox on Vertex AI and ADK 2.0."
-timestamp: "2026-10-27T17:21:00-07:00"
-source_modified: "2026-10-27T17:21:00-07:00"
+timestamp: "2026-11-24T18:20:00-08:00"
+source_modified: "2026-11-24T18:20:00-08:00"
 status: "stable"
 verified: true
-stale_after: "2027-04-27T17:21:00-07:00"
-corpus: "GEAPL200"
-version_tag: "GEAPL200_2026-10-27_172100"
-l400_version_tag: "L400_version_20261027_1721"
+stale_after: "2027-05-24T18:20:00-08:00"
+corpus: "GEAP_L400"
+version_tag: "L400_OKF_2026-11-24_182000"
+l400_version_tag: "L400_version_20261124_1820"
 sources:
   - "local://sources/AI Tokenomics- The Economics of Tokens, Computation, and Pricing in Foundation Models.pdf (Quanyan Zhu, NYU, arXiv:2606.24616v1, 10 Jun 2026)"
   - "local://sources/token_economics_llm_agents.pdf (Yuxi Chen et al., Zhejiang Univ & Alibaba Cloud, arXiv:2605.09104v1, 9 May 2026)"
@@ -29,12 +29,13 @@ tags:
   - security-tokenomics
   - google-adk
   - fde-grading-rubric
-content_sha256: "50b5d4a5f8276de1823b40afe99890042d50646fe109de329b7dd65640c6d5c8"
-expires_at: "2027-04-27T17:21:00-07:00"
-ttl: "6 months (180 days / P6M)"
-tokenomics_version_tag: "Tokenomics_version_20261027_1721"
-version_date: "2026-10-27"
-version_time: "17:21:00-07:00"
+content_sha256: "889fae1c978b28dfe87d5984c9e7f637d2ecf6848a10ecdfb075f76a4a62e22b"
+expires_at: "2027-05-24T18:20:00-08:00"
+ttl: "P6M"
+tokenomics_version_tag: "Tokenomics_version_20261124_1820"
+version_date: "2026-11-24"
+version_time: "18:20:00-08:00"
+ttl_days: 180
 ---
 
 # Architecture Best Practice: Security-Conditioned Token Economics, Grilling-Loop Threat Defense, and Ecosystem Market Design (`OKF-TOK-42`)

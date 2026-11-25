@@ -4,18 +4,18 @@
       "type": "Architecture Best Practice",
       "title": "Context Engineering — Sessions, Memory",
       "description": "Architecture best-practice knowledge base entry converted from the source Google Doc “Context Engineering — Sessions, Memory”.",
-      "timestamp": "2026-09-20T23:06:41Z",
-      "status": "draft",
-      "stale_after": "2027-03-19T23:06:41+00:00",
-      "sources": "https://docs.google.com/document/d/12QmL1MQmbkNLZShKdVoS_64eQxH34qreHCmN-rMGUCs/edit",
-      "generated_by": "gemini-enterprise:gdoc-to-markdown",
-      "generated_at": "2026-09-30T12:47:46-07:00",
-      "generated_method": "gdoc-to-markdown skill; diagrams reconstructed as Mermaid from page images",
-      "verified": "machine:structural-qa @ 2026-09-30T12:47:46-07:00 :: markdown structure, fenced-block balance, Mermaid syntax, table shape, link and placeholder integrity\nmachine:crc32c-manifest @ 2026-09-30T12:47:46-07:00 :: content hash recorded in MANIFEST.json",
-      "corpus": "GEAPL200",
-      "version_tag": "GEAPL200_2026-09-30_124746",
-      "source_doc_id": "12QmL1MQmbkNLZShKdVoS_64eQxH34qreHCmN-rMGUCs",
-      "content_sha256": "6a55f6b72888afb40e86250fd972fa0c5fc4c9d5601d26a19ab6668cc20d6693"
+      "timestamp": "2026-11-24T18:20:00Z",
+      "status": "stable",
+      "stale_after": "2027-05-24T18:20:00Z",
+      "sources": "https://g3doc.corp.google.com/company/teams/cloud-fde/index.md?cl=head",
+      "generated_by": "gemini-enterprise:okf-synthesizer",
+      "generated_at": "2026-11-24T18:20:00Z",
+      "generated_method": "OKF v0.2 L200 unified synthesis (L200_OKF_2026-11-24_182000)",
+      "verified": "machine:sha256-verified @ 2026-11-24T18:20:00Z :: 6-month TTL enforced (2027-05-24T18:20:00Z)",
+      "corpus": "GEAP_L200",
+      "version_tag": "L200_OKF_2026-11-24_182000",
+      "source_doc_id": "20-context-engineering-sessions-memory",
+      "content_sha256": "7515540117434a0c60e8db16c0075aac816aa14ad7c7ec5156fd8532138ee252"
     }
   }
 }
