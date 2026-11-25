@@ -15,9 +15,9 @@ All **92 deduplicated OKF v0.2 concepts** (`21 L200`, `15 L300`, `47 L400`, and 
 When you switch to your Argolis account or a new GCP project, paste this prompt directly into Antigravity:
 
 > **Prompt for Antigravity:**
-> *"Deploy the entire `architecture_best_practices_mcp` project from scratch into my new GCP project `<NEW_PROJECT_ID>` using cloud account `<NEW_ACCOUNT_EMAIL>` in region `us-central1`. Run `scripts/deploy_from_scratch.py` to copy `data/` to Cloud Storage, propagate all 92 L200/L300/L400/WAF concepts to the Dataplex Knowledge Base, hydrate Cloud Spanner Graph and BigQuery, deploy the MCP server and Vertex AI Reasoning Engines, update my local Antigravity MCP config, and run all MCP and 38-skill runbook evaluation tests."*
+> *"Deploy the entire `architecture_best_practices_mcp` project from scratch into my new GCP project `<NEW_PROJECT_ID>` using cloud account `<NEW_ACCOUNT_EMAIL>` in region `us-central1`. Run `bash scripts/deploy_from_scratch.sh` to copy `data/` to Cloud Storage, propagate all 92 L200/L300/L400/WAF concepts to the Dataplex Knowledge Base, hydrate Cloud Spanner Graph and BigQuery, deploy the MCP server and Vertex AI Reasoning Engines, update my local Antigravity MCP config, and run all MCP and 38-skill runbook evaluation tests."*
 
-### 0.2 Direct CLI Command (`scripts/deploy_from_scratch.py`)
+### 0.2 Direct Shell Script Execution (`scripts/deploy_from_scratch.sh`)
 ```bash
 cd /Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp
 
@@ -26,14 +26,14 @@ gcloud auth login admin@prdmohan.altostrat.com
 gcloud auth application-default login
 
 # 2. Run a safe Dry-Run + Full 38-Skill Runbook Test Suite first
-uv run python scripts/deploy_from_scratch.py \
+bash scripts/deploy_from_scratch.sh \
   --project-id <NEW_PROJECT_ID> \
   --account admin@prdmohan.altostrat.com \
   --region us-central1 \
   --dry-run
 
 # 3. Execute Live Full-Stack Deployment from scratch
-uv run python scripts/deploy_from_scratch.py \
+bash scripts/deploy_from_scratch.sh \
   --project-id <NEW_PROJECT_ID> \
   --account admin@prdmohan.altostrat.com \
   --region us-central1 \
