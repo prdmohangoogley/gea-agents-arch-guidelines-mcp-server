@@ -31,7 +31,36 @@ LOGS_BUCKET = os.getenv("LOGS_BUCKET_NAME", f"{PROJECT_ID}-agent-telemetry")
 ADK_MODEL = os.getenv("ADK_MODEL", "gemini-4-carbon")
 
 
-def deploy(dry_run: bool = False, update_resource_name: str | None = None) -> str:
+DISPLAY_NAME = "Enterprise Architecture Guidelines ADK Agent"
+MATCHING_DISPLAY_NAMES = {
+    "Enterprise Architecture Guidelines ADK Agent",
+    "Enterprise Architecture Guidelines Agent",
+}
+
+
+def _resolve_existing_agent_resource(explicit_resource: str | None = None) -> str | None:
+    """Resolve an existing base Agent Engine to update in place (preventing duplicate deployments)."""
+    if explicit_resource:
+        return explicit_resource
+    env_res = os.getenv("REASONING_ENGINE_RESOURCE_NAME", "").strip()
+    if env_res:
+        return env_res
+    matches = [
+        e.gca_resource
+        for e in agent_engines.list()
+        if getattr(e.gca_resource, "display_name", "") in MATCHING_DISPLAY_NAMES
+    ]
+    if not matches:
+        return None
+    matches.sort(key=lambda r: r.update_time, reverse=True)
+    return matches[0].name
+
+
+def deploy(
+    dry_run: bool = False,
+    update_resource_name: str | None = None,
+    force_create: bool = False,
+) -> str:
     """Deploy the Enterprise Architecture Guidelines Agent as an ADK Agent Engine (`google-adk`)."""
     print("=" * 75)
     print("Deploying Enterprise Architecture Guidelines ADK Agent to Vertex AI Agent Runtime")
@@ -99,23 +128,31 @@ def deploy(dry_run: bool = False, update_resource_name: str | None = None) -> st
         "LOGS_BUCKET_NAME": LOGS_BUCKET,
     }
 
-    if update_resource_name:
-        print(f"==> Updating ADK App (`agent_framework = google-adk`) in place: {update_resource_name}")
+    target_resource = None if force_create else _resolve_existing_agent_resource(update_resource_name)
+
+    if target_resource:
+        print(f"==> Updating existing base ADK App (`agent_framework = google-adk`) in place as a new revision: {target_resource}")
         remote_agent = agent_engines.update(
-            resource_name=update_resource_name,
+            resource_name=target_resource,
             agent_engine=app,
             requirements=requirements,
             extra_packages=extra_pkgs,
             env_vars=env_vars,
+            display_name=DISPLAY_NAME,
+            description=(
+                "ADK-native Enterprise Architecture Guidelines, Well-Architected Framework, AI/ML, Security, Reliability, "
+                "FinOps, Operational Excellence, Designing for Change & Scoping Agent (Gemini 4 Carbon) exposing all "
+                "29 MCP tools, 58 skills, Cloud Spanner Graph, 92 OKF v0.2 concepts, and full Cloud Trace telemetry."
+            ),
         )
     else:
-        print("==> Packaging and deploying ADK App (`agent_framework = google-adk`) to Agent Runtime...")
+        print("==> No existing base agent found — creating initial ADK App (`agent_framework = google-adk`) in Agent Runtime...")
         remote_agent = agent_engines.create(
             agent_engine=app,
             requirements=requirements,
             extra_packages=extra_pkgs,
             env_vars=env_vars,
-            display_name="Enterprise Architecture Guidelines ADK Agent",
+            display_name=DISPLAY_NAME,
             description=(
                 "ADK-native Enterprise Architecture Guidelines, Well-Architected Framework, AI/ML, Security, Reliability, "
                 "FinOps, Operational Excellence, Designing for Change & Scoping Agent (Gemini 4 Carbon) exposing all "
@@ -135,10 +172,11 @@ def deploy(dry_run: bool = False, update_resource_name: str | None = None) -> st
 def main() -> None:
     parser = argparse.ArgumentParser(description="Deploy ADK Architecture Guidelines Agent to Vertex AI Agent Runtime")
     parser.add_argument("--dry-run", action="store_true", help="Validate ADK app locally without creating cloud resource")
-    parser.add_argument("--update", default=None, help="Existing ReasoningEngine resource name to update in place")
+    parser.add_argument("--update", default=None, help="Existing ReasoningEngine resource name to update in place (auto-detected if omitted)")
+    parser.add_argument("--force-create", action="store_true", help="Force creating a brand-new ReasoningEngine instead of updating the base deployment")
     args = parser.parse_args()
 
-    deploy(dry_run=args.dry_run, update_resource_name=args.update)
+    deploy(dry_run=args.dry_run, update_resource_name=args.update, force_create=args.force_create)
 
 
 if __name__ == "__main__":
