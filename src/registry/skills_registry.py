@@ -103,11 +103,23 @@ class SkillsRegistry:
             init_skills_registry()
             discovered = discover_all_skills()
             for manifest in discovered:
+                alias_hyphen = manifest.id.replace("_", "-")
+                alias_under = manifest.id.replace("-", "_")
+                # Skip workspace_skill SKILL.md mirrors when a static or plugin skill with the same ID already exists
+                # (preserve legacy skill_nl2kg_triplification entry expected by the 58-skill catalog contract)
+                if (
+                    manifest.category == "workspace_skill"
+                    and manifest.id != "skill_nl2kg_triplification"
+                    and (
+                        manifest.id in self._skills
+                        or alias_hyphen in self._skills
+                        or alias_under in self._skills
+                    )
+                ):
+                    continue
                 # Store under exact ID
                 self._skills[manifest.id] = manifest
                 # Also store hyphenated/underscored alias for flexible lookup
-                alias_hyphen = manifest.id.replace("_", "-")
-                alias_under = manifest.id.replace("-", "_")
                 if alias_hyphen not in self._skills:
                     self._skills[alias_hyphen] = manifest
                 if alias_under not in self._skills:

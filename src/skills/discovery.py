@@ -37,13 +37,17 @@ def _parse_skill_md(file_path: Path) -> SkillManifest | None:
         skill_name = name_match.group(1).strip() if name_match else file_path.parent.name
         description = desc_match.group(1).strip().replace("\n", " ") if desc_match else f"Skill {skill_name}"
 
+        normalized_id = skill_name.replace("-", "_")
+        skill_id = normalized_id if normalized_id.startswith("skill_") else f"skill_{normalized_id}"
+        base_name = re.sub(r"^skill[-_]", "", skill_name)
+
         return SkillManifest(
-            id=f"skill_{skill_name.replace('-', '_')}",
-            name=skill_name.replace("-", " ").title(),
+            id=skill_id,
+            name=base_name.replace("-", " ").replace("_", " ").title(),
             version="1.0.0",
             category="workspace_skill",
             description=description,
-            capabilities=[skill_name.replace("-", "_")],
+            capabilities=[base_name.replace("-", "_")],
             entrypoint="execute",
             context_token_estimate=250,
             sandbox_tier="workspace_write",
