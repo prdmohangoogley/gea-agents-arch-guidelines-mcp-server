@@ -32,6 +32,8 @@ dependencies = [
     "opentelemetry-instrumentation>=0.45b0",
     "cloudpickle>=3.1.0",
     "google-adk>=1.0.0",
+    "pandas>=2.2.0",
+    "tqdm>=4.66.0",
 ]
 
 [project.optional-dependencies]

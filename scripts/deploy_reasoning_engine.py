@@ -60,6 +60,7 @@ def deploy(
     dry_run: bool = False,
     update_resource_name: str | None = None,
     force_create: bool = False,
+    run_evals: bool = True,
 ) -> str:
     """Deploy the Enterprise Architecture Guidelines Agent as an ADK Agent Engine (`google-adk`)."""
     print("=" * 75)
@@ -166,6 +167,16 @@ def deploy(
     print(f"Console Playground URL:         https://console.cloud.google.com/vertex-ai/agents/agent-engines?project={PROJECT_ID}")
     print(f"export REASONING_ENGINE_RESOURCE_NAME=\"{remote_agent.resource_name}\"")
     print("=" * 75)
+
+    if run_evals:
+        print("==> Triggering managed GCP Agent Evaluation Experiments across all 8 skill suites...")
+        try:
+            from scripts.run_gcp_agent_evaluations import run_gcp_evaluations
+            os.environ["REASONING_ENGINE_RESOURCE_NAME"] = remote_agent.resource_name
+            run_gcp_evaluations()
+        except Exception as exc:
+            print(f"[WARN] Post-deploy GCP evaluation submission failed: {exc}")
+
     return remote_agent.resource_name
 
 
@@ -174,9 +185,15 @@ def main() -> None:
     parser.add_argument("--dry-run", action="store_true", help="Validate ADK app locally without creating cloud resource")
     parser.add_argument("--update", default=None, help="Existing ReasoningEngine resource name to update in place (auto-detected if omitted)")
     parser.add_argument("--force-create", action="store_true", help="Force creating a brand-new ReasoningEngine instead of updating the base deployment")
+    parser.add_argument("--skip-evals", action="store_true", help="Skip triggering managed GCP Evaluation Experiments after deployment")
     args = parser.parse_args()
 
-    deploy(dry_run=args.dry_run, update_resource_name=args.update, force_create=args.force_create)
+    deploy(
+        dry_run=args.dry_run,
+        update_resource_name=args.update,
+        force_create=args.force_create,
+        run_evals=not args.skip_evals,
+    )
 
 
 if __name__ == "__main__":
