@@ -27,8 +27,8 @@ By codifying 92 OKF v0.2 architectural concepts into a **Cloud Spanner Graph + D
 ## 2. Technical Scope, Constraints & Assumptions
 
 ### In-Scope vs. Out-of-Scope System Boundaries
-- **In-Scope**: FastMCP server (`stdio`/`SSE`, 29 tools), 58 dynamically discovered skills (`src/skills/plugins/` + `.agents/skills/`), Cloud Spanner Graph (`ArchGuidelinesGraph`), BigQuery analytics/embeddings, Dataplex OKF v0.2 corpus, Dual-Pass Model Armor guardrails, Vertex AI Agent Runtime (`google-adk` / `AdkApp`), OpenTelemetry Cloud Trace, and automated pytest/trajectory evaluation suites.
-- **Out-of-Scope**: Self-hosted Cloud Run/GKE container hosting for the agent runtime (mandated Zero Cloud Run / Zero BYOC), direct mutation of customer production GCP projects without human-in-the-loop review.
+- **In-Scope**: FastMCP server (`stdio`/`SSE`, 29 tools), 58 dynamically discovered skills (`src/skills/plugins/` + `.agents/skills/`), Cloud Spanner Graph (`ArchGuidelinesGraph`), BigQuery analytics/embeddings, Dataplex OKF v0.2 corpus, Dual-Pass Model Armor guardrails, **Gemini Enterprise / Vertex AI Agent Engine (`google-adk` / `AdkApp`)** deployment as both MCP server and ADK agent, optional **Cloud Run frontend / web deployment layer** over Gemini Enterprise & MCP, OpenTelemetry Cloud Trace, and automated pytest/trajectory evaluation suites.
+- **Out-of-Scope**: Hosting the core ADK agent runtime directly inside self-managed containers instead of Gemini Enterprise / Vertex AI Agent Engine, or mutating customer production GCP projects without human-in-the-loop review.
 
 ### Constraints & Assumptions
 - **Zero Ambient Authority (ZAA)**: Zero static service account JSON keys in runtime or Terraform.

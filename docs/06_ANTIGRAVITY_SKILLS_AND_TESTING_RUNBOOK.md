@@ -1,9 +1,9 @@
-# Antigravity Skills Installation, From-Scratch Deployment & All-38-Skills Testing Runbook
+# Antigravity Skills Installation, From-Scratch Deployment & All-58-Skills Testing Runbook
 
 This runbook provides step-by-step instructions to:
-1. **Install all 26 `.agents/skills/*` and the `arch-guidelines` MCP server** in a local installation of **Google Antigravity (CLI & IDE)**.
-2. **Deploy the entire project from scratch** (`data/` $\rightarrow$ Cloud Storage $\rightarrow$ Dataplex $\rightarrow$ Spanner Graph & BigQuery $\rightarrow$ Vertex AI Reasoning Engines & MCP Server) when switching to a new GCP Project or Argolis Cloud Account.
-3. **Execute the Single-Command All-38-Skills Runbook Test** and invoke skills interactively inside Antigravity.
+1. **Install all 46 `.agents/skills/*` and the `arch-guidelines` MCP server** in a local installation of **Google Antigravity (CLI & IDE)**.
+2. **Deploy the entire project from scratch** (`data/` $\rightarrow$ Cloud Storage $\rightarrow$ Dataplex $\rightarrow$ Spanner Graph & BigQuery $\rightarrow$ Gemini Enterprise / Vertex AI Agent Engines & optional Cloud Run frontend layer) when switching to a new GCP Project or Argolis Cloud Account.
+3. **Execute the Single-Command All-58-Skills Runbook Test** and invoke skills interactively inside Antigravity.
 
 ---
 
@@ -110,12 +110,12 @@ bash scripts/deploy_from_scratch.sh \
 
 ---
 
-## 3. Running the Single-Command All-38-Skills Runbook Test & Full MCP Test Suite
+## 3. Running the Single-Command All-58-Skills Runbook Test & Full MCP Test Suite
 
 We provide a dedicated pytest runbook suite ([tests/test_all_38_skills_runbook.py](../tests/test_all_38_skills_runbook.py)) that tests:
-1. **Tier 1 Progressive Disclosure (`list_registered_skills`):** Verifies all **38 unique skills** are registered.
-2. **Tier 2 Progressive Disclosure (`get_skill_manifest`):** Hydrates and validates schemas for all **38 skills**.
-3. **End-to-End Execution (`invoke_skill`):** Executes **every single one of the 38 skills** with its canonical runbook payload and verifies its sanitized response envelope.
+1. **Tier 1 Progressive Disclosure (`list_registered_skills`):** Verifies all **58 unique skills** are registered.
+2. **Tier 2 Progressive Disclosure (`get_skill_manifest`):** Hydrates and validates schemas for all **58 skills**.
+3. **End-to-End Execution (`invoke_skill`):** Executes **every single one of the 58 skills** with its canonical runbook payload and verifies its sanitized response envelope.
 4. **FastMCP Tool Surface:** Verifies all **29 FastMCP tools** are active.
 
 ```bash

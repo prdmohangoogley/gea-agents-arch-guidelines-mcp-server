@@ -12,12 +12,15 @@
 
 | Document | Description |
 | :--- | :--- |
+| [**0. Project Scoping Charter & ADRs**](docs/00_SCOPING_AND_ADR_CHARTER.md) | Business problem definition, CUJs, Definition of Done, technical scope/boundaries, phased roadmap, and formal Architecture Decision Records (`ADR-001`..`ADR-005`). |
+| [**Architecture Overview**](docs/architecture.md) | End-to-end architecture showing the **Gemini Enterprise / Vertex AI Agent Engine (`google-adk`)** MCP & agent runtime, optional **Cloud Run frontend/web layer**, Hybrid RRF GraphRAG, and live telemetry. |
 | [**1. MCP Server Reference Documentation**](docs/01_MCP_SERVER_DOCUMENTATION.md) | End-to-end architecture, Multi-Tier OKF v0.2 Corpus (`L200`, `L300`, `L400`, `WAF_Pillars` — 92 concepts with 6-month TTL), Dataplex & Spanner Graph topology, and all **29 FastMCP Tools**. |
-| [**2. Skills Registry & Progressive Disclosure Guide**](docs/02_SKILLS_REGISTRY_DOCUMENTATION.md) | Two-Tier Progressive Disclosure architecture (`Tier 1 Catalog` vs `Tier 2 Manifest Hydration`), dynamic discovery engine, and complete catalog of all **38 Registered Skills**. |
-| [**3. Local Antigravity Installation & Argolis Migration Guide**](docs/03_ANTIGRAVITY_LOCAL_INSTALLATION_GUIDE.md) | Step-by-step instructions to install and configure `arch-guidelines` in local Antigravity (`~/.gemini/config/mcp_config.json`), enable the 26 `.agents/skills/`, and migrate via `data/` to Argolis. |
-| [**4. Skills Usage Runbook (Examples & Expected Outputs)**](docs/04_SKILLS_USAGE_RUNBOOK.md) | Getting-started invocation examples (`invoke_skill` and direct MCP tools) and expected JSON/Markdown outputs for **every single one of the 38 skills**. |
-| [**5. Gemini Enterprise Testing & Experimental Traces Runbook**](docs/05_GEMINI_ENTERPRISE_TESTING_AND_TRACES_RUNBOOK.md) | Publishing & testing the agent in **Gemini Enterprise (Google Cloud Console Chatbot / Vertex AI Agent Engine)** and inspecting **Experimental Traces (`Cloud Trace`), Trajectory Waterfalls, Logs, and BigQuery Audit Tables**. |
-| [**6. Antigravity Skills, Deployment & Runbook Testing Guide**](docs/06_ANTIGRAVITY_SKILLS_AND_TESTING_RUNBOOK.md) | Turnkey from-scratch shell deployment (`scripts/deploy_from_scratch.sh`), installing skills in **Local Antigravity**, running the **Single-Command All-38-Skills Runbook Test**, and interactive Antigravity verification prompts. |
+| [**2. Skills Registry & Progressive Disclosure Guide**](docs/02_SKILLS_REGISTRY_DOCUMENTATION.md) | Two-Tier Progressive Disclosure architecture (`Tier 1 Catalog` vs `Tier 2 Manifest Hydration`), dynamic discovery engine, and complete catalog of all **58 Registered Skills** (`46 .agents/skills/`). |
+| [**3. Local Antigravity Installation & Argolis Migration Guide**](docs/03_ANTIGRAVITY_LOCAL_INSTALLATION_GUIDE.md) | Step-by-step instructions to install and configure `arch-guidelines` in local Antigravity (`~/.gemini/config/mcp_config.json`), enable the **46 `.agents/skills/`**, and migrate via `data/` to Argolis. |
+| [**4. Skills Usage Runbook (Examples & Expected Outputs)**](docs/04_SKILLS_USAGE_RUNBOOK.md) | Getting-started invocation examples (`invoke_skill` and direct MCP tools) and expected JSON/Markdown outputs for the registered skills. |
+| [**5. Gemini Enterprise Testing & Experimental Traces Runbook**](docs/05_GEMINI_ENTERPRISE_TESTING_AND_TRACES_RUNBOOK.md) | Publishing & testing the agent in **Gemini Enterprise (Google Cloud Console Chatbot / Vertex AI Agent Engine)** and inspecting **Experimental Traces (`Cloud Trace`), Trajectory Waterfalls, OnlineEvaluator, and BigQuery Audit Tables**. |
+| [**6. Antigravity Skills, Deployment & Runbook Testing Guide**](docs/06_ANTIGRAVITY_SKILLS_AND_TESTING_RUNBOOK.md) | Turnkey from-scratch shell deployment (`scripts/deploy_from_scratch.sh`), installing all **46 skills** in **Local Antigravity**, running the **Single-Command All-58-Skills Runbook Test**, and interactive Antigravity verification prompts. |
+| [**Engineering Rubric FAQs**](docs/FAQs.md) | Direct, conversational, evidence-backed FAQs documenting how this project satisfies the AI/ML, Security/Privacy/Compliance, Reliability & Resilience, Performance & Cost, Operational Excellence, and Designing for Change rubrics. |
 
 ---
 
@@ -26,26 +29,26 @@
 ```mermaid
 graph TD
     subgraph DataIngestion["1. Knowledge Ingestion & Graph Creation"]
-        MD["Markdown Architectural Corpus (GEAPL200)"]
-        GCS["GCS Bucket (Raw Knowledge Corpus)"]
-        NL2KG["NL2KG Triplification Pipeline (`pipelines/`)"]
+        MD["OKF v0.2 Architectural Corpus (92 Concepts: L200, L300, L400, OKF-PCA-01..09)"]
+        GCS["GCS Bucket & Dataplex Catalog (geap-architecture-kb & geap-pca-waf-kb)"]
+        NL2KG["NL2KG Triplification Pipeline (pipelines/)"]
     end
 
     subgraph Storage["2. Cloud Graph & Analytics Store"]
-        SPANNER["Cloud Spanner Graph (`ArchGuidelinesGraph`)"]
-        BQ["BigQuery (`guideline_embeddings` & audit logs)"]
+        SPANNER["Cloud Spanner Graph (ArchGuidelinesGraph)"]
+        BQ["BigQuery (guideline_embeddings, Zero-ETL Federation & Audit Logs)"]
     end
 
-    subgraph Server["3. FastMCP Application (`src/`)"]
-        FASTMCP["FastMCP Engine"]
-        TOOLS["Tools: search_guidelines, evaluate_tradeoffs"]
-        RESOURCES["Resources: server_info, catalog"]
+    subgraph Server["3. FastMCP Server & Gemini Enterprise Agent Runtime (src/)"]
+        FASTMCP["FastMCP Engine (29 Tools) + 58 Auto-Discovered Skills + Dual-Pass Model Armor"]
+        ADK["Gemini Enterprise / Vertex AI Agent Engine (google-adk / AdkApp — 31 Tools)"]
+        TRACE["OpenTelemetry OTLP/gRPC -> Cloud Trace & Vertex AI OnlineEvaluator"]
     end
 
-    subgraph Consumers["4. Agent & Developer Clients"]
-        AGY["Antigravity Pair Programming Agent"]
-        IDE["VS Code / Claude Desktop / Cursor"]
-        CLOUDRUN["Cloud Run (SSE Mode)"]
+    subgraph Consumers["4. Frontends, Clients & Optional Cloud Run Layer"]
+        GE_UI["Gemini Enterprise / Cloud Console Playground & Studio UI"]
+        CLOUDRUN["Optional Cloud Run Frontend / Web Portal / SSE Gateway"]
+        AGY["Antigravity / VS Code / Cursor / Claude Desktop (Local MCP)"]
     end
 
     MD --> GCS
@@ -55,12 +58,13 @@ graph TD
 
     SPANNER --> FASTMCP
     BQ --> FASTMCP
-    FASTMCP --> TOOLS
-    FASTMCP --> RESOURCES
+    FASTMCP --> ADK
+    ADK --> TRACE
 
-    TOOLS --> AGY
-    TOOLS --> IDE
+    ADK --> GE_UI
+    ADK --> CLOUDRUN
     FASTMCP --> CLOUDRUN
+    FASTMCP --> AGY
 ```
 
 ---

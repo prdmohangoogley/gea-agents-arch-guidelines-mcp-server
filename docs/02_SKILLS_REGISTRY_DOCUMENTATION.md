@@ -3,8 +3,8 @@
 * **Registry Implementation:** [src/registry/skills_registry.py](../src/registry/skills_registry.py)
 * **Dynamic Discovery Engine:** [src/skills/discovery.py](../src/skills/discovery.py)
 * **Base Plugin Contract:** [src/skills/base.py](../src/skills/base.py)
-* **Total Unique Skills Registered:** **38 Skills** (`26 Python SkillPlugins` + `5 Canonical Core Skills` + `7 Standalone Workspace SKILL.md Skills`)
-* **Total Antigravity `.agents/skills/` Directories:** **26 Directories**
+* **Total Unique Skills Registered:** **58 Skills** (`46 Python SkillPlugins` + `5 Canonical Core Skills` + `7 Standalone Workspace SKILL.md Skills`)
+* **Total Antigravity `.agents/skills/` Directories:** **46 Directories**
 
 ---
 
@@ -59,7 +59,7 @@ When `SkillsRegistry` initializes, `init_skills_registry()` in `src/skills/disco
 
 ---
 
-## 3. Complete Catalog of All 38 Registered Skills
+## 3. Complete Catalog of All 58 Registered Skills
 
 ### 3.1 Architecture & Specification Synthesis (`9 Skills`)
 | # | Skill ID | Type | Sandbox Tier | Source File | Description |
@@ -118,6 +118,30 @@ When `SkillsRegistry` initializes, `init_skills_registry()` in `src/skills/disco
 | 36 | `skill_google_landing_metrics` | `workspace_skill` | `.agents/skills/google-landing-metrics/SKILL.md` | Audits architectures against Google Landing Metrics, Core Web Vitals, and Edge CDN SLAs. |
 | 37 | `skill_nl2kg_triplification` | `workspace_skill` | `.agents/skills/nl2kg-triplification/SKILL.md` | Extracts entities and relationships from natural language docs into Spanner Graph triples. |
 | 38 | `skill_okf_auto_evolution` | `workspace_skill` | `.agents/skills/okf-auto-evolution/SKILL.md` | Monitors, updates, and evolves the OKF v0.2 corpus on Vertex AI Reasoning Engine. |
+
+### 3.6 Enterprise Engineering Rubric Suites (`20 Skills`)
+| # | Skill ID | Category | Source File | Description |
+|---:|:---|:---|:---|:---|
+| 39 | `skill_ai_ml_rubric_assessment_feedback` | `governance` | `src/skills/plugins/ai_ml_rubric.py` | Assesses projects/specs against all 5 AI/ML Engineering Rubric domains. |
+| 40 | `skill_ai_ml_rubric_assessment_feedback_resolution` | `workflow` | `src/skills/plugins/ai_ml_rubric.py` | Resolves AI/ML rubric feedback iteratively using library skills until PASS. |
+| 41 | `skill_ai_ml_rubric_assessment_faq_doc_generator` | `knowledge_management` | `src/skills/plugins/ai_ml_rubric.py` | Generates AI/ML rubric FAQs and upserts them into `docs/FAQs.md`. |
+| 42 | `skill_security_privacy_compliance_assessor_feedback` | `security` | `src/skills/plugins/security_privacy_compliance.py` | Assesses projects/specs against all 5 Security, Privacy & Compliance domains. |
+| 43 | `skill_security_privacy_compliance_feedback_resolver` | `security` | `src/skills/plugins/security_privacy_compliance.py` | Resolves Security, Privacy & Compliance feedback iteratively until PASS. |
+| 44 | `skill_security_privacy_compliance_faqs` | `security` | `src/skills/plugins/security_privacy_compliance.py` | Generates conversational Security, Privacy & Compliance FAQs in `docs/FAQs.md`. |
+| 45 | `skill_reliability_resilience_assessor_feedback` | `governance` | `src/skills/plugins/reliability_resilience.py` | Assesses projects/specs/components against all 4 Reliability & Resilience domains. |
+| 46 | `skill_reliability_resilience_feedback_resolver` | `workflow` | `src/skills/plugins/reliability_resilience.py` | Resolves Reliability & Resilience feedback iteratively until PASS. |
+| 47 | `skill_reliability_resilience_faqs` | `knowledge_management` | `src/skills/plugins/reliability_resilience.py` | Generates Reliability & Resilience FAQs in `docs/FAQs.md`. |
+| 48 | `skill_performance_cost_optimization_assessor_feedback` | `governance` | `src/skills/plugins/performance_cost_optimization.py` | Assesses projects/specs/components against all 3 Performance & Cost domains. |
+| 49 | `skill_performance_cost_optimization_feedback_resolver` | `workflow` | `src/skills/plugins/performance_cost_optimization.py` | Resolves Performance & Cost feedback iteratively until PASS. |
+| 50 | `skill_performance_cost_optimization_faqs` | `knowledge_management` | `src/skills/plugins/performance_cost_optimization.py` | Generates Performance & Cost Optimization FAQs in `docs/FAQs.md`. |
+| 51 | `skill_operational_excellence_assessor_feedback` | `governance` | `src/skills/plugins/operational_excellence.py` | Assesses projects/specs/components against all 4 Operational Excellence domains. |
+| 52 | `skill_operational_excellence_feedback_resolver` | `workflow` | `src/skills/plugins/operational_excellence.py` | Resolves Operational Excellence feedback iteratively until PASS. |
+| 53 | `skill_operational_excellence_faqs` | `knowledge_management` | `src/skills/plugins/operational_excellence.py` | Generates Operational Excellence FAQs in `docs/FAQs.md`. |
+| 54 | `skill_designing_for_change_assessor_feedback` | `architecture` | `src/skills/plugins/designing_for_change.py` | Assesses projects/specs/components against all 4 Designing for Change domains. |
+| 55 | `skill_designing_for_change_feedback_resolver` | `workflow` | `src/skills/plugins/designing_for_change.py` | Resolves Designing for Change feedback iteratively until PASS. |
+| 56 | `skill_designing_for_change_faqs` | `knowledge_management` | `src/skills/plugins/designing_for_change.py` | Generates Designing for Change FAQs in `docs/FAQs.md`. |
+| 57 | `skill_scoping_documentation_assessor_feedback` | `governance` | `src/skills/plugins/scoping_and_documentation.py` | Assesses entire project documentation against all 7 Scoping & Documentation domains. |
+| 58 | `skill_scoping_documentation_feedback_resolver` | `workflow` | `src/skills/plugins/scoping_and_documentation.py` | Resolves Scoping & Documentation feedback iteratively until PASS. |
 
 ---
 

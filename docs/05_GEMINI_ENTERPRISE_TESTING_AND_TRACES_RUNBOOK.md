@@ -6,7 +6,7 @@ This runbook provides step-by-step instructions to publish, invoke, and test the
 
 ## 1. Publish & Verify the Agent in Gemini Enterprise & GCP Agent Registry
 
-The agent runs natively on **Vertex AI Reasoning Engine** (Zero Cloud Run) and exposes all **29 FastMCP Tools** and **38 Registered Skills** backed by the **92 OKF v0.2 concepts** (`L200`, `L300`, `L400`, and `WAF_Pillars`).
+The MCP server and ADK agents run natively on **Gemini Enterprise / Vertex AI Agent Engine (`google-adk` / `AdkApp`)** — with an optional **Cloud Run frontend / web portal layer** that can be deployed over them — and expose all **29 FastMCP Tools**, **31 ADK Agent Tools**, and **58 Registered Skills** backed by the **92 OKF v0.2 concepts** (`L200`, `L300`, `L400`, and `WAF_Pillars`).
 
 ```bash
 cd /Users/prdmohan/ge_spark_workspace/projects/architecture_best_practices_mcp
@@ -36,13 +36,15 @@ gcloud agent-registry services describe gea-arch-guidelines-agent \
 > **Note on Google Cloud Console URLs:** While the underlying API resource is `reasoningEngines/<id>`, Google Cloud Console's web UI routes them under **Vertex AI Agent Engine** (`/vertex-ai/agents` and `/vertex-ai/agents/agent-engines`).
 
 1. **Vertex AI Agent Engine (Reasoning Engines) Console:**
-   * **Agent Overview:** `https://console.cloud.google.com/vertex-ai/agents?project=fivedaysai-prd-sandbox-317383`
-   * **Agent Engines List:** `https://console.cloud.google.com/vertex-ai/agents/agent-engines?project=fivedaysai-prd-sandbox-317383`
+   * **Agent Overview:** `https://console.cloud.google.com/vertex-ai/agents?project=arch-best-practices-mcp-server`
+   * **Agent Engines List:** `https://console.cloud.google.com/vertex-ai/agents/agent-engines?project=arch-best-practices-mcp-server`
    * **Live Deployed Reasoning Engine Resources (`us-central1`):**
-     * **Enterprise Architecture Guidelines Agent:** `projects/301802433103/locations/us-central1/reasoningEngines/2766980659804110848`
-     * **Autonomous OKF Evolution Agent:** `projects/301802433103/locations/us-central1/reasoningEngines/4506777490852675584`
+     * **Enterprise Architecture Guidelines ADK Agent (58 Skills / 31 ADK Tools):** `projects/1026002058981/locations/us-central1/reasoningEngines/1740451315344998400`
+     * **Autonomous OKF Evolution ADK Agent:** `projects/1026002058981/locations/us-central1/reasoningEngines/4759850982706249728`
+   * **Active Vertex AI Online Monitor (`OnlineEvaluator`):**
+     * `projects/arch-best-practices-mcp-server/locations/us-central1/onlineEvaluators/7362365043960184832` (`ACTIVE`, `100%` sampling, `final_response_quality_v1`)
 2. **Gemini Enterprise / Agent Builder (Agentspace) Web App:**
-   * `https://console.cloud.google.com/gen-app-builder/engines?project=fivedaysai-prd-sandbox-317383`
+   * `https://console.cloud.google.com/gen-app-builder/engines?project=arch-best-practices-mcp-server`
 3. **Dataplex Universal Catalog (Knowledge Catalog) Search:**
    * `https://console.cloud.google.com/dataplex/search?project=fivedaysai-prd-sandbox-317383`
 4. Select **`Enterprise Architecture Guidelines Agent`** (`2766980659804110848`) or **`Autonomous OKF Evolution Agent`** (`4506777490852675584`).

@@ -12,8 +12,9 @@ The architecture comprises three primary tiers:
 2. **Ingestion Tier (NL2KG Triplification Pipeline)**:
    - Natural Language to Knowledge Graph (NL2KG) extractor converting architectural documents into typed entity nodes and labeled relationships.
    - Schema validation enforcing strict ontology constraints before committing to Spanner Graph.
-3. **Application & Serving Tier (FastMCP Server)**:
-   - Built on `FastMCP` supporting dual transports: `stdio` (local IDE agents) and `sse` (Cloud Run managed service).
+3. **Application & Serving Tier (FastMCP Server + Gemini Enterprise ADK Runtime)**:
+   - Core MCP server and ADK agents are deployed natively on **Gemini Enterprise / Vertex AI Agent Engine (`google-adk` / `AdkApp`)**, exposing **29 FastMCP tools**, **31 ADK tools**, and **58 auto-discovered skills**.
+   - Built on `FastMCP` supporting `stdio` (local IDE agents) and `sse`, with an optional **Cloud Run frontend / web portal / SSE gateway** layered over the deployed Gemini Enterprise agent and MCP server.
    - High-performance, asynchronous query handlers with structured Pydantic response models.
 
 ## 3. Storage Modeling & GQL Standards

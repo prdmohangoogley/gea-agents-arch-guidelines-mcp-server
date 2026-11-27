@@ -5,8 +5,8 @@
 * **OKF v0.2 Corpus Version Date:** `2026-11-24` (`2026-11-24T18:20:00-08:00`)
 * **6-Month TTL Expiry (`stale_after`):** `2027-05-24` (`2027-05-24T18:20:00-08:00` / ISO-8601 `P6M`)
 * **Total OKF Concepts Backed:** **92 Verified Concepts** (`21 L200` + `15 L300` + `47 L400` + `9 Well-Architected Pillar OKFs`)
-* **Total Registered Skills:** **38 Skills** (`26 Python SkillPlugins` + `5 Canonical Core Skills` + `7 Workspace SKILL.md Skills`)
-* **Total FastMCP Tools Exposed:** **29 Tools**
+* **Total Registered Skills:** **58 Skills** (`46 Python SkillPlugins` + `5 Canonical Core Skills` + `7 Workspace SKILL.md Skills`)
+* **Total FastMCP Tools Exposed:** **29 Tools** (plus **31 First-Class ADK Agent Tools** on Gemini Enterprise / Vertex AI Agent Engine)
 
 ---
 
@@ -35,18 +35,19 @@ flowchart TB
         CACHE["💾 Embedded Local OKF Fallback\n92 Concepts + 37 Rubric Items + 19 WAF Anti-Patterns"]
     end
 
-    subgraph MCPServer["4. FastMCP Server & Security Perimeter (src/)"]
+    subgraph MCPServer["4. FastMCP Server, Gemini Enterprise ADK Runtime & Security Perimeter (src/)"]
         MA["🛡️ Google Cloud Model Armor (Dual-Pass)\n• Ingress: Prompt Injection & Jailbreak Filter\n• Egress: Sensitive Data Protection (DLP) Masking"]
         ZAA["🔐 Zero Ambient Authority (ZAA)\nDownscoped STS CredentialAccessBoundary + W3C traceparent"]
-        REG["🧩 Two-Tier Skills Registry\n38 Registered Skills · 29 FastMCP Tools"]
-        ROUTER["🧠 MultiModelRouter + KV Prefix Cache\nGemini 4 Argon / Gemini 3.1 Pro (>=75% Cache Hit)"]
+        REG["🧩 Two-Tier Skills Registry\n58 Registered Skills · 29 FastMCP Tools · 31 ADK Tools"]
+        ROUTER["🧠 MultiModelRouter + KV Prefix Cache\nGemini 4 Argon / Gemini 3.1 Pro + gemini-embedding-001 + JSON Mode"]
+        RUNTIME["🚀 Gemini Enterprise / Vertex AI Agent Engine (google-adk)\nOptional Cloud Run Frontend / Web Portal Layer over MCP & ADK"]
     end
 
     Corpus --> GCS1 & GCS2
     GCS1 & GCS2 --> DP
     DP --> SPANNER & BQ
     SPANNER & BQ & CACHE --> MCPServer
-    MA --> REG --> ROUTER
+    MA --> REG --> ROUTER --> RUNTIME
 ```
 
 ---
@@ -92,9 +93,9 @@ flowchart TB
 ### 3.4 Two-Tier Progressive Disclosure Skills Registry (`src/tools/skills.py`)
 | # | Tool Name | Signature | Description |
 |---:|:---|:---|:---|
-| 11 | `list_registered_skills` | `list_registered_skills(category: str \| None = None)` | **Tier 1 Progressive Disclosure:** Returns lightweight (~30 tokens/skill) catalog of all 38 registered skills. |
+| 11 | `list_registered_skills` | `list_registered_skills(category: str \| None = None)` | **Tier 1 Progressive Disclosure:** Returns lightweight (~30 tokens/skill) catalog of all 58 registered skills. |
 | 12 | `get_skill_manifest` | `get_skill_manifest(skill_id: str)` | **Tier 2 Progressive Disclosure:** Hydrates full parameter schema, sandbox tier, and instructions for a specific `skill_id`. |
-| 13 | `invoke_skill` | `invoke_skill(skill_id: str, parameters: dict[str, Any])` | Dynamically executes any of the 38 registered skills with Model Armor ingress sanitization and egress DLP masking. |
+| 13 | `invoke_skill` | `invoke_skill(skill_id: str, parameters: dict[str, Any])` | Dynamically executes any of the 58 registered skills with Model Armor ingress sanitization and egress DLP masking. |
 | 14 | `record_session_feedback` | `record_session_feedback(session_id: str, skill_id: str, rating: float, ...)` | Records online quality ratings (`0.0–5.0`) and rubric scores to OpenTelemetry and Cloud Monitoring. |
 
 ### 3.5 Autonomous OKF Knowledge Evolution (`src/tools/evolution.py`)

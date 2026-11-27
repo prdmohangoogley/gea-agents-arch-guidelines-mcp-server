@@ -24,4 +24,5 @@ This plan details the testing, benchmarking, and evaluation strategy for the Ent
 - **Goal**: FastMCP tool execution latency must meet real-time agent pair programming requirements.
 - **SLA**:
   - Local stdio tool latency: < 50ms (in-memory / cached), < 300ms (remote Spanner).
-  - SSE Cloud Run p95 latency: < 500ms.
+  - Gemini Enterprise / Vertex AI Agent Engine & optional Cloud Run frontend p95 latency: < 500ms (tool/graph lookup).
+  - Independent 58-skill trajectory record: `docs/validation/all_58_skills_trajectory_record.json` (`100%` pass rate) and active Vertex AI `OnlineEvaluator` (`final_response_quality_v1`).

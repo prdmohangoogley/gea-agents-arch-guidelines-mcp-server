@@ -1,6 +1,6 @@
 # Installing the Architecture Best Practices MCP Server & Skills in Local Antigravity
 
-This guide walks through installing, configuring, and verifying the **Enterprise Agents Architectural Guidelines MCP Server** (`arch-guidelines` / `gea-arch-guidelines`) and its **38 registered skills** (`26 .agents/skills/` folders) in a local installation of **Google Antigravity (CLI & IDE)**, as well as migrating the project to an **Argolis** environment.
+This guide walks through installing, configuring, and verifying the **Enterprise Agents Architectural Guidelines MCP Server** (`arch-guidelines` / `gea-arch-guidelines`) and its **58 registered skills** (`46 .agents/skills/` folders) in a local installation of **Google Antigravity (CLI & IDE)**, as well as migrating the project to an **Argolis** environment.
 
 ---
 
