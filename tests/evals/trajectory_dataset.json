@@ -153,5 +153,428 @@
         "expected_output_contains": ["updates", "total_results"]
       }
     ]
+  },
+  {
+    "trajectory_id": "traj_ai_ml_rubric_assess_resolve_faq",
+    "goal": "Discover, assess, iteratively resolve feedback, and generate FAQs for the 5-domain AI/ML Engineering Rubric",
+    "domain": "ai_ml_rubric",
+    "steps": [
+      {
+        "turn": 1,
+        "action": "discover_ai_ml_rubric_skills",
+        "tool": "list_registered_skills",
+        "arguments": {
+          "category": "governance"
+        },
+        "expected_output_contains": ["skill_ai_ml_rubric_assessment_feedback"]
+      },
+      {
+        "turn": 2,
+        "action": "assess_sparse_project",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_ai_ml_rubric_assessment_feedback",
+          "parameters": {
+            "project_name": "Barebones LLM Prototype",
+            "project_manifest_or_spec": "Simple Python script calling an LLM without RAG or evals."
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["FAIL", "feedback_items"]
+      },
+      {
+        "turn": 3,
+        "action": "resolve_rubric_feedback_iteratively",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_ai_ml_rubric_assessment_feedback_resolution",
+          "parameters": {
+            "project_name": "Barebones LLM Prototype",
+            "project_manifest_or_spec": "Simple Python script calling an LLM without RAG or evals.",
+            "max_iterations": 3
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["PASS", "library_skills_orchestrated", "eval-harness"]
+      },
+      {
+        "turn": 4,
+        "action": "generate_rubric_faqs",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_ai_ml_rubric_assessment_faq_doc_generator",
+          "parameters": {
+            "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+            "project_manifest_or_summary": "ADK multi-agent system, Spanner Graph hybrid RRF, MultiModelRouter JSON mode + encoder/decoder, Precision/Recall/MRR/ROUGE-L evals, OTel Cloud Trace, HIPAA/FINRA DLP.",
+            "docs_file_path": "docs/FAQs.md",
+            "write_to_disk": false
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["AI/ML Engineering Rubric FAQs", "AI_ML_RUBRIC_FAQS_START"]
+      }
+    ]
+  },
+  {
+    "trajectory_id": "traj_security_privacy_compliance_assess_resolve_faq",
+    "goal": "Discover, assess, iteratively resolve security/privacy/compliance feedback, and generate human-style FAQs",
+    "domain": "security_privacy_compliance",
+    "steps": [
+      {
+        "turn": 1,
+        "action": "discover_security_rubric_skills",
+        "tool": "list_registered_skills",
+        "arguments": {
+          "category": "security"
+        },
+        "expected_output_contains": [
+          "skill_security_privacy_compliance_assessor_feedback",
+          "skill_security_privacy_compliance_feedback_resolver",
+          "skill_security_privacy_compliance_faqs"
+        ]
+      },
+      {
+        "turn": 2,
+        "action": "assess_insecure_prototype",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_security_privacy_compliance_assessor_feedback",
+          "parameters": {
+            "project_name": "Insecure Prototype",
+            "project_manifest_or_spec": "Public service with hardcoded credentials and no guardrails."
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["FAIL", "feedback_items"]
+      },
+      {
+        "turn": 3,
+        "action": "resolve_security_feedback_iteratively",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_security_privacy_compliance_feedback_resolver",
+          "parameters": {
+            "project_name": "Insecure Prototype",
+            "project_manifest_or_spec": "Public service with hardcoded credentials and no guardrails.",
+            "max_iterations": 3
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["PASS", "library_skills_orchestrated", "waf-pillar-security"]
+      },
+      {
+        "turn": 4,
+        "action": "generate_security_faqs",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_security_privacy_compliance_faqs",
+          "parameters": {
+            "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+            "project_manifest_or_summary": "Workload Identity OAuth2, ZAA least privilege IAM, VPC-SC Cloud Armor, CMEK TLS PII DLP Secret Manager, Dual-Pass Model Armor, Zero Legacy model allow-list, Cloud Trace audit logs, HIPAA/FINRA.",
+            "docs_file_path": "docs/FAQs.md",
+            "write_to_disk": false
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["Security, Privacy & Compliance FAQs", "SECURITY_PRIVACY_COMPLIANCE_FAQS_START"]
+      }
+    ]
+  },
+  {
+    "trajectory_id": "traj_reliability_resilience_assess_resolve_faq",
+    "goal": "Discover, critically assess, iteratively resolve Reliability & Resilience feedback, and generate FAQs",
+    "domain": "reliability_resilience",
+    "steps": [
+      {
+        "turn": 1,
+        "action": "discover_reliability_rubric_skills",
+        "tool": "list_registered_skills",
+        "arguments": {
+          "category": "governance"
+        },
+        "expected_output_contains": ["skill_reliability_resilience_assessor_feedback"]
+      },
+      {
+        "turn": 2,
+        "action": "assess_fragile_component",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_reliability_resilience_assessor_feedback",
+          "parameters": {
+            "project_name": "Fragile Component",
+            "project_manifest_or_spec": "Single-instance service with no health checks, no OTel tracing, and no circuit breakers.",
+            "scope": "component"
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["FAIL", "feedback_items"]
+      },
+      {
+        "turn": 3,
+        "action": "resolve_reliability_feedback_iteratively",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_reliability_resilience_feedback_resolver",
+          "parameters": {
+            "project_name": "Fragile Component",
+            "project_manifest_or_spec": "Single-instance service with no health checks, no OTel tracing, and no circuit breakers.",
+            "scope": "component",
+            "max_iterations": 3
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["PASS", "library_skills_orchestrated", "waf-pillar-reliability"]
+      },
+      {
+        "turn": 4,
+        "action": "generate_reliability_faqs",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_reliability_resilience_faqs",
+          "parameters": {
+            "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+            "project_manifest_or_summary": "health_check, Spanner failover, OpenTelemetry Cloud Trace, latency_ms token_metrics, trip_circuit_breaker failure injection, 150ms timeout.",
+            "docs_file_path": "docs/FAQs.md",
+            "write_to_disk": false
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["Reliability & Resilience FAQs", "RELIABILITY_RESILIENCE_FAQS_START"]
+      }
+    ]
+  },
+  {
+    "trajectory_id": "traj_performance_cost_optimization_assess_resolve_faq",
+    "goal": "Discover, assess, iteratively resolve Performance & Cost Optimization feedback, and generate FAQs",
+    "domain": "performance_cost_optimization",
+    "steps": [
+      {
+        "turn": 1,
+        "action": "discover_perf_cost_skills",
+        "tool": "list_registered_skills",
+        "arguments": {
+          "category": "governance"
+        },
+        "expected_output_contains": ["skill_performance_cost_optimization_assessor_feedback"]
+      },
+      {
+        "turn": 2,
+        "action": "assess_unoptimized_service",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_performance_cost_optimization_assessor_feedback",
+          "parameters": {
+            "project_name": "Unoptimized LLM App",
+            "project_manifest_or_spec": "Static VM with no autoscaling, no caching, and no token budgets.",
+            "scope": "project"
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["FAIL", "feedback_items"]
+      },
+      {
+        "turn": 3,
+        "action": "resolve_perf_cost_feedback_iteratively",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_performance_cost_optimization_feedback_resolver",
+          "parameters": {
+            "project_name": "Unoptimized LLM App",
+            "project_manifest_or_spec": "Static VM with no autoscaling, no caching, and no token budgets.",
+            "scope": "project",
+            "max_iterations": 3
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["PASS", "library_skills_orchestrated", "waf-pillar-cost-optimization"]
+      },
+      {
+        "turn": 4,
+        "action": "generate_perf_cost_faqs",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_performance_cost_optimization_faqs",
+          "parameters": {
+            "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+            "project_manifest_or_summary": "autoscaling stateless Vertex AI Agent Runtime, p99 TTFT throughput, Spanner processing_units Spot VMs Autoclass, MultiModelRouter prefix_cache gemini-embedding, Progressive Disclosure token_metrics.",
+            "docs_file_path": "docs/FAQs.md",
+            "write_to_disk": false
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["Performance & Cost Optimization FAQs", "PERFORMANCE_COST_OPTIMIZATION_FAQS_START"]
+      }
+    ]
+  },
+  {
+    "trajectory_id": "traj_operational_excellence_assess_resolve_faq",
+    "goal": "Discover, assess, iteratively resolve Operational Excellence feedback, and generate FAQs",
+    "domain": "operational_excellence",
+    "steps": [
+      {
+        "turn": 1,
+        "action": "discover_ops_excellence_skills",
+        "tool": "list_registered_skills",
+        "arguments": {
+          "category": "governance"
+        },
+        "expected_output_contains": ["skill_operational_excellence_assessor_feedback"]
+      },
+      {
+        "turn": 2,
+        "action": "assess_manual_deployment",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_operational_excellence_assessor_feedback",
+          "parameters": {
+            "project_name": "Manual Ad-Hoc App",
+            "project_manifest_or_spec": "ClickOps deployment with no Terraform, no CI/CD, and no pytest suite.",
+            "scope": "project"
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["FAIL", "feedback_items"]
+      },
+      {
+        "turn": 3,
+        "action": "resolve_ops_excellence_feedback_iteratively",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_operational_excellence_feedback_resolver",
+          "parameters": {
+            "project_name": "Manual Ad-Hoc App",
+            "project_manifest_or_spec": "ClickOps deployment with no Terraform, no CI/CD, and no pytest suite.",
+            "scope": "project",
+            "max_iterations": 3
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["PASS", "library_skills_orchestrated", "waf-pillar-operational-excellence"]
+      },
+      {
+        "turn": 4,
+        "action": "generate_ops_excellence_faqs",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_operational_excellence_faqs",
+          "parameters": {
+            "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+            "project_manifest_or_summary": "CI/CD Cloud Deploy deploy_reasoning_engine dry-run rollback, Terraform iac backend.tf GCS tfvars uv.lock, MODEL_REGISTRY config.py OnlineEvaluator Cloud Trace, pytest e2e runbook trajectory parametrize.",
+            "docs_file_path": "docs/FAQs.md",
+            "write_to_disk": false
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["Operational Excellence FAQs", "OPERATIONAL_EXCELLENCE_FAQS_START"]
+      }
+    ]
+  },
+  {
+    "trajectory_id": "traj_designing_for_change_assess_resolve_faq",
+    "goal": "Discover, assess, iteratively resolve Designing for Change feedback, and generate FAQs",
+    "domain": "designing_for_change",
+    "steps": [
+      {
+        "turn": 1,
+        "action": "discover_designing_for_change_skills",
+        "tool": "list_registered_skills",
+        "arguments": {
+          "category": "architecture"
+        },
+        "expected_output_contains": ["skill_designing_for_change_assessor_feedback"]
+      },
+      {
+        "turn": 2,
+        "action": "assess_rigid_monolith",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_designing_for_change_assessor_feedback",
+          "parameters": {
+            "project_name": "Rigid Monolith",
+            "project_manifest_or_spec": "Tightly coupled script with hardcoded settings and no plugin extensibility.",
+            "scope": "project"
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["FAIL", "feedback_items"]
+      },
+      {
+        "turn": 3,
+        "action": "resolve_designing_for_change_iteratively",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_designing_for_change_feedback_resolver",
+          "parameters": {
+            "project_name": "Rigid Monolith",
+            "project_manifest_or_spec": "Tightly coupled script with hardcoded settings and no plugin extensibility.",
+            "scope": "project",
+            "max_iterations": 3
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["PASS", "library_skills_orchestrated", "enterprise-system-design"]
+      },
+      {
+        "turn": 4,
+        "action": "generate_designing_for_change_faqs",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_designing_for_change_faqs",
+          "parameters": {
+            "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+            "project_manifest_or_summary": "abc.ABC SkillPlugin MultiModelRouter dependency injection use_mock, pydantic-settings config.py .env ADK_MODEL, contract-first SkillManifest backward compat version OKF v0.2, dynamic discovery.py plugin drop-in SKILL.md.",
+            "docs_file_path": "docs/FAQs.md",
+            "write_to_disk": false
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["Designing for Change FAQs", "DESIGNING_FOR_CHANGE_FAQS_START"]
+      }
+    ]
+  },
+  {
+    "trajectory_id": "traj_scoping_documentation_assess_resolve",
+    "goal": "Discover, assess, and iteratively resolve Scoping & Documentation feedback across project docs",
+    "domain": "scoping_and_documentation",
+    "steps": [
+      {
+        "turn": 1,
+        "action": "discover_scoping_docs_skills",
+        "tool": "list_registered_skills",
+        "arguments": {
+          "category": "governance"
+        },
+        "expected_output_contains": ["skill_scoping_documentation_assessor_feedback"]
+      },
+      {
+        "turn": 2,
+        "action": "assess_undocumented_project",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_scoping_documentation_assessor_feedback",
+          "parameters": {
+            "project_name": "Undocumented Prototype",
+            "project_docs_manifest": "Just a 3-line README with no ADRs, diagrams, or runbooks."
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["FAIL", "feedback_items"]
+      },
+      {
+        "turn": 3,
+        "action": "resolve_scoping_docs_feedback_iteratively",
+        "tool": "invoke_skill",
+        "arguments": {
+          "skill_id": "skill_scoping_documentation_feedback_resolver",
+          "parameters": {
+            "project_name": "Undocumented Prototype",
+            "project_docs_manifest": "Just a 3-line README with no ADRs, diagrams, or runbooks.",
+            "max_iterations": 3
+          }
+        },
+        "expected_status": "success",
+        "expected_output_contains": ["PASS", "library_skills_orchestrated", "spec-creation-workflow"]
+      }
+    ]
   }
 ]

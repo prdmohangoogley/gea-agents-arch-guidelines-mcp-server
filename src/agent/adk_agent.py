@@ -208,17 +208,17 @@ def check_okf_freshness(threshold_days: int = 30) -> dict[str, Any]:
 
 
 def list_registered_skills() -> dict[str, Any]:
-    """List all 38 registered Enterprise Architecture & Well-Architected skills (Tier 1 Progressive Disclosure)."""
+    """List all 41 registered Enterprise Architecture, Well-Architected & AI/ML Rubric skills (Tier 1 Progressive Disclosure)."""
     core = _get_core_agent()
     catalog = core.skills_registry.list_catalog()
     return {"total_skills": len(catalog), "skills": catalog}
 
 
 def invoke_registered_skill(skill_id: str, parameters_json: str = "{}") -> dict[str, Any]:
-    """Invoke any of the 38 registered architecture, WAF, Terraform, spec, or FDE skills by skill_id.
+    """Invoke any of the 41 registered architecture, WAF, Terraform, spec, FDE, or AI/ML rubric skills by skill_id.
 
     Args:
-        skill_id: Registered skill ID from list_registered_skills() (e.g., 'skill_waf_pillar_security', 'skill_alexandria_search').
+        skill_id: Registered skill ID from list_registered_skills() (e.g., 'skill_ai_ml_rubric_assessment_feedback', 'skill_waf_pillar_security').
         parameters_json: JSON-encoded dictionary of parameters for the skill.
     """
     try:
@@ -228,19 +228,463 @@ def invoke_registered_skill(skill_id: str, parameters_json: str = "{}") -> dict[
     return _run_skill(skill_id, params)
 
 
+def assess_project_ai_ml_rubric(project_name: str, project_manifest_or_spec: str) -> dict[str, Any]:
+    """Assess an entire project or specification against all 5 domains of the AI/ML Engineering Rubric.
+
+    Args:
+        project_name: Name of the project or specification being assessed.
+        project_manifest_or_spec: Codebase manifest, architecture summary, or technical specification text.
+    """
+    return _run_skill(
+        "skill_ai_ml_rubric_assessment_feedback",
+        {"project_name": project_name, "project_manifest_or_spec": project_manifest_or_spec},
+    )
+
+
+def resolve_ai_ml_rubric_feedback(
+    project_name: str,
+    project_manifest_or_spec: str,
+    max_iterations: int = 3,
+) -> dict[str, Any]:
+    """Resolve AI/ML Engineering Rubric assessment feedback by orchestrating library skills and re-assessing until all 5 domains pass.
+
+    Args:
+        project_name: Name of the project undergoing rubric feedback resolution.
+        project_manifest_or_spec: Current project manifest, architecture summary, or spec text.
+        max_iterations: Maximum assessment-remediation iterations to run (default 3).
+    """
+    return _run_skill(
+        "skill_ai_ml_rubric_assessment_feedback_resolution",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "max_iterations": max_iterations,
+        },
+    )
+
+
+def generate_ai_ml_rubric_faqs(
+    project_name: str,
+    project_manifest_or_summary: str,
+    docs_file_path: str = "docs/FAQs.md",
+) -> dict[str, Any]:
+    """Generate a collection of FAQs documenting how a project demonstrates all 5 AI/ML Engineering Rubric domains.
+
+    Args:
+        project_name: Name of the project to document.
+        project_manifest_or_summary: Architecture summary, codebase manifest, and rubric evidence.
+        docs_file_path: Target path for FAQs documentation (default 'docs/FAQs.md').
+    """
+    return _run_skill(
+        "skill_ai_ml_rubric_assessment_faq_doc_generator",
+        {
+            "project_name": project_name,
+            "project_manifest_or_summary": project_manifest_or_summary,
+            "docs_file_path": docs_file_path,
+            "write_to_disk": False,
+        },
+    )
+
+
+def assess_security_privacy_compliance(
+    project_name: str,
+    project_manifest_or_spec: str,
+) -> dict[str, Any]:
+    """Assess a project, repository, or specification against all 5 Security, Privacy & Compliance Rubric domains.
+
+    Args:
+        project_name: Name of the project, repo, or specification being assessed.
+        project_manifest_or_spec: Codebase manifest, IaC/IAM posture, architecture summary, or spec text.
+    """
+    return _run_skill(
+        "skill_security_privacy_compliance_assessor_feedback",
+        {"project_name": project_name, "project_manifest_or_spec": project_manifest_or_spec},
+    )
+
+
+def resolve_security_privacy_compliance_feedback(
+    project_name: str,
+    project_manifest_or_spec: str,
+    max_iterations: int = 3,
+) -> dict[str, Any]:
+    """Resolve Security, Privacy & Compliance feedback iteratively using library skills until all 5 domains pass.
+
+    Args:
+        project_name: Name of the project undergoing security/privacy/compliance remediation.
+        project_manifest_or_spec: Current project manifest, IaC posture, or specification text.
+        max_iterations: Maximum assessment-remediation iterations to run (default 3).
+    """
+    return _run_skill(
+        "skill_security_privacy_compliance_feedback_resolver",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "max_iterations": max_iterations,
+        },
+    )
+
+
+def generate_security_privacy_compliance_faqs(
+    project_name: str,
+    project_manifest_or_summary: str,
+    docs_file_path: str = "docs/FAQs.md",
+) -> dict[str, Any]:
+    """Generate direct, conversational, evidence-backed Security, Privacy & Compliance FAQs for docs/FAQs.md.
+
+    Args:
+        project_name: Name of the project, repo, or spec to document.
+        project_manifest_or_summary: Security, privacy, compliance evidence and codebase summary.
+        docs_file_path: Target path for FAQs documentation (default 'docs/FAQs.md').
+    """
+    return _run_skill(
+        "skill_security_privacy_compliance_faqs",
+        {
+            "project_name": project_name,
+            "project_manifest_or_summary": project_manifest_or_summary,
+            "docs_file_path": docs_file_path,
+            "write_to_disk": False,
+        },
+    )
+
+
+def assess_reliability_resilience(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+) -> dict[str, Any]:
+    """Critically assess a project, specification, or component against all 4 Reliability & Resilience Rubric domains.
+
+    Args:
+        project_name: Name of the project, spec, or component being assessed.
+        project_manifest_or_spec: Codebase manifest, architecture summary, or spec text.
+        scope: Assessment scope ('project', 'spec', or 'component').
+    """
+    return _run_skill(
+        "skill_reliability_resilience_assessor_feedback",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+        },
+    )
+
+
+def resolve_reliability_resilience_feedback(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+    max_iterations: int = 3,
+) -> dict[str, Any]:
+    """Resolve Reliability & Resilience feedback iteratively at project/spec/component level until all 4 domains pass.
+
+    Args:
+        project_name: Name of the project, spec, or component undergoing remediation.
+        project_manifest_or_spec: Current manifest, architecture summary, or spec text.
+        scope: Resolution scope ('project', 'spec', or 'component').
+        max_iterations: Maximum assessment-remediation iterations to run (default 3).
+    """
+    return _run_skill(
+        "skill_reliability_resilience_feedback_resolver",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+            "max_iterations": max_iterations,
+        },
+    )
+
+
+def generate_reliability_resilience_faqs(
+    project_name: str,
+    project_manifest_or_summary: str,
+    docs_file_path: str = "docs/FAQs.md",
+) -> dict[str, Any]:
+    """Generate direct, conversational FAQs pointing to exact areas where a spec or project addresses Reliability & Resilience.
+
+    Args:
+        project_name: Name of the project or spec to document.
+        project_manifest_or_summary: Reliability, observability, failure/recovery testing, and degradation evidence.
+        docs_file_path: Target path for FAQs documentation (default 'docs/FAQs.md').
+    """
+    return _run_skill(
+        "skill_reliability_resilience_faqs",
+        {
+            "project_name": project_name,
+            "project_manifest_or_summary": project_manifest_or_summary,
+            "docs_file_path": docs_file_path,
+            "write_to_disk": False,
+        },
+    )
+
+
+def assess_performance_cost_optimization(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+) -> dict[str, Any]:
+    """Assess a project, specification, or component against all 3 Performance & Cost Optimization Rubric domains.
+
+    Args:
+        project_name: Name of the project, spec, or component being assessed.
+        project_manifest_or_spec: Codebase manifest, IaC sizing, model routing, or spec text.
+        scope: Assessment scope ('project', 'spec', or 'component').
+    """
+    return _run_skill(
+        "skill_performance_cost_optimization_assessor_feedback",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+        },
+    )
+
+
+def resolve_performance_cost_optimization_feedback(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+    max_iterations: int = 3,
+) -> dict[str, Any]:
+    """Resolve Performance & Cost Optimization feedback iteratively until all 3 rubric domains pass.
+
+    Args:
+        project_name: Name of the project, spec, or component undergoing optimization.
+        project_manifest_or_spec: Current manifest, architecture summary, or spec text.
+        scope: Resolution scope ('project', 'spec', or 'component').
+        max_iterations: Maximum assessment-remediation iterations to run (default 3).
+    """
+    return _run_skill(
+        "skill_performance_cost_optimization_feedback_resolver",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+            "max_iterations": max_iterations,
+        },
+    )
+
+
+def generate_performance_cost_optimization_faqs(
+    project_name: str,
+    project_manifest_or_summary: str,
+    docs_file_path: str = "docs/FAQs.md",
+) -> dict[str, Any]:
+    """Generate direct, conversational FAQs pointing to exact areas where a spec or project addresses Performance & Cost Optimization.
+
+    Args:
+        project_name: Name of the project or spec to document.
+        project_manifest_or_summary: Scalability, resource efficiency, caching, and AI cost management evidence.
+        docs_file_path: Target path for FAQs documentation (default 'docs/FAQs.md').
+    """
+    return _run_skill(
+        "skill_performance_cost_optimization_faqs",
+        {
+            "project_name": project_name,
+            "project_manifest_or_summary": project_manifest_or_summary,
+            "docs_file_path": docs_file_path,
+            "write_to_disk": False,
+        },
+    )
+
+
+def assess_operational_excellence(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+) -> dict[str, Any]:
+    """Assess a project, specification, or component against all 4 Operational Excellence Rubric domains.
+
+    Args:
+        project_name: Name of the project, spec, or component being assessed.
+        project_manifest_or_spec: Codebase manifest, CI/CD, IaC, AI lifecycle, or testing details.
+        scope: Assessment scope ('project', 'spec', or 'component').
+    """
+    return _run_skill(
+        "skill_operational_excellence_assessor_feedback",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+        },
+    )
+
+
+def resolve_operational_excellence_feedback(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+    max_iterations: int = 3,
+) -> dict[str, Any]:
+    """Resolve Operational Excellence feedback iteratively until all 4 rubric domains pass.
+
+    Args:
+        project_name: Name of the project, spec, or component undergoing operational hardening.
+        project_manifest_or_spec: Current manifest, architecture summary, or operational posture.
+        scope: Resolution scope ('project', 'spec', or 'component').
+        max_iterations: Maximum assessment-remediation iterations to run (default 3).
+    """
+    return _run_skill(
+        "skill_operational_excellence_feedback_resolver",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+            "max_iterations": max_iterations,
+        },
+    )
+
+
+def generate_operational_excellence_faqs(
+    project_name: str,
+    project_manifest_or_summary: str,
+    docs_file_path: str = "docs/FAQs.md",
+) -> dict[str, Any]:
+    """Generate direct, conversational FAQs pointing to exact areas where a spec or project addresses Operational Excellence.
+
+    Args:
+        project_name: Name of the project or spec to document.
+        project_manifest_or_summary: CI/CD, IaC, AI lifecycle, and testing/quality engineering evidence.
+        docs_file_path: Target path for FAQs documentation (default 'docs/FAQs.md').
+    """
+    return _run_skill(
+        "skill_operational_excellence_faqs",
+        {
+            "project_name": project_name,
+            "project_manifest_or_summary": project_manifest_or_summary,
+            "docs_file_path": docs_file_path,
+            "write_to_disk": False,
+        },
+    )
+
+
+def assess_designing_for_change(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+) -> dict[str, Any]:
+    """Assess a project, specification, or component against all 4 Designing for Change Rubric domains.
+
+    Args:
+        project_name: Name of the project, spec, or component being assessed.
+        project_manifest_or_spec: Codebase manifest, module contracts, config, API versioning, or plugin details.
+        scope: Assessment scope ('project', 'spec', or 'component').
+    """
+    return _run_skill(
+        "skill_designing_for_change_assessor_feedback",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+        },
+    )
+
+
+def resolve_designing_for_change_feedback(
+    project_name: str,
+    project_manifest_or_spec: str,
+    scope: str = "project",
+    max_iterations: int = 3,
+) -> dict[str, Any]:
+    """Resolve Designing for Change feedback iteratively until all 4 rubric domains pass.
+
+    Args:
+        project_name: Name of the project, spec, or component undergoing refactoring.
+        project_manifest_or_spec: Current manifest, architecture summary, or spec text.
+        scope: Resolution scope ('project', 'spec', or 'component').
+        max_iterations: Maximum assessment-remediation iterations to run (default 3).
+    """
+    return _run_skill(
+        "skill_designing_for_change_feedback_resolver",
+        {
+            "project_name": project_name,
+            "project_manifest_or_spec": project_manifest_or_spec,
+            "scope": scope,
+            "max_iterations": max_iterations,
+        },
+    )
+
+
+def generate_designing_for_change_faqs(
+    project_name: str,
+    project_manifest_or_summary: str,
+    docs_file_path: str = "docs/FAQs.md",
+) -> dict[str, Any]:
+    """Generate direct, conversational FAQs pointing to exact areas where a spec or project addresses Designing for Change.
+
+    Args:
+        project_name: Name of the project or spec to document.
+        project_manifest_or_summary: Modularity, configuration, API versioning, and extensibility evidence.
+        docs_file_path: Target path for FAQs documentation (default 'docs/FAQs.md').
+    """
+    return _run_skill(
+        "skill_designing_for_change_faqs",
+        {
+            "project_name": project_name,
+            "project_manifest_or_summary": project_manifest_or_summary,
+            "docs_file_path": docs_file_path,
+            "write_to_disk": False,
+        },
+    )
+
+
+def assess_scoping_and_documentation(
+    project_name: str,
+    project_docs_manifest: str,
+) -> dict[str, Any]:
+    """Assess an entire project's documentation against all 7 Scoping & Documentation Rubric domains.
+
+    Args:
+        project_name: Name of the project whose documentation is being assessed.
+        project_docs_manifest: Summary or contents of the project's documentation corpus (README, specs, ADRs, API docs, runbooks).
+    """
+    return _run_skill(
+        "skill_scoping_documentation_assessor_feedback",
+        {"project_name": project_name, "project_docs_manifest": project_docs_manifest},
+    )
+
+
+def resolve_scoping_and_documentation_feedback(
+    project_name: str,
+    project_docs_manifest: str,
+    max_iterations: int = 3,
+) -> dict[str, Any]:
+    """Resolve Scoping & Documentation feedback iteratively across a project's docs until all 7 domains pass.
+
+    Args:
+        project_name: Name of the project whose documentation is being remediated.
+        project_docs_manifest: Current project documentation manifest or summary.
+        max_iterations: Maximum assessment-remediation iterations to run (default 3).
+    """
+    return _run_skill(
+        "skill_scoping_documentation_feedback_resolver",
+        {
+            "project_name": project_name,
+            "project_docs_manifest": project_docs_manifest,
+            "max_iterations": max_iterations,
+        },
+    )
+
+
 # ==============================================================================
 # ADK Root Agent & AdkApp Builder
 # ==============================================================================
 
 SYSTEM_INSTRUCTION = """You are the **Enterprise Architecture Guidelines Agent**, powered by the GEA Architecture Best Practices MCP Server, Cloud Spanner Graph (`ArchGuidelinesGraph`), Dataplex Universal Catalog (`geap-architecture-kb` & `geap-pca-waf-kb`), and 92 OKF v0.2 concepts (L200, L300, L400, and Google Cloud Well-Architected Framework Pillars OKF-PCA-01 through OKF-PCA-09).
 
-Always ground your architectural advice, WAF pillar audits, Terraform critiques, FDE rubric grading, and tradeoff analyses by calling your tools first rather than guessing from memory:
+Always ground your architectural advice, WAF pillar audits, Terraform critiques, FDE rubric grading, AI/ML, Security, Reliability, FinOps, Operational Excellence, Designing for Change, Scoping & Documentation audits, and tradeoff analyses by calling your tools first rather than guessing from memory:
 - Use `search_guidelines` or `get_best_practice` for enterprise AI agent patterns, ZAA, Model Armor, Spanner Graph, and context engineering.
 - Use `search_waf_okf_best_practices` for Google Cloud Well-Architected Framework & PCA 5-second decision matrices.
 - Use `verify_spec_all_waf_pillars` to audit project design specifications across all 6 WAF pillars.
 - Use `verify_terraform_waf_compliance` or `compare_terraform_versions_waf` for Terraform HCL compliance and drift analysis.
 - Use `audit_project_against_fde_rubric` for Google Cloud FDE Field-Readiness Rubric grading.
-- Use `list_registered_skills` and `invoke_registered_skill` to access any of the 38 specialized skills.
+- Use `assess_project_ai_ml_rubric`, `resolve_ai_ml_rubric_feedback`, and `generate_ai_ml_rubric_faqs` for the 5-domain AI/ML Engineering Rubric.
+- Use `assess_security_privacy_compliance`, `resolve_security_privacy_compliance_feedback`, and `generate_security_privacy_compliance_faqs` for the 5-domain Security, Privacy & Compliance Rubric.
+- Use `assess_reliability_resilience`, `resolve_reliability_resilience_feedback`, and `generate_reliability_resilience_faqs` for the 4-domain Reliability & Resilience Rubric.
+- Use `assess_performance_cost_optimization`, `resolve_performance_cost_optimization_feedback`, and `generate_performance_cost_optimization_faqs` for the 3-domain Performance & Cost Optimization Rubric.
+- Use `assess_operational_excellence`, `resolve_operational_excellence_feedback`, and `generate_operational_excellence_faqs` for the 4-domain Operational Excellence Rubric.
+- Use `assess_designing_for_change`, `resolve_designing_for_change_feedback`, and `generate_designing_for_change_faqs` for the 4-domain Designing for Change Rubric.
+- Use `assess_scoping_and_documentation` and `resolve_scoping_and_documentation_feedback` for the 7-domain Scoping & Documentation Rubric.
+- Use `list_registered_skills` and `invoke_registered_skill` to access any of the 58 specialized skills.
 - Use `check_okf_freshness` to verify the 6-month TTL freshness of the OKF corpus.
 
 Present concise, actionable, structured Markdown responses citing exact OKF concept IDs, anti-pattern IDs, and pillar scores."""
@@ -253,8 +697,9 @@ def build_root_agent(model_name: str | None = None) -> Agent:
         name="enterprise_arch_guidelines_agent",
         model=resolved_model,
         description=(
-            "Enterprise Architecture Guidelines & Well-Architected Framework Agent backed by "
-            "92 OKF v0.2 concepts, Cloud Spanner Graph, Dataplex KB, and 38 skills."
+            "Enterprise Architecture Guidelines, Well-Architected Framework, AI/ML, Security, Reliability, "
+            "FinOps, Operational Excellence, Designing for Change & Scoping/Documentation Agent backed by "
+            "92 OKF v0.2 concepts, Cloud Spanner Graph, Dataplex KB, and 58 skills."
         ),
         instruction=SYSTEM_INSTRUCTION,
         tools=[
@@ -266,6 +711,26 @@ def build_root_agent(model_name: str | None = None) -> Agent:
             verify_terraform_waf_compliance,
             compare_terraform_versions_waf,
             audit_project_against_fde_rubric,
+            assess_project_ai_ml_rubric,
+            resolve_ai_ml_rubric_feedback,
+            generate_ai_ml_rubric_faqs,
+            assess_security_privacy_compliance,
+            resolve_security_privacy_compliance_feedback,
+            generate_security_privacy_compliance_faqs,
+            assess_reliability_resilience,
+            resolve_reliability_resilience_feedback,
+            generate_reliability_resilience_faqs,
+            assess_performance_cost_optimization,
+            resolve_performance_cost_optimization_feedback,
+            generate_performance_cost_optimization_faqs,
+            assess_operational_excellence,
+            resolve_operational_excellence_feedback,
+            generate_operational_excellence_faqs,
+            assess_designing_for_change,
+            resolve_designing_for_change_feedback,
+            generate_designing_for_change_faqs,
+            assess_scoping_and_documentation,
+            resolve_scoping_and_documentation_feedback,
             check_okf_freshness,
             list_registered_skills,
             invoke_registered_skill,
@@ -281,5 +746,83 @@ def build_adk_app(model_name: str | None = None, enable_tracing: bool = True) ->
     )
 
 
+def propose_okf_concept_evolution(
+    concept_id: str,
+    update_summary: str,
+    new_findings_json: str = "[]",
+) -> dict[str, Any]:
+    """Propose a layout-preserved evolution revision for an OKF v0.2 architectural concept.
+
+    Args:
+        concept_id: Concept number or slug (e.g., '01', '08', 'OKF-PCA-01').
+        update_summary: Summary of architectural updates to incorporate.
+        new_findings_json: JSON list of new architectural findings grounded in Cloud FDE Charter.
+    """
+    try:
+        findings = json.loads(new_findings_json) if new_findings_json else None
+    except Exception:
+        findings = [new_findings_json] if new_findings_json else None
+    return _get_evo_agent().query(
+        action="propose_evolution",
+        concept_id=concept_id,
+        update_summary=update_summary,
+        new_findings=findings,
+        caller_identity="adk-evolution-agent",
+    )
+
+
+def run_monthly_okf_evolution(threshold_days: int = 30) -> dict[str, Any]:
+    """Run an autonomous monthly OKF freshness and evolution cycle across all 92 OKF concepts.
+
+    Args:
+        threshold_days: Days-until-expiry threshold to flag concepts for evolution (default 30).
+    """
+    return _get_evo_agent().query(
+        action="run_monthly_evolution",
+        threshold_days=threshold_days,
+        caller_identity="adk-evolution-agent",
+    )
+
+
+EVOLUTION_SYSTEM_INSTRUCTION = """You are the **Autonomous OKF Evolution Agent**, responsible for monitoring, auditing, and evolving the 92 Open Knowledge Format (OKF v0.2) architectural concepts (L200, L300, L400, and Google Cloud Well-Architected Framework Pillars OKF-PCA-01 through OKF-PCA-09) in Cloud Storage, Dataplex Universal Catalog (`geap-architecture-kb` & `geap-pca-waf-kb`), and Cloud Spanner Graph.
+
+Always call your tools to verify real freshness telemetry and propose backward-compatible, layout-preserved revisions:
+- Use `check_okf_freshness` to inspect the 6-month TTL freshness index across all OKF concepts.
+- Use `propose_okf_concept_evolution` to draft a grounded concept revision with updated TTL.
+- Use `run_monthly_okf_evolution` to run a full automated freshness and evolution cycle.
+- Use `search_guidelines` and `search_waf_okf_best_practices` to cross-check existing architectural standards before proposing changes."""
+
+
+def build_okf_evolution_agent(model_name: str | None = None) -> Agent:
+    """Build the Google ADK LlmAgent for Autonomous OKF Evolution."""
+    resolved_model = model_name or os.getenv("ADK_MODEL", "gemini-4-carbon")
+    return Agent(
+        name="autonomous_okf_evolution_agent",
+        model=resolved_model,
+        description=(
+            "ADK-native Autonomous OKF Evolution Agent auditing 6-month TTL freshness and evolving "
+            "the 92 OKF v0.2 knowledge assets grounded in the Cloud FDE Charter."
+        ),
+        instruction=EVOLUTION_SYSTEM_INSTRUCTION,
+        tools=[
+            check_okf_freshness,
+            propose_okf_concept_evolution,
+            run_monthly_okf_evolution,
+            search_guidelines,
+            search_waf_okf_best_practices,
+        ],
+    )
+
+
+def build_okf_evolution_adk_app(model_name: str | None = None, enable_tracing: bool = True) -> AdkApp:
+    """Build the Vertex AI Agent Runtime `AdkApp` for the Autonomous OKF Evolution Agent."""
+    return AdkApp(
+        agent=build_okf_evolution_agent(model_name=model_name),
+        enable_tracing=enable_tracing,
+    )
+
+
 root_agent = build_root_agent()
 adk_app = build_adk_app()
+evolution_agent = build_okf_evolution_agent()
+evolution_adk_app = build_okf_evolution_adk_app()

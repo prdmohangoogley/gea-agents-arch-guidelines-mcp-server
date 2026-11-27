@@ -158,5 +158,381 @@
       "skill_system_design"
     ],
     "rubric_target": "RUBRIC-B-4-2"
+  },
+  {
+    "id": "SKILL-TRAJ-010",
+    "name": "AI/ML Engineering Rubric Assessment & Feedback Trajectory",
+    "domain": "governance",
+    "skill_id": "skill_ai_ml_rubric_assessment_feedback",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_spec": "Google ADK Agent + AdkApp, 29 FastMCP tools, Model Armor dual-pass DLP, Zero Ambient Authority, Spanner Graph + BigQuery hybrid RRF search, NL2KG table parsing, MultiModelRouter with gemini-4-argon (decoder) and gemini-embedding-001 (encoder), generate_structured JSON mode, Precision/Recall/F1/MRR/ROUGE-L evals, OpenTelemetry Cloud Trace, HIPAA/FINRA compliance, Terraform IaC."
+    },
+    "expected_invariants": [
+      "PASS",
+      "Agentic & Multi-Agent Systems",
+      "Retrieval & Data Engineering for AI",
+      "Model Selection, Tuning & Optimization",
+      "LLM Ops and Evaluation",
+      "Domain-Applied AI/ML Expertise"
+    ],
+    "rubric_target": "RUBRIC-B-2-1"
+  },
+  {
+    "id": "SKILL-TRAJ-011",
+    "name": "AI/ML Rubric Feedback Resolution Iterative Loop Trajectory",
+    "domain": "workflow",
+    "skill_id": "skill_ai_ml_rubric_assessment_feedback_resolution",
+    "parameters": {
+      "project_name": "Prototype Enterprise Assistant",
+      "project_manifest_or_spec": "Basic LLM script without RAG hybrid search, structured JSON mode, or deterministic eval metrics.",
+      "max_iterations": 3
+    },
+    "expected_invariants": [
+      "PASS",
+      "library_skills_orchestrated",
+      "eval-harness",
+      "fde-governance-auditor"
+    ],
+    "rubric_target": "RUBRIC-B-2-2"
+  },
+  {
+    "id": "SKILL-TRAJ-012",
+    "name": "AI/ML Rubric Assessment FAQ Doc Generator Trajectory",
+    "domain": "knowledge_management",
+    "skill_id": "skill_ai_ml_rubric_assessment_faq_doc_generator",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_summary": "Google ADK multi-agent system, Spanner Graph hybrid RRF, MultiModelRouter JSON mode + encoder/decoder selection, Precision/Recall/MRR/ROUGE-L evals, OTel Cloud Trace, HIPAA/FINRA Model Armor DLP.",
+      "docs_file_path": "docs/FAQs.md",
+      "write_to_disk": false
+    },
+    "expected_invariants": [
+      "AI/ML Engineering Rubric FAQs",
+      "AI_ML_RUBRIC_FAQS_START",
+      "Agentic & Multi-Agent Systems",
+      "LLM Ops and Evaluation"
+    ],
+    "rubric_target": "RUBRIC-A-2"
+  },
+  {
+    "id": "SKILL-TRAJ-013",
+    "name": "Security, Privacy & Compliance Assessor & Feedback Trajectory",
+    "domain": "security",
+    "skill_id": "skill_security_privacy_compliance_assessor_feedback",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_spec": "Service accounts with Workload Identity OAuth/OIDC, Zero Ambient Authority least privilege IAM, VPC private endpoints zero-trust segmentation, VPC-SC service perimeter Cloud Armor firewall SSRF blocking, CMEK TLS encryption PII DLP redaction, Secret Manager, Dual-Pass Model Armor prompt injection mitigation and output filtering, Zero Legacy model allow-list content safety, Cloud Trace BigQuery audit logging data residency HIPAA/FINRA, Org Policies Terraform WAF governance."
+    },
+    "expected_invariants": [
+      "PASS",
+      "Authentication & Authorization",
+      "Infrastructure & Network Security",
+      "Data Protection & Privacy",
+      "AI-Specific Security",
+      "Compliance & Governance"
+    ],
+    "rubric_target": "RUBRIC-B-3-1"
+  },
+  {
+    "id": "SKILL-TRAJ-014",
+    "name": "Security, Privacy & Compliance Feedback Resolver Iterative Loop Trajectory",
+    "domain": "security",
+    "skill_id": "skill_security_privacy_compliance_feedback_resolver",
+    "parameters": {
+      "project_name": "Legacy Public Chatbot",
+      "project_manifest_or_spec": "Public endpoint using static service account key, no VPC-SC, no DLP, no Model Armor, no audit logging.",
+      "max_iterations": 3
+    },
+    "expected_invariants": [
+      "PASS",
+      "library_skills_orchestrated",
+      "waf-pillar-security",
+      "terraform-waf-verifier"
+    ],
+    "rubric_target": "RUBRIC-B-3-2"
+  },
+  {
+    "id": "SKILL-TRAJ-015",
+    "name": "Security, Privacy & Compliance Human-Style FAQs Generator Trajectory",
+    "domain": "security",
+    "skill_id": "skill_security_privacy_compliance_faqs",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_summary": "Workload Identity OAuth2, ZAA least privilege IAM, VPC-SC Cloud Armor, CMEK TLS PII DLP Secret Manager, Dual-Pass Model Armor prompt injection output filtering, Zero Legacy model allow-list, Cloud Trace BigQuery audit logs, HIPAA/FINRA Org Policies.",
+      "docs_file_path": "docs/FAQs.md",
+      "write_to_disk": false
+    },
+    "expected_invariants": [
+      "Security, Privacy & Compliance FAQs",
+      "SECURITY_PRIVACY_COMPLIANCE_FAQS_START",
+      "Authentication & Authorization",
+      "AI-Specific Security"
+    ],
+    "rubric_target": "RUBRIC-A-2"
+  },
+  {
+    "id": "SKILL-TRAJ-016",
+    "name": "Reliability & Resilience Assessor & Feedback Trajectory",
+    "domain": "governance",
+    "skill_id": "skill_reliability_resilience_assessor_feedback",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_spec": "health_check, multi-region Cloud Spanner failover SLO 99.999%, OpenTelemetry Cloud Trace OTLP structured logging, latency_ms token_metrics OnlineEvaluator final_response_quality, trip_circuit_breaker failure injection red team DR backup restore degraded resilience test, circuit breaker fallback retry 150ms timeout max_iterations.",
+      "scope": "project"
+    },
+    "expected_invariants": [
+      "PASS",
+      "Availability Design",
+      "Observability",
+      "Failure & Recovery Testing",
+      "Graceful Degradation"
+    ],
+    "rubric_target": "RUBRIC-B-4-1"
+  },
+  {
+    "id": "SKILL-TRAJ-017",
+    "name": "Reliability & Resilience Feedback Resolver Iterative Loop Trajectory",
+    "domain": "workflow",
+    "skill_id": "skill_reliability_resilience_feedback_resolver",
+    "parameters": {
+      "project_name": "Fragile Prototype Component",
+      "project_manifest_or_spec": "Single-zone worker without health checks, distributed tracing, circuit breakers, or timeouts.",
+      "scope": "component",
+      "max_iterations": 3
+    },
+    "expected_invariants": [
+      "PASS",
+      "library_skills_orchestrated",
+      "waf-pillar-reliability",
+      "waf-pillar-operational-excellence"
+    ],
+    "rubric_target": "RUBRIC-B-5-1"
+  },
+  {
+    "id": "SKILL-TRAJ-018",
+    "name": "Reliability & Resilience Human-Style FAQs Generator Trajectory",
+    "domain": "knowledge_management",
+    "skill_id": "skill_reliability_resilience_faqs",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_summary": "health_check, multi-region Spanner failover, OpenTelemetry Cloud Trace, latency_ms token_metrics OnlineEvaluator, trip_circuit_breaker failure injection red team, degraded fallback, 150ms timeout.",
+      "docs_file_path": "docs/FAQs.md",
+      "write_to_disk": false
+    },
+    "expected_invariants": [
+      "Reliability & Resilience FAQs",
+      "RELIABILITY_RESILIENCE_FAQS_START",
+      "Availability Design",
+      "Graceful Degradation"
+    ],
+    "rubric_target": "RUBRIC-A-2"
+  },
+  {
+    "id": "SKILL-TRAJ-019",
+    "name": "Performance & Cost Optimization Assessor & Feedback Trajectory",
+    "domain": "governance",
+    "skill_id": "skill_performance_cost_optimization_assessor_feedback",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_spec": "autoscaling stateless Vertex AI Agent Runtime Global External ALB, p99 TTFT throughput streaming async, Spanner processing_units right-sizing Spot VMs GKE Autopilot, GCS Autoclass BigQuery partition Data Boost, MultiModelRouter ModelTier ROUTING_FAST prefix_cache gemini-embedding, Two-Tier Progressive Disclosure token_metrics 80% compression.",
+      "scope": "project"
+    },
+    "expected_invariants": [
+      "PASS",
+      "Scalability & Elasticity",
+      "Resource Efficiency",
+      "AI Cost Management"
+    ],
+    "rubric_target": "RUBRIC-B-6-1"
+  },
+  {
+    "id": "SKILL-TRAJ-020",
+    "name": "Performance & Cost Optimization Feedback Resolver Iterative Loop Trajectory",
+    "domain": "workflow",
+    "skill_id": "skill_performance_cost_optimization_feedback_resolver",
+    "parameters": {
+      "project_name": "Unoptimized Monolith LLM Service",
+      "project_manifest_or_spec": "Fixed oversized VMs with no autoscaling, no caching, and bloated prompts.",
+      "scope": "project",
+      "max_iterations": 3
+    },
+    "expected_invariants": [
+      "PASS",
+      "library_skills_orchestrated",
+      "waf-pillar-cost-optimization",
+      "waf-pillar-performance-optimization"
+    ],
+    "rubric_target": "RUBRIC-B-6-2"
+  },
+  {
+    "id": "SKILL-TRAJ-021",
+    "name": "Performance & Cost Optimization Human-Style FAQs Generator Trajectory",
+    "domain": "knowledge_management",
+    "skill_id": "skill_performance_cost_optimization_faqs",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_summary": "autoscaling stateless Vertex AI Agent Runtime, p99 TTFT throughput, Spanner processing_units Spot VMs Autoclass Data Boost, MultiModelRouter prefix_cache gemini-embedding, Progressive Disclosure token_metrics.",
+      "docs_file_path": "docs/FAQs.md",
+      "write_to_disk": false
+    },
+    "expected_invariants": [
+      "Performance & Cost Optimization FAQs",
+      "PERFORMANCE_COST_OPTIMIZATION_FAQS_START",
+      "Scalability & Elasticity",
+      "AI Cost Management"
+    ],
+    "rubric_target": "RUBRIC-A-2"
+  },
+  {
+    "id": "SKILL-TRAJ-022",
+    "name": "Operational Excellence Assessor & Feedback Trajectory",
+    "domain": "governance",
+    "skill_id": "skill_operational_excellence_assessor_feedback",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_spec": "CI/CD Cloud Deploy canary deploy_from_scratch deploy_reasoning_engine dry-run rollback repeatable, Terraform iac backend.tf GCS state locking tfvars uv.lock parity, MODEL_REGISTRY config.py OnlineEvaluator Cloud Trace session_feedback, pytest unit integration e2e runbook trajectory golden_dataset parametrize.",
+      "scope": "project"
+    },
+    "expected_invariants": [
+      "PASS",
+      "CI/CD & Deployment",
+      "Infrastructure as Code",
+      "AI Lifecycle Management",
+      "Testing & Quality Engineering"
+    ],
+    "rubric_target": "RUBRIC-B-5-1"
+  },
+  {
+    "id": "SKILL-TRAJ-023",
+    "name": "Operational Excellence Feedback Resolver Iterative Loop Trajectory",
+    "domain": "workflow",
+    "skill_id": "skill_operational_excellence_feedback_resolver",
+    "parameters": {
+      "project_name": "Manual Ad-Hoc Deployment",
+      "project_manifest_or_spec": "Manually deployed script without Terraform, CI/CD, versioning, or automated tests.",
+      "scope": "project",
+      "max_iterations": 3
+    },
+    "expected_invariants": [
+      "PASS",
+      "library_skills_orchestrated",
+      "waf-pillar-operational-excellence",
+      "terraform-infra"
+    ],
+    "rubric_target": "RUBRIC-B-5-2"
+  },
+  {
+    "id": "SKILL-TRAJ-024",
+    "name": "Operational Excellence Human-Style FAQs Generator Trajectory",
+    "domain": "knowledge_management",
+    "skill_id": "skill_operational_excellence_faqs",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_summary": "CI/CD Cloud Deploy deploy_reasoning_engine dry-run rollback, Terraform iac backend.tf GCS tfvars uv.lock, MODEL_REGISTRY config.py OnlineEvaluator Cloud Trace, pytest e2e runbook trajectory parametrize.",
+      "docs_file_path": "docs/FAQs.md",
+      "write_to_disk": false
+    },
+    "expected_invariants": [
+      "Operational Excellence FAQs",
+      "OPERATIONAL_EXCELLENCE_FAQS_START",
+      "CI/CD & Deployment",
+      "Testing & Quality Engineering"
+    ],
+    "rubric_target": "RUBRIC-A-2"
+  },
+  {
+    "id": "SKILL-TRAJ-025",
+    "name": "Designing for Change Assessor & Feedback Trajectory",
+    "domain": "architecture",
+    "skill_id": "skill_designing_for_change_assessor_feedback",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_spec": "abc.ABC SkillPlugin interface contract MultiModelRouter swappability, dependency injection use_mock fixture modules/, pydantic-settings config.py .env feature flag ADK_MODEL dynamic, contract-first Pydantic SkillManifest backward compat OKF v0.2 version, dynamic discovery.py plugin streaming_agent_run_with_events drop-in SKILL.md.",
+      "scope": "project"
+    },
+    "expected_invariants": [
+      "PASS",
+      "Modularity & Abstraction",
+      "Configuration Management",
+      "API Design & Versioning",
+      "Extensibility"
+    ],
+    "rubric_target": "RUBRIC-B-1-2"
+  },
+  {
+    "id": "SKILL-TRAJ-026",
+    "name": "Designing for Change Feedback Resolver Iterative Loop Trajectory",
+    "domain": "workflow",
+    "skill_id": "skill_designing_for_change_feedback_resolver",
+    "parameters": {
+      "project_name": "Rigid Monolith Service",
+      "project_manifest_or_spec": "Tightly coupled script with hardcoded model calls, hardcoded config, unversioned APIs, and no plugins.",
+      "scope": "project",
+      "max_iterations": 3
+    },
+    "expected_invariants": [
+      "PASS",
+      "library_skills_orchestrated",
+      "enterprise-system-design",
+      "fastmcp-tool-dev"
+    ],
+    "rubric_target": "RUBRIC-B-1-2"
+  },
+  {
+    "id": "SKILL-TRAJ-027",
+    "name": "Designing for Change Human-Style FAQs Generator Trajectory",
+    "domain": "knowledge_management",
+    "skill_id": "skill_designing_for_change_faqs",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_manifest_or_summary": "abc.ABC SkillPlugin MultiModelRouter dependency injection use_mock, pydantic-settings config.py .env ADK_MODEL, contract-first SkillManifest backward compat version OKF v0.2, dynamic discovery.py plugin drop-in SKILL.md.",
+      "docs_file_path": "docs/FAQs.md",
+      "write_to_disk": false
+    },
+    "expected_invariants": [
+      "Designing for Change FAQs",
+      "DESIGNING_FOR_CHANGE_FAQS_START",
+      "Modularity & Abstraction",
+      "Extensibility"
+    ],
+    "rubric_target": "RUBRIC-A-2"
+  },
+  {
+    "id": "SKILL-TRAJ-028",
+    "name": "Scoping & Documentation Assessor & Feedback Trajectory",
+    "domain": "governance",
+    "skill_id": "skill_scoping_documentation_assessor_feedback",
+    "parameters": {
+      "project_name": "Enterprise Agents Architectural Guidelines MCP Server",
+      "project_docs_manifest": "Business problem, customer success unlocks, CUJs, Definition of Done, technical scope, constraints, assumptions, system boundaries, prototype vs production-grade, stakeholder alignment, success criteria, phased roadmap, Mermaid sequenceDiagram graph TD architecture diagram, ADR-001 trade-offs alternatives considered status: accepted, MCP_SERVER_DOCUMENTATION OpenAPI JSON schema skills_usage_runbook expected output, deployment guide installation_guide troubleshooting FAQs.md handoff."
+    },
+    "expected_invariants": [
+      "PASS",
+      "Problem Definition",
+      "Technical Scope & Constraints",
+      "Decision Records",
+      "API Documentation",
+      "Operational Documentation"
+    ],
+    "rubric_target": "RUBRIC-A-2"
+  },
+  {
+    "id": "SKILL-TRAJ-029",
+    "name": "Scoping & Documentation Feedback Resolver Iterative Loop Trajectory",
+    "domain": "workflow",
+    "skill_id": "skill_scoping_documentation_feedback_resolver",
+    "parameters": {
+      "project_name": "Undocumented Prototype",
+      "project_docs_manifest": "Minimal 3-line README with no problem definition, ADRs, diagrams, API specs, or runbooks.",
+      "max_iterations": 3
+    },
+    "expected_invariants": [
+      "PASS",
+      "library_skills_orchestrated",
+      "spec-creation-workflow",
+      "codebase-to-spec-collection"
+    ],
+    "rubric_target": "RUBRIC-A-3"
   }
 ]

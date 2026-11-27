@@ -1,0 +1,413 @@
+{
+  "total_skills_evaluated": 58,
+  "total_passed": 58,
+  "pass_rate": 1.0,
+  "skills": [
+    {
+      "skill_id": "skill-arch-eval",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill-fde-governance",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill-nl2kg-triplification",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill-okf-evolution",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill-security-auditor",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_ai_ml_rubric_assessment_faq_doc_generator",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_ai_ml_rubric_assessment_feedback",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_ai_ml_rubric_assessment_feedback_resolution",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_alexandria_search",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_arbitrary_spec_generator",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_codebase_to_spec_collection",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_complete_system_audit",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_designing_for_change_assessor_feedback",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_designing_for_change_faqs",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_designing_for_change_feedback_resolver",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_discovery_and_catalog",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_enterprise_system_design",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_eval_harness",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_fastmcp_tool_dev",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_fde_governance_auditor",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_google_landing_metrics",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_google_landing_metrics_critique",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_nl2kg_triplification",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_okf_auto_evolution",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_okf_evolution_agent",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_operational_excellence_assessor_feedback",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_operational_excellence_faqs",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_operational_excellence_feedback_resolver",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_performance_cost_optimization_assessor_feedback",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_performance_cost_optimization_faqs",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_performance_cost_optimization_feedback_resolver",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_reliability_resilience_assessor_feedback",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_reliability_resilience_faqs",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_reliability_resilience_feedback_resolver",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_rubric_level_critique",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_scoping_documentation_assessor_feedback",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_scoping_documentation_feedback_resolver",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_security_privacy_compliance_assessor_feedback",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_security_privacy_compliance_faqs",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_security_privacy_compliance_feedback_resolver",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_spec_best_practices_updater",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_spec_creation_workflow",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_spec_critique",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_spec_generator",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_system_design",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_terraform_infra",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_terraform_version_comparator",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_terraform_waf_verifier",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_all_pillars_spec_verifier",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_critique",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_okf_search",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_pillar_cost_optimization",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_pillar_critique",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_pillar_operational_excellence",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_pillar_performance_optimization",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_pillar_reliability",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_pillar_security",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    },
+    {
+      "skill_id": "skill_waf_pillar_sustainability",
+      "turn_1_tier1_discovery": true,
+      "turn_2_tier2_manifest": true,
+      "turn_3_invoke_skill": true,
+      "verdict": "PASS"
+    }
+  ]
+}

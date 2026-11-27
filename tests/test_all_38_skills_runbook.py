@@ -166,18 +166,131 @@ RUNBOOK_SKILL_PAYLOADS: dict[str, dict[str, Any]] = {
     "skill_google_landing_metrics": {"input_payload": "Verify LCP, INP, CLS, and CDN hit ratio."},
     "skill_nl2kg_triplification": {"input_payload": "Extract knowledge graph triples from markdown."},
     "skill_okf_auto_evolution": {"input_payload": "Check 6-month TTL freshness and sync to Dataplex."},
+    # 6. AI/ML Engineering Rubric Assessment, Resolution & FAQ Doc Generator Skills (3 skills)
+    "skill_ai_ml_rubric_assessment_feedback": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_spec": "Google ADK Agent, MCP tools, Model Armor, Spanner Graph hybrid RRF search, MultiModelRouter JSON mode, OTel Cloud Trace, Precision/Recall/MRR/ROUGE-L evals, HIPAA/FINRA DLP.",
+    },
+    "skill_ai_ml_rubric_assessment_feedback_resolution": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_spec": "Prototype LLM chatbot needing hybrid search, structured JSON mode, and evals.",
+        "max_iterations": 2,
+    },
+    "skill_ai_ml_rubric_assessment_faq_doc_generator": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_summary": "ADK multi-agent system with Spanner Graph RRF, MultiModelRouter, OTel Cloud Trace, Precision/Recall/MRR/ROUGE-L, and Model Armor DLP.",
+        "write_to_disk": False,
+    },
+    # 7. Security, Privacy & Compliance Rubric Skills (3 skills)
+    "skill_security_privacy_compliance_assessor_feedback": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_spec": "Service accounts with Workload Identity OAuth/OIDC, Zero Ambient Authority least privilege IAM, VPC private endpoints zero-trust, VPC-SC Cloud Armor firewall SSRF protection, CMEK TLS encryption PII DLP, Secret Manager, Dual-Pass Model Armor prompt injection output filtering, Zero Legacy model allow-list, Cloud Trace BigQuery audit logging, HIPAA/FINRA Org Policies.",
+    },
+    "skill_security_privacy_compliance_feedback_resolver": {
+        "project_name": "Insecure Prototype API",
+        "project_manifest_or_spec": "Basic web app with hardcoded API key and public endpoint.",
+        "max_iterations": 3,
+    },
+    "skill_security_privacy_compliance_faqs": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_summary": "Workload Identity OAuth2, ZAA least privilege IAM, VPC-SC Cloud Armor, CMEK TLS DLP Secret Manager, Dual-Pass Model Armor, Zero Legacy model allow-list, Cloud Trace audit logs, HIPAA/FINRA compliance.",
+        "docs_file_path": "docs/FAQs.md",
+        "write_to_disk": False,
+    },
+    # 8. Reliability & Resilience Rubric Skills (3 skills)
+    "skill_reliability_resilience_assessor_feedback": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_spec": "health_check, multi-region Cloud Spanner failover, OpenTelemetry Cloud Trace, latency_ms token_metrics OnlineEvaluator, trip_circuit_breaker failure injection red team, degraded fallback, 150ms timeout max_iterations.",
+        "scope": "project",
+    },
+    "skill_reliability_resilience_feedback_resolver": {
+        "project_name": "Fragile Prototype Service",
+        "project_manifest_or_spec": "Single-zone app with no health checks, no tracing, no circuit breakers, and no timeouts.",
+        "scope": "component",
+        "max_iterations": 3,
+    },
+    "skill_reliability_resilience_faqs": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_summary": "health_check, Cloud Spanner failover, OpenTelemetry Cloud Trace, latency_ms token_metrics OnlineEvaluator, trip_circuit_breaker failure injection red team, degraded fallback, 150ms timeout.",
+        "docs_file_path": "docs/FAQs.md",
+        "write_to_disk": False,
+    },
+    # 9. Performance & Cost Optimization Rubric Skills (3 skills)
+    "skill_performance_cost_optimization_assessor_feedback": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_spec": "autoscaling stateless Vertex AI Agent Runtime, Global External ALB, p99 TTFT throughput streaming, Spanner processing_units right-sizing Spot VMs GKE Autopilot, GCS Autoclass BigQuery partition Data Boost, MultiModelRouter ModelTier ROUTING_FAST prefix_cache gemini-embedding, Two-Tier Progressive Disclosure token_metrics 80% compression.",
+        "scope": "project",
+    },
+    "skill_performance_cost_optimization_feedback_resolver": {
+        "project_name": "Unoptimized Monolith LLM App",
+        "project_manifest_or_spec": "Fixed oversized VMs sending all 50 tool schemas to frontier LLM on every turn without caching or autoscaling.",
+        "scope": "project",
+        "max_iterations": 3,
+    },
+    "skill_performance_cost_optimization_faqs": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_summary": "autoscaling stateless Vertex AI Agent Runtime, p99 TTFT throughput, Spanner processing_units Spot VMs Autoclass Data Boost, MultiModelRouter prefix_cache gemini-embedding, Progressive Disclosure token_metrics.",
+        "docs_file_path": "docs/FAQs.md",
+        "write_to_disk": False,
+    },
+    # 10. Operational Excellence Rubric Skills (3 skills)
+    "skill_operational_excellence_assessor_feedback": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_spec": "CI/CD Cloud Deploy canary deploy_from_scratch deploy_reasoning_engine dry-run rollback repeatable, Terraform iac backend.tf GCS state locking tfvars uv.lock parity, MODEL_REGISTRY config.py OnlineEvaluator Cloud Trace session_feedback, pytest unit integration e2e runbook trajectory golden_dataset parametrize.",
+        "scope": "project",
+    },
+    "skill_operational_excellence_feedback_resolver": {
+        "project_name": "Manual Ad-Hoc Script",
+        "project_manifest_or_spec": "Manually SSHed scripts with no Terraform, no CI/CD, no versioning, and no automated tests.",
+        "scope": "project",
+        "max_iterations": 3,
+    },
+    "skill_operational_excellence_faqs": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_summary": "CI/CD Cloud Deploy deploy_reasoning_engine dry-run rollback, Terraform iac backend.tf GCS tfvars uv.lock, MODEL_REGISTRY config.py OnlineEvaluator Cloud Trace, pytest e2e runbook trajectory parametrize.",
+        "docs_file_path": "docs/FAQs.md",
+        "write_to_disk": False,
+    },
+    # 11. Designing for Change Rubric Skills (3 skills)
+    "skill_designing_for_change_assessor_feedback": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_spec": "abc.ABC SkillPlugin interface contract MultiModelRouter swappability, dependency injection use_mock fixture modules/, pydantic-settings config.py .env feature flag ADK_MODEL dynamic, contract-first Pydantic SkillManifest backward compat OKF v0.2 version, dynamic discovery.py plugin streaming_agent_run_with_events drop-in SKILL.md.",
+        "scope": "project",
+    },
+    "skill_designing_for_change_feedback_resolver": {
+        "project_name": "Rigid Monolith App",
+        "project_manifest_or_spec": "Hardcoded model SDK calls tightly coupled to global state with hardcoded config and no plugin architecture.",
+        "scope": "project",
+        "max_iterations": 3,
+    },
+    "skill_designing_for_change_faqs": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_manifest_or_summary": "abc.ABC SkillPlugin MultiModelRouter dependency injection use_mock, pydantic-settings config.py .env ADK_MODEL, contract-first SkillManifest backward compat version OKF v0.2, dynamic discovery.py plugin drop-in SKILL.md.",
+        "docs_file_path": "docs/FAQs.md",
+        "write_to_disk": False,
+    },
+    # 12. Scoping & Documentation Rubric Skills (2 skills)
+    "skill_scoping_documentation_assessor_feedback": {
+        "project_name": "GEA Architecture Guidelines MCP Server",
+        "project_docs_manifest": "Business problem, customer success unlocks, CUJs, Definition of Done, technical scope, constraints, assumptions, system boundaries, prototype vs production-grade, stakeholder alignment, success criteria, phased roadmap, Mermaid sequenceDiagram graph TD architecture diagram, ADR-001 trade-offs alternatives considered status: accepted, MCP_SERVER_DOCUMENTATION OpenAPI JSON schema skills_usage_runbook expected output, deployment guide installation_guide troubleshooting FAQs.md handoff.",
+    },
+    "skill_scoping_documentation_feedback_resolver": {
+        "project_name": "Undocumented Prototype",
+        "project_docs_manifest": "Only a 3-line README with no problem definition, no scope, no ADRs, no diagrams, and no runbooks.",
+        "max_iterations": 3,
+    },
 }
 
 
 @pytest.mark.asyncio
 async def test_runbook_tier1_and_tier2_all_38_skills(mcp_app):
-    """Verify Tier 1 list_registered_skills and Tier 2 get_skill_manifest for all 38 skills."""
+    """Verify Tier 1 list_registered_skills and Tier 2 get_skill_manifest for all 58 skills."""
     list_tool = await mcp_app.get_tool("list_registered_skills")
     tier1_res = await list_tool.run({})
     tier1_data = tier1_res.structured_content or {}
 
     assert tier1_data.get("status") == "success"
-    assert tier1_data.get("total_skills") == 38
+    assert tier1_data.get("total_skills") == 58
     catalog_ids = {s["id"] for s in tier1_data.get("skills", [])}
     assert catalog_ids == set(RUNBOOK_SKILL_PAYLOADS.keys())
 

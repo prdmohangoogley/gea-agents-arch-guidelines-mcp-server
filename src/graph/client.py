@@ -753,3 +753,79 @@ class GraphClient:
             except Exception as e:
                 logger.warning(f"Spanner traverse_pattern_mitigations failed: {e}")
         return []
+
+    async def hybrid_search_guidelines(
+        self,
+        query: str,
+        category: str | None = None,
+        limit: int = 5,
+        rrf_k: int = 60,
+    ) -> list[dict[str, Any]]:
+        """Hybrid retrieval combining lexical token matching and category/graph affinity via Reciprocal Rank Fusion (RRF).
+
+        Fuses two complementary ranking signals:
+        1. Lexical BM25-style token overlap over title, summary, and guideline_id.
+        2. Semantic/structural affinity over category and linked architectural pattern terms.
+        """
+        import re
+
+        tokens = [t for t in re.findall(r"[a-z0-9_]+", query.lower()) if len(t) > 1]
+        candidates = [
+            g for g in self._guidelines
+            if not category or g.category.lower() == category.lower()
+        ]
+        if not candidates:
+            candidates = list(self._guidelines)
+
+        # Rank 1: Lexical token frequency score (title weighted 2x, summary 1x)
+        lexical_scored: list[tuple[float, Guideline]] = []
+        for g in candidates:
+            title_l = g.title.lower()
+            summary_l = g.summary.lower()
+            score = sum(
+                (2.0 if tok in title_l else 0.0) + (1.0 if tok in summary_l else 0.0)
+                for tok in tokens
+            )
+            lexical_scored.append((score, g))
+        lexical_scored.sort(key=lambda x: x[0], reverse=True)
+
+        # Rank 2: Structural / category / pattern-link affinity score
+        pattern_terms = {p.name.lower(): p.category.lower() for p in self._patterns.values()}
+        semantic_scored: list[tuple[float, Guideline]] = []
+        for g in candidates:
+            aff = 0.0
+            cat_l = g.category.lower()
+            if any(tok in cat_l for tok in tokens):
+                aff += 2.0
+            for pname, pcat in pattern_terms.items():
+                if any(tok in pname for tok in tokens) and pcat == cat_l:
+                    aff += 1.5
+            # Phrase match boost
+            if query.lower() in g.title.lower() or query.lower() in g.summary.lower():
+                aff += 3.0
+            semantic_scored.append((aff, g))
+        semantic_scored.sort(key=lambda x: x[0], reverse=True)
+
+        # Reciprocal Rank Fusion: RRF(d) = sum(1 / (k + rank_i(d)))
+        rrf_scores: dict[str, float] = {}
+        guideline_map: dict[str, Guideline] = {}
+        for rank, (_, g) in enumerate(lexical_scored, start=1):
+            rrf_scores[g.guideline_id] = rrf_scores.get(g.guideline_id, 0.0) + 1.0 / (rrf_k + rank)
+            guideline_map[g.guideline_id] = g
+        for rank, (_, g) in enumerate(semantic_scored, start=1):
+            rrf_scores[g.guideline_id] = rrf_scores.get(g.guideline_id, 0.0) + 1.0 / (rrf_k + rank)
+            guideline_map[g.guideline_id] = g
+
+        ranked_ids = sorted(rrf_scores.keys(), key=lambda gid: rrf_scores[gid], reverse=True)[:limit]
+        return [
+            {
+                "guideline_id": gid,
+                "title": guideline_map[gid].title,
+                "category": guideline_map[gid].category,
+                "summary": guideline_map[gid].summary,
+                "source_url": guideline_map[gid].source_url,
+                "rrf_score": round(rrf_scores[gid], 6),
+                "retrieval_mode": "hybrid_rrf",
+            }
+            for gid in ranked_ids
+        ]

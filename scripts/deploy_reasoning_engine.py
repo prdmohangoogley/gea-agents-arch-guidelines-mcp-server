@@ -22,15 +22,16 @@ from src.agent.adk_agent import build_adk_app
 from src.config import config
 
 PROJECT_ID = os.getenv("GCP_PROJECT_ID", config.gcp_project_id)
-REGION = os.getenv("GCP_REGION", config.gcp_region)
+REGION = os.getenv("AGENT_ENGINE_LOCATION", os.getenv("GCP_REGION", config.gcp_region))
 STAGING_BUCKET = os.getenv(
     "STAGING_BUCKET",
     f"gs://{PROJECT_ID}-reasoning-engine-staging",
 )
+LOGS_BUCKET = os.getenv("LOGS_BUCKET_NAME", f"{PROJECT_ID}-agent-telemetry")
 ADK_MODEL = os.getenv("ADK_MODEL", "gemini-4-carbon")
 
 
-def deploy(dry_run: bool = False) -> None:
+def deploy(dry_run: bool = False, update_resource_name: str | None = None) -> str:
     """Deploy the Enterprise Architecture Guidelines Agent as an ADK Agent Engine (`google-adk`)."""
     print("=" * 75)
     print("Deploying Enterprise Architecture Guidelines ADK Agent to Vertex AI Agent Runtime")
@@ -46,6 +47,7 @@ def deploy(dry_run: bool = False) -> None:
         "google-adk>=1.0.0",
         "google-cloud-aiplatform[adk,agent_engines]>=1.112.0",
         "opentelemetry-exporter-otlp-proto-http>=1.25.0",
+        "opentelemetry-exporter-gcp-trace>=1.15.0",
         "google-cloud-spanner>=3.49.0",
         "google-cloud-bigquery>=3.25.0",
         "google-cloud-storage>=2.14.0",
@@ -91,20 +93,35 @@ def deploy(dry_run: bool = False) -> None:
         "OKF_GCS_BUCKET": os.getenv("OKF_GCS_BUCKET", f"{PROJECT_ID}-arch-guidelines-okf"),
         "ADK_MODEL": ADK_MODEL,
         "SPANNER_DISABLE_BUILTIN_METRICS": "true",
+        "GOOGLE_CLOUD_AGENT_ENGINE_ENABLE_TELEMETRY": "true",
+        "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT": "SPAN_AND_EVENT",
+        "OTEL_INSTRUMENTATION_GENAI_COMPLETION_HOOK": "upload",
+        "LOGS_BUCKET_NAME": LOGS_BUCKET,
     }
 
-    print("==> Packaging and deploying ADK App (`agent_framework = google-adk`) to Agent Runtime...")
-    remote_agent = agent_engines.create(
-        agent_engine=app,
-        requirements=requirements,
-        extra_packages=extra_pkgs,
-        env_vars=env_vars,
-        display_name="Enterprise Architecture Guidelines ADK Agent",
-        description=(
-            "ADK-native Enterprise Architecture Guidelines & Well-Architected Framework Agent "
-            "exposing all 29 MCP tools, 38 skills, Cloud Spanner Graph, and 92 OKF v0.2 concepts."
-        ),
-    )
+    if update_resource_name:
+        print(f"==> Updating ADK App (`agent_framework = google-adk`) in place: {update_resource_name}")
+        remote_agent = agent_engines.update(
+            resource_name=update_resource_name,
+            agent_engine=app,
+            requirements=requirements,
+            extra_packages=extra_pkgs,
+            env_vars=env_vars,
+        )
+    else:
+        print("==> Packaging and deploying ADK App (`agent_framework = google-adk`) to Agent Runtime...")
+        remote_agent = agent_engines.create(
+            agent_engine=app,
+            requirements=requirements,
+            extra_packages=extra_pkgs,
+            env_vars=env_vars,
+            display_name="Enterprise Architecture Guidelines ADK Agent",
+            description=(
+                "ADK-native Enterprise Architecture Guidelines, Well-Architected Framework, AI/ML, Security, Reliability, "
+                "FinOps, Operational Excellence, Designing for Change & Scoping Agent (Gemini 4 Carbon) exposing all "
+                "29 MCP tools, 58 skills, Cloud Spanner Graph, 92 OKF v0.2 concepts, and full Cloud Trace telemetry."
+            ),
+        )
 
     print("=" * 75)
     print("ADK Agent Runtime Deployment Successful!")
@@ -112,14 +129,16 @@ def deploy(dry_run: bool = False) -> None:
     print(f"Console Playground URL:         https://console.cloud.google.com/vertex-ai/agents/agent-engines?project={PROJECT_ID}")
     print(f"export REASONING_ENGINE_RESOURCE_NAME=\"{remote_agent.resource_name}\"")
     print("=" * 75)
+    return remote_agent.resource_name
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Deploy ADK Architecture Guidelines Agent to Vertex AI Agent Runtime")
     parser.add_argument("--dry-run", action="store_true", help="Validate ADK app locally without creating cloud resource")
+    parser.add_argument("--update", default=None, help="Existing ReasoningEngine resource name to update in place")
     args = parser.parse_args()
 
-    deploy(dry_run=args.dry_run)
+    deploy(dry_run=args.dry_run, update_resource_name=args.update)
 
 
 if __name__ == "__main__":

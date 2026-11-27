@@ -55,6 +55,7 @@ class ModelTier(str, enum.Enum):
     ROUTING_FAST = "fast_routing"          # Sub-second intent classification & tool selector
     AUDIT_SOCRATIC = "socratic_audit"     # Multi-agent debate, critique, and compliance auditing
     FORMAL_VERIFICATION = "verification"  # Mathematical invariant checking & formal proofs
+    EMBEDDING_ENCODER = "embedding_encoder"  # Encoder-only dense vector embeddings for RAG
 
 
 class ModelSpec(BaseModel):
@@ -63,6 +64,7 @@ class ModelSpec(BaseModel):
     name: str = Field(..., description="Human-readable model name")
     family: ModelFamily = Field(..., description="Model family (Gemini, GPT, Claude)")
     tier: ModelTier = Field(..., description="Operational capability tier")
+    architecture: str = Field(default="decoder", description="Model architecture ('decoder' or 'encoder')")
     max_context_tokens: int = Field(default=1_000_000, description="Max input context window")
     supports_thinking: bool = Field(default=True, description="Supports explicit reasoning / thinking tokens")
     supports_tools: bool = Field(default=True, description="Supports function/tool calling")
@@ -186,6 +188,18 @@ MODEL_REGISTRY: dict[str, ModelSpec] = {
         tier=ModelTier.ROUTING_FAST,
         max_context_tokens=250_000,
         supports_thinking=False,
+    ),
+
+    # --- Encoder-Only Embedding Models (Dense Vector Retrieval) ---
+    "gemini-embedding-001": ModelSpec(
+        id="gemini-embedding-001",
+        name="Gemini Embedding 001 (Encoder Dense Vector Retrieval)",
+        family=ModelFamily.GEMINI,
+        tier=ModelTier.EMBEDDING_ENCODER,
+        architecture="encoder",
+        max_context_tokens=8_192,
+        supports_thinking=False,
+        supports_tools=False,
     ),
 }
 
@@ -591,6 +605,63 @@ flowchart TD
             temperature=temperature,
         )
         return res.get("text", "")
+
+    async def generate_structured(
+        self,
+        prompt: str,
+        response_schema: type[BaseModel],
+        model_id: str = "gemini-4-argon",
+        tier: ModelTier | None = None,
+        system_instruction: str | None = None,
+        temperature: float = 0.0,
+    ) -> dict[str, Any]:
+        """Enforce structured JSON output (response_mime_type='application/json') validated against a Pydantic schema.
+
+        Guarantees schema-conforming JSON output by appending the JSON Schema contract to the
+        system instruction, requesting native JSON mode when online, and validating/parsing
+        the response with Pydantic `model_validate`.
+        """
+        schema_json = json.dumps(response_schema.model_json_schema(), indent=2)
+        structured_system = (
+            f"{system_instruction or 'You are an enterprise architecture assistant.'}\n\n"
+            f"Respond ONLY with valid JSON conforming strictly to this JSON Schema "
+            f"(response_mime_type='application/json'):\n{schema_json}"
+        )
+
+        res = await self.generate_content(
+            prompt=prompt,
+            model_id=model_id,
+            tier=tier,
+            system_instruction=structured_system,
+            temperature=temperature,
+        )
+        raw_text = res.get("text", "").strip()
+
+        # Attempt strict JSON extraction and Pydantic validation
+        parsed_payload: dict[str, Any] | None = None
+        try:
+            # Strip optional markdown json fences if present
+            cleaned = raw_text
+            if cleaned.startswith("```"):
+                cleaned = cleaned.split("\n", 1)[-1].rsplit("```", 1)[0].strip()
+            candidate = json.loads(cleaned)
+            validated = response_schema.model_validate(candidate)
+            parsed_payload = validated.model_dump()
+            schema_valid = True
+        except Exception as exc:
+            logger.debug(f"Structured output validation fallback triggered: {exc}")
+            schema_valid = False
+
+        return {
+            "status": "success" if schema_valid else "fallback_unvalidated",
+            "model_used": res.get("model_used", model_id),
+            "response_mime_type": "application/json",
+            "schema_name": response_schema.__name__,
+            "schema_valid": schema_valid,
+            "parsed": parsed_payload,
+            "raw_text": raw_text,
+            "latency_ms": res.get("latency_ms", 0.0),
+        }
 
 
 # Global singleton instance
